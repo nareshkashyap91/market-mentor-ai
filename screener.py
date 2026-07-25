@@ -390,9 +390,13 @@ def generate_report(mf_data, stock_data):
     if not stock_data:
         report.append("*No high-probability momentum setups met the strict quality and liquidity criteria today. Staying in cash is also a position.*")
     else:
-        for idx, stock in enumerate(stock_data, 1):
+        # Show top 10 momentum setups sorted by volume expansion
+        for idx, stock in enumerate(stock_data[:10], 1):
             report.append(f"{idx}. **NSE: {stock['symbol']}** (Price: ₹{stock['close']})")
             report.append(f"   🔍 *Technical Setup*: {stock['why']}\n")
+            
+        if len(stock_data) > 10:
+            report.append(f"*(Total {len(stock_data)} setups passed filters, displaying top 10 highest-momentum setups ranked by volume expansion)*\n")
             
     report.append("="*45 + "\n")
     
@@ -403,21 +407,57 @@ def generate_report(mf_data, stock_data):
     return final_report
 
 def send_to_telegram(report, token, chat_id):
-    """Sends the formatted report to a Telegram chat/channel using the Telegram Bot API."""
+    """Sends the formatted report to a Telegram chat/channel using the Telegram Bot API.
+    Splits the message automatically if it exceeds Telegram's 4096 character limit.
+    """
     url = f"https://api.telegram.org/bot{token}/sendMessage"
-    payload = {
-        "chat_id": chat_id,
-        "text": report,
-        "parse_mode": "Markdown"
-    }
-    try:
-        response = requests.post(url, json=payload, timeout=15)
-        if response.status_code == 200:
-            print("[INFO] Successfully sent report to Telegram!")
-        else:
-            print(f"[ERROR] Telegram sending failed: {response.text}")
-    except Exception as e:
-        print(f"[ERROR] Exception sending to Telegram: {e}")
+    MAX_LENGTH = 4000
+    
+    if len(report) <= MAX_LENGTH:
+        payload = {
+            "chat_id": chat_id,
+            "text": report,
+            "parse_mode": "Markdown"
+        }
+        try:
+            response = requests.post(url, json=payload, timeout=15)
+            if response.status_code == 200:
+                print("[INFO] Successfully sent report to Telegram!")
+            else:
+                print(f"[ERROR] Telegram sending failed: {response.text}")
+        except Exception as e:
+            print(f"[ERROR] Exception sending to Telegram: {e}")
+    else:
+        # Split report into chunks by lines
+        chunks = []
+        current_chunk = []
+        current_length = 0
+        for line in report.split("\n"):
+            if current_length + len(line) + 1 > MAX_LENGTH:
+                chunks.append("\n".join(current_chunk))
+                current_chunk = [line]
+                current_length = len(line)
+            else:
+                current_chunk.append(line)
+                current_length += len(line) + 1
+        if current_chunk:
+            chunks.append("\n".join(current_chunk))
+            
+        print(f"[INFO] Report length ({len(report)}) exceeds limit. Sending in {len(chunks)} parts...")
+        for idx, chunk in enumerate(chunks, 1):
+            payload = {
+                "chat_id": chat_id,
+                "text": chunk,
+                "parse_mode": "Markdown"
+            }
+            try:
+                response = requests.post(url, json=payload, timeout=15)
+                if response.status_code == 200:
+                    print(f"[INFO] Part {idx} sent successfully to Telegram!")
+                else:
+                    print(f"[ERROR] Part {idx} sending failed: {response.text}")
+            except Exception as e:
+                print(f"[ERROR] Exception sending Part {idx}: {e}")
 
 def send_to_whatsapp_callmebot(report, phone, apikey):
     """Sends a summary of the report to WhatsApp via CallMeBot gateway."""
