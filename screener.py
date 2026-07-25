@@ -504,26 +504,33 @@ def main():
     print("=========================================\n")
     print(report)
     
-    # Send report via Broadcast APIs if configured in config.json
-    config_file = "config.json"
-    if os.path.exists(config_file):
-        try:
-            with open(config_file, "r") as cf:
-                config = json.load(cf)
-            
-            # Send to Telegram
-            tg = config.get("telegram", {})
-            if tg.get("enabled", False):
-                print("\n[BROADCAST] Broadcasting to Telegram...")
-                send_to_telegram(report, tg.get("bot_token"), tg.get("chat_id"))
+    # Send report via Broadcast APIs (checks environment variables first, then config.json fallback)
+    env_token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    env_chat_id = os.environ.get("TELEGRAM_CHAT_ID")
+    
+    if env_token and env_chat_id:
+        print("\n[BROADCAST] Broadcasting to Telegram via Environment Variables...")
+        send_to_telegram(report, env_token, env_chat_id)
+    else:
+        config_file = "config.json"
+        if os.path.exists(config_file):
+            try:
+                with open(config_file, "r") as cf:
+                    config = json.load(cf)
                 
-            # Send to WhatsApp
-            wa = config.get("whatsapp_callmebot", {})
-            if wa.get("enabled", False):
-                print("\n[BROADCAST] Broadcasting to WhatsApp...")
-                send_to_whatsapp_callmebot(report, wa.get("phone_number"), wa.get("api_key"))
-        except Exception as e:
-            print(f"\n[WARNING] Failed to load config or broadcast: {e}")
+                # Send to Telegram
+                tg = config.get("telegram", {})
+                if tg.get("enabled", False):
+                    print("\n[BROADCAST] Broadcasting to Telegram...")
+                    send_to_telegram(report, tg.get("bot_token"), tg.get("chat_id"))
+                    
+                # Send to WhatsApp
+                wa = config.get("whatsapp_callmebot", {})
+                if wa.get("enabled", False):
+                    print("\n[BROADCAST] Broadcasting to WhatsApp...")
+                    send_to_whatsapp_callmebot(report, wa.get("phone_number"), wa.get("api_key"))
+            except Exception as e:
+                print(f"\n[WARNING] Failed to load config or broadcast: {e}")
 
 if __name__ == "__main__":
     main()
