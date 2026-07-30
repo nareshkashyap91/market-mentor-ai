@@ -10,16 +10,19 @@ from datetime import datetime, time, timedelta
 # Ensure terminal outputs emojis correctly on Windows
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Dhan Security IDs for fallback symbols (extracted from scrip master)
+# Dhan Security IDs for Nifty 50 symbols (extracted from scrip master)
 DHAN_MAPPING = {
-    'RELIANCE': '2885', 'TCS': '11536', 'HDFCBANK': '1333', 'INFY': '1594', 'ICICIBANK': '4963', 
-    'BHARTIARTL': '10604', 'SBIN': '3045', 'ITC': '1660', 'HINDUNILVR': '1394', 'LT': '11483', 
-    'BAJFINANCE': '317', 'HCLTECH': '7229', 'MARUTI': '10999', 'SUNPHARMA': '3351', 'AXISBANK': '5900', 
-    'COALINDIA': '20374', 'ADANIPORTS': '15083', 'ASIANPAINT': '236', 'ULTRACEMCO': '11532', 
-    'JSWSTEEL': '11723', 'M&M': '2031', 'TATASTEEL': '3499', 'SIEMENS': '3150', 'HAL': '2303', 
-    'TECHM': '13538', 'PFC': '14299', 'RECLTD': '15355', 'BEL': '383', 'INDUSINDBK': '5258', 
-    'CIPLA': '694', 'WIPRO': '3787', 'DLF': '14732', 'TRENT': '1964', 'BPCL': '526', 'VBL': '18921', 
-    'HEROMOTOCO': '1348', 'SHRIRAMFIN': '4306', 'POLYCAB': '9590', 'PIDILITIND': '2664', 'TATAMOTORS': '3456'
+    'ADANIENT': '25', 'ADANIPORTS': '15083', 'APOLLOHOSP': '157', 'ASIANPAINT': '236', 'AXISBANK': '5900', 
+    'BAJAJ-AUTO': '16669', 'BAJFINANCE': '317', 'BAJAJFINSV': '16675', 'BEL': '383', 'BHARTIARTL': '10604', 
+    'CIPLA': '694', 'COALINDIA': '20374', 'DRREDDY': '881', 'EICHERMOT': '910', 'GRASIM': '1232', 
+    'HCLTECH': '7229', 'HDFCBANK': '1333', 'HDFCLIFE': '467', 'HINDALCO': '1363', 
+    'HINDUNILVR': '1394', 'ICICIBANK': '4963', 'ITC': '1660', 'INFY': '1594', 'INDIGO': '11195', 
+    'JSWSTEEL': '11723', 'JIOFIN': '18143', 'KOTAKBANK': '1922', 'LT': '11483', 'M&M': '2031', 
+    'MARUTI': '10999', 'MAXHEALTH': '22377', 'NTPC': '11630', 'NESTLEIND': '17963', 'ONGC': '2475', 
+    'POWERGRID': '14977', 'RELIANCE': '2885', 'SBILIFE': '21808', 'SHRIRAMFIN': '4306', 'SBIN': '3045', 
+    'SUNPHARMA': '3351', 'TCS': '11536', 'TATACONSUM': '3432', 'TMPV': '3456', 'TATASTEEL': '3499', 
+    'TECHM': '13538', 'TITAN': '3506', 'TRENT': '1964', 'ULTRACEMCO': '11532', 'WIPRO': '3787',
+    'TATAMOTORS': '3456' # Handled both alias for safety
 }
 
 def calculate_rsi(series, period=14):
@@ -47,14 +50,35 @@ def calculate_atr(df, period=14):
     atr = tr.ewm(alpha=1/period, adjust=False).mean()
     return atr
 
-def get_fallback_symbols():
+def get_nifty50_symbols():
+    """Fetches Nifty 50 symbols dynamically from the NSE website list."""
+    url = "https://archives.nseindia.com/content/indices/ind_nifty50list.csv"
+    headers = {"User-Agent": "Mozilla/5.0"}
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        if response.status_code == 200:
+            lines = response.text.strip().split('\n')
+            symbols = []
+            for line in lines[1:]:
+                parts = line.split(',')
+                if len(parts) > 2:
+                    symbol = parts[2].strip().replace('"', '')
+                    if symbol:
+                        symbols.append(symbol)
+            if len(symbols) >= 45: # Safe verification
+                return symbols
+    except Exception as e:
+        print(f"[WARNING] Failed to fetch dynamic Nifty 50 symbols: {e}. Using local fallback.")
+        
+    # Local fallback if NSE website is down or blocking requests
     return [
-        "RELIANCE", "TCS", "HDFCBANK", "INFY", "ICICIBANK", "BHARTIARTL", "SBIN", "ITC", 
-        "HINDUNILVR", "LT", "BAJFINANCE", "HCLTECH", "MARUTI", "SUNPHARMA", "TATAMOTORS", 
-        "AXISBANK", "COALINDIA", "ADANIPORTS", "ASIANPAINT", "ULTRACEMCO", "JSWSTEEL", 
-        "M&M", "TATASTEEL", "SIEMENS", "HAL", "TECHM", "PFC", "RECLTD", "BEL", "INDUSINDBK", 
-        "CIPLA", "WIPRO", "DLF", "TRENT", "BPCL", "VBL", "HEROMOTOCO", "SHRIRAMFIN", 
-        "POLYCAB", "PIDILITIND"
+        'ADANIENT', 'ADANIPORTS', 'APOLLOHOSP', 'ASIANPAINT', 'AXISBANK', 'BAJAJ-AUTO', 'BAJFINANCE', 
+        'BAJAJFINSV', 'BEL', 'BHARTIARTL', 'CIPLA', 'COALINDIA', 'DRREDDY', 'EICHERMOT', 'ETERNAL', 
+        'GRASIM', 'HCLTECH', 'HDFCBANK', 'HDFCLIFE', 'HINDALCO', 'HINDUNILVR', 'ICICIBANK', 'ITC', 
+        'INFY', 'INDIGO', 'JSWSTEEL', 'JIOFIN', 'KOTAKBANK', 'LT', 'M&M', 'MARUTI', 'MAXHEALTH', 
+        'NTPC', 'NESTLEIND', 'ONGC', 'POWERGRID', 'RELIANCE', 'SBILIFE', 'SHRIRAMFIN', 'SBIN', 
+        'SUNPHARMA', 'TCS', 'TATACONSUM', 'TMPV', 'TATASTEEL', 'TECHM', 'TITAN', 'TRENT', 
+        'ULTRACEMCO', 'WIPRO'
     ]
 
 def check_market_hours():
@@ -266,7 +290,7 @@ def main():
         print("[INFO] Market is OPEN. Scanning for real-time live breakouts.")
         is_simulation = False
         
-    symbols = get_fallback_symbols()
+    symbols = get_nifty50_symbols()
     
     # If Dhan is enabled, we will query individually (or fall back to yf)
     # If Dhan is disabled, we download in bulk from yf (fastest for yfinance)
