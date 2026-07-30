@@ -22,8 +22,22 @@ DHAN_MAPPING = {
     'POWERGRID': '14977', 'RELIANCE': '2885', 'SBILIFE': '21808', 'SHRIRAMFIN': '4306', 'SBIN': '3045', 
     'SUNPHARMA': '3351', 'TCS': '11536', 'TATACONSUM': '3432', 'TMPV': '3456', 'TATASTEEL': '3499', 
     'TECHM': '13538', 'TITAN': '3506', 'TRENT': '1964', 'ULTRACEMCO': '11532', 'WIPRO': '3787',
-    'TATAMOTORS': '3456' # Handled both alias for safety
+    'TATAMOTORS': '3456'
 }
+
+def ensure_ist_timezone(df):
+    """Ensures the DataFrame index is in Asia/Kolkata timezone (IST) for accurate time-window analysis."""
+    if df.index.tz is None:
+        try:
+            df.index = df.index.tz_localize('UTC').tz_convert('Asia/Kolkata')
+        except Exception:
+            try:
+                df.index = df.index.tz_localize('Asia/Kolkata')
+            except Exception:
+                pass
+    else:
+        df.index = df.index.tz_convert('Asia/Kolkata')
+    return df
 
 def calculate_rsi(series, period=14):
     delta = series.diff()
@@ -119,7 +133,6 @@ def fetch_dhan_data(symbol, client_id, access_token):
         "Content-Type": "application/json"
     }
     
-    # Request last 5 days of data to compute indicators (EMA20, RSI14, ATR14)
     today = datetime.now()
     from_date = (today - timedelta(days=5)).strftime("%Y-%m-%d")
     to_date = today.strftime("%Y-%m-%d")
@@ -139,7 +152,6 @@ def fetch_dhan_data(symbol, client_id, access_token):
             res_json = response.json()
             chart_data = res_json.get("data", {})
             if "t" in chart_data and len(chart_data["t"]) > 0:
-                # Convert timestamps to pandas datetime
                 idx = pd.to_datetime(chart_data["t"], unit='s')
                 df = pd.DataFrame({
                     "Open": [float(x) for x in chart_data["o"]],
@@ -149,8 +161,7 @@ def fetch_dhan_data(symbol, client_id, access_token):
                     "Volume": [int(x) for x in chart_data["v"]]
                 }, index=idx)
                 
-                # Convert index to Indian Standard Time (IST)
-                df.index = df.index.tz_localize('UTC').tz_convert('Asia/Kolkata')
+                df = ensure_ist_timezone(df)
                 return df
     except Exception as e:
         print(f"[WARNING] Dhan API fetch failed for {symbol}: {e}")
@@ -160,24 +171,20 @@ def process_symbol(symbol, df, is_simulation=False):
     if len(df) < 20:
         return None
         
-    # Get rows belonging to the most recent trading session
     latest_date = df.index[-1].date()
     today_data = df[df.index.date == latest_date]
     
     if len(today_data) < 2:
         return None
         
-    # First 15-minute candle of the session defines the range
     first_candle = today_data.iloc[0]
     range_high = first_candle['High']
     range_low = first_candle['Low']
     
-    # Calculate indicators
     ema20 = df['Close'].ewm(span=20, adjust=False).mean()
     rsi = calculate_rsi(df['Close'], period=14)
     atr = calculate_atr(df, period=14)
     
-    # VWAP on the active session
     typical_price_vol = ((today_data['High'] + today_data['Low'] + today_data['Close']) / 3) * today_data['Volume']
     total_vol = today_data['Volume'].sum()
     vwap = typical_price_vol.sum() / total_vol if total_vol > 0 else today_data['Close'].iloc[-1]
@@ -200,6 +207,12 @@ def process_symbol(symbol, df, is_simulation=False):
         return None
         
     trigger_candle = today_data.iloc[signal_idx]
+    
+    # Pro-Trader Time Filter: Skip late entries after 2:30 PM (14:30 IST)
+    trigger_time_obj = today_data.index[signal_idx].time()
+    if trigger_time_obj > time(14, 30):
+        return None
+        
     trigger_time = today_data.index[signal_idx].strftime('%I:%M %p')
     close_price = trigger_candle['Close']
     volume = trigger_candle['Volume']
@@ -290,29 +303,48 @@ def main():
         print("[INFO] Market is OPEN. Scanning for real-time live breakouts.")
         is_simulation = False
         
+    # Pro-Trader Index Context Filter
+    nifty_trend = "Neutral / Sideways"
+    try:
+        nifty_df = yf.download('^NSEI', period='2d', interval='15m', progress=False)
+        if nifty_df is not None and not nifty_df.empty:
+            if isinstance(nifty_df.columns, pd.MultiIndex):
+                nifty_df.columns = nifty_df.columns.get_level_values(0)
+            
+            nifty_df = ensure_ist_timezone(nifty_df)
+            latest_nifty_date = nifty_df.index[-1].date()
+            nifty_today = nifty_df[nifty_df.index.date == latest_nifty_date]
+            if len(nifty_today) > 0:
+                nifty_open = nifty_today['Open'].iloc[0]
+                nifty_close = nifty_today['Close'].iloc[-1]
+                nifty_pct = ((nifty_close - nifty_open) / nifty_open) * 100
+                if nifty_pct > 0.2:
+                    nifty_trend = "🟢 Bullish (Market Trending Up)"
+                elif nifty_pct < -0.2:
+                    nifty_trend = "🔴 Bearish (Market Downtrend)"
+                else:
+                    nifty_trend = "🟡 Neutral (Rangebound Market)"
+    except Exception as e:
+        print(f"[WARNING] Could not fetch Nifty Index context: {e}")
+        
     symbols = get_nifty50_symbols()
     
-    # If Dhan is enabled, we will query individually (or fall back to yf)
-    # If Dhan is disabled, we download in bulk from yf (fastest for yfinance)
     if dhan_enabled and client_id and access_token:
         print(f"[INFO] Dhan API enabled. Scanning {len(symbols)} stocks with live Dhan feed...")
         signals_found = 0
         for symbol in symbols:
-            print(f"Scanning {symbol}...")
             df = fetch_dhan_data(symbol, client_id, access_token)
             
-            # Fallback to yfinance if Dhan failed
             if df is None:
                 ticker_symbol = f"{symbol}.NS"
                 try:
                     df = yf.download(ticker_symbol, period='5d', interval='15m', progress=False)
                     if df is not None and not df.empty:
-                        # Handle multi-level index if returned by yfinance
                         if isinstance(df.columns, pd.MultiIndex):
                             df.columns = df.columns.get_level_values(0)
                         df = df.dropna(subset=['Close'])
+                        df = ensure_ist_timezone(df)
                 except Exception as e:
-                    print(f"[WARNING] yfinance fallback failed for {symbol}: {e}")
                     continue
                     
             if df is None or df.empty:
@@ -321,8 +353,6 @@ def main():
             signal = process_symbol(symbol, df, is_simulation=is_simulation)
             if signal:
                 signals_found += 1
-                
-                # Fetch long company name
                 company_name = symbol
                 try:
                     ticker_obj = yf.Ticker(f"{symbol}.NS")
@@ -334,7 +364,8 @@ def main():
                     f"🚨 **EXPERT INTRADAY BUY ALERT** 🚨\n\n"
                     f"📈 **Stock**: NSE:{signal['symbol']} ({company_name})\n"
                     f"⚡ **Setup**: 15-Min Opening Range Breakout (ORB)\n"
-                    f"🕒 **Trigger Time**: {signal['trigger_time']} (IST)\n\n"
+                    f"🕒 **Trigger Time**: {signal['trigger_time']} (IST)\n"
+                    f"📊 **Nifty 50 Trend**: {nifty_trend}\n\n"
                     f"📥 **Entry Trigger**: `₹{signal['entry']:.2f}`\n"
                     f"🛡️ **Stop Loss (SL)**: `₹{signal['sl']:.2f}` (Risk: {signal['risk_pct']:.2f}%)\n\n"
                     f"🎯 **Target 1 (R:R 1:1)**: `₹{signal['t1']:.2f}`\n"
@@ -342,7 +373,7 @@ def main():
                     f"📊 **Expert Analysis**:\n"
                     f"- Price broke above the opening 15m range high of `₹{signal['range_high']}` with `{signal['vol_expansion']}x` volume expansion.\n"
                     f"- Sustaining above daily VWAP (`₹{signal['vwap']}`). RSI is in strong bullish territory at `{signal['rsi']}`.\n\n"
-                    f"⚠️ *Risk Management: Standard capital risk of 1% is recommended per setup. Trailing stop-loss is advised as Target 1 is reached.*"
+                    f"⚠️ *Risk Management: Standard capital risk of 1% is recommended per setup. Trailing stop-loss to cost is advised once Target 1 is reached.*"
                 )
                 print(f"[SIGNAL] Buy trigger for {symbol} at {signal['entry']}")
                 if tg_token and tg_chat_id:
@@ -351,13 +382,12 @@ def main():
         print(f"\nScan complete. Total signals detected: {signals_found}")
         
     else:
-        # Standard yfinance bulk download
         print(f"[INFO] Dhan API disabled or keys missing. Scanning {len(symbols)} stocks using yfinance...")
         tickers = [f"{s}.NS" for s in symbols]
         try:
             data = yf.download(tickers, period='5d', interval='15m', group_by='ticker', progress=False)
         except Exception as e:
-            print(f"[ERROR] Failed to download intraday data from yfinance: {e}")
+            print(f"[ERROR] Failed to download intraday data: {e}")
             return
             
         signals_found = 0
@@ -370,7 +400,8 @@ def main():
                     df = data[ticker_symbol].dropna(subset=['Close'])
                 else:
                     df = data.dropna(subset=['Close'])
-                    
+                
+                df = ensure_ist_timezone(df)
                 signal = process_symbol(symbol, df, is_simulation=is_simulation)
                 if signal:
                     signals_found += 1
@@ -385,7 +416,8 @@ def main():
                         f"🚨 **EXPERT INTRADAY BUY ALERT** 🚨\n\n"
                         f"📈 **Stock**: NSE:{signal['symbol']} ({company_name})\n"
                         f"⚡ **Setup**: 15-Min Opening Range Breakout (ORB)\n"
-                        f"🕒 **Trigger Time**: {signal['trigger_time']} (IST)\n\n"
+                        f"🕒 **Trigger Time**: {signal['trigger_time']} (IST)\n"
+                        f"📊 **Nifty 50 Trend**: {nifty_trend}\n\n"
                         f"📥 **Entry Trigger**: `₹{signal['entry']:.2f}`\n"
                         f"🛡️ **Stop Loss (SL)**: `₹{signal['sl']:.2f}` (Risk: {signal['risk_pct']:.2f}%)\n\n"
                         f"🎯 **Target 1 (R:R 1:1)**: `₹{signal['t1']:.2f}`\n"
@@ -393,7 +425,7 @@ def main():
                         f"📊 **Expert Analysis**:\n"
                         f"- Price broke above the opening 15m range high of `₹{signal['range_high']}` with `{signal['vol_expansion']}x` volume expansion.\n"
                         f"- Sustaining above daily VWAP (`₹{signal['vwap']}`). RSI is in strong bullish territory at `{signal['rsi']}`.\n\n"
-                        f"⚠️ *Risk Management: Standard capital risk of 1% is recommended per setup. Trailing stop-loss is advised as Target 1 is reached.*"
+                        f"⚠️ *Risk Management: Standard capital risk of 1% is recommended per setup. Trailing stop-loss to cost is advised once Target 1 is reached.*"
                     )
                     print(f"[SIGNAL] Buy trigger for {symbol} at {signal['entry']}")
                     if tg_token and tg_chat_id:
