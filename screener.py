@@ -11,6 +11,31 @@ from datetime import datetime, timedelta
 # Ensure terminal outputs emojis correctly on Windows
 sys.stdout.reconfigure(encoding='utf-8')
 
+def calculate_rsi(series, period=14):
+    delta = series.diff()
+    gain = delta.where(delta > 0, 0.0)
+    loss = -delta.where(delta < 0, 0.0)
+    
+    avg_gain = gain.ewm(alpha=1/period, adjust=False).mean()
+    avg_loss = loss.ewm(alpha=1/period, adjust=False).mean()
+    
+    rs = avg_gain / avg_loss.replace(0, 1e-9)
+    rsi = 100 - (100 / (1 + rs))
+    return rsi
+
+def calculate_atr(df, period=14):
+    high = df['High']
+    low = df['Low']
+    close = df['Close']
+    
+    tr1 = high - low
+    tr2 = (high - close.shift(1)).abs()
+    tr3 = (low - close.shift(1)).abs()
+    
+    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+    atr = tr.ewm(alpha=1/period, adjust=False).mean()
+    return atr
+
 # Emojis for categories
 EMOJIS = {
     "Large Cap": "🏆",
@@ -166,6 +191,19 @@ def screen_stocks(symbols):
     """Screens stocks based on liquidity, quality, EMA crossovers, volume expansion, and VWAP position."""
     print("\n--- Processing Stock Momentum Screener ---")
     
+    # Download Nifty 50 for Relative Strength calculation
+    nifty_close = None
+    try:
+        print("Downloading Nifty 50 benchmark data for Relative Strength calculation...")
+        nifty_df = yf.download("^NSEI", period='6mo', interval='1d', progress=False)
+        if not nifty_df.empty:
+            if isinstance(nifty_df.columns, pd.MultiIndex):
+                nifty_close = nifty_df['Close']['^NSEI'].dropna()
+            else:
+                nifty_close = nifty_df['Close'].dropna()
+    except Exception as e:
+        print(f"Warning: Could not download Nifty 50 data: {e}")
+        
     # Format symbols for Yahoo Finance
     tickers = [f"{s}.NS" for s in symbols]
     
@@ -210,8 +248,25 @@ def screen_stocks(symbols):
             ema21 = df['Close'].ewm(span=21, adjust=False).mean()
             ema50 = df['Close'].ewm(span=50, adjust=False).mean()
             
-            # Volume 10-day Average
-            vol_sma10 = df['Volume'].rolling(window=10).mean()
+            # RSI (14)
+            rsi = calculate_rsi(df['Close'], period=14)
+            rsi_val = rsi.iloc[-1]
+            
+            # ATR (14)
+            atr = calculate_atr(df, period=14)
+            atr_val = atr.iloc[-1]
+            
+            # Relative Strength vs Nifty 50
+            rs_outperforming = True
+            if nifty_close is not None:
+                aligned_nifty = nifty_close.reindex(df.index, method='ffill')
+                rs_ratio = df['Close'] / aligned_nifty
+                rs_sma20 = rs_ratio.rolling(20).mean()
+                rs_sma5 = rs_ratio.rolling(5).mean()
+                
+                # Check if RS is above its 20-day SMA, and 5-day SMA is rising compared to 2 sessions ago
+                if rs_ratio.iloc[-1] <= rs_sma20.iloc[-1] or rs_sma5.iloc[-1] <= rs_sma5.iloc[-3]:
+                    rs_outperforming = False
             
             # 2. Trend & Support Filter: Price sustaining above 20-EMA and 50-EMA
             if close_price <= ema20.iloc[-1] or close_price <= ema50.iloc[-1]:
@@ -219,6 +274,18 @@ def screen_stocks(symbols):
                 
             # 3. Momentum Filter: Bullish EMA Crossover (9-EMA > 21-EMA)
             if ema9.iloc[-1] <= ema21.iloc[-1]:
+                continue
+                
+            # Advanced Filter A: RSI must be in strong but not overbought momentum range (55-75)
+            if rsi_val < 55 or rsi_val > 75:
+                continue
+                
+            # Advanced Filter B: Price must not be overextended (Close - EMA20 <= 1.5 * ATR)
+            if (close_price - ema20.iloc[-1]) > 1.5 * atr_val:
+                continue
+                
+            # Advanced Filter C: Stock must possess relative strength outperformance
+            if not rs_outperforming:
                 continue
                 
             # Check if crossover is fresh (occurred in the last 5 trading sessions)
@@ -230,6 +297,7 @@ def screen_stocks(symbols):
             crossover_type = "fresh" if was_below else "established"
             
             # 4. Volume Action: Daily volume > 10-day Average Volume
+            vol_sma10 = df['Volume'].rolling(window=10).mean()
             avg_vol10 = vol_sma10.iloc[-1]
             if volume <= avg_vol10 or avg_vol10 == 0:
                 continue
@@ -243,7 +311,9 @@ def screen_stocks(symbols):
                 "vol_expansion": round(vol_expansion_factor, 1),
                 "crossover_type": crossover_type,
                 "high": df['High'].iloc[-1],
-                "low": df['Low'].iloc[-1]
+                "low": df['Low'].iloc[-1],
+                "rsi": rsi_val,
+                "atr": atr_val
             })
             
         except Exception as e:
@@ -331,7 +401,7 @@ def screen_stocks(symbols):
                 continue # Exclude
                 
             # Generate the dynamic technical "Why"
-            why_reason = f"Strong liquidity (Turnover: ₹{stock['turnover_cr']:.1f} Cr), closed {pct_above_vwap:.1f}% above VWAP with a {stock['crossover_type']} 9/21 EMA crossover and {stock['vol_expansion']:.1f}x volume expansion."
+            why_reason = f"Outperforming market (RSI: {stock['rsi']:.1f}), closed {pct_above_vwap:.1f}% above VWAP with a {stock['crossover_type']} 9/21 EMA crossover and {stock['vol_expansion']:.1f}x volume expansion."
             
             final_candidates.append({
                 "symbol": symbol,
