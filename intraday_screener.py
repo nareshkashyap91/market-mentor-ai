@@ -192,9 +192,12 @@ def main():
     
     # Determine Mode
     is_live = check_market_hours()
+    is_github = os.environ.get("GITHUB_ACTIONS") == "true"
     
-    # Force simulation mode if market is closed
     if not is_live:
+        if is_github:
+            print("[INFO] Market is closed. Exiting immediately in GitHub Actions to prevent duplicate simulation alerts.")
+            return
         print("[INFO] Market is closed. Running in SIMULATION MODE on last trading session.")
         is_simulation = True
     else:

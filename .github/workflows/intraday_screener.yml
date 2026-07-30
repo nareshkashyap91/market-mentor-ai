@@ -1,0 +1,33 @@
+name: Run Intraday Breakout Signals
+
+on:
+  schedule:
+    # Runs every 15 minutes, from 4:00 AM UTC (9:30 AM IST) to 10:00 AM UTC (3:30 PM IST)
+    # Mondays to Fridays. Automatically checks the latest 15m candle for breakouts.
+    - cron: '*/15 4-10 * * 1-5'
+  workflow_dispatch:
+    # Allows manually running the intraday scan from the GitHub interface at any time
+
+jobs:
+  run-intraday:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run MarketMentor Intraday Screener & Broadcast
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python intraday_screener.py
