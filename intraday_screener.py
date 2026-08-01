@@ -5,7 +5,7 @@ import json
 import requests
 import pandas as pd
 import yfinance as yf
-from datetime import datetime, time, timedelta
+from datetime import datetime, time, timedelta, timezone
 
 # Ensure terminal outputs emojis correctly on Windows
 sys.stdout.reconfigure(encoding='utf-8')
@@ -96,9 +96,13 @@ def get_nifty50_symbols():
     ]
 
 def check_market_hours():
-    now = datetime.now()
+    # Indian Standard Time (IST) is UTC + 5:30
+    ist_tz = timezone(timedelta(hours=5, minutes=30))
+    now = datetime.now(ist_tz)
+    
     if now.weekday() >= 5: # Saturday/Sunday
         return False
+        
     current_time = now.time()
     market_start = time(9, 15)
     market_end = time(15, 30)
