@@ -564,6 +564,20 @@ def main():
     # Generate report
     report = generate_report(mf_results, stock_results)
     
+    # Save to JSON for Web UI Dashboard
+    os.makedirs("data", exist_ok=True)
+    evening_data = {
+        "date": datetime.now().strftime("%d-%b-%Y"),
+        "mutual_funds": mf_results,
+        "momentum_stocks": stock_results
+    }
+    try:
+        with open("data/evening.json", "w") as jf:
+            json.dump(evening_data, jf, indent=2)
+        print("[INFO] Successfully saved evening results to data/evening.json")
+    except Exception as e:
+        print(f"[ERROR] Failed to save evening.json: {e}")
+    
     # Save report to file
     report_filename = f"MarketWrap_{datetime.now().strftime('%Y%m%d')}.md"
     with open(report_filename, "w", encoding="utf-8") as f:

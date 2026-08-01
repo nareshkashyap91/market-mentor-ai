@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketMentor AI - Premium Trading Dashboard</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background blur effects -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar-nav">
+            <div class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-chart-line-up"></i></div>
+                <div class="logo-text">Market<span>Mentor</span></div>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#" class="nav-item active" data-tab="dashboard">
+                    <i class="fa-solid fa-grid-2"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-tab="morning">
+                    <i class="fa-solid fa-sun-cloud"></i> Morning Insights
+                </a>
+                <a href="#" class="nav-item" data-tab="momentum">
+                    <i class="fa-solid fa-fire"></i> Momentum Stocks
+                </a>
+                <a href="#" class="nav-item" data-tab="funds">
+                    <i class="fa-solid fa-vault"></i> Mutual Funds
+                </a>
+            </nav>
+            
+            <div class="connection-status">
+                <div class="status-indicator live"></div>
+                <span class="status-label">Cloud Sync Online</span>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Container -->
+        <main class="main-content">
+            <!-- Header bar -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 class="page-title">Market Overview</h1>
+                    <p class="current-date" id="date-label">Loading date...</p>
+                </div>
+                
+                <div class="header-right">
+                    <div class="widget-mini gift-nifty-mini">
+                        <span class="widget-title">GIFT Nifty</span>
+                        <div class="widget-val" id="gift-mini-val">--</div>
+                    </div>
+                    <div class="widget-mini nifty-status-mini">
+                        <span class="widget-title">Nifty 50 Trend</span>
+                        <div class="widget-val" id="nifty-trend-label">--</div>
+                    </div>
+                    <button class="btn-refresh" onclick="refreshDashboard()"><i class="fa-solid fa-rotate"></i> Refresh</button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content Panels -->
+            <div class="tab-panel active" id="tab-dashboard">
+                <!-- Overview Row -->
+                <div class="overview-grid">
+                    <div class="glass-card overview-card">
+                        <div class="card-icon blue"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Intraday Buy Alerts</span>
+                            <h3 class="stat-value" id="signal-count">0</h3>
+                            <span class="stat-sub">Active Breakouts Today</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon green"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">GIFT Nifty Gap</span>
+                            <h3 class="stat-value" id="gift-change-pct">+0.00%</h3>
+                            <span class="stat-sub" id="gift-open-signal">Loading gap status...</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon purple"><i class="fa-solid fa-radar"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Momentum Setups</span>
+                            <h3 class="stat-value" id="momentum-count">0</h3>
+                            <span class="stat-sub">Screener Candidates</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Grid Row -->
+                <div class="layout-main-grid">
+                    <!-- Left Column: Intraday Signals Tracker -->
+                    <div class="layout-col-left">
+                        <div class="glass-card panel-card">
+                            <div class="panel-header">
+                                <h2 class="panel-title"><i class="fa-solid fa-crosshairs"></i> Active Intraday Breakouts (15-Min ORB)</h2>
+                                <span class="badge badge-pulse" id="market-status-badge">Market Hours</span>
+                            </div>
+                            
+                            <div class="signals-container" id="signals-list">
+                                <!-- Signals dynamically injected here -->
+                                <div class="empty-state">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <p>Scanning markets for 15-Minute Opening Range Breakouts...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Market Cues & Summary -->
+                    <div class="layout-col-right">
+                        <div class="glass-card panel-card compact">
+                            <div class="panel-header">
+                                <h2 class="panel-title"><i class="fa-solid fa-gauge-high"></i> Global Cue Sentiment</h2>
+                            </div>
+                            <div class="gauge-wrapper">
+                                <div class="sentiment-box" id="sentiment-indicator">
+                                    <span class="sentiment-text" id="sentiment-text">NEUTRAL</span>
+                                </div>
+                            </div>
+                            <div class="pivot-levels-grid" id="pivot-table">
+                                <div class="pivot-row header">
+                                    <span>Pivot Level</span>
+                                    <span>Nifty 50 Spot</span>
+                                </div>
+                                <div class="pivot-row resistance">
+                                    <span>Resistance 2 (R2)</span>
+                                    <span id="pivot-r2">--</span>
+                                </div>
+                                <div class="pivot-row resistance">
+                                    <span>Resistance 1 (R1)</span>
+                                    <span id="pivot-r1">--</span>
+                                </div>
+                                <div class="pivot-row spot">
+                                    <span>Previous Close</span>
+                                    <span id="pivot-close">--</span>
+                                </div>
+                                <div class="pivot-row support">
+                                    <span>Support 1 (S1)</span>
+                                    <span id="pivot-s1">--</span>
+                                </div>
+                                <div class="pivot-row support">
+                                    <span>Support 2 (S2)</span>
+                                    <span id="pivot-s2">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Morning Insights Tab -->
+            <div class="tab-panel" id="tab-morning">
+                <div class="glass-card panel-card">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-sun-cloud"></i> Morning Cues & Global Market Sentiment</h2>
+                    </div>
+                    
+                    <div class="indices-grid" id="global-indices-list">
+                        <!-- Global indices cards dynamically injected -->
+                    </div>
+
+                    <div class="macro-section">
+                        <h3 class="section-title"><i class="fa-solid fa-globe"></i> Macro Commodities & Currencies</h3>
+                        <div class="macro-grid" id="macro-indices-list">
+                            <!-- Macro widgets dynamically injected -->
+                        </div>
+                    </div>
+
+                    <div class="insights-section">
+                        <h3 class="section-title"><i class="fa-solid fa-lightbulb"></i> Pre-Market Cues Strategy</h3>
+                        <ul class="insights-list" id="insights-list-ul">
+                            <!-- List elements dynamically injected -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Momentum Stocks Tab -->
+            <div class="tab-panel" id="tab-momentum">
+                <div class="glass-card panel-card">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-fire"></i> Momentum Screener Candidates</h2>
+                        <span class="badge badge-indigo">Daily Swing Setups</span>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Close Price</th>
+                                    <th>Turnover (Crores)</th>
+                                    <th>Volume Expansion</th>
+                                    <th>RSI (14)</th>
+                                    <th>Technical Rationale</th>
+                                </tr>
+                            </thead>
+                            <tbody id="momentum-stocks-list">
+                                <!-- Dynamic table rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mutual Funds Tab -->
+            <div class="tab-panel" id="tab-funds">
+                <div class="funds-grid" id="funds-categories-container">
+                    <!-- Mutual Fund lists dynamically injected -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Main JavaScript Logic -->
+    <script src="app.js"></script>
+</body>
+</html>

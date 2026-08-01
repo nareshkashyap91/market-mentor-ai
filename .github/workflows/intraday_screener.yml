@@ -11,6 +11,8 @@ on:
 jobs:
   run-intraday:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Allow committing and pushing data back to the repository
 
     steps:
       - name: Checkout repository code
@@ -31,3 +33,11 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python intraday_screener.py
+
+      - name: Commit and push updated data
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/*.json
+          git diff-index --quiet HEAD || git commit -m "Auto-update dashboard data [skip ci]"
+          git push

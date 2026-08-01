@@ -280,6 +280,48 @@ def main():
     final_report = "\n".join(report)
     print(final_report)
     
+    # Save to JSON for Web UI Dashboard
+    os.makedirs("data", exist_ok=True)
+    morning_data = {
+        "date": datetime.now().strftime("%d-%b-%Y"),
+        "gift_nifty": {
+            "price": gift["price"] if gift else None,
+            "prev_close": gift["prev_close"] if gift else None,
+            "change": gift["change"] if gift else 0.0,
+            "change_pct": gift["change_pct"] if gift else 0.0,
+            "open_signal": gap_desc if gift else "Flat Open"
+        },
+        "global_indices": [
+            {"name": "Dow Jones", "price": dow_price, "change_pct": dow_pct},
+            {"name": "S&P 500", "price": sp500_price, "change_pct": sp500_pct},
+            {"name": "Nasdaq", "price": nas_price, "change_pct": nas_pct},
+            {"name": "Nikkei 225", "price": nikkei_price, "change_pct": nikkei_pct},
+            {"name": "Hang Seng", "price": hangseng_price, "change_pct": hangseng_pct}
+        ],
+        "macro": [
+            {"name": "Brent Crude Oil", "price": crude_price, "change_pct": crude_pct},
+            {"name": "Gold Futures", "price": gold_price, "change_pct": gold_pct},
+            {"name": "Dollar Index (DXY)", "price": dxy_price, "change_pct": dxy_pct},
+            {"name": "US 10Y Bond Yield", "price": bond_price, "change_pct": bond_pct}
+        ],
+        "nifty_pivots": {
+            "close": nifty_price,
+            "pct_change": nifty_pct,
+            "r1": r1,
+            "r2": r2,
+            "s1": s1,
+            "s2": s2
+        },
+        "insights": insights
+    }
+    
+    try:
+        with open("data/morning.json", "w") as jf:
+            json.dump(morning_data, jf, indent=2)
+        print("[INFO] Successfully saved morning pre-market clues to data/morning.json")
+    except Exception as e:
+        print(f"[ERROR] Failed to save morning.json: {e}")
+    
     # 6. Broadcast report to Telegram
     env_token = os.environ.get("TELEGRAM_BOT_TOKEN")
     env_chat_id = os.environ.get("TELEGRAM_CHAT_ID")

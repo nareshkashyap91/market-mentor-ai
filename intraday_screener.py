@@ -263,6 +263,80 @@ def process_symbol(symbol, df, is_simulation=False):
         "vol_expansion": round(vol_expansion, 1)
     }
 
+def save_intraday_json(new_signals, nifty_trend):
+    """Saves intraday setups and updates prices and statuses in data/intraday.json."""
+    os.makedirs("data", exist_ok=True)
+    json_path = os.path.join("data", "intraday.json")
+    
+    # Use IST Date for file state consistency
+    ist_tz = timezone(timedelta(hours=5, minutes=30))
+    today_str = datetime.now(ist_tz).strftime("%d-%b-%Y")
+    
+    existing_signals = []
+    if os.path.exists(json_path):
+        try:
+            with open(json_path, "r") as f:
+                saved_data = json.load(f)
+            if saved_data.get("date") == today_str:
+                existing_signals = saved_data.get("signals", [])
+        except Exception as e:
+            print(f"[WARNING] Failed to read existing intraday.json: {e}")
+            
+    # Combine signals: update existing or add new
+    signal_map = {s["symbol"]: s for s in existing_signals}
+    
+    # Process new signals
+    for s in new_signals:
+        sym = s["symbol"]
+        if sym not in signal_map:
+            s["current_price"] = s["entry"]
+            s["status"] = "Active"
+            signal_map[sym] = s
+            
+    # Update current prices and status for active signals in the map
+    for sym, s_data in list(signal_map.items()):
+        if s_data.get("status") in ["Stop Loss Hit", "Target 2 Hit"]:
+            continue
+            
+        ticker_symbol = f"{sym}.NS"
+        try:
+            ticker_obj = yf.Ticker(ticker_symbol)
+            fast_info = ticker_obj.fast_info
+            ltp = fast_info.get("lastPrice")
+            if ltp is not None:
+                ltp = round(float(ltp), 2)
+                s_data["current_price"] = ltp
+                
+                # Check status boundaries
+                sl = s_data["sl"]
+                t1 = s_data["t1"]
+                t2 = s_data["t2"]
+                
+                if ltp <= sl:
+                    s_data["status"] = "Stop Loss Hit"
+                elif ltp >= t2:
+                    s_data["status"] = "Target 2 Hit"
+                elif ltp >= t1:
+                    s_data["status"] = "Target 1 Hit"
+                else:
+                    s_data["status"] = "Active"
+        except Exception as e:
+            print(f"[WARNING] Failed to update LTP for {sym}: {e}")
+            
+    # Write back to JSON
+    output_data = {
+        "date": today_str,
+        "nifty_trend": nifty_trend,
+        "signals": list(signal_map.values())
+    }
+    
+    try:
+        with open(json_path, "w") as f:
+            json.dump(output_data, f, indent=2)
+        print(f"[INFO] Saved intraday data to {json_path}")
+    except Exception as e:
+        print(f"[ERROR] Failed to write intraday.json: {e}")
+
 def main():
     print("=========================================")
     print("   MARKETMENTOR INTRADAY ENGINE (ORB)    ")
@@ -332,6 +406,7 @@ def main():
         print(f"[WARNING] Could not fetch Nifty Index context: {e}")
         
     symbols = get_nifty50_symbols()
+    new_signals = []
     
     if dhan_enabled and client_id and access_token:
         print(f"[INFO] Dhan API enabled. Scanning {len(symbols)} stocks with live Dhan feed...")
@@ -363,6 +438,10 @@ def main():
                     company_name = ticker_obj.info.get('longName', symbol)
                 except Exception:
                     pass
+                
+                # Append company name to signal and add to new list
+                signal["company"] = company_name
+                new_signals.append(signal)
                     
                 alert_msg = (
                     f"🚨 **EXPERT INTRADAY BUY ALERT** 🚨\n\n"
@@ -415,6 +494,9 @@ def main():
                         company_name = ticker_obj.info.get('longName', symbol)
                     except Exception:
                         pass
+                    
+                    signal["company"] = company_name
+                    new_signals.append(signal)
                         
                     alert_msg = (
                         f"🚨 **EXPERT INTRADAY BUY ALERT** 🚨\n\n"
@@ -438,6 +520,9 @@ def main():
                 continue
                 
         print(f"\nScan complete. Total signals detected: {signals_found}")
+        
+    # Save collected signals to JSON (updates current price & status of active signals)
+    save_intraday_json(new_signals, nifty_trend)
 
 if __name__ == '__main__':
     main()
