@@ -333,6 +333,23 @@ function renderMomentumStocks(data) {
     }
 
     list.innerHTML = data.momentum_stocks.map(s => {
+        // Build DMA badge and description
+        let dmaBadge = "";
+        if (s.dma20 && s.dma50 && s.dma100 && s.dma200) {
+            const alignmentText = s.dma_aligned ? "🟢 BULLISH ALIGN" : "🟡 ABOVE DMAs";
+            dmaBadge = `
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <span class="status-pill ${s.dma_aligned ? 'target-1' : 'active'}" style="font-size: 0.65rem; padding: 3px 8px; width: fit-content; text-align: center;">${alignmentText}</span>
+                    <span style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.3;">
+                        20: <strong>₹${s.dma20.toFixed(0)}</strong> | 50: <strong>₹${s.dma50.toFixed(0)}</strong><br>
+                        100: <strong>₹${s.dma100.toFixed(0)}</strong> | 200: <strong>₹${s.dma200.toFixed(0)}</strong>
+                    </span>
+                </div>
+            `;
+        } else {
+            dmaBadge = `<span style="color: var(--text-muted); font-size: 0.8rem;">N/A</span>`;
+        }
+
         return `
             <tr>
                 <td class="stock-ticker">NSE:${s.symbol}</td>
@@ -340,6 +357,7 @@ function renderMomentumStocks(data) {
                 <td>₹${s.turnover.toFixed(1)} Cr</td>
                 <td><span style="color: var(--clr-success); font-weight: 600;">${s.vol_expansion.toFixed(1)}x</span></td>
                 <td>${s.rsi ? s.rsi.toFixed(1) : "N/A"}</td>
+                <td>${dmaBadge}</td>
                 <td style="font-size: 0.8rem; line-height: 1.4; color: var(--text-secondary); max-width: 320px;">${s.why}</td>
             </tr>
         `;

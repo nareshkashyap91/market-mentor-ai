@@ -195,7 +195,7 @@ def screen_stocks(symbols):
     nifty_close = None
     try:
         print("Downloading Nifty 50 benchmark data for Relative Strength calculation...")
-        nifty_df = yf.download("^NSEI", period='6mo', interval='1d', progress=False)
+        nifty_df = yf.download("^NSEI", period='18mo', interval='1d', progress=False)
         if not nifty_df.empty:
             if isinstance(nifty_df.columns, pd.MultiIndex):
                 nifty_close = nifty_df['Close']['^NSEI'].dropna()
@@ -207,11 +207,11 @@ def screen_stocks(symbols):
     # Format symbols for Yahoo Finance
     tickers = [f"{s}.NS" for s in symbols]
     
-    # Step 1: Bulk download daily EOD data (6 months) to calculate EMA & Volume averages
+    # Step 1: Bulk download daily EOD data (18 months) to calculate DMA & Volume averages
     print(f"Downloading historical daily data for {len(tickers)} stocks...")
     try:
         # Download in one large batch
-        hist_data = yf.download(tickers, period='6mo', interval='1d', group_by='ticker', progress=False)
+        hist_data = yf.download(tickers, period='18mo', interval='1d', group_by='ticker', progress=False)
     except Exception as e:
         print(f"Error downloading bulk EOD data: {e}")
         return []
@@ -229,7 +229,7 @@ def screen_stocks(symbols):
             else:
                 # Single ticker fallback
                 df = hist_data.dropna(subset=['Close'])
-            if len(df) < 50: # Minimum history for 50-EMA
+            if len(df) < 200: # Minimum history for 200-DMA Simple Moving Average
                 continue
             
             # Latest day values
@@ -247,6 +247,19 @@ def screen_stocks(symbols):
             ema20 = df['Close'].ewm(span=20, adjust=False).mean()
             ema21 = df['Close'].ewm(span=21, adjust=False).mean()
             ema50 = df['Close'].ewm(span=50, adjust=False).mean()
+            
+            # DMAs (Simple Moving Averages)
+            dma20_series = df['Close'].rolling(window=20).mean()
+            dma50_series = df['Close'].rolling(window=50).mean()
+            dma100_series = df['Close'].rolling(window=100).mean()
+            dma200_series = df['Close'].rolling(window=200).mean()
+            
+            dma20_val = float(dma20_series.iloc[-1])
+            dma50_val = float(dma50_series.iloc[-1])
+            dma100_val = float(dma100_series.iloc[-1])
+            dma200_val = float(dma200_series.iloc[-1])
+            
+            dma_aligned = bool(dma20_val > dma50_val > dma100_val > dma200_val)
             
             # RSI (14)
             rsi = calculate_rsi(df['Close'], period=14)
@@ -270,6 +283,10 @@ def screen_stocks(symbols):
             
             # 2. Trend & Support Filter: Price sustaining above 20-EMA and 50-EMA
             if close_price <= ema20.iloc[-1] or close_price <= ema50.iloc[-1]:
+                continue
+                
+            # 4. DMA Filter: Price must be above all major DMAs (20, 50, 100, 200 DMA)
+            if close_price <= dma20_val or close_price <= dma50_val or close_price <= dma100_val or close_price <= dma200_val:
                 continue
                 
             # 3. Momentum Filter: Bullish EMA Crossover (9-EMA > 21-EMA)
@@ -313,7 +330,12 @@ def screen_stocks(symbols):
                 "high": df['High'].iloc[-1],
                 "low": df['Low'].iloc[-1],
                 "rsi": rsi_val,
-                "atr": atr_val
+                "atr": atr_val,
+                "dma20": round(dma20_val, 2),
+                "dma50": round(dma50_val, 2),
+                "dma100": round(dma100_val, 2),
+                "dma200": round(dma200_val, 2),
+                "dma_aligned": dma_aligned
             })
             
         except Exception as e:
@@ -401,14 +423,21 @@ def screen_stocks(symbols):
                 continue # Exclude
                 
             # Generate the dynamic technical "Why"
-            why_reason = f"Outperforming market (RSI: {stock['rsi']:.1f}), closed {pct_above_vwap:.1f}% above VWAP with a {stock['crossover_type']} 9/21 EMA crossover and {stock['vol_expansion']:.1f}x volume expansion."
+            alignment_desc = "bullish DMA alignment (20>50>100>200)" if stock['dma_aligned'] else "sustaining above all key DMAs (20, 50, 100, 200)"
+            why_reason = f"Outperforming market (RSI: {stock['rsi']:.1f}), closed {pct_above_vwap:.1f}% above VWAP with {alignment_desc} and {stock['vol_expansion']:.1f}x volume expansion."
             
             final_candidates.append({
                 "symbol": symbol,
                 "close": stock['close'],
                 "turnover": stock['turnover_cr'],
                 "vol_expansion": stock['vol_expansion'],
-                "why": why_reason
+                "why": why_reason,
+                "dma20": stock['dma20'],
+                "dma50": stock['dma50'],
+                "dma100": stock['dma100'],
+                "dma200": stock['dma200'],
+                "dma_aligned": stock['dma_aligned'],
+                "rsi": round(stock['rsi'], 1)
             })
             
         except Exception as e:
