@@ -37,27 +37,27 @@ async function refreshDashboard() {
 
     try {
         // Fetch JSON data concurrently
-        const [morningRes, eveningRes, intradayRes, optionsRes] = await Promise.allSettled([
+        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes] = await Promise.allSettled([
             fetch("./data/morning.json").then(r => r.json()),
             fetch("./data/evening.json").then(r => r.json()),
             fetch("./data/intraday.json").then(r => r.json()),
-            fetch("./data/options.json").then(r => r.json())
+            fetch("./data/options.json").then(r => r.json()),
+            fetch("./data/mutual_funds.json").then(r => r.json())
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
         const eveningData = eveningRes.status === "fulfilled" ? eveningRes.value : null;
         const intradayData = intradayRes.status === "fulfilled" ? intradayRes.value : null;
         const optionsData = optionsRes.status === "fulfilled" ? optionsRes.value : null;
+        const mfData = mfRes.status === "fulfilled" ? mfRes.value : null;
 
         // Update dashboard elements
         updateHeaderAndOverview(morningData, eveningData, intradayData);
         if (intradayData) renderIntradaySignals(intradayData);
         if (morningData) renderMorningInsights(morningData);
         if (optionsData) renderOptionsPage(optionsData);
-        if (eveningData) {
-            renderMomentumStocks(eveningData);
-            renderMutualFunds(eveningData);
-        }
+        if (eveningData) renderMomentumStocks(eveningData);
+        if (mfData) renderMutualFunds(mfData);
 
     } catch (error) {
         console.error("[ERROR] Failed to fetch or render dashboard data: ", error);
@@ -354,10 +354,14 @@ function renderMomentumStocks(data) {
             dmaBadge = `<span style="color: var(--text-muted); font-size: 0.8rem;">N/A</span>`;
         }
 
+        const carVal = s.car_1y !== undefined ? `${s.car_1y > 0 ? '+' : ''}${s.car_1y.toFixed(1)}%` : "N/A";
+        const carColor = s.car_1y > 0 ? "var(--clr-success)" : "var(--clr-danger)";
+
         return `
             <tr>
                 <td class="stock-ticker">NSE:${s.symbol}</td>
                 <td>₹${s.close.toFixed(2)}</td>
+                <td style="color: ${carColor}; font-weight: 600;">${carVal}</td>
                 <td>₹${s.turnover.toFixed(1)} Cr</td>
                 <td><span style="color: var(--clr-success); font-weight: 600;">${s.vol_expansion.toFixed(1)}x</span></td>
                 <td>${s.rsi ? s.rsi.toFixed(1) : "N/A"}</td>

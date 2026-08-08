@@ -261,6 +261,13 @@ def screen_stocks(symbols):
             
             dma_aligned = bool(dma20_val > dma50_val > dma100_val > dma200_val)
             
+            # 1-Year CAR (Compound Annualized Return)
+            if len(df) >= 252:
+                price_1y_ago = df['Close'].iloc[-252]
+            else:
+                price_1y_ago = df['Close'].iloc[0]
+            car_1y = float(((close_price - price_1y_ago) / price_1y_ago) * 100.0)
+            
             # RSI (14)
             rsi = calculate_rsi(df['Close'], period=14)
             rsi_val = rsi.iloc[-1]
@@ -325,17 +332,18 @@ def screen_stocks(symbols):
                 "symbol": symbol.replace(".NS", ""),
                 "close": round(close_price, 2),
                 "turnover_cr": round(turnover / 10000000, 2),
-                "vol_expansion": round(vol_expansion_factor, 1),
+                "vol_expansion": round(vol_expansion_factor, 2),
                 "crossover_type": crossover_type,
-                "high": df['High'].iloc[-1],
-                "low": df['Low'].iloc[-1],
+                "high": round(df['High'].iloc[-1], 2),
+                "low": round(df['Low'].iloc[-1], 2),
                 "rsi": rsi_val,
                 "atr": atr_val,
                 "dma20": round(dma20_val, 2),
                 "dma50": round(dma50_val, 2),
                 "dma100": round(dma100_val, 2),
                 "dma200": round(dma200_val, 2),
-                "dma_aligned": dma_aligned
+                "dma_aligned": dma_aligned,
+                "car_1y": car_1y
             })
             
         except Exception as e:
@@ -423,8 +431,9 @@ def screen_stocks(symbols):
                 continue # Exclude
                 
             # Generate the dynamic technical "Why"
+            car_str = f"+{stock['car_1y']:.1f}%" if stock['car_1y'] >= 0 else f"{stock['car_1y']:.1f}%"
             alignment_desc = "bullish DMA alignment (20>50>100>200)" if stock['dma_aligned'] else "sustaining above all key DMAs (20, 50, 100, 200)"
-            why_reason = f"Outperforming market (RSI: {stock['rsi']:.1f}), closed {pct_above_vwap:.1f}% above VWAP with {alignment_desc} and {stock['vol_expansion']:.1f}x volume expansion."
+            why_reason = f"Outperforming market (RSI: {stock['rsi']:.1f}, 1Y CAR: {car_str}), closed {pct_above_vwap:.1f}% above VWAP with {alignment_desc} and {stock['vol_expansion']:.1f}x volume expansion."
             
             final_candidates.append({
                 "symbol": symbol,
@@ -437,6 +446,7 @@ def screen_stocks(symbols):
                 "dma100": stock['dma100'],
                 "dma200": stock['dma200'],
                 "dma_aligned": stock['dma_aligned'],
+                "car_1y": round(stock['car_1y'], 1),
                 "rsi": round(stock['rsi'], 1)
             })
             
@@ -447,44 +457,17 @@ def screen_stocks(symbols):
     final_candidates = sorted(final_candidates, key=lambda x: x['vol_expansion'], reverse=True)
     return final_candidates
 
-def generate_report(mf_data, stock_data):
+def generate_report(stock_data):
     """Compiles the analytical results into a beautiful, ready-to-publish Markdown report."""
     date_str = datetime.now().strftime('%d-%b-%Y')
     
     report = []
-    report.append(f"📅 **Market Wrap & Educational Insights - {date_str}**")
+    report.append(f"📅 **Daily Stock Momentum & Market Wrap - {date_str}**")
     report.append("\n" + "="*45 + "\n")
     
-    # 1. Mutual Funds Section
-    report.append("🏆 **Top Mutual Funds (Long-Term Wealth)**")
-    report.append("Ranked by historical returns (Direct Growth Options). Ideal for compounding wealth.\n")
-    
-    for category, funds in mf_data.items():
-        emoji = EMOJIS.get(category, "📊")
-        report.append(f"### {emoji} {category} Funds")
-        
-        for idx, fund in enumerate(funds, 1):
-            name = fund['name'].replace(" - Direct Growth", "").replace(" - Direct Plan - Growth Option", "")
-            
-            # Format returns
-            r_1y = f"{fund['cagr_1y']}%" if fund['cagr_1y'] is not None else "N/A"
-            r_3y = f"{fund['cagr_3y']}%" if fund['cagr_3y'] is not None else "N/A"
-            r_5y = f"{fund['cagr_5y']}%" if fund['cagr_5y'] is not None else "N/A"
-            r_10y = f"{fund['cagr_10y']}%" if fund['cagr_10y'] is not None else "N/A"
-            
-            report.append(f"{idx}. **{name}**")
-            report.append(f"   📈 *CAGR Returns*: 1Y: **{r_1y}** | 3Y: **{r_3y}** | 5Y: **{r_5y}** | 10Y: **{r_10y}**")
-            
-            # Crisp "Why" description
-            best_cagr = fund['cagr_3y'] or fund['cagr_1y'] or 0.0
-            why_desc = f"Consistently compounding at {best_cagr}% over the medium term, demonstrating robust downside protection and portfolio quality."
-            report.append(f"   🔍 *Insight*: {why_desc}\n")
-            
-    report.append("="*45 + "\n")
-    
-    # 2. Stock Momentum Screener Section
+    # Stock Momentum Screener Section
     report.append("🚀 **Momentum Stocks (3-10% Short-Term Potential Setups)**")
-    report.append("Screener Criteria: Daily Turnover > ₹10 Cr | Above 20/50 EMA | Bullish 9/21 Crossover | Volume Expansion | Price > VWAP.\n")
+    report.append("Screener Criteria: Daily Turnover > ₹10 Cr | Above 20/50/100/200 DMAs | Volume Expansion | Price > VWAP.\n")
     
     if not stock_data:
         report.append("*No high-probability momentum setups met the strict quality and liquidity criteria today. Staying in cash is also a position.*")
@@ -499,7 +482,7 @@ def generate_report(mf_data, stock_data):
             
     report.append("="*45 + "\n")
     
-    # 3. Mandatory SEBI Educational Disclaimer
+    # Mandatory SEBI Educational Disclaimer
     report.append("⚠️ *Disclaimer: This report is generated via AI for strictly EDUCATIONAL PURPOSES. I am not a SEBI-registered advisor. The setups discussed are technical probabilities, not buy/sell recommendations. Please do your own research.*")
     
     final_report = "\n".join(report)
@@ -521,52 +504,33 @@ def send_to_telegram(report, token, chat_id):
         try:
             response = requests.post(url, json=payload, timeout=15)
             if response.status_code == 200:
-                print("[INFO] Successfully sent report to Telegram!")
+                print("[INFO] Report sent successfully to Telegram!")
             else:
                 print(f"[ERROR] Telegram sending failed: {response.text}")
         except Exception as e:
             print(f"[ERROR] Exception sending to Telegram: {e}")
     else:
-        # Split report into chunks by lines
-        chunks = []
-        current_chunk = []
-        current_length = 0
-        for line in report.split("\n"):
-            if current_length + len(line) + 1 > MAX_LENGTH:
-                chunks.append("\n".join(current_chunk))
-                current_chunk = [line]
-                current_length = len(line)
-            else:
-                current_chunk.append(line)
-                current_length += len(line) + 1
-        if current_chunk:
-            chunks.append("\n".join(current_chunk))
-            
-        print(f"[INFO] Report length ({len(report)}) exceeds limit. Sending in {len(chunks)} parts...")
-        for idx, chunk in enumerate(chunks, 1):
+        print(f"[INFO] Report length ({len(report)}) exceeds limit. Sending in parts...")
+        parts = [report[i:i+MAX_LENGTH] for i in range(0, len(report), MAX_LENGTH)]
+        for idx, part in enumerate(parts):
             payload = {
                 "chat_id": chat_id,
-                "text": chunk,
+                "text": f"*Part {idx+1}/{len(parts)}*\n\n" + part,
                 "parse_mode": "Markdown"
             }
             try:
                 response = requests.post(url, json=payload, timeout=15)
                 if response.status_code == 200:
-                    print(f"[INFO] Part {idx} sent successfully to Telegram!")
+                    print(f"[INFO] Part {idx+1} sent successfully to Telegram!")
                 else:
-                    print(f"[ERROR] Part {idx} sending failed: {response.text}")
+                    print(f"[ERROR] Part {idx+1} failed: {response.text}")
             except Exception as e:
-                print(f"[ERROR] Exception sending Part {idx}: {e}")
+                print(f"[ERROR] Exception sending part {idx+1}: {e}")
 
 def send_to_whatsapp_callmebot(report, phone, apikey):
-    """Sends a summary of the report to WhatsApp via CallMeBot gateway."""
+    """Fallback notification via CallMeBot API."""
     from urllib.parse import quote
-    # CallMeBot doesn't support complex markdown stars well, so clean them up
-    clean_report = report.replace("**", "").replace("### ", "").replace("`", "")
-    # CallMeBot limit is around 2000 chars
-    if len(clean_report) > 1800:
-        clean_report = clean_report[:1800] + "\n\n... (Truncated for WhatsApp limits)"
-    
+    clean_report = report.replace("*", "").replace("#", "")
     encoded_msg = quote(clean_report)
     url = f"https://api.callmebot.com/whatsapp.php?phone={phone}&apikey={apikey}&text={encoded_msg}"
     try:
@@ -586,18 +550,16 @@ def main():
     # Fetch data
     nifty_symbols = fetch_nifty500_symbols()
     
-    # Run analysis
-    mf_results = analyze_mutual_funds()
+    # Run stock momentum analysis
     stock_results = screen_stocks(nifty_symbols)
     
     # Generate report
-    report = generate_report(mf_results, stock_results)
+    report = generate_report(stock_results)
     
     # Save to JSON for Web UI Dashboard
     os.makedirs("data", exist_ok=True)
     evening_data = {
         "date": datetime.now().strftime("%d-%b-%Y"),
-        "mutual_funds": mf_results,
         "momentum_stocks": stock_results
     }
     try:
