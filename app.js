@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (targetTab === "dashboard") headerTitle.textContent = "Market Overview";
             else if (targetTab === "morning") headerTitle.textContent = "Morning Insights";
             else if (targetTab === "momentum") headerTitle.textContent = "Momentum Stocks";
+            else if (targetTab === "options") headerTitle.textContent = "Options & Market Pulse";
             else if (targetTab === "funds") headerTitle.textContent = "Mutual Funds Leaderboard";
         });
     });
@@ -36,20 +37,23 @@ async function refreshDashboard() {
 
     try {
         // Fetch JSON data concurrently
-        const [morningRes, eveningRes, intradayRes] = await Promise.allSettled([
+        const [morningRes, eveningRes, intradayRes, optionsRes] = await Promise.allSettled([
             fetch("./data/morning.json").then(r => r.json()),
             fetch("./data/evening.json").then(r => r.json()),
-            fetch("./data/intraday.json").then(r => r.json())
+            fetch("./data/intraday.json").then(r => r.json()),
+            fetch("./data/options.json").then(r => r.json())
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
         const eveningData = eveningRes.status === "fulfilled" ? eveningRes.value : null;
         const intradayData = intradayRes.status === "fulfilled" ? intradayRes.value : null;
+        const optionsData = optionsRes.status === "fulfilled" ? optionsRes.value : null;
 
         // Update dashboard elements
         updateHeaderAndOverview(morningData, eveningData, intradayData);
         if (intradayData) renderIntradaySignals(intradayData);
         if (morningData) renderMorningInsights(morningData);
+        if (optionsData) renderOptionsPage(optionsData);
         if (eveningData) {
             renderMomentumStocks(eveningData);
             renderMutualFunds(eveningData);
@@ -417,4 +421,132 @@ function renderMutualFunds(data) {
             </div>
         `;
     }).join("");
+}
+
+function renderOptionsPage(data) {
+    if (!data) return;
+
+    // VIX
+    const vixVal = document.getElementById("opt-vix-val");
+    const vixStatus = document.getElementById("opt-vix-status");
+    if (vixVal && data.vix) {
+        vixVal.textContent = data.vix.value ? data.vix.value.toFixed(2) : "--";
+        if (vixStatus) vixStatus.textContent = data.vix.status || "Low Volatility";
+    }
+
+    // Nifty & Bank Nifty PCR
+    const indices = data.indices || {};
+    const nifty = indices.NIFTY || {};
+    const bank = indices.BANKNIFTY || {};
+
+    const niftyPcr = document.getElementById("opt-nifty-pcr");
+    const niftySent = document.getElementById("opt-nifty-sentiment");
+    if (niftyPcr && nifty.pcr !== undefined) {
+        niftyPcr.textContent = nifty.pcr.toFixed(2);
+        if (niftySent) niftySent.textContent = nifty.sentiment || "Neutral";
+    }
+
+    const bankPcr = document.getElementById("opt-bank-pcr");
+    const bankSent = document.getElementById("opt-bank-sentiment");
+    if (bankPcr && bank.pcr !== undefined) {
+        bankPcr.textContent = bank.pcr.toFixed(2);
+        if (bankSent) bankSent.textContent = bank.sentiment || "Neutral";
+    }
+
+    // Render Index Open Interest Tracker Cards
+    const indicesContainer = document.getElementById("options-indices-container");
+    if (indicesContainer) {
+        const indexKeys = Object.keys(indices);
+        indicesContainer.innerHTML = indexKeys.map(key => {
+            const idx = indices[key];
+            const isBull = idx.sentiment && idx.sentiment.includes("BULLISH");
+            const isBear = idx.sentiment && idx.sentiment.includes("BEARISH");
+            const sentColor = isBull ? "var(--clr-success)" : (isBear ? "var(--clr-danger)" : "var(--clr-warning)");
+
+            return `
+                <div class="index-card" style="padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <span class="index-name" style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary);">${key} SPOT</span>
+                        <span class="badge" style="background: rgba(255,255,255,0.03); color: ${sentColor}; border: 1px solid var(--border-glass);">${idx.sentiment}</span>
+                    </div>
+                    
+                    <div class="signal-values-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 0;">
+                        <div class="val-box">
+                            <span class="val-lbl">Spot Price</span>
+                            <span class="val-num">₹${idx.spot ? idx.spot.toFixed(2) : "--"}</span>
+                        </div>
+                        <div class="val-box">
+                            <span class="val-lbl">Session VWAP</span>
+                            <span class="val-num">₹${idx.vwap ? idx.vwap.toFixed(2) : "--"}</span>
+                        </div>
+                        <div class="val-box">
+                            <span class="val-lbl">OI Resistance (Call)</span>
+                            <span class="val-num danger">₹${idx.max_call_oi ? idx.max_call_oi.toFixed(0) : "--"}</span>
+                        </div>
+                        <div class="val-box">
+                            <span class="val-lbl">OI Support (Put)</span>
+                            <span class="val-num success">₹${idx.max_put_oi ? idx.max_put_oi.toFixed(0) : "--"}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    // Render active Options Signals Cards
+    const signalsContainer = document.getElementById("options-signals-container");
+    if (signalsContainer) {
+        const signals = data.options_signals || [];
+        if (signals.length === 0) {
+            signalsContainer.innerHTML = `
+                <div class="empty-state">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <p>No high-probability index options setups. Market is currently rangebound.</p>
+                </div>
+            `;
+        } else {
+            signalsContainer.innerHTML = signals.map(sig => {
+                const isCE = sig.type.includes("CE");
+                const pillClass = isCE ? "target-1" : "sl-hit";
+
+                return `
+                    <div class="signal-card">
+                        <div class="signal-card-header">
+                            <div class="stock-info">
+                                <div class="stock-symbol">
+                                    ${sig.option_symbol}
+                                    <span class="status-pill ${pillClass}">${sig.type}</span>
+                                </div>
+                                <span class="stock-company">${sig.index} Index Option Setup</span>
+                            </div>
+                            <span class="signal-time-badge">PCR: ${sig.pcr}</span>
+                        </div>
+
+                        <div class="signal-values-grid">
+                            <div class="val-box">
+                                <span class="val-lbl">Spot Entry</span>
+                                <span class="val-num">₹${sig.spot_price.toFixed(2)}</span>
+                            </div>
+                            <div class="val-box">
+                                <span class="val-lbl">Spot SL</span>
+                                <span class="val-num danger">₹${sig.sl_spot.toFixed(2)}</span>
+                            </div>
+                            <div class="val-box">
+                                <span class="val-lbl">Target 1</span>
+                                <span class="val-num success">₹${sig.t1_spot.toFixed(2)}</span>
+                            </div>
+                            <div class="val-box">
+                                <span class="val-lbl">Target 2</span>
+                                <span class="val-num success">₹${sig.t2_spot.toFixed(2)}</span>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
+                            <strong style="color: var(--text-primary)">Rationale:</strong> ${sig.rationale}
+                        </p>
+                    </div>
+                `;
+            }).join("");
+        }
+    }
 }

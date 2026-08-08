@@ -1,0 +1,43 @@
+name: Run Options & 15-Min Market Pulse Engine
+
+on:
+  schedule:
+    # Runs every 15 minutes, from 4:00 AM UTC (9:30 AM IST) to 10:00 AM UTC (3:30 PM IST)
+    # Mondays to Fridays.
+    - cron: '*/15 4-10 * * 1-5'
+  workflow_dispatch:
+    # Allows manual triggering or external API cron-job.org dispatch
+
+jobs:
+  run-options:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Allow committing and pushing options data back to the repository
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run MarketMentor Options Engine & Pulse Broadcast
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python options_screener.py
+
+      - name: Commit and push updated data
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/*.json
+          git diff-index --quiet HEAD || git commit -m "Auto-update options pulse data [skip ci]"
+          git push
