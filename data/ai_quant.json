@@ -1,8 +1,8 @@
 {
-  "timestamp": "10-Aug-2026 02:01 PM",
+  "timestamp": "10-Aug-2026 02:15 PM",
   "nifty": {
-    "spot": 24595.3,
-    "vwap": 24595.3,
+    "spot": 24588.45,
+    "vwap": 24588.45,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)",
     "pcr": 1.05,
@@ -14,9 +14,9 @@
           "BUY NIFTY 24600 CE",
           "SELL NIFTY 24750 CE (Hedge)"
         ],
-        "entry_spot": 24595.3,
-        "sl_spot": 24496.92,
-        "target1_spot": 24792.06,
+        "entry_spot": 24588.45,
+        "sl_spot": 24490.1,
+        "target1_spot": 24785.16,
         "max_profit": "Fixed Spread Width (\u20b9150 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "74%",
@@ -31,13 +31,13 @@
         "legs": [
           "BUY NIFTY 24600 CE"
         ],
-        "entry_spot": 24595.3,
-        "sl_spot": 24521.51,
-        "target1_spot": 24742.87,
+        "entry_spot": 24588.45,
+        "sl_spot": 24514.68,
+        "target1_spot": 24735.98,
         "max_profit": "Unlimited Upside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bullish breakout above VWAP (\u20b924595.3) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 1.05).",
+        "rationale": "Bullish breakout above VWAP (\u20b924588.4) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 1.05).",
         "win_score": 65.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
@@ -45,43 +45,43 @@
     ]
   },
   "banknifty": {
-    "spot": 57606.1,
-    "vwap": 57606.1,
+    "spot": 57634.75,
+    "vwap": 57634.75,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
-    "pattern": "\ud83d\udd34 Double Top (M Pattern Breakdown)",
+    "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)",
     "pcr": 0.98,
     "strategies": [
       {
-        "name": "BANKNIFTY Bear Put Debit Spread (Hedged)",
+        "name": "BANKNIFTY Bull Call Debit Spread (Hedged)",
         "type": "HEDGED SPREAD",
         "legs": [
-          "BUY BANKNIFTY 57600 PE",
-          "SELL BANKNIFTY 57300 PE (Hedge)"
+          "BUY BANKNIFTY 57600 CE",
+          "SELL BANKNIFTY 57900 CE (Hedge)"
         ],
-        "entry_spot": 57606.1,
-        "sl_spot": 57836.53,
-        "target1_spot": 57145.25,
+        "entry_spot": 57634.75,
+        "sl_spot": 57404.21,
+        "target1_spot": 58095.83,
         "max_profit": "Fixed Spread Width (\u20b9300 Points)",
         "max_loss": "Fixed Net Premium Paid",
-        "win_prob": "72%",
-        "rationale": "Hedged downside strategy mitigating volatility crush.",
-        "win_score": 72.0,
+        "win_prob": "74%",
+        "rationale": "High probability hedged bullish trade capping volatility decay risk.",
+        "win_score": 74.0,
         "is_top_pick": true,
         "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)"
       },
       {
-        "name": "BANKNIFTY ATM Put Option Buy",
+        "name": "BANKNIFTY ATM Call Option Buy",
         "type": "NAKED OPTION BUY",
         "legs": [
-          "BUY BANKNIFTY 57600 PE"
+          "BUY BANKNIFTY 57600 CE"
         ],
-        "entry_spot": 57606.1,
-        "sl_spot": 57778.92,
-        "target1_spot": 57260.46,
-        "max_profit": "Unlimited Downside",
+        "entry_spot": 57634.75,
+        "sl_spot": 57461.85,
+        "target1_spot": 57980.56,
+        "max_profit": "Unlimited Upside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bearish breakdown below VWAP (\u20b957606.1) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
+        "rationale": "Bullish breakout above VWAP (\u20b957634.8) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 0.98).",
         "win_score": 65.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
