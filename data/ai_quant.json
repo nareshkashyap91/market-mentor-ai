@@ -1,81 +1,90 @@
 {
-  "timestamp": "10-Aug-2026 01:31 PM",
+  "timestamp": "10-Aug-2026 01:46 PM",
   "nifty": {
-    "spot": 24593.25,
-    "vwap": 24593.25,
+    "spot": 24607.65,
+    "vwap": 24607.65,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
-    "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
+    "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)",
     "pcr": 1.05,
     "strategies": [
       {
-        "name": "NIFTY Bull Put Credit Spread (Theta Harvest)",
-        "type": "THETA CREDIT SPREAD",
+        "name": "NIFTY Bull Call Debit Spread (Hedged)",
+        "type": "HEDGED SPREAD",
         "legs": [
-          "SELL NIFTY 24500 PE",
-          "BUY NIFTY 24400 PE (Hedge)"
+          "BUY NIFTY 24600 CE",
+          "SELL NIFTY 24750 CE (Hedge)"
         ],
-        "entry_spot": 24593.25,
-        "sl_spot": 24473.25,
-        "target1_spot": "Full Premium Decay at Expiry",
-        "max_profit": "Net Credit Received",
-        "max_loss": "Defined Difference (\u20b9100 - Credit)",
-        "win_prob": "82%",
-        "rationale": "Rangebound market (PCR: 1.05). Collects time decay as long as NIFTY stays above \u20b924500."
+        "entry_spot": 24607.65,
+        "sl_spot": 24509.22,
+        "target1_spot": 24804.51,
+        "max_profit": "Fixed Spread Width (\u20b9150 Points)",
+        "max_loss": "Fixed Net Premium Paid",
+        "win_prob": "74%",
+        "rationale": "High probability hedged bullish trade capping volatility decay risk.",
+        "win_score": 74.0,
+        "is_top_pick": true,
+        "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)"
       },
       {
-        "name": "NIFTY Iron Butterfly (Hedged Short Straddle)",
-        "type": "HEDGED STRADDLE",
+        "name": "NIFTY ATM Call Option Buy",
+        "type": "NAKED OPTION BUY",
         "legs": [
-          "SELL NIFTY 24600 CE",
-          "SELL NIFTY 24600 PE",
-          "BUY NIFTY 24750 CE (Hedge)",
-          "BUY NIFTY 24450 PE (Hedge)"
+          "BUY NIFTY 24600 CE"
         ],
-        "entry_spot": 24593.25,
-        "sl_spot": "Upper/Lower Wing Touch",
-        "target1_spot": "Max Decay at Center ATM Strike",
-        "max_profit": "Max Net Premium Collected",
-        "max_loss": "Defined Wing Width minus Net Premium",
-        "win_prob": "78%",
-        "rationale": "Sideways consolidation regime with low VIX (12.4). Harvests dual Theta decay on both Call and Put legs."
+        "entry_spot": 24607.65,
+        "sl_spot": 24533.83,
+        "target1_spot": 24755.3,
+        "max_profit": "Unlimited Upside",
+        "max_loss": "Defined (Option Premium Paid)",
+        "win_prob": "65%",
+        "rationale": "Bullish breakout above VWAP (\u20b924607.7) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 1.05).",
+        "win_score": 65.0,
+        "is_top_pick": false,
+        "recommendation_tag": "ALTERNATIVE STRATEGY"
       }
     ]
   },
   "banknifty": {
-    "spot": 57611.15,
-    "vwap": 57611.15,
+    "spot": 57657.65,
+    "vwap": 57657.65,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)",
     "pcr": 0.98,
     "strategies": [
       {
-        "name": "BANKNIFTY ATM Call Option Buy",
-        "type": "NAKED OPTION BUY",
-        "legs": [
-          "BUY BANKNIFTY 57600 CE"
-        ],
-        "entry_spot": 57611.15,
-        "sl_spot": 57438.31,
-        "target1_spot": 57956.82,
-        "max_profit": "Unlimited Upside",
-        "max_loss": "Defined (Option Premium Paid)",
-        "win_prob": "65%",
-        "rationale": "Bullish breakout above VWAP (\u20b957611.1) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 0.98)."
-      },
-      {
         "name": "BANKNIFTY Bull Call Debit Spread (Hedged)",
         "type": "HEDGED SPREAD",
         "legs": [
-          "BUY BANKNIFTY 57600 CE",
-          "SELL BANKNIFTY 57900 CE (Hedge)"
+          "BUY BANKNIFTY 57700 CE",
+          "SELL BANKNIFTY 58000 CE (Hedge)"
         ],
-        "entry_spot": 57611.15,
-        "sl_spot": 57380.7,
-        "target1_spot": 58072.04,
+        "entry_spot": 57657.65,
+        "sl_spot": 57427.02,
+        "target1_spot": 58118.91,
         "max_profit": "Fixed Spread Width (\u20b9300 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "74%",
-        "rationale": "High probability hedged bullish trade capping volatility decay risk."
+        "rationale": "High probability hedged bullish trade capping volatility decay risk.",
+        "win_score": 74.0,
+        "is_top_pick": true,
+        "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)"
+      },
+      {
+        "name": "BANKNIFTY ATM Call Option Buy",
+        "type": "NAKED OPTION BUY",
+        "legs": [
+          "BUY BANKNIFTY 57700 CE"
+        ],
+        "entry_spot": 57657.65,
+        "sl_spot": 57484.68,
+        "target1_spot": 58003.59,
+        "max_profit": "Unlimited Upside",
+        "max_loss": "Defined (Option Premium Paid)",
+        "win_prob": "65%",
+        "rationale": "Bullish breakout above VWAP (\u20b957657.6) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 0.98).",
+        "win_score": 65.0,
+        "is_top_pick": false,
+        "recommendation_tag": "ALTERNATIVE STRATEGY"
       }
     ]
   },
