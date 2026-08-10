@@ -532,5 +532,13 @@ def main():
     except Exception as e:
         print(f"[WARNING] Could not trigger Options Engine: {e}")
 
+    # Automatically trigger AI Quant Multi-Regime Strategy Engine
+    try:
+        import ai_options_quant
+        print("\n--- Triggering AI Quant Multi-Regime Engine ---")
+        ai_options_quant.main()
+    except Exception as e:
+        print(f"[WARNING] Could not trigger AI Quant Engine: {e}")
+
 if __name__ == '__main__':
     main()

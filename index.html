@@ -40,6 +40,9 @@
                 <a href="#" class="nav-item" data-tab="options">
                     <i class="fa-solid fa-layer-group"></i> Options & Pulse
                 </a>
+                <a href="#" class="nav-item" data-tab="ai-quant">
+                    <i class="fa-solid fa-brain-circuit"></i> AI Quant Strategy
+                </a>
                 <a href="#" class="nav-item" data-tab="funds">
                     <i class="fa-solid fa-vault"></i> Mutual Funds
                 </a>
@@ -280,6 +283,51 @@
                                     <i class="fa-solid fa-shield-halved"></i>
                                     <p>Scanning Nifty & Bank Nifty Options for VWAP + PCR Alignment...</p>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- AI Quant Strategy Tab -->
+            <div class="tab-panel" id="tab-ai-quant">
+                <div class="overview-grid" style="margin-bottom: 24px;">
+                    <div class="glass-card overview-card">
+                        <div class="card-icon blue"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Nifty Mood / Regime</span>
+                            <h3 class="stat-value" style="font-size: 1.05rem;" id="quant-nifty-regime">--</h3>
+                            <span class="stat-sub" id="quant-nifty-pattern">Pattern: Scanning...</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon green"><i class="fa-solid fa-building-columns"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Bank Nifty Mood / Regime</span>
+                            <h3 class="stat-value" style="font-size: 1.05rem;" id="quant-bank-regime">--</h3>
+                            <span class="stat-sub" id="quant-bank-pattern">Pattern: Scanning...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout-main-grid">
+                    <div class="layout-col-left">
+                        <!-- AI Quant Recommended Strategies -->
+                        <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                            <div class="panel-header">
+                                <h2 class="panel-title"><i class="fa-solid fa-microchip"></i> Optimal Quant Options Strategies (Hedging & Theta Decay)</h2>
+                                <span class="badge badge-pulse">AI Multi-Leg Matrix</span>
+                            </div>
+                            <div class="signals-container" id="quant-strategies-container">
+                                <!-- Dynamic Strategy Cards -->
+                            </div>
+                        </div>
+
+                        <!-- Intraday Long & Short Stocks -->
+                        <div class="glass-card panel-card">
+                            <div class="panel-header">
+                                <h2 class="panel-title"><i class="fa-solid fa-arrows-up-down-left-right"></i> Intraday Stocks: BUY & SHORT Setups</h2>
+                            </div>
+                            <div class="signals-container" id="quant-stocks-container">
+                                <!-- Dynamic Intraday Long & Short Cards -->
                             </div>
                         </div>
                     </div>

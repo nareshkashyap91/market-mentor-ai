@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             else if (targetTab === "morning") headerTitle.textContent = "Morning Insights";
             else if (targetTab === "momentum") headerTitle.textContent = "Momentum Stocks";
             else if (targetTab === "options") headerTitle.textContent = "Options & Market Pulse";
+            else if (targetTab === "ai-quant") headerTitle.textContent = "AI Quant Strategy";
             else if (targetTab === "funds") headerTitle.textContent = "Mutual Funds Leaderboard";
         });
     });
@@ -37,12 +38,13 @@ async function refreshDashboard() {
 
     try {
         // Fetch JSON data concurrently
-        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes] = await Promise.allSettled([
+        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes] = await Promise.allSettled([
             fetch("./data/morning.json").then(r => r.json()),
             fetch("./data/evening.json").then(r => r.json()),
             fetch("./data/intraday.json").then(r => r.json()),
             fetch("./data/options.json").then(r => r.json()),
-            fetch("./data/mutual_funds.json").then(r => r.json())
+            fetch("./data/mutual_funds.json").then(r => r.json()),
+            fetch("./data/ai_quant.json").then(r => r.json())
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
@@ -50,12 +52,14 @@ async function refreshDashboard() {
         const intradayData = intradayRes.status === "fulfilled" ? intradayRes.value : null;
         const optionsData = optionsRes.status === "fulfilled" ? optionsRes.value : null;
         const mfData = mfRes.status === "fulfilled" ? mfRes.value : null;
+        const quantData = quantRes.status === "fulfilled" ? quantRes.value : null;
 
         // Update dashboard elements
         updateHeaderAndOverview(morningData, eveningData, intradayData);
         if (intradayData) renderIntradaySignals(intradayData);
         if (morningData) renderMorningInsights(morningData);
         if (optionsData) renderOptionsPage(optionsData);
+        if (quantData) renderAIQuantPage(quantData);
         if (eveningData) renderMomentumStocks(eveningData);
         if (mfData) renderMutualFunds(mfData);
 
@@ -548,6 +552,137 @@ function renderOptionsPage(data) {
                         <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
                             <strong style="color: var(--text-primary)">Rationale:</strong> ${sig.rationale}
                         </p>
+                    </div>
+                `;
+            }).join("");
+        }
+    }
+}
+
+function renderAIQuantPage(data) {
+    if (!data) return;
+
+    // Regimes & Chart Patterns
+    const niftyRegime = document.getElementById("quant-nifty-regime");
+    const niftyPattern = document.getElementById("quant-nifty-pattern");
+    if (niftyRegime && data.nifty) {
+        niftyRegime.textContent = data.nifty.regime || "SIDEWAYS";
+        if (niftyPattern) niftyPattern.textContent = `Pattern: ${data.nifty.pattern || 'Normal'}`;
+    }
+
+    const bankRegime = document.getElementById("quant-bank-regime");
+    const bankPattern = document.getElementById("quant-bank-pattern");
+    if (bankRegime && data.banknifty) {
+        bankRegime.textContent = data.banknifty.regime || "SIDEWAYS";
+        if (bankPattern) bankPattern.textContent = `Pattern: ${data.banknifty.pattern || 'Normal'}`;
+    }
+
+    // Render Strategy Cards
+    const stratsContainer = document.getElementById("quant-strategies-container");
+    if (stratsContainer) {
+        const niftyStrats = (data.nifty && data.nifty.strategies) || [];
+        const bankStrats = (data.banknifty && data.banknifty.strategies) || [];
+        const allStrats = [...niftyStrats, ...bankStrats];
+
+        if (allStrats.length === 0) {
+            stratsContainer.innerHTML = `
+                <div class="empty-state">
+                    <i class="fa-solid fa-microchip"></i>
+                    <p>Evaluating multi-regime options matrix...</p>
+                </div>
+            `;
+        } else {
+            stratsContainer.innerHTML = allStrats.map(s => {
+                const isCredit = s.type.includes("CREDIT") || s.type.includes("STRADDLE");
+                const badgeClass = isCredit ? "target-1" : "badge-indigo";
+
+                return `
+                    <div class="signal-card" style="border-left: 4px solid var(--clr-primary);">
+                        <div class="signal-card-header">
+                            <div class="stock-info">
+                                <div class="stock-symbol">
+                                    ${s.name}
+                                    <span class="status-pill ${badgeClass}">${s.type}</span>
+                                </div>
+                                <span class="stock-company">Legs: ${s.legs ? s.legs.join(" | ") : "Single Leg"}</span>
+                            </div>
+                            <span class="signal-time-badge">Win Prob: ${s.win_prob}</span>
+                        </div>
+
+                        <div class="signal-values-grid" style="grid-template-columns: repeat(3, 1fr);">
+                            <div class="val-box">
+                                <span class="val-lbl">Spot Entry</span>
+                                <span class="val-num">₹${s.entry_spot ? s.entry_spot.toFixed(2) : "--"}</span>
+                            </div>
+                            <div class="val-box">
+                                <span class="val-lbl">Max Profit</span>
+                                <span class="val-num success">${s.max_profit}</span>
+                            </div>
+                            <div class="val-box">
+                                <span class="val-lbl">Max Loss</span>
+                                <span class="val-num danger">${s.max_loss}</span>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
+                            <strong style="color: var(--text-primary)">Rationale:</strong> ${s.rationale}
+                        </p>
+                    </div>
+                `;
+            }).join("");
+        }
+    }
+
+    // Render Intraday Stocks Long & Short Setups
+    const stocksContainer = document.getElementById("quant-stocks-container");
+    if (stocksContainer) {
+        const longs = (data.intraday_stocks && data.intraday_stocks.long_setups) || [];
+        const shorts = (data.intraday_stocks && data.intraday_stocks.short_setups) || [];
+        const allStockSetups = [...longs, ...shorts];
+
+        if (allStockSetups.length === 0) {
+            stocksContainer.innerHTML = `
+                <div class="empty-state">
+                    <i class="fa-solid fa-arrows-up-down-left-right"></i>
+                    <p>No high-volume intraday long/short stock setups detected in current session.</p>
+                </div>
+            `;
+        } else {
+            stocksContainer.innerHTML = allStockSetups.map(st => {
+                const isBuy = st.action.includes("BUY");
+                const badgeClass = isBuy ? "target-1" : "sl-hit";
+
+                return `
+                    <div class="signal-card">
+                        <div class="signal-card-header">
+                            <div class="stock-info">
+                                <div class="stock-symbol">
+                                    NSE:${st.symbol}
+                                    <span class="status-pill ${badgeClass}">${st.action}</span>
+                                </div>
+                                <span class="stock-company">Chart Pattern: ${st.pattern}</span>
+                            </div>
+                            <span class="signal-time-badge">Vol: ${st.vol_exp}x</span>
+                        </div>
+
+                        <div class="signal-values-grid">
+                            <div class="val-box">
+                                <span class="val-lbl">Trigger Price</span>
+                                <span class="val-num">₹${st.close.toFixed(2)}</span>
+                            </div>
+                            <div class="val-box">
+                                <span class="val-lbl">Stop Loss</span>
+                                <span class="val-num danger">₹${st.sl.toFixed(2)}</span>
+                            </div>
+                            <div class="val-box">
+                                <span class="val-lbl">Target 1</span>
+                                <span class="val-num success">₹${st.t1.toFixed(2)}</span>
+                            </div>
+                            <div class="val-box">
+                                <span class="val-lbl">Target 2</span>
+                                <span class="val-num success">₹${st.t2.toFixed(2)}</span>
+                            </div>
+                        </div>
                     </div>
                 `;
             }).join("");
