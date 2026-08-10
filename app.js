@@ -591,22 +591,25 @@ function renderAIQuantPage(data) {
                     <p>Evaluating multi-regime options matrix...</p>
                 </div>
             `;
-        } else {
             stratsContainer.innerHTML = allStrats.map(s => {
+                const isTop = s.is_top_pick;
                 const isCredit = s.type.includes("CREDIT") || s.type.includes("STRADDLE");
                 const badgeClass = isCredit ? "target-1" : "badge-indigo";
+                const borderStyle = isTop ? "border-left: 5px solid #FFD700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);" : "border-left: 4px solid var(--clr-primary);";
+                const topBadgeMarkup = isTop ? `<span class="status-pill target-1" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; border: 1px solid #FFD700; font-weight: 700; margin-left: 8px;">⭐ TOP PICK (#1 RECOMMENDED)</span>` : "";
 
                 return `
-                    <div class="signal-card" style="border-left: 4px solid var(--clr-primary);">
+                    <div class="signal-card" style="${borderStyle}">
                         <div class="signal-card-header">
                             <div class="stock-info">
                                 <div class="stock-symbol">
                                     ${s.name}
+                                    ${topBadgeMarkup}
                                     <span class="status-pill ${badgeClass}">${s.type}</span>
                                 </div>
                                 <span class="stock-company">Legs: ${s.legs ? s.legs.join(" | ") : "Single Leg"}</span>
                             </div>
-                            <span class="signal-time-badge">Win Prob: ${s.win_prob}</span>
+                            <span class="signal-time-badge" style="${isTop ? 'color: #FFD700; font-weight: 700;' : ''}">Win Prob: ${s.win_prob}</span>
                         </div>
 
                         <div class="signal-values-grid" style="grid-template-columns: repeat(3, 1fr);">

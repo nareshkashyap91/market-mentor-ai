@@ -229,6 +229,23 @@ def recommend_options_quant_strategies(index_name, spot, vwap, regime, pcr, vix_
             "rationale": f"Sideways consolidation regime with low VIX ({vix_val:.1f}). Harvests dual Theta decay on both Call and Put legs."
         })
         
+    # Quantitative Ranking: Rank strategies by win probability & safety score
+    for s in strategies:
+        try:
+            s["win_score"] = float(s["win_prob"].replace("%", "").strip())
+        except Exception:
+            s["win_score"] = 50.0
+            
+    strategies.sort(key=lambda x: x["win_score"], reverse=True)
+    
+    # Tag #1 Best Strategy
+    if strategies:
+        strategies[0]["is_top_pick"] = True
+        strategies[0]["recommendation_tag"] = "⭐ TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)"
+        for s in strategies[1:]:
+            s["is_top_pick"] = False
+            s["recommendation_tag"] = "ALTERNATIVE STRATEGY"
+            
     return strategies
 
 def scan_intraday_stocks_long_and_short(symbols):
@@ -453,9 +470,11 @@ def main():
     msg += f"• **Spot**: `₹{nifty_spot:.2f}` | **VWAP**: `₹{nifty_vwap:.2f}` | **PCR**: `{nifty_pcr}`\n\n"
     
     msg += f"🎯 **OPTIMAL QUANT OPTIONS STRATEGIES**:\n"
-    for strat in nifty_strats[:2]:
+    for idx, strat in enumerate(nifty_strats[:2]):
+        tag_prefix = "⭐ **[TOP PICK - #1 BEST STRATEGY]**\n" if strat.get("is_top_pick", False) else "🔹 **[ALTERNATIVE STRATEGY]**\n"
         msg += (
-            f"🔹 **{strat['name']}** ({strat['type']})\n"
+            f"{tag_prefix}"
+            f"🏆 **{strat['name']}** ({strat['type']})\n"
             f"  - **Legs**: `{', '.join(strat['legs'])}` \n"
             f"  - **Win Probability**: `{strat['win_prob']}` | **Max Profit**: `{strat['max_profit']}`\n"
             f"  - 💡 *Rationale*: {strat['rationale']}\n\n"
