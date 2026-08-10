@@ -524,5 +524,13 @@ def main():
     # Save collected signals to JSON (updates current price & status of active signals)
     save_intraday_json(new_signals, nifty_trend)
 
+    # Automatically trigger Options & 15-Min Market Pulse Engine
+    try:
+        import options_screener
+        print("\n--- Triggering Options & 15-Min Market Pulse Engine ---")
+        options_screener.main()
+    except Exception as e:
+        print(f"[WARNING] Could not trigger Options Engine: {e}")
+
 if __name__ == '__main__':
     main()
