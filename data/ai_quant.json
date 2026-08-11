@@ -1,52 +1,55 @@
 {
-  "timestamp": "11-Aug-2026 11:01 AM",
+  "timestamp": "11-Aug-2026 11:15 AM",
   "nifty": {
-    "spot": 24470.9,
-    "vwap": 24470.9,
+    "spot": 24449.35,
+    "vwap": 24449.35,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
-    "pattern": "\ud83d\udfe2 Hammer Pattern (Demand Reversal at Support)",
+    "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 1.05,
     "strategies": [
       {
-        "name": "NIFTY Bull Call Debit Spread (Hedged)",
-        "type": "HEDGED SPREAD",
+        "name": "NIFTY Bull Put Credit Spread (Theta Harvest)",
+        "type": "THETA CREDIT SPREAD",
         "legs": [
-          "BUY NIFTY 24450 CE",
-          "SELL NIFTY 24600 CE (Hedge)"
+          "SELL NIFTY 24350 PE",
+          "BUY NIFTY 24250 PE (Hedge)"
         ],
-        "entry_spot": 24470.9,
-        "sl_spot": 24373.02,
-        "target1_spot": 24666.67,
-        "max_profit": "Fixed Spread Width (\u20b9150 Points)",
-        "max_loss": "Fixed Net Premium Paid",
-        "win_prob": "74%",
-        "rationale": "High probability hedged bullish trade capping volatility decay risk.",
-        "win_score": 74.0,
+        "entry_spot": 24449.35,
+        "sl_spot": 24329.35,
+        "target1_spot": "Full Premium Decay at Expiry",
+        "max_profit": "Net Credit Received",
+        "max_loss": "Defined Difference (\u20b9100 - Credit)",
+        "win_prob": "82%",
+        "rationale": "Rangebound market (PCR: 1.05). Collects time decay as long as NIFTY stays above \u20b924350.",
+        "win_score": 82.0,
         "is_top_pick": true,
         "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)"
       },
       {
-        "name": "NIFTY ATM Call Option Buy",
-        "type": "NAKED OPTION BUY",
+        "name": "NIFTY Iron Butterfly (Hedged Short Straddle)",
+        "type": "HEDGED STRADDLE",
         "legs": [
-          "BUY NIFTY 24450 CE"
+          "SELL NIFTY 24450 CE",
+          "SELL NIFTY 24450 PE",
+          "BUY NIFTY 24600 CE (Hedge)",
+          "BUY NIFTY 24300 PE (Hedge)"
         ],
-        "entry_spot": 24470.9,
-        "sl_spot": 24397.49,
-        "target1_spot": 24617.73,
-        "max_profit": "Unlimited Upside",
-        "max_loss": "Defined (Option Premium Paid)",
-        "win_prob": "65%",
-        "rationale": "Bullish breakout above VWAP (\u20b924470.9) supported by \ud83d\udfe2 Hammer Pattern (Demand Reversal at Support) & Put writing (PCR: 1.05).",
-        "win_score": 65.0,
+        "entry_spot": 24449.35,
+        "sl_spot": "Upper/Lower Wing Touch",
+        "target1_spot": "Max Decay at Center ATM Strike",
+        "max_profit": "Max Net Premium Collected",
+        "max_loss": "Defined Wing Width minus Net Premium",
+        "win_prob": "78%",
+        "rationale": "Sideways consolidation regime with low VIX (12.3). Harvests dual Theta decay on both Call and Put legs.",
+        "win_score": 78.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
       }
     ]
   },
   "banknifty": {
-    "spot": 57310.65,
-    "vwap": 57310.65,
+    "spot": 57301.3,
+    "vwap": 57301.3,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 0.98,
@@ -58,8 +61,8 @@
           "SELL BANKNIFTY 57100 PE",
           "BUY BANKNIFTY 56900 PE (Hedge)"
         ],
-        "entry_spot": 57310.65,
-        "sl_spot": 57190.65,
+        "entry_spot": 57301.3,
+        "sl_spot": 57181.3,
         "target1_spot": "Full Premium Decay at Expiry",
         "max_profit": "Net Credit Received",
         "max_loss": "Defined Difference (\u20b9200 - Credit)",
@@ -78,13 +81,13 @@
           "BUY BANKNIFTY 57600 CE (Hedge)",
           "BUY BANKNIFTY 57000 PE (Hedge)"
         ],
-        "entry_spot": 57310.65,
+        "entry_spot": 57301.3,
         "sl_spot": "Upper/Lower Wing Touch",
         "target1_spot": "Max Decay at Center ATM Strike",
         "max_profit": "Max Net Premium Collected",
         "max_loss": "Defined Wing Width minus Net Premium",
         "win_prob": "78%",
-        "rationale": "Sideways consolidation regime with low VIX (12.2). Harvests dual Theta decay on both Call and Put legs.",
+        "rationale": "Sideways consolidation regime with low VIX (12.3). Harvests dual Theta decay on both Call and Put legs.",
         "win_score": 78.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
