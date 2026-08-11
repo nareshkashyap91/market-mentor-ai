@@ -1,43 +1,43 @@
 {
-  "timestamp": "11-Aug-2026 09:16 AM",
+  "timestamp": "11-Aug-2026 09:31 AM",
   "nifty": {
-    "spot": 24533.0,
-    "vwap": 24533.0,
+    "spot": 24489.65,
+    "vwap": 24489.65,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
-    "pattern": "\ud83d\udd34 Double Top (M Pattern Breakdown)",
+    "pattern": "\ud83d\udfe2 Hammer Pattern (Demand Reversal at Support)",
     "pcr": 1.05,
     "strategies": [
       {
-        "name": "NIFTY Bear Put Debit Spread (Hedged)",
+        "name": "NIFTY Bull Call Debit Spread (Hedged)",
         "type": "HEDGED SPREAD",
         "legs": [
-          "BUY NIFTY 24550 PE",
-          "SELL NIFTY 24400 PE (Hedge)"
+          "BUY NIFTY 24500 CE",
+          "SELL NIFTY 24650 CE (Hedge)"
         ],
-        "entry_spot": 24533.0,
-        "sl_spot": 24631.13,
-        "target1_spot": 24336.74,
+        "entry_spot": 24489.65,
+        "sl_spot": 24391.69,
+        "target1_spot": 24685.57,
         "max_profit": "Fixed Spread Width (\u20b9150 Points)",
         "max_loss": "Fixed Net Premium Paid",
-        "win_prob": "72%",
-        "rationale": "Hedged downside strategy mitigating volatility crush.",
-        "win_score": 72.0,
+        "win_prob": "74%",
+        "rationale": "High probability hedged bullish trade capping volatility decay risk.",
+        "win_score": 74.0,
         "is_top_pick": true,
         "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)"
       },
       {
-        "name": "NIFTY ATM Put Option Buy",
+        "name": "NIFTY ATM Call Option Buy",
         "type": "NAKED OPTION BUY",
         "legs": [
-          "BUY NIFTY 24550 PE"
+          "BUY NIFTY 24500 CE"
         ],
-        "entry_spot": 24533.0,
-        "sl_spot": 24606.6,
-        "target1_spot": 24385.8,
-        "max_profit": "Unlimited Downside",
+        "entry_spot": 24489.65,
+        "sl_spot": 24416.18,
+        "target1_spot": 24636.59,
+        "max_profit": "Unlimited Upside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bearish breakdown below VWAP (\u20b924533.0) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 1.05).",
+        "rationale": "Bullish breakout above VWAP (\u20b924489.7) supported by \ud83d\udfe2 Hammer Pattern (Demand Reversal at Support) & Put writing (PCR: 1.05).",
         "win_score": 65.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
@@ -45,8 +45,8 @@
     ]
   },
   "banknifty": {
-    "spot": 57409.0,
-    "vwap": 57409.0,
+    "spot": 57275.05,
+    "vwap": 57275.05,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udd34 Double Top (M Pattern Breakdown)",
     "pcr": 0.98,
@@ -55,12 +55,12 @@
         "name": "BANKNIFTY Bear Put Debit Spread (Hedged)",
         "type": "HEDGED SPREAD",
         "legs": [
-          "BUY BANKNIFTY 57400 PE",
-          "SELL BANKNIFTY 57100 PE (Hedge)"
+          "BUY BANKNIFTY 57300 PE",
+          "SELL BANKNIFTY 57000 PE (Hedge)"
         ],
-        "entry_spot": 57409.0,
-        "sl_spot": 57638.64,
-        "target1_spot": 56949.73,
+        "entry_spot": 57275.05,
+        "sl_spot": 57504.15,
+        "target1_spot": 56816.85,
         "max_profit": "Fixed Spread Width (\u20b9300 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "72%",
@@ -73,15 +73,15 @@
         "name": "BANKNIFTY ATM Put Option Buy",
         "type": "NAKED OPTION BUY",
         "legs": [
-          "BUY BANKNIFTY 57400 PE"
+          "BUY BANKNIFTY 57300 PE"
         ],
-        "entry_spot": 57409.0,
-        "sl_spot": 57581.23,
-        "target1_spot": 57064.55,
+        "entry_spot": 57275.05,
+        "sl_spot": 57446.88,
+        "target1_spot": 56931.4,
         "max_profit": "Unlimited Downside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bearish breakdown below VWAP (\u20b957409.0) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
+        "rationale": "Bearish breakdown below VWAP (\u20b957275.1) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
         "win_score": 65.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
