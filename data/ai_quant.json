@@ -1,8 +1,8 @@
 {
-  "timestamp": "12-Aug-2026 11:46 AM",
+  "timestamp": "12-Aug-2026 12:01 PM",
   "nifty": {
-    "spot": 24293.2,
-    "vwap": 24293.2,
+    "spot": 24279.9,
+    "vwap": 24279.9,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 1.05,
@@ -14,8 +14,8 @@
           "SELL NIFTY 24200 PE",
           "BUY NIFTY 24100 PE (Hedge)"
         ],
-        "entry_spot": 24293.2,
-        "sl_spot": 24173.2,
+        "entry_spot": 24279.9,
+        "sl_spot": 24159.9,
         "target1_spot": "Full Premium Decay at Expiry",
         "max_profit": "Net Credit Received",
         "max_loss": "Defined Difference (\u20b9100 - Credit)",
@@ -34,13 +34,13 @@
           "BUY NIFTY 24450 CE (Hedge)",
           "BUY NIFTY 24150 PE (Hedge)"
         ],
-        "entry_spot": 24293.2,
+        "entry_spot": 24279.9,
         "sl_spot": "Upper/Lower Wing Touch",
         "target1_spot": "Max Decay at Center ATM Strike",
         "max_profit": "Max Net Premium Collected",
         "max_loss": "Defined Wing Width minus Net Premium",
         "win_prob": "78%",
-        "rationale": "Sideways consolidation regime with low VIX (12.0). Harvests dual Theta decay on both Call and Put legs.",
+        "rationale": "Sideways consolidation regime with low VIX (11.9). Harvests dual Theta decay on both Call and Put legs.",
         "win_score": 78.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
@@ -48,43 +48,43 @@
     ]
   },
   "banknifty": {
-    "spot": 57543.55,
-    "vwap": 57543.55,
+    "spot": 57547.1,
+    "vwap": 57547.1,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
-    "pattern": "\ud83d\udd34 Double Top (M Pattern Breakdown)",
+    "pattern": "\ud83d\udfe2 Hammer Pattern (Demand Reversal at Support)",
     "pcr": 0.98,
     "strategies": [
       {
-        "name": "BANKNIFTY Bear Put Debit Spread (Hedged)",
+        "name": "BANKNIFTY Bull Call Debit Spread (Hedged)",
         "type": "HEDGED SPREAD",
         "legs": [
-          "BUY BANKNIFTY 57500 PE",
-          "SELL BANKNIFTY 57200 PE (Hedge)"
+          "BUY BANKNIFTY 57500 CE",
+          "SELL BANKNIFTY 57800 CE (Hedge)"
         ],
-        "entry_spot": 57543.55,
-        "sl_spot": 57773.72,
-        "target1_spot": 57083.2,
+        "entry_spot": 57547.1,
+        "sl_spot": 57316.91,
+        "target1_spot": 58007.48,
         "max_profit": "Fixed Spread Width (\u20b9300 Points)",
         "max_loss": "Fixed Net Premium Paid",
-        "win_prob": "72%",
-        "rationale": "Hedged downside strategy mitigating volatility crush.",
-        "win_score": 72.0,
+        "win_prob": "74%",
+        "rationale": "High probability hedged bullish trade capping volatility decay risk.",
+        "win_score": 74.0,
         "is_top_pick": true,
         "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)"
       },
       {
-        "name": "BANKNIFTY ATM Put Option Buy",
+        "name": "BANKNIFTY ATM Call Option Buy",
         "type": "NAKED OPTION BUY",
         "legs": [
-          "BUY BANKNIFTY 57500 PE"
+          "BUY BANKNIFTY 57500 CE"
         ],
-        "entry_spot": 57543.55,
-        "sl_spot": 57716.18,
-        "target1_spot": 57198.29,
-        "max_profit": "Unlimited Downside",
+        "entry_spot": 57547.1,
+        "sl_spot": 57374.46,
+        "target1_spot": 57892.38,
+        "max_profit": "Unlimited Upside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bearish breakdown below VWAP (\u20b957543.6) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
+        "rationale": "Bullish breakout above VWAP (\u20b957547.1) supported by \ud83d\udfe2 Hammer Pattern (Demand Reversal at Support) & Put writing (PCR: 0.98).",
         "win_score": 65.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
@@ -93,20 +93,6 @@
   },
   "intraday_stocks": {
     "long_setups": [],
-    "short_setups": [
-      {
-        "symbol": "AXISBANK",
-        "action": "SHORT SELL",
-        "close": 1223.0,
-        "vwap": 1227.81,
-        "orb_low": 1226.3,
-        "sl": 1232.78,
-        "t1": 1211.26,
-        "t2": 1203.43,
-        "rsi": 31.0,
-        "vol_exp": 2.2,
-        "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)"
-      }
-    ]
+    "short_setups": []
   }
 }
