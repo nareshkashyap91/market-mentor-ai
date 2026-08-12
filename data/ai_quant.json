@@ -1,8 +1,8 @@
 {
-  "timestamp": "12-Aug-2026 01:54 PM",
+  "timestamp": "12-Aug-2026 02:01 PM",
   "nifty": {
-    "spot": 24286.85,
-    "vwap": 24286.85,
+    "spot": 24284.75,
+    "vwap": 24284.75,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 1.05,
@@ -14,8 +14,8 @@
           "SELL NIFTY 24200 PE",
           "BUY NIFTY 24100 PE (Hedge)"
         ],
-        "entry_spot": 24286.85,
-        "sl_spot": 24166.85,
+        "entry_spot": 24284.75,
+        "sl_spot": 24164.75,
         "target1_spot": "Full Premium Decay at Expiry",
         "max_profit": "Net Credit Received",
         "max_loss": "Defined Difference (\u20b9100 - Credit)",
@@ -34,7 +34,7 @@
           "BUY NIFTY 24450 CE (Hedge)",
           "BUY NIFTY 24150 PE (Hedge)"
         ],
-        "entry_spot": 24286.85,
+        "entry_spot": 24284.75,
         "sl_spot": "Upper/Lower Wing Touch",
         "target1_spot": "Max Decay at Center ATM Strike",
         "max_profit": "Max Net Premium Collected",
@@ -48,10 +48,10 @@
     ]
   },
   "banknifty": {
-    "spot": 57524.2,
-    "vwap": 57524.2,
+    "spot": 57522.55,
+    "vwap": 57522.55,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
-    "pattern": "\ud83d\udfe2 Bullish Engulfing (Reversal Setup)",
+    "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)",
     "pcr": 0.98,
     "strategies": [
       {
@@ -61,9 +61,9 @@
           "BUY BANKNIFTY 57500 CE",
           "SELL BANKNIFTY 57800 CE (Hedge)"
         ],
-        "entry_spot": 57524.2,
-        "sl_spot": 57294.1,
-        "target1_spot": 57984.39,
+        "entry_spot": 57522.55,
+        "sl_spot": 57292.46,
+        "target1_spot": 57982.73,
         "max_profit": "Fixed Spread Width (\u20b9300 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "74%",
@@ -78,13 +78,13 @@
         "legs": [
           "BUY BANKNIFTY 57500 CE"
         ],
-        "entry_spot": 57524.2,
-        "sl_spot": 57351.63,
-        "target1_spot": 57869.34,
+        "entry_spot": 57522.55,
+        "sl_spot": 57349.98,
+        "target1_spot": 57867.69,
         "max_profit": "Unlimited Upside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bullish breakout above VWAP (\u20b957524.2) supported by \ud83d\udfe2 Bullish Engulfing (Reversal Setup) & Put writing (PCR: 0.98).",
+        "rationale": "Bullish breakout above VWAP (\u20b957522.6) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 0.98).",
         "win_score": 65.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
