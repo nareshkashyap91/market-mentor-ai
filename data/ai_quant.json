@@ -1,8 +1,8 @@
 {
-  "timestamp": "12-Aug-2026 12:28 PM",
+  "timestamp": "12-Aug-2026 12:31 PM",
   "nifty": {
-    "spot": 24276.4,
-    "vwap": 24276.4,
+    "spot": 24278.95,
+    "vwap": 24278.95,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 1.05,
@@ -14,8 +14,8 @@
           "SELL NIFTY 24200 PE",
           "BUY NIFTY 24100 PE (Hedge)"
         ],
-        "entry_spot": 24276.4,
-        "sl_spot": 24156.4,
+        "entry_spot": 24278.95,
+        "sl_spot": 24158.95,
         "target1_spot": "Full Premium Decay at Expiry",
         "max_profit": "Net Credit Received",
         "max_loss": "Defined Difference (\u20b9100 - Credit)",
@@ -34,7 +34,7 @@
           "BUY NIFTY 24450 CE (Hedge)",
           "BUY NIFTY 24150 PE (Hedge)"
         ],
-        "entry_spot": 24276.4,
+        "entry_spot": 24278.95,
         "sl_spot": "Upper/Lower Wing Touch",
         "target1_spot": "Max Decay at Center ATM Strike",
         "max_profit": "Max Net Premium Collected",
@@ -48,8 +48,8 @@
     ]
   },
   "banknifty": {
-    "spot": 57501.45,
-    "vwap": 57501.45,
+    "spot": 57512.65,
+    "vwap": 57512.65,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 0.98,
@@ -61,8 +61,8 @@
           "SELL BANKNIFTY 57300 PE",
           "BUY BANKNIFTY 57100 PE (Hedge)"
         ],
-        "entry_spot": 57501.45,
-        "sl_spot": 57381.45,
+        "entry_spot": 57512.65,
+        "sl_spot": 57392.65,
         "target1_spot": "Full Premium Decay at Expiry",
         "max_profit": "Net Credit Received",
         "max_loss": "Defined Difference (\u20b9200 - Credit)",
@@ -81,7 +81,7 @@
           "BUY BANKNIFTY 57800 CE (Hedge)",
           "BUY BANKNIFTY 57200 PE (Hedge)"
         ],
-        "entry_spot": 57501.45,
+        "entry_spot": 57512.65,
         "sl_spot": "Upper/Lower Wing Touch",
         "target1_spot": "Max Decay at Center ATM Strike",
         "max_profit": "Max Net Premium Collected",
@@ -96,46 +96,6 @@
   },
   "intraday_stocks": {
     "long_setups": [],
-    "short_setups": [
-      {
-        "symbol": "RELIANCE",
-        "action": "SHORT SELL",
-        "close": 1311.4,
-        "vwap": 1314.28,
-        "orb_low": 1316.2,
-        "sl": 1321.89,
-        "t1": 1298.81,
-        "t2": 1290.42,
-        "rsi": 32.4,
-        "vol_exp": 1.5,
-        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
-      },
-      {
-        "symbol": "AXISBANK",
-        "action": "SHORT SELL",
-        "close": 1222.0,
-        "vwap": 1226.81,
-        "orb_low": 1226.3,
-        "sl": 1231.78,
-        "t1": 1210.27,
-        "t2": 1202.45,
-        "rsi": 22.2,
-        "vol_exp": 1.5,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
-      },
-      {
-        "symbol": "TITAN",
-        "action": "SHORT SELL",
-        "close": 4995.1,
-        "vwap": 5053.87,
-        "orb_low": 5086.8,
-        "sl": 5086.8,
-        "t1": 4885.06,
-        "t2": 4811.7,
-        "rsi": 13.5,
-        "vol_exp": 1.4,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
-      }
-    ]
+    "short_setups": []
   }
 }
