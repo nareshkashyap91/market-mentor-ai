@@ -1,8 +1,8 @@
 {
-  "timestamp": "12-Aug-2026 09:31 AM",
+  "timestamp": "12-Aug-2026 09:46 AM",
   "nifty": {
-    "spot": 24442.5,
-    "vwap": 24442.5,
+    "spot": 24418.1,
+    "vwap": 24418.1,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udd34 Double Top (M Pattern Breakdown)",
     "pcr": 1.05,
@@ -11,12 +11,12 @@
         "name": "NIFTY Bear Put Debit Spread (Hedged)",
         "type": "HEDGED SPREAD",
         "legs": [
-          "BUY NIFTY 24450 PE",
-          "SELL NIFTY 24300 PE (Hedge)"
+          "BUY NIFTY 24400 PE",
+          "SELL NIFTY 24250 PE (Hedge)"
         ],
-        "entry_spot": 24442.5,
-        "sl_spot": 24540.27,
-        "target1_spot": 24246.96,
+        "entry_spot": 24418.1,
+        "sl_spot": 24515.77,
+        "target1_spot": 24222.75,
         "max_profit": "Fixed Spread Width (\u20b9150 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "72%",
@@ -29,15 +29,15 @@
         "name": "NIFTY ATM Put Option Buy",
         "type": "NAKED OPTION BUY",
         "legs": [
-          "BUY NIFTY 24450 PE"
+          "BUY NIFTY 24400 PE"
         ],
-        "entry_spot": 24442.5,
-        "sl_spot": 24515.83,
-        "target1_spot": 24295.85,
+        "entry_spot": 24418.1,
+        "sl_spot": 24491.35,
+        "target1_spot": 24271.59,
         "max_profit": "Unlimited Downside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bearish breakdown below VWAP (\u20b924442.5) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 1.05).",
+        "rationale": "Bearish breakdown below VWAP (\u20b924418.1) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 1.05).",
         "win_score": 65.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
@@ -45,8 +45,8 @@
     ]
   },
   "banknifty": {
-    "spot": 57633.2,
-    "vwap": 57633.2,
+    "spot": 57635.7,
+    "vwap": 57635.7,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 0.98,
@@ -58,8 +58,8 @@
           "SELL BANKNIFTY 57400 PE",
           "BUY BANKNIFTY 57200 PE (Hedge)"
         ],
-        "entry_spot": 57633.2,
-        "sl_spot": 57513.2,
+        "entry_spot": 57635.7,
+        "sl_spot": 57515.7,
         "target1_spot": "Full Premium Decay at Expiry",
         "max_profit": "Net Credit Received",
         "max_loss": "Defined Difference (\u20b9200 - Credit)",
@@ -78,13 +78,13 @@
           "BUY BANKNIFTY 57900 CE (Hedge)",
           "BUY BANKNIFTY 57300 PE (Hedge)"
         ],
-        "entry_spot": 57633.2,
+        "entry_spot": 57635.7,
         "sl_spot": "Upper/Lower Wing Touch",
         "target1_spot": "Max Decay at Center ATM Strike",
         "max_profit": "Max Net Premium Collected",
         "max_loss": "Defined Wing Width minus Net Premium",
         "win_prob": "78%",
-        "rationale": "Sideways consolidation regime with low VIX (11.8). Harvests dual Theta decay on both Call and Put legs.",
+        "rationale": "Sideways consolidation regime with low VIX (11.7). Harvests dual Theta decay on both Call and Put legs.",
         "win_score": 78.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
