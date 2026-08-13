@@ -562,12 +562,13 @@ function renderOptionsPage(data) {
 function renderAIQuantPage(data) {
     if (!data) return;
 
-    // Phase 1 Data Quality
+    // Phase 1 Data Quality & Phase 7 Virtual Paper Portfolio
     const dqTag = document.getElementById("quant-dq-tag");
     const dqSummary = document.getElementById("quant-dq-summary");
     if (dqTag && data.data_quality) {
         dqTag.textContent = data.data_type || "LIVE_DATA";
-        if (dqSummary) dqSummary.textContent = data.data_quality.status_summary || "Fresh Data";
+        const paperBal = data.paper_portfolio ? data.paper_portfolio.formatted_balance : "₹100,000.00";
+        if (dqSummary) dqSummary.textContent = `Paper Bal: ${paperBal} | ${data.data_quality.status_summary || 'Fresh Data'}`;
     }
 
     // Regimes, ADX, Confidence & Expected Move

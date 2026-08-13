@@ -466,25 +466,36 @@ def main():
     ist_tz = timezone(timedelta(hours=5, minutes=30))
     now_str = datetime.now(ist_tz).strftime("%d-%b-%Y %I:%M %p")
     
-    # Phase 6 Signal Persistence & Position Management
+    # Phase 6 & Phase 7 Signal Persistence, Paper Trading & Trade Journal Engine
     from position_manager import PositionManager
+    from paper_trading import PaperTradingEngine
+    from trade_journal import TradeJournalEngine
     
-    # Sync Intraday Stock signals into Position DB
+    # Sync Intraday Stock signals into Position DB and execute Paper Orders
     for st in long_stocks:
         sig_id = f"STK_LONG_{st['symbol']}"
         PositionManager.sync_signal(sig_id, st['symbol'], "Intraday Long", "BUY", st['close'], st['close'], st['sl'], st['t1'], st['t2'])
+        PaperTradingEngine.place_paper_order(st['symbol'], "Intraday Long", "BUY", st['close'], st['sl'], st['t1'], margin_req=1500.0)
 
     for st in short_stocks:
         sig_id = f"STK_SHORT_{st['symbol']}"
         PositionManager.sync_signal(sig_id, st['symbol'], "Intraday Short", "SELL", st['close'], st['close'], st['sl'], st['t1'], st['t2'])
+        PaperTradingEngine.place_paper_order(st['symbol'], "Intraday Short", "SELL", st['close'], st['sl'], st['t1'], margin_req=1500.0)
 
     active_positions = PositionManager.get_active_positions()
     audit_logs = PositionManager.get_signal_audit_logs(limit=15)
+    
+    paper_portfolio = PaperTradingEngine.get_account_summary()
+    journal_perf = TradeJournalEngine.get_performance_summary()
+    journal_history = TradeJournalEngine.get_journal_entries(limit=10)
     
     payload = {
         "timestamp": now_str,
         "data_type": LIVE_DATA,
         "data_quality": nifty_dq,
+        "paper_portfolio": paper_portfolio,
+        "trade_journal_performance": journal_perf,
+        "trade_journal_history": journal_history,
         "active_positions_count": len(active_positions),
         "active_positions": active_positions,
         "signal_audit_log": audit_logs,
