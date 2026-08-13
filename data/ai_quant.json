@@ -1,14 +1,43 @@
 {
-  "timestamp": "14-Aug-2026 12:17 AM",
+  "timestamp": "14-Aug-2026 12:19 AM",
   "data_type": "LIVE_DATA",
+  "model_metadata": {
+    "model_version": "v1.2.0-QUANT-PROD",
+    "release_date": "2026-08-14",
+    "architecture": "Institutional Multi-Regime Options Quant Engine",
+    "active_modules": [
+      "Phase 1: Data Quality & Stale Protection",
+      "Phase 1: Market Regime & ADX Volatility Analyzer",
+      "Phase 2: Black-Scholes Greeks & Bisection IV Solver",
+      "Phase 2: Option Chain & Net Strategy Greeks",
+      "Phase 3: Expected Move (1-Sigma / 2-Sigma) & DTE Engine",
+      "Phase 4: Strategy Risk Scoring & NO TRADE Guardrails",
+      "Phase 5: Capital & NSE Margin Requirement Engine",
+      "Phase 6: Signal Persistence & SQLite Position DB Manager",
+      "Phase 7: Paper Trading Simulator & Trade Journal Engine",
+      "Phase 8: Backtesting Engine & Walk-Forward Optimization",
+      "Phase 9: Model Versioning & Research AI Engine"
+    ],
+    "live_execution_status": "OFF (PAPER TRADING / SIMULATOR ACTIVE)"
+  },
+  "ai_research_synthesis": {
+    "executive_thesis": "Market environment is currently operating in \ud83d\udfe1 SIDEWAYS_RANGEBOUND with ADX at 17.0 and 50% regime confidence. The 1-Sigma Expected Move for upcoming expiry is \u00b1350 pts. Optimal quantitative execution favors 'NIFTY Bull Call Debit Spread (Hedged)' with a historical backtested win probability of 74%. Capital risk guardrails and NO TRADE filters remain active.",
+    "key_insights": [
+      "Regime Alignment: \ud83d\udfe1 SIDEWAYS_RANGEBOUND (ADX: 17.0)",
+      "Expected Expiry Range: \u00b1350 pts",
+      "Top Quantitative Pick: NIFTY Bull Call Debit Spread (Hedged) (Hist Win: 74%)",
+      "Capital Protection Status: Active Guardrails"
+    ],
+    "research_tag": "AI QUANT EXECUTIVE RESEARCH SYNTHESIS"
+  },
   "data_quality": {
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 542.3,
+    "stale_minutes": 544.6,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 542.3m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 544.6m)"
   },
   "backtest_metrics": {
     "cagr_pct": -1.4,
@@ -24,10 +53,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 15000.0,
+    "allocated_margin": 22500.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 10,
+    "total_trades": 15,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
