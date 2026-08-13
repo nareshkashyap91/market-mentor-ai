@@ -1,14 +1,14 @@
 {
-  "timestamp": "14-Aug-2026 12:04 AM",
+  "timestamp": "14-Aug-2026 12:07 AM",
   "data_type": "LIVE_DATA",
   "data_quality": {
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 529.3,
+    "stale_minutes": 532.3,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 529.3m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 532.3m)"
   },
   "nifty": {
     "spot": 24395.85,
@@ -32,6 +32,12 @@
         25107.9
       ],
       "summary_str": "\u00b1356.0 pts (\u20b924040 - \u20b924752)"
+    },
+    "no_trade_eval": {
+      "is_no_trade": false,
+      "trade_status": "ACTIVE QUANT SIGNALS",
+      "reasons": [],
+      "summary": "Market Conditions Optimal for Execution"
     },
     "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)",
     "pcr": 1.05,
@@ -59,7 +65,11 @@
           "implied_volatility_pct": 11.4
         },
         "is_top_pick": true,
-        "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)"
+        "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)",
+        "historical_win_probability": "74%",
+        "ai_confidence_score": "50%",
+        "risk_reward_ratio": "1:2.0",
+        "composite_score": 56.0
       },
       {
         "name": "NIFTY ATM Call Option Buy",
@@ -83,7 +93,11 @@
           "implied_volatility_pct": 11.4
         },
         "is_top_pick": false,
-        "recommendation_tag": "ALTERNATIVE STRATEGY"
+        "recommendation_tag": "ALTERNATIVE STRATEGY",
+        "historical_win_probability": "65%",
+        "ai_confidence_score": "50%",
+        "risk_reward_ratio": "1:2.0",
+        "composite_score": 51.5
       }
     ]
   },
@@ -109,6 +123,12 @@
         59317.48
       ],
       "summary_str": "\u00b1841.1 pts (\u20b956794 - \u20b958476)"
+    },
+    "no_trade_eval": {
+      "is_no_trade": false,
+      "trade_status": "ACTIVE QUANT SIGNALS",
+      "reasons": [],
+      "summary": "Market Conditions Optimal for Execution"
     },
     "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)",
     "pcr": 0.98,
@@ -136,7 +156,11 @@
           "implied_volatility_pct": 11.4
         },
         "is_top_pick": true,
-        "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)"
+        "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)",
+        "historical_win_probability": "74%",
+        "ai_confidence_score": "50%",
+        "risk_reward_ratio": "1:2.0",
+        "composite_score": 56.0
       },
       {
         "name": "BANKNIFTY ATM Call Option Buy",
@@ -160,7 +184,11 @@
           "implied_volatility_pct": 11.4
         },
         "is_top_pick": false,
-        "recommendation_tag": "ALTERNATIVE STRATEGY"
+        "recommendation_tag": "ALTERNATIVE STRATEGY",
+        "historical_win_probability": "65%",
+        "ai_confidence_score": "50%",
+        "risk_reward_ratio": "1:2.0",
+        "composite_score": 51.5
       }
     ]
   },

@@ -613,11 +613,17 @@ function renderAIQuantPage(data) {
                 const topBadgeMarkup = isTop ? `<span class="status-pill target-1" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; border: 1px solid #FFD700; font-weight: 700; margin-left: 8px;">⭐ TOP PICK (#1 RECOMMENDED)</span>` : "";
 
                 const g = s.greeks || {};
+                const histProb = s.historical_win_probability || s.win_prob || "70%";
+                const aiConf = s.ai_confidence_score || "50%";
+                const rrr = s.risk_reward_ratio || "1:1.5";
+
                 const greeksMarkup = g.net_delta !== undefined ? `
                     <div style="display: flex; gap: 8px; margin-top: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+                        <span class="status-pill target-1">Hist Prob: ${histProb}</span>
+                        <span class="status-pill badge-purple">AI Conf: ${aiConf}</span>
+                        <span class="status-pill badge-blue">RRR: ${rrr}</span>
                         <span class="status-pill badge-indigo">Δ Delta: ${g.net_delta}</span>
                         <span class="status-pill ${g.net_theta >= 0 ? 'target-1' : 'sl-hit'}">Θ Theta: ₹${g.net_theta}/day</span>
-                        <span class="status-pill badge-blue">ν Vega: ${g.net_vega}</span>
                         <span class="status-pill" style="background: rgba(255,255,255,0.08); color: var(--text-secondary);">IV: ${g.implied_volatility_pct}%</span>
                     </div>
                 ` : "";

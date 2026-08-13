@@ -439,8 +439,16 @@ def main():
     bank_em = get_expected_move(bank_spot, vix_val / 100.0 if vix_val > 0 else 0.15)
     
     # Strategy Recommendations
-    nifty_strats = recommend_options_quant_strategies("NIFTY", nifty_spot, nifty_vwap, nifty_regime, nifty_pcr, vix_val, nifty_pattern, nifty_p_bias)
-    bank_strats = recommend_options_quant_strategies("BANKNIFTY", bank_spot, bank_vwap, bank_regime, bank_pcr, vix_val, bank_pattern, bank_p_bias)
+    nifty_raw_strats = recommend_options_quant_strategies("NIFTY", nifty_spot, nifty_vwap, nifty_regime, nifty_pcr, vix_val, nifty_pattern, nifty_p_bias)
+    bank_raw_strats = recommend_options_quant_strategies("BANKNIFTY", bank_spot, bank_vwap, bank_regime, bank_pcr, vix_val, bank_pattern, bank_p_bias)
+    
+    # Phase 4 Strategy Scoring, Risk-Reward & NO TRADE Evaluation
+    from strategy_scoring import evaluate_strategies
+    nifty_eval = evaluate_strategies(nifty_raw_strats, nifty_regime_info["confidence_score"], vix_val, nifty_dq["is_stale"])
+    bank_eval = evaluate_strategies(bank_raw_strats, bank_regime_info["confidence_score"], vix_val, bank_dq["is_stale"])
+    
+    nifty_strats = nifty_eval["strategies"]
+    bank_strats = bank_eval["strategies"]
     
     # Intraday Stocks Long & Short
     sample_symbols = [
@@ -466,6 +474,7 @@ def main():
             "volatility_percentile": nifty_regime_info["volatility_percentile"],
             "confidence_score": nifty_regime_info["confidence_score"],
             "expected_move": nifty_em,
+            "no_trade_eval": nifty_eval["no_trade_eval"],
             "pattern": nifty_pattern,
             "pcr": nifty_pcr,
             "strategies": nifty_strats
@@ -479,6 +488,7 @@ def main():
             "volatility_percentile": bank_regime_info["volatility_percentile"],
             "confidence_score": bank_regime_info["confidence_score"],
             "expected_move": bank_em,
+            "no_trade_eval": bank_eval["no_trade_eval"],
             "pattern": bank_pattern,
             "pcr": bank_pcr,
             "strategies": bank_strats
