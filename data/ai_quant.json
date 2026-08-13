@@ -1,43 +1,43 @@
 {
-  "timestamp": "13-Aug-2026 02:13 PM",
+  "timestamp": "13-Aug-2026 02:16 PM",
   "nifty": {
-    "spot": 24357.15,
-    "vwap": 24357.15,
+    "spot": 24358.4,
+    "vwap": 24358.4,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
-    "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)",
+    "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)",
     "pcr": 1.05,
     "strategies": [
       {
-        "name": "NIFTY Bear Put Debit Spread (Hedged)",
+        "name": "NIFTY Bull Call Debit Spread (Hedged)",
         "type": "HEDGED SPREAD",
         "legs": [
-          "BUY NIFTY 24350 PE",
-          "SELL NIFTY 24200 PE (Hedge)"
+          "BUY NIFTY 24350 CE",
+          "SELL NIFTY 24500 CE (Hedge)"
         ],
-        "entry_spot": 24357.15,
-        "sl_spot": 24454.58,
-        "target1_spot": 24162.29,
+        "entry_spot": 24358.4,
+        "sl_spot": 24260.97,
+        "target1_spot": 24553.27,
         "max_profit": "Fixed Spread Width (\u20b9150 Points)",
         "max_loss": "Fixed Net Premium Paid",
-        "win_prob": "72%",
-        "rationale": "Hedged downside strategy mitigating volatility crush.",
-        "win_score": 72.0,
+        "win_prob": "74%",
+        "rationale": "High probability hedged bullish trade capping volatility decay risk.",
+        "win_score": 74.0,
         "is_top_pick": true,
         "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)"
       },
       {
-        "name": "NIFTY ATM Put Option Buy",
+        "name": "NIFTY ATM Call Option Buy",
         "type": "NAKED OPTION BUY",
         "legs": [
-          "BUY NIFTY 24350 PE"
+          "BUY NIFTY 24350 CE"
         ],
-        "entry_spot": 24357.15,
-        "sl_spot": 24430.22,
-        "target1_spot": 24211.01,
-        "max_profit": "Unlimited Downside",
+        "entry_spot": 24358.4,
+        "sl_spot": 24285.33,
+        "target1_spot": 24504.55,
+        "max_profit": "Unlimited Upside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bearish breakdown below VWAP (\u20b924357.2) confirmed by \ud83d\udd34 Bearish Engulfing (Reversal Setup) & Call writing (PCR: 1.05).",
+        "rationale": "Bullish breakout above VWAP (\u20b924358.4) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 1.05).",
         "win_score": 65.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
@@ -45,8 +45,8 @@
     ]
   },
   "banknifty": {
-    "spot": 57575.85,
-    "vwap": 57575.85,
+    "spot": 57579.0,
+    "vwap": 57579.0,
     "regime": "\ud83d\udfe1 SIDEWAYS THETA HARVEST REGIME",
     "pattern": "\ud83d\udd34 Double Top (M Pattern Breakdown)",
     "pcr": 0.98,
@@ -58,9 +58,9 @@
           "BUY BANKNIFTY 57600 PE",
           "SELL BANKNIFTY 57300 PE (Hedge)"
         ],
-        "entry_spot": 57575.85,
-        "sl_spot": 57806.15,
-        "target1_spot": 57115.24,
+        "entry_spot": 57579.0,
+        "sl_spot": 57809.32,
+        "target1_spot": 57118.37,
         "max_profit": "Fixed Spread Width (\u20b9300 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "72%",
@@ -75,13 +75,13 @@
         "legs": [
           "BUY BANKNIFTY 57600 PE"
         ],
-        "entry_spot": 57575.85,
-        "sl_spot": 57748.58,
-        "target1_spot": 57230.4,
+        "entry_spot": 57579.0,
+        "sl_spot": 57751.74,
+        "target1_spot": 57233.53,
         "max_profit": "Unlimited Downside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bearish breakdown below VWAP (\u20b957575.9) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
+        "rationale": "Bearish breakdown below VWAP (\u20b957579.0) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
         "win_score": 65.0,
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY"
