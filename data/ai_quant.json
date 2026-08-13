@@ -1,15 +1,145 @@
 {
-  "timestamp": "14-Aug-2026 12:10 AM",
+  "timestamp": "14-Aug-2026 12:12 AM",
   "data_type": "LIVE_DATA",
   "data_quality": {
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 535.4,
+    "stale_minutes": 537.5,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 535.4m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 537.5m)"
   },
+  "active_positions_count": 5,
+  "active_positions": [
+    {
+      "id": "STK_LONG_BAJFINANCE",
+      "symbol": "BAJFINANCE",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 1090.8,
+      "current_price": 1090.8,
+      "sl_price": 1082.07,
+      "target1_price": 1101.27,
+      "target2_price": 1108.25,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "14-Aug-2026 12:12 AM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_LONG_LT",
+      "symbol": "LT",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 4070.7,
+      "current_price": 4070.7,
+      "sl_price": 4025.6,
+      "target1_price": 4124.82,
+      "target2_price": 4160.9,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "14-Aug-2026 12:12 AM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_LONG_KOTAKBANK",
+      "symbol": "KOTAKBANK",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 392.4,
+      "current_price": 392.4,
+      "sl_price": 389.26,
+      "target1_price": 396.17,
+      "target2_price": 398.68,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "14-Aug-2026 12:12 AM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_SHORT_SUNPHARMA",
+      "symbol": "SUNPHARMA",
+      "strategy_name": "Intraday Short",
+      "action": "SELL",
+      "entry_price": 1932.0,
+      "current_price": 1932.0,
+      "sl_price": 1947.46,
+      "target1_price": 1913.45,
+      "target2_price": 1901.09,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "14-Aug-2026 12:12 AM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_SHORT_POWERGRID",
+      "symbol": "POWERGRID",
+      "strategy_name": "Intraday Short",
+      "action": "SELL",
+      "entry_price": 266.6,
+      "current_price": 266.6,
+      "sl_price": 268.73,
+      "target1_price": 264.04,
+      "target2_price": 262.33,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "14-Aug-2026 12:12 AM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    }
+  ],
+  "signal_audit_log": [
+    {
+      "id": 5,
+      "signal_id": "STK_SHORT_POWERGRID",
+      "timestamp": "14-Aug-2026 12:12 AM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 266.6,
+      "notes": "Position initialized at \u20b9266.60"
+    },
+    {
+      "id": 4,
+      "signal_id": "STK_SHORT_SUNPHARMA",
+      "timestamp": "14-Aug-2026 12:12 AM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 1932.0,
+      "notes": "Position initialized at \u20b91932.00"
+    },
+    {
+      "id": 3,
+      "signal_id": "STK_LONG_KOTAKBANK",
+      "timestamp": "14-Aug-2026 12:12 AM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 392.4,
+      "notes": "Position initialized at \u20b9392.40"
+    },
+    {
+      "id": 2,
+      "signal_id": "STK_LONG_LT",
+      "timestamp": "14-Aug-2026 12:12 AM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 4070.7,
+      "notes": "Position initialized at \u20b94070.70"
+    },
+    {
+      "id": 1,
+      "signal_id": "STK_LONG_BAJFINANCE",
+      "timestamp": "14-Aug-2026 12:12 AM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 1090.8,
+      "notes": "Position initialized at \u20b91090.80"
+    }
+  ],
   "nifty": {
     "spot": 24395.85,
     "vwap": 24395.85,

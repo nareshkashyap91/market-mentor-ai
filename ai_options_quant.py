@@ -466,10 +466,28 @@ def main():
     ist_tz = timezone(timedelta(hours=5, minutes=30))
     now_str = datetime.now(ist_tz).strftime("%d-%b-%Y %I:%M %p")
     
+    # Phase 6 Signal Persistence & Position Management
+    from position_manager import PositionManager
+    
+    # Sync Intraday Stock signals into Position DB
+    for st in long_stocks:
+        sig_id = f"STK_LONG_{st['symbol']}"
+        PositionManager.sync_signal(sig_id, st['symbol'], "Intraday Long", "BUY", st['close'], st['close'], st['sl'], st['t1'], st['t2'])
+
+    for st in short_stocks:
+        sig_id = f"STK_SHORT_{st['symbol']}"
+        PositionManager.sync_signal(sig_id, st['symbol'], "Intraday Short", "SELL", st['close'], st['close'], st['sl'], st['t1'], st['t2'])
+
+    active_positions = PositionManager.get_active_positions()
+    audit_logs = PositionManager.get_signal_audit_logs(limit=15)
+    
     payload = {
         "timestamp": now_str,
         "data_type": LIVE_DATA,
         "data_quality": nifty_dq,
+        "active_positions_count": len(active_positions),
+        "active_positions": active_positions,
+        "signal_audit_log": audit_logs,
         "nifty": {
             "spot": round(nifty_spot, 2),
             "vwap": round(nifty_vwap, 2),
