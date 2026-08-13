@@ -289,21 +289,29 @@
                 </div>
             <!-- AI Quant Strategy Tab -->
             <div class="tab-panel" id="tab-ai-quant">
-                <div class="overview-grid" style="margin-bottom: 24px;">
+                <div class="overview-grid" style="margin-bottom: 24px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                    <div class="glass-card overview-card">
+                        <div class="card-icon purple"><i class="fa-solid fa-shield-check"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Data Quality & Feed</span>
+                            <h3 class="stat-value" style="font-size: 1.05rem;" id="quant-dq-tag">LIVE_DATA</h3>
+                            <span class="stat-sub" id="quant-dq-summary">Status: Fresh Data</span>
+                        </div>
+                    </div>
                     <div class="glass-card overview-card">
                         <div class="card-icon blue"><i class="fa-solid fa-bolt"></i></div>
                         <div class="card-stats">
-                            <span class="stat-label">Nifty Mood / Regime</span>
+                            <span class="stat-label">Nifty Regime (ADX / Vol)</span>
                             <h3 class="stat-value" style="font-size: 1.05rem;" id="quant-nifty-regime">--</h3>
-                            <span class="stat-sub" id="quant-nifty-pattern">Pattern: Scanning...</span>
+                            <span class="stat-sub" id="quant-nifty-pattern">ADX: -- | Conf: --%</span>
                         </div>
                     </div>
                     <div class="glass-card overview-card">
                         <div class="card-icon green"><i class="fa-solid fa-building-columns"></i></div>
                         <div class="card-stats">
-                            <span class="stat-label">Bank Nifty Mood / Regime</span>
+                            <span class="stat-label">Bank Nifty Regime</span>
                             <h3 class="stat-value" style="font-size: 1.05rem;" id="quant-bank-regime">--</h3>
-                            <span class="stat-sub" id="quant-bank-pattern">Pattern: Scanning...</span>
+                            <span class="stat-sub" id="quant-bank-pattern">ADX: -- | Conf: --%</span>
                         </div>
                     </div>
                 </div>

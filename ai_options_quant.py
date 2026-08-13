@@ -353,6 +353,9 @@ def scan_intraday_stocks_long_and_short(symbols):
     
     return long_setups[:5], short_setups[:5]
 
+from data_quality import DataQualityEngine, LIVE_DATA, MOCK_DATA, get_data_quality_report
+from market_regime import MarketRegimeEngine, get_market_regime_analysis
+
 def main():
     print("=========================================")
     print("   AI MULTI-REGIME OPTIONS QUANT ENGINE  ")
@@ -387,6 +390,10 @@ def main():
     bank_df = ensure_ist_timezone(bank_df.dropna(subset=['Close'])) if bank_df is not None else None
     vix_df = ensure_ist_timezone(vix_df.dropna(subset=['Close'])) if vix_df is not None else None
     
+    # Phase 1 Data Quality Checks
+    nifty_dq, nifty_df = DataQualityEngine.validate_dataframe(nifty_df, is_mock=False)
+    bank_dq, bank_df = DataQualityEngine.validate_dataframe(bank_df, is_mock=False)
+    
     nifty_spot = float(nifty_df['Close'].iloc[-1]) if nifty_df is not None and not nifty_df.empty else 24600.0
     bank_spot = float(bank_df['Close'].iloc[-1]) if bank_df is not None and not bank_df.empty else 51500.0
     vix_val = float(vix_df['Close'].iloc[-1]) if vix_df is not None and not vix_df.empty else 13.5
@@ -407,13 +414,16 @@ def main():
     nifty_pattern, nifty_p_bias = detect_chart_patterns(nifty_df)
     bank_pattern, bank_p_bias = detect_chart_patterns(bank_df)
     
-    # PCR (Default 1.0 if off-session)
+    # PCR (Default 1.05)
     nifty_pcr = 1.05
     bank_pcr = 0.98
     
-    # Regimes
-    nifty_regime, _ = classify_market_regime(nifty_spot, nifty_vwap, vix_val, nifty_pcr)
-    bank_regime, _ = classify_market_regime(bank_spot, bank_vwap, vix_val, bank_pcr)
+    # Phase 1 Market Regime Analysis
+    nifty_regime_info = get_market_regime_analysis(nifty_df, vix_val=vix_val, pcr=nifty_pcr, is_mock=False)
+    bank_regime_info = get_market_regime_analysis(bank_df, vix_val=vix_val, pcr=bank_pcr, is_mock=False)
+    
+    nifty_regime = nifty_regime_info["regime"]
+    bank_regime = bank_regime_info["regime"]
     
     # Strategy Recommendations
     nifty_strats = recommend_options_quant_strategies("NIFTY", nifty_spot, nifty_vwap, nifty_regime, nifty_pcr, vix_val, nifty_pattern, nifty_p_bias)
@@ -421,8 +431,8 @@ def main():
     
     # Intraday Stocks Long & Short
     sample_symbols = [
-        "RELIANCE", "TCS", "HDFCBANK", "ICICIBANK", "INFY", "BHARTIARTL", "ITC", "SBIN", "LTIM",
-        "LT", "AXISBANK", "KOTAKBANK", "TATAMOTORS", "M&M", "SUNPHARMA", "MARUTI", "NTPC",
+        "RELIANCE", "TCS", "HDFCBANK", "ICICIBANK", "INFY", "BHARTIARTL", "ITC", "SBIN",
+        "LT", "AXISBANK", "KOTAKBANK", "M&M", "SUNPHARMA", "MARUTI", "NTPC",
         "POWERGRID", "TITAN", "ULTRACEMCO", "BAJFINANCE", "TATASTEEL", "ADANIENT", "JSWSTEEL"
     ]
     long_stocks, short_stocks = scan_intraday_stocks_long_and_short(sample_symbols)
@@ -432,10 +442,16 @@ def main():
     
     payload = {
         "timestamp": now_str,
+        "data_type": LIVE_DATA,
+        "data_quality": nifty_dq,
         "nifty": {
             "spot": round(nifty_spot, 2),
             "vwap": round(nifty_vwap, 2),
             "regime": nifty_regime,
+            "adx": nifty_regime_info["adx"],
+            "trend_intensity": nifty_regime_info["trend_intensity"],
+            "volatility_percentile": nifty_regime_info["volatility_percentile"],
+            "confidence_score": nifty_regime_info["confidence_score"],
             "pattern": nifty_pattern,
             "pcr": nifty_pcr,
             "strategies": nifty_strats
@@ -444,6 +460,10 @@ def main():
             "spot": round(bank_spot, 2),
             "vwap": round(bank_vwap, 2),
             "regime": bank_regime,
+            "adx": bank_regime_info["adx"],
+            "trend_intensity": bank_regime_info["trend_intensity"],
+            "volatility_percentile": bank_regime_info["volatility_percentile"],
+            "confidence_score": bank_regime_info["confidence_score"],
             "pattern": bank_pattern,
             "pcr": bank_pcr,
             "strategies": bank_strats
