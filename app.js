@@ -610,6 +610,16 @@ function renderAIQuantPage(data) {
                 const borderStyle = isTop ? "border-left: 5px solid #FFD700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);" : "border-left: 4px solid var(--clr-primary);";
                 const topBadgeMarkup = isTop ? `<span class="status-pill target-1" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; border: 1px solid #FFD700; font-weight: 700; margin-left: 8px;">⭐ TOP PICK (#1 RECOMMENDED)</span>` : "";
 
+                const g = s.greeks || {};
+                const greeksMarkup = g.net_delta !== undefined ? `
+                    <div style="display: flex; gap: 8px; margin-top: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+                        <span class="status-pill badge-indigo">Δ Delta: ${g.net_delta}</span>
+                        <span class="status-pill ${g.net_theta >= 0 ? 'target-1' : 'sl-hit'}">Θ Theta: ₹${g.net_theta}/day</span>
+                        <span class="status-pill badge-blue">ν Vega: ${g.net_vega}</span>
+                        <span class="status-pill" style="background: rgba(255,255,255,0.08); color: var(--text-secondary);">IV: ${g.implied_volatility_pct}%</span>
+                    </div>
+                ` : "";
+
                 return `
                     <div class="signal-card" style="${borderStyle}">
                         <div class="signal-card-header">
@@ -623,6 +633,8 @@ function renderAIQuantPage(data) {
                             </div>
                             <span class="signal-time-badge" style="${isTop ? 'color: #FFD700; font-weight: 700;' : ''}">Win Prob: ${s.win_prob}</span>
                         </div>
+
+                        ${greeksMarkup}
 
                         <div class="signal-values-grid" style="grid-template-columns: repeat(3, 1fr);">
                             <div class="val-box">

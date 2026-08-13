@@ -229,12 +229,20 @@ def recommend_options_quant_strategies(index_name, spot, vwap, regime, pcr, vix_
             "rationale": f"Sideways consolidation regime with low VIX ({vix_val:.1f}). Harvests dual Theta decay on both Call and Put legs."
         })
         
+    # Phase 2 Option Greeks & IV Enrichment
+    from option_chain_analyzer import OptionChainAnalyzer
+    
     # Quantitative Ranking: Rank strategies by win probability & safety score
     for s in strategies:
         try:
             s["win_score"] = float(s["win_prob"].replace("%", "").strip())
         except Exception:
             s["win_score"] = 50.0
+            
+        # Attach Phase 2 Black-Scholes Greeks
+        iv_estimate = max(0.10, min(0.60, vix_val / 100.0 if vix_val > 0 else 0.15))
+        greeks = OptionChainAnalyzer.calculate_strategy_net_greeks(s["legs"], spot, dte_days=7, default_iv=iv_estimate)
+        s["greeks"] = greeks
             
     strategies.sort(key=lambda x: x["win_score"], reverse=True)
     
