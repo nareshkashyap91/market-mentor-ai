@@ -1,23 +1,33 @@
 {
-  "timestamp": "14-Aug-2026 12:15 AM",
+  "timestamp": "14-Aug-2026 12:17 AM",
   "data_type": "LIVE_DATA",
   "data_quality": {
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 540.2,
+    "stale_minutes": 542.3,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 540.2m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 542.3m)"
+  },
+  "backtest_metrics": {
+    "cagr_pct": -1.4,
+    "sharpe_ratio": -6.92,
+    "max_drawdown_pct": -1.2,
+    "profit_factor": 0.8,
+    "win_rate_pct": 48.4,
+    "total_backtest_trades": 124,
+    "strategy_name": "AI Multi-Regime Options Quant Strategy",
+    "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
   },
   "paper_portfolio": {
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 7500.0,
+    "allocated_margin": 15000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 5,
+    "total_trades": 10,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },

@@ -466,10 +466,11 @@ def main():
     ist_tz = timezone(timedelta(hours=5, minutes=30))
     now_str = datetime.now(ist_tz).strftime("%d-%b-%Y %I:%M %p")
     
-    # Phase 6 & Phase 7 Signal Persistence, Paper Trading & Trade Journal Engine
+    # Phase 6, 7 & 8 Signal Persistence, Paper Trading & Backtesting Engine
     from position_manager import PositionManager
     from paper_trading import PaperTradingEngine
     from trade_journal import TradeJournalEngine
+    from backtest_engine import get_backtest_metrics
     
     # Sync Intraday Stock signals into Position DB and execute Paper Orders
     for st in long_stocks:
@@ -489,10 +490,14 @@ def main():
     journal_perf = TradeJournalEngine.get_performance_summary()
     journal_history = TradeJournalEngine.get_journal_entries(limit=10)
     
+    # Phase 8 Historical Backtest Simulation
+    backtest_results = get_backtest_metrics("AI Multi-Regime Options Quant Strategy", nifty_df)
+    
     payload = {
         "timestamp": now_str,
         "data_type": LIVE_DATA,
         "data_quality": nifty_dq,
+        "backtest_metrics": backtest_results,
         "paper_portfolio": paper_portfolio,
         "trade_journal_performance": journal_perf,
         "trade_journal_history": journal_history,
