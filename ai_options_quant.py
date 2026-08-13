@@ -433,6 +433,11 @@ def main():
     nifty_regime = nifty_regime_info["regime"]
     bank_regime = bank_regime_info["regime"]
     
+    # Phase 3 Expected Move & DTE Calculation
+    from expected_move import get_expected_move
+    nifty_em = get_expected_move(nifty_spot, vix_val / 100.0 if vix_val > 0 else 0.15)
+    bank_em = get_expected_move(bank_spot, vix_val / 100.0 if vix_val > 0 else 0.15)
+    
     # Strategy Recommendations
     nifty_strats = recommend_options_quant_strategies("NIFTY", nifty_spot, nifty_vwap, nifty_regime, nifty_pcr, vix_val, nifty_pattern, nifty_p_bias)
     bank_strats = recommend_options_quant_strategies("BANKNIFTY", bank_spot, bank_vwap, bank_regime, bank_pcr, vix_val, bank_pattern, bank_p_bias)
@@ -460,6 +465,7 @@ def main():
             "trend_intensity": nifty_regime_info["trend_intensity"],
             "volatility_percentile": nifty_regime_info["volatility_percentile"],
             "confidence_score": nifty_regime_info["confidence_score"],
+            "expected_move": nifty_em,
             "pattern": nifty_pattern,
             "pcr": nifty_pcr,
             "strategies": nifty_strats
@@ -472,6 +478,7 @@ def main():
             "trend_intensity": bank_regime_info["trend_intensity"],
             "volatility_percentile": bank_regime_info["volatility_percentile"],
             "confidence_score": bank_regime_info["confidence_score"],
+            "expected_move": bank_em,
             "pattern": bank_pattern,
             "pcr": bank_pcr,
             "strategies": bank_strats

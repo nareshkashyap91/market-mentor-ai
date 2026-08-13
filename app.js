@@ -570,23 +570,25 @@ function renderAIQuantPage(data) {
         if (dqSummary) dqSummary.textContent = data.data_quality.status_summary || "Fresh Data";
     }
 
-    // Regimes, ADX & Chart Patterns
+    // Regimes, ADX, Confidence & Expected Move
     const niftyRegime = document.getElementById("quant-nifty-regime");
     const niftyPattern = document.getElementById("quant-nifty-pattern");
     if (niftyRegime && data.nifty) {
         niftyRegime.textContent = data.nifty.regime || "SIDEWAYS";
-        const adxStr = data.nifty.adx ? `ADX: ${data.nifty.adx} (${data.nifty.trend_intensity})` : "";
+        const adxStr = data.nifty.adx ? `ADX: ${data.nifty.adx}` : "";
         const confStr = data.nifty.confidence_score ? `Conf: ${data.nifty.confidence_score}%` : "";
-        if (niftyPattern) niftyPattern.textContent = `${adxStr} | ${confStr}`;
+        const emStr = data.nifty.expected_move ? `EM: ${data.nifty.expected_move.summary_str}` : "";
+        if (niftyPattern) niftyPattern.textContent = `${adxStr} | ${confStr} | ${emStr}`;
     }
 
     const bankRegime = document.getElementById("quant-bank-regime");
     const bankPattern = document.getElementById("quant-bank-pattern");
     if (bankRegime && data.banknifty) {
         bankRegime.textContent = data.banknifty.regime || "SIDEWAYS";
-        const adxStr = data.banknifty.adx ? `ADX: ${data.banknifty.adx} (${data.banknifty.trend_intensity})` : "";
+        const adxStr = data.banknifty.adx ? `ADX: ${data.banknifty.adx}` : "";
         const confStr = data.banknifty.confidence_score ? `Conf: ${data.banknifty.confidence_score}%` : "";
-        if (bankPattern) bankPattern.textContent = `${adxStr} | ${confStr}`;
+        const emStr = data.banknifty.expected_move ? `EM: ${data.banknifty.expected_move.summary_str}` : "";
+        if (bankPattern) bankPattern.textContent = `${adxStr} | ${confStr} | ${emStr}`;
     }
 
     // Render Strategy Cards
