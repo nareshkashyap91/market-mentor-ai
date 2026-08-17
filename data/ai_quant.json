@@ -1,5 +1,5 @@
 {
-  "timestamp": "17-Aug-2026 02:25 PM",
+  "timestamp": "17-Aug-2026 02:31 PM",
   "data_type": "LIVE_DATA",
   "broker_status": {
     "live_trading_active": false,
@@ -27,9 +27,9 @@
     "live_execution_status": "OFF (PAPER TRADING / SIMULATOR ACTIVE)"
   },
   "ai_research_synthesis": {
-    "executive_thesis": "Market environment is currently operating in \ud83d\udfe1 SIDEWAYS_RANGEBOUND with ADX at 54.5 and 75% regime confidence. The 1-Sigma Expected Move for upcoming expiry is \u00b1350 pts. Optimal quantitative execution favors 'NIFTY Bull Put Credit Spread (Theta Harvest)' with a historical backtested win probability of 82%. Capital risk guardrails and NO TRADE filters remain active.",
+    "executive_thesis": "Market environment is currently operating in \ud83d\udfe1 SIDEWAYS_RANGEBOUND with ADX at 53.6 and 75% regime confidence. The 1-Sigma Expected Move for upcoming expiry is \u00b1350 pts. Optimal quantitative execution favors 'NIFTY Bull Put Credit Spread (Theta Harvest)' with a historical backtested win probability of 82%. Capital risk guardrails and NO TRADE filters remain active.",
     "key_insights": [
-      "Regime Alignment: \ud83d\udfe1 SIDEWAYS_RANGEBOUND (ADX: 54.5)",
+      "Regime Alignment: \ud83d\udfe1 SIDEWAYS_RANGEBOUND (ADX: 53.6)",
       "Expected Expiry Range: \u00b1350 pts",
       "Top Quantitative Pick: NIFTY Bull Put Credit Spread (Theta Harvest) (Hist Win: 82%)",
       "Capital Protection Status: Active Guardrails"
@@ -40,18 +40,18 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 10.1,
+    "stale_minutes": 1.2,
     "anomalies": [],
-    "clean_rows": 121,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 10.1m)"
+    "clean_rows": 122,
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 1.2m)"
   },
   "backtest_metrics": {
     "cagr_pct": -1.1,
-    "sharpe_ratio": -6.79,
+    "sharpe_ratio": -6.77,
     "max_drawdown_pct": -0.8,
-    "profit_factor": 0.83,
-    "win_rate_pct": 46.7,
-    "total_backtest_trades": 120,
+    "profit_factor": 0.84,
+    "win_rate_pct": 47.1,
+    "total_backtest_trades": 121,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
     "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
   },
@@ -59,10 +59,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 33000.0,
+    "allocated_margin": 30000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 22,
+    "total_trades": 20,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -75,40 +75,8 @@
     "formatted_realized_pnl": "\u20b9+0.00"
   },
   "trade_journal_history": [],
-  "active_positions_count": 7,
+  "active_positions_count": 5,
   "active_positions": [
-    {
-      "id": "STK_LONG_JSWSTEEL",
-      "symbol": "JSWSTEEL",
-      "strategy_name": "Intraday Long",
-      "action": "BUY",
-      "entry_price": 1281.7,
-      "current_price": 1281.7,
-      "sl_price": 1269.9,
-      "target1_price": 1295.86,
-      "target2_price": 1305.3,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "17-Aug-2026 02:25 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
-    {
-      "id": "STK_SHORT_ITC",
-      "symbol": "ITC",
-      "strategy_name": "Intraday Short",
-      "action": "SELL",
-      "entry_price": 273.25,
-      "current_price": 273.25,
-      "sl_price": 275.44,
-      "target1_price": 270.63,
-      "target2_price": 268.88,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "17-Aug-2026 02:25 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
     {
       "id": "STK_LONG_BAJFINANCE",
       "symbol": "BAJFINANCE",
@@ -192,24 +160,6 @@
   ],
   "signal_audit_log": [
     {
-      "id": 7,
-      "signal_id": "STK_SHORT_ITC",
-      "timestamp": "17-Aug-2026 02:25 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 273.25,
-      "notes": "Position initialized at \u20b9273.25"
-    },
-    {
-      "id": 6,
-      "signal_id": "STK_LONG_JSWSTEEL",
-      "timestamp": "17-Aug-2026 02:25 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 1281.7,
-      "notes": "Position initialized at \u20b91281.70"
-    },
-    {
       "id": 5,
       "signal_id": "STK_SHORT_POWERGRID",
       "timestamp": "14-Aug-2026 12:12 AM",
@@ -256,27 +206,27 @@
     }
   ],
   "nifty": {
-    "spot": 24323.55,
-    "vwap": 24323.55,
+    "spot": 24329.85,
+    "vwap": 24329.85,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
-    "adx": 54.5,
+    "adx": 53.6,
     "trend_intensity": "STRONG TREND",
     "volatility_percentile": 8.7,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 3.0,
-      "em_1sigma_pts": 249.24,
-      "em_2sigma_pts": 498.48,
+      "em_1sigma_pts": 249.3,
+      "em_2sigma_pts": 498.61,
       "em_pct": 1.02,
       "range_1sigma": [
-        24074.31,
-        24572.79
+        24080.55,
+        24579.15
       ],
       "range_2sigma": [
-        23825.07,
-        24822.03
+        23831.24,
+        24828.46
       ],
-      "summary_str": "\u00b1249.2 pts (\u20b924074 - \u20b924573)"
+      "summary_str": "\u00b1249.3 pts (\u20b924081 - \u20b924579)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -291,22 +241,22 @@
         "name": "NIFTY Bull Put Credit Spread (Theta Harvest)",
         "type": "THETA CREDIT SPREAD",
         "legs": [
-          "SELL NIFTY 24200 PE",
-          "BUY NIFTY 24100 PE (Hedge)"
+          "SELL NIFTY 24250 PE",
+          "BUY NIFTY 24150 PE (Hedge)"
         ],
-        "entry_spot": 24323.55,
-        "sl_spot": 24203.55,
+        "entry_spot": 24329.85,
+        "sl_spot": 24209.85,
         "target1_spot": "Full Premium Decay at Expiry",
         "max_profit": "Net Credit Received",
         "max_loss": "Defined Difference (\u20b9100 - Credit)",
         "win_prob": "82%",
-        "rationale": "Rangebound market (PCR: 1.05). Collects time decay as long as NIFTY stays above \u20b924200.",
+        "rationale": "Rangebound market (PCR: 1.05). Collects time decay as long as NIFTY stays above \u20b924250.",
         "win_score": 82.0,
         "greeks": {
-          "net_delta": 0.091,
-          "net_gamma": -0.00013,
-          "net_theta": 0.94,
-          "net_vega": -1.66,
+          "net_delta": 0.096,
+          "net_gamma": -0.00011,
+          "net_theta": 0.69,
+          "net_vega": -1.38,
           "implied_volatility_pct": 11.3
         },
         "margin_info": {
@@ -326,12 +276,12 @@
         "name": "NIFTY Iron Butterfly (Hedged Short Straddle)",
         "type": "HEDGED STRADDLE",
         "legs": [
-          "SELL NIFTY 24300 CE",
-          "SELL NIFTY 24300 PE",
-          "BUY NIFTY 24450 CE (Hedge)",
-          "BUY NIFTY 24150 PE (Hedge)"
+          "SELL NIFTY 24350 CE",
+          "SELL NIFTY 24350 PE",
+          "BUY NIFTY 24500 CE (Hedge)",
+          "BUY NIFTY 24200 PE (Hedge)"
         ],
-        "entry_spot": 24323.55,
+        "entry_spot": 24329.85,
         "sl_spot": "Upper/Lower Wing Touch",
         "target1_spot": "Max Decay at Center ATM Strike",
         "max_profit": "Max Net Premium Collected",
@@ -340,10 +290,10 @@
         "rationale": "Sideways consolidation regime with low VIX (11.3). Harvests dual Theta decay on both Call and Put legs.",
         "win_score": 78.0,
         "greeks": {
-          "net_delta": -0.007,
+          "net_delta": -0.002,
           "net_gamma": -0.00016,
-          "net_theta": 1.59,
-          "net_vega": -1.96,
+          "net_theta": 1.6,
+          "net_vega": -1.99,
           "implied_volatility_pct": 11.3
         },
         "margin_info": {
@@ -362,27 +312,27 @@
     ]
   },
   "banknifty": {
-    "spot": 57546.3,
-    "vwap": 57546.3,
+    "spot": 57586.5,
+    "vwap": 57586.5,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
-    "adx": 64.0,
+    "adx": 63.6,
     "trend_intensity": "STRONG TREND",
     "volatility_percentile": 8.7,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 3.0,
-      "em_1sigma_pts": 589.67,
-      "em_2sigma_pts": 1179.33,
+      "em_1sigma_pts": 590.08,
+      "em_2sigma_pts": 1180.16,
       "em_pct": 1.02,
       "range_1sigma": [
-        56956.63,
-        58135.97
+        56996.42,
+        58176.58
       ],
       "range_2sigma": [
-        56366.97,
-        58725.63
+        56406.34,
+        58766.66
       ],
-      "summary_str": "\u00b1589.7 pts (\u20b956957 - \u20b958136)"
+      "summary_str": "\u00b1590.1 pts (\u20b956996 - \u20b958177)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -397,22 +347,22 @@
         "name": "BANKNIFTY Bull Put Credit Spread (Theta Harvest)",
         "type": "THETA CREDIT SPREAD",
         "legs": [
-          "SELL BANKNIFTY 57300 PE",
-          "BUY BANKNIFTY 57100 PE (Hedge)"
+          "SELL BANKNIFTY 57400 PE",
+          "BUY BANKNIFTY 57200 PE (Hedge)"
         ],
-        "entry_spot": 57546.3,
-        "sl_spot": 57426.3,
+        "entry_spot": 57586.5,
+        "sl_spot": 57466.5,
         "target1_spot": "Full Premium Decay at Expiry",
         "max_profit": "Net Credit Received",
         "max_loss": "Defined Difference (\u20b9200 - Credit)",
         "win_prob": "82%",
-        "rationale": "Rangebound market (PCR: 0.98). Collects time decay as long as BANKNIFTY stays above \u20b957300.",
+        "rationale": "Rangebound market (PCR: 0.98). Collects time decay as long as BANKNIFTY stays above \u20b957400.",
         "win_score": 82.0,
         "greeks": {
-          "net_delta": 0.08,
-          "net_gamma": -4e-05,
-          "net_theta": 1.59,
-          "net_vega": -2.99,
+          "net_delta": 0.082,
+          "net_gamma": -3e-05,
+          "net_theta": 1.28,
+          "net_vega": -2.64,
           "implied_volatility_pct": 11.3
         },
         "margin_info": {
@@ -432,12 +382,12 @@
         "name": "BANKNIFTY Iron Butterfly (Hedged Short Straddle)",
         "type": "HEDGED STRADDLE",
         "legs": [
-          "SELL BANKNIFTY 57500 CE",
-          "SELL BANKNIFTY 57500 PE",
-          "BUY BANKNIFTY 57800 CE (Hedge)",
-          "BUY BANKNIFTY 57200 PE (Hedge)"
+          "SELL BANKNIFTY 57600 CE",
+          "SELL BANKNIFTY 57600 PE",
+          "BUY BANKNIFTY 57900 CE (Hedge)",
+          "BUY BANKNIFTY 57300 PE (Hedge)"
         ],
-        "entry_spot": 57546.3,
+        "entry_spot": 57586.5,
         "sl_spot": "Upper/Lower Wing Touch",
         "target1_spot": "Max Decay at Center ATM Strike",
         "max_profit": "Max Net Premium Collected",
@@ -446,10 +396,10 @@
         "rationale": "Sideways consolidation regime with low VIX (11.3). Harvests dual Theta decay on both Call and Put legs.",
         "win_score": 78.0,
         "greeks": {
-          "net_delta": -0.005,
-          "net_gamma": -5e-05,
-          "net_theta": 2.71,
-          "net_vega": -3.35,
+          "net_delta": -0.002,
+          "net_gamma": -4e-05,
+          "net_theta": 2.73,
+          "net_vega": -3.4,
           "implied_volatility_pct": 11.3
         },
         "margin_info": {
@@ -468,35 +418,7 @@
     ]
   },
   "intraday_stocks": {
-    "long_setups": [
-      {
-        "symbol": "JSWSTEEL",
-        "action": "BUY (LONG)",
-        "close": 1281.7,
-        "vwap": 1267.59,
-        "orb_high": 1269.9,
-        "sl": 1269.9,
-        "t1": 1295.86,
-        "t2": 1305.3,
-        "rsi": 93.4,
-        "vol_exp": 2.1,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
-      }
-    ],
-    "short_setups": [
-      {
-        "symbol": "ITC",
-        "action": "SHORT SELL",
-        "close": 273.25,
-        "vwap": 274.35,
-        "orb_low": 275.4,
-        "sl": 275.44,
-        "t1": 270.63,
-        "t2": 268.88,
-        "rsi": 19.0,
-        "vol_exp": 1.2,
-        "pattern": "\ud83d\udfe2 Bullish Engulfing (Reversal Setup)"
-      }
-    ]
+    "long_setups": [],
+    "short_setups": []
   }
 }
