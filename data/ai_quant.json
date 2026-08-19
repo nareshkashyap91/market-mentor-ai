@@ -1,5 +1,5 @@
 {
-  "timestamp": "19-Aug-2026 11:30 AM",
+  "timestamp": "19-Aug-2026 11:45 AM",
   "data_type": "LIVE_DATA",
   "broker_status": {
     "live_trading_active": false,
@@ -27,9 +27,9 @@
     "live_execution_status": "OFF (PAPER TRADING / SIMULATOR ACTIVE)"
   },
   "ai_research_synthesis": {
-    "executive_thesis": "Market environment is currently operating in \ud83d\udfe1 SIDEWAYS_RANGEBOUND with ADX at 57.0 and 75% regime confidence. The 1-Sigma Expected Move for upcoming expiry is \u00b1350 pts. Optimal quantitative execution favors 'NIFTY Bull Put Credit Spread (Theta Harvest)' with a historical backtested win probability of 82%. Capital risk guardrails and NO TRADE filters remain active.",
+    "executive_thesis": "Market environment is currently operating in \ud83d\udfe1 SIDEWAYS_RANGEBOUND with ADX at 60.3 and 75% regime confidence. The 1-Sigma Expected Move for upcoming expiry is \u00b1350 pts. Optimal quantitative execution favors 'NIFTY Bull Put Credit Spread (Theta Harvest)' with a historical backtested win probability of 82%. Capital risk guardrails and NO TRADE filters remain active.",
     "key_insights": [
-      "Regime Alignment: \ud83d\udfe1 SIDEWAYS_RANGEBOUND (ADX: 57.0)",
+      "Regime Alignment: \ud83d\udfe1 SIDEWAYS_RANGEBOUND (ADX: 60.3)",
       "Expected Expiry Range: \u00b1350 pts",
       "Top Quantitative Pick: NIFTY Bull Put Credit Spread (Theta Harvest) (Hist Win: 82%)",
       "Capital Protection Status: Active Guardrails"
@@ -40,18 +40,18 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 0.9,
+    "stale_minutes": 0.8,
     "anomalies": [],
-    "clean_rows": 110,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 0.9m)"
+    "clean_rows": 111,
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 0.8m)"
   },
   "backtest_metrics": {
-    "cagr_pct": -2.1,
-    "sharpe_ratio": -8.48,
+    "cagr_pct": -2.2,
+    "sharpe_ratio": -8.57,
     "max_drawdown_pct": -1.1,
     "profit_factor": 0.68,
-    "win_rate_pct": 49.5,
-    "total_backtest_trades": 109,
+    "win_rate_pct": 48.2,
+    "total_backtest_trades": 110,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
     "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
   },
@@ -206,27 +206,27 @@
     }
   ],
   "nifty": {
-    "spot": 24055.85,
-    "vwap": 24055.85,
+    "spot": 24050.55,
+    "vwap": 24050.55,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
-    "adx": 57.0,
+    "adx": 60.3,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 10.2,
+    "volatility_percentile": 10.0,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 1.0,
-      "em_1sigma_pts": 145.15,
-      "em_2sigma_pts": 290.29,
+      "em_1sigma_pts": 144.8,
+      "em_2sigma_pts": 289.6,
       "em_pct": 0.6,
       "range_1sigma": [
-        23910.7,
-        24201.0
+        23905.75,
+        24195.35
       ],
       "range_2sigma": [
-        23765.55,
-        24346.14
+        23760.95,
+        24340.15
       ],
-      "summary_str": "\u00b1145.1 pts (\u20b923911 - \u20b924201)"
+      "summary_str": "\u00b1144.8 pts (\u20b923906 - \u20b924195)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -244,8 +244,8 @@
           "SELL NIFTY 23950 PE",
           "BUY NIFTY 23850 PE (Hedge)"
         ],
-        "entry_spot": 24055.85,
-        "sl_spot": 23935.85,
+        "entry_spot": 24050.55,
+        "sl_spot": 23930.55,
         "target1_spot": "Full Premium Decay at Expiry",
         "max_profit": "Net Credit Received",
         "max_loss": "Defined Difference (\u20b9100 - Credit)",
@@ -255,8 +255,8 @@
         "greeks": {
           "net_delta": 0.093,
           "net_gamma": -0.00012,
-          "net_theta": 0.85,
-          "net_vega": -1.51,
+          "net_theta": 0.82,
+          "net_vega": -1.48,
           "implied_volatility_pct": 11.5
         },
         "margin_info": {
@@ -281,7 +281,7 @@
           "BUY NIFTY 24200 CE (Hedge)",
           "BUY NIFTY 23900 PE (Hedge)"
         ],
-        "entry_spot": 24055.85,
+        "entry_spot": 24050.55,
         "sl_spot": "Upper/Lower Wing Touch",
         "target1_spot": "Max Decay at Center ATM Strike",
         "max_profit": "Max Net Premium Collected",
@@ -291,9 +291,9 @@
         "win_score": 78.0,
         "greeks": {
           "net_delta": -0.004,
-          "net_gamma": -0.00014,
-          "net_theta": 1.58,
-          "net_vega": -1.92,
+          "net_gamma": -0.00016,
+          "net_theta": 1.6,
+          "net_vega": -1.95,
           "implied_volatility_pct": 11.5
         },
         "margin_info": {
@@ -312,27 +312,27 @@
     ]
   },
   "banknifty": {
-    "spot": 57068.75,
-    "vwap": 57068.75,
+    "spot": 57062.1,
+    "vwap": 57062.1,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
-    "adx": 34.2,
+    "adx": 35.9,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 10.2,
+    "volatility_percentile": 10.0,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 1.0,
-      "em_1sigma_pts": 344.34,
-      "em_2sigma_pts": 688.68,
+      "em_1sigma_pts": 343.55,
+      "em_2sigma_pts": 687.11,
       "em_pct": 0.6,
       "range_1sigma": [
-        56724.41,
-        57413.09
+        56718.55,
+        57405.65
       ],
       "range_2sigma": [
-        56380.07,
-        57757.43
+        56375.0,
+        57749.21
       ],
-      "summary_str": "\u00b1344.3 pts (\u20b956724 - \u20b957413)"
+      "summary_str": "\u00b1343.6 pts (\u20b956719 - \u20b957406)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -340,77 +340,80 @@
       "reasons": [],
       "summary": "Market Conditions Optimal for Execution"
     },
-    "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)",
+    "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 0.98,
     "strategies": [
       {
-        "name": "BANKNIFTY Bull Call Debit Spread (Hedged)",
-        "type": "HEDGED SPREAD",
+        "name": "BANKNIFTY Bull Put Credit Spread (Theta Harvest)",
+        "type": "THETA CREDIT SPREAD",
         "legs": [
-          "BUY BANKNIFTY 57100 CE",
-          "SELL BANKNIFTY 57400 CE (Hedge)"
+          "SELL BANKNIFTY 56900 PE",
+          "BUY BANKNIFTY 56700 PE (Hedge)"
         ],
-        "entry_spot": 57068.75,
-        "sl_spot": 56840.47,
-        "target1_spot": 57525.3,
-        "max_profit": "Fixed Spread Width (\u20b9300 Points)",
-        "max_loss": "Fixed Net Premium Paid",
-        "win_prob": "74%",
-        "rationale": "High probability hedged bullish trade capping volatility decay risk.",
-        "win_score": 74.0,
+        "entry_spot": 57062.1,
+        "sl_spot": 56942.1,
+        "target1_spot": "Full Premium Decay at Expiry",
+        "max_profit": "Net Credit Received",
+        "max_loss": "Defined Difference (\u20b9200 - Credit)",
+        "win_prob": "82%",
+        "rationale": "Rangebound market (PCR: 0.98). Collects time decay as long as BANKNIFTY stays above \u20b956900.",
+        "win_score": 82.0,
         "greeks": {
-          "net_delta": 0.13,
-          "net_gamma": 2e-05,
-          "net_theta": -2.23,
-          "net_vega": 1.14,
+          "net_delta": 0.082,
+          "net_gamma": -3e-05,
+          "net_theta": 1.14,
+          "net_vega": -2.42,
           "implied_volatility_pct": 11.5
         },
         "margin_info": {
           "index_name": "BANKNIFTY",
           "lot_size": 15,
-          "margin_required_rupees": 1800.0,
-          "margin_formatted": "\u20b91,800"
+          "margin_required_rupees": 1950.0,
+          "margin_formatted": "\u20b91,950"
         },
         "is_top_pick": true,
         "recommendation_tag": "\u2b50 TOP PICK (#1 BEST STRATEGY FOR HIGH WIN-RATE & SAFETY)",
-        "historical_win_probability": "74%",
+        "historical_win_probability": "82%",
         "ai_confidence_score": "75%",
-        "risk_reward_ratio": "1:2.0",
-        "composite_score": 63.5
+        "risk_reward_ratio": "1:1.5",
+        "composite_score": 66.5
       },
       {
-        "name": "BANKNIFTY ATM Call Option Buy",
-        "type": "NAKED OPTION BUY",
+        "name": "BANKNIFTY Iron Butterfly (Hedged Short Straddle)",
+        "type": "HEDGED STRADDLE",
         "legs": [
-          "BUY BANKNIFTY 57100 CE"
+          "SELL BANKNIFTY 57100 CE",
+          "SELL BANKNIFTY 57100 PE",
+          "BUY BANKNIFTY 57400 CE (Hedge)",
+          "BUY BANKNIFTY 56800 PE (Hedge)"
         ],
-        "entry_spot": 57068.75,
-        "sl_spot": 56897.54,
-        "target1_spot": 57411.16,
-        "max_profit": "Unlimited Upside",
-        "max_loss": "Defined (Option Premium Paid)",
-        "win_prob": "65%",
-        "rationale": "Bullish breakout above VWAP (\u20b957068.8) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 0.98).",
-        "win_score": 65.0,
+        "entry_spot": 57062.1,
+        "sl_spot": "Upper/Lower Wing Touch",
+        "target1_spot": "Max Decay at Center ATM Strike",
+        "max_profit": "Max Net Premium Collected",
+        "max_loss": "Defined Wing Width minus Net Premium",
+        "win_prob": "78%",
+        "rationale": "Sideways consolidation regime with low VIX (11.5). Harvests dual Theta decay on both Call and Put legs.",
+        "win_score": 78.0,
         "greeks": {
-          "net_delta": 0.521,
-          "net_gamma": 0.00044,
-          "net_theta": -31.15,
-          "net_vega": 31.49,
+          "net_delta": -0.002,
+          "net_gamma": -5e-05,
+          "net_theta": 2.7,
+          "net_vega": -3.32,
           "implied_volatility_pct": 11.5
         },
         "margin_info": {
           "index_name": "BANKNIFTY",
           "lot_size": 15,
-          "margin_required_rupees": 8560.0,
-          "margin_formatted": "\u20b98,560"
+          "margin_required_rupees": 4500.0,
+          "margin_formatted": "\u20b94,500"
         },
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY",
-        "historical_win_probability": "65%",
+        "historical_win_probability": "78%",
         "ai_confidence_score": "75%",
-        "risk_reward_ratio": "1:2.0",
-        "composite_score": 59.0
+        "risk_reward_ratio": "1:1.5",
+        "composite_score": 64.5
       }
     ]
   },
