@@ -1,5 +1,5 @@
 {
-  "timestamp": "19-Aug-2026 09:31 AM",
+  "timestamp": "19-Aug-2026 09:45 AM",
   "data_type": "LIVE_DATA",
   "broker_status": {
     "live_trading_active": false,
@@ -27,9 +27,9 @@
     "live_execution_status": "OFF (PAPER TRADING / SIMULATOR ACTIVE)"
   },
   "ai_research_synthesis": {
-    "executive_thesis": "Market environment is currently operating in \ud83d\udfe1 SIDEWAYS_RANGEBOUND with ADX at 45.0 and 75% regime confidence. The 1-Sigma Expected Move for upcoming expiry is \u00b1350 pts. Optimal quantitative execution favors 'NIFTY Bear Put Debit Spread (Hedged)' with a historical backtested win probability of 72%. Capital risk guardrails and NO TRADE filters remain active.",
+    "executive_thesis": "Market environment is currently operating in \ud83d\udfe1 SIDEWAYS_RANGEBOUND with ADX at 45.3 and 75% regime confidence. The 1-Sigma Expected Move for upcoming expiry is \u00b1350 pts. Optimal quantitative execution favors 'NIFTY Bear Put Debit Spread (Hedged)' with a historical backtested win probability of 72%. Capital risk guardrails and NO TRADE filters remain active.",
     "key_insights": [
-      "Regime Alignment: \ud83d\udfe1 SIDEWAYS_RANGEBOUND (ADX: 45.0)",
+      "Regime Alignment: \ud83d\udfe1 SIDEWAYS_RANGEBOUND (ADX: 45.3)",
       "Expected Expiry Range: \u00b1350 pts",
       "Top Quantitative Pick: NIFTY Bear Put Debit Spread (Hedged) (Hist Win: 72%)",
       "Capital Protection Status: Active Guardrails"
@@ -40,18 +40,18 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 1.1,
+    "stale_minutes": 0.9,
     "anomalies": [],
-    "clean_rows": 102,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 1.1m)"
+    "clean_rows": 103,
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 0.9m)"
   },
   "backtest_metrics": {
-    "cagr_pct": -2.0,
-    "sharpe_ratio": -8.19,
+    "cagr_pct": -2.1,
+    "sharpe_ratio": -8.23,
     "max_drawdown_pct": -1.0,
-    "profit_factor": 0.7,
-    "win_rate_pct": 50.5,
-    "total_backtest_trades": 101,
+    "profit_factor": 0.69,
+    "win_rate_pct": 50.0,
+    "total_backtest_trades": 102,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
     "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
   },
@@ -206,27 +206,27 @@
     }
   ],
   "nifty": {
-    "spot": 24089.15,
-    "vwap": 24089.15,
+    "spot": 24082.3,
+    "vwap": 24082.3,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
-    "adx": 45.0,
+    "adx": 45.3,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 10.4,
+    "volatility_percentile": 10.1,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 1.0,
-      "em_1sigma_pts": 145.79,
-      "em_2sigma_pts": 291.58,
-      "em_pct": 0.61,
+      "em_1sigma_pts": 145.12,
+      "em_2sigma_pts": 290.24,
+      "em_pct": 0.6,
       "range_1sigma": [
-        23943.36,
-        24234.94
+        23937.18,
+        24227.42
       ],
       "range_2sigma": [
-        23797.57,
-        24380.73
+        23792.06,
+        24372.54
       ],
-      "summary_str": "\u00b1145.8 pts (\u20b923943 - \u20b924235)"
+      "summary_str": "\u00b1145.1 pts (\u20b923937 - \u20b924227)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -244,20 +244,20 @@
           "BUY NIFTY 24100 PE",
           "SELL NIFTY 23950 PE (Hedge)"
         ],
-        "entry_spot": 24089.15,
-        "sl_spot": 24185.51,
-        "target1_spot": 23896.44,
+        "entry_spot": 24082.3,
+        "sl_spot": 24178.63,
+        "target1_spot": 23889.64,
         "max_profit": "Fixed Spread Width (\u20b9150 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "72%",
         "rationale": "Hedged downside strategy mitigating volatility crush.",
         "win_score": 72.0,
         "greeks": {
-          "net_delta": -0.15,
+          "net_delta": -0.151,
           "net_gamma": 9e-05,
-          "net_theta": -0.37,
-          "net_vega": 1.25,
-          "implied_volatility_pct": 11.6
+          "net_theta": -0.31,
+          "net_vega": 1.17,
+          "implied_volatility_pct": 11.5
         },
         "margin_info": {
           "index_name": "NIFTY",
@@ -278,26 +278,26 @@
         "legs": [
           "BUY NIFTY 24100 PE"
         ],
-        "entry_spot": 24089.15,
-        "sl_spot": 24161.42,
-        "target1_spot": 23944.62,
+        "entry_spot": 24082.3,
+        "sl_spot": 24154.55,
+        "target1_spot": 23937.81,
         "max_profit": "Unlimited Downside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bearish breakdown below VWAP (\u20b924089.2) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 1.05).",
+        "rationale": "Bearish breakdown below VWAP (\u20b924082.3) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 1.05).",
         "win_score": 65.0,
         "greeks": {
-          "net_delta": -0.477,
-          "net_gamma": 0.00103,
-          "net_theta": -8.9,
+          "net_delta": -0.484,
+          "net_gamma": 0.00104,
+          "net_theta": -8.83,
           "net_vega": 13.29,
-          "implied_volatility_pct": 11.6
+          "implied_volatility_pct": 11.5
         },
         "margin_info": {
           "index_name": "NIFTY",
           "lot_size": 25,
-          "margin_required_rupees": 6022.0,
-          "margin_formatted": "\u20b96,022"
+          "margin_required_rupees": 6021.0,
+          "margin_formatted": "\u20b96,021"
         },
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY",
@@ -309,27 +309,27 @@
     ]
   },
   "banknifty": {
-    "spot": 57092.25,
-    "vwap": 57092.25,
+    "spot": 57094.75,
+    "vwap": 57094.75,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
-    "adx": 26.4,
+    "adx": 27.9,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 10.4,
+    "volatility_percentile": 10.1,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 1.0,
-      "em_1sigma_pts": 345.53,
-      "em_2sigma_pts": 691.05,
-      "em_pct": 0.61,
+      "em_1sigma_pts": 344.05,
+      "em_2sigma_pts": 688.1,
+      "em_pct": 0.6,
       "range_1sigma": [
-        56746.72,
-        57437.78
+        56750.7,
+        57438.8
       ],
       "range_2sigma": [
-        56401.2,
-        57783.3
+        56406.65,
+        57782.85
       ],
-      "summary_str": "\u00b1345.5 pts (\u20b956747 - \u20b957438)"
+      "summary_str": "\u00b1344.0 pts (\u20b956751 - \u20b957439)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -347,9 +347,9 @@
           "BUY BANKNIFTY 57100 PE",
           "SELL BANKNIFTY 56800 PE (Hedge)"
         ],
-        "entry_spot": 57092.25,
-        "sl_spot": 57320.62,
-        "target1_spot": 56635.51,
+        "entry_spot": 57094.75,
+        "sl_spot": 57323.13,
+        "target1_spot": 56637.99,
         "max_profit": "Fixed Spread Width (\u20b9300 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "72%",
@@ -358,9 +358,9 @@
         "greeks": {
           "net_delta": -0.127,
           "net_gamma": 4e-05,
-          "net_theta": -0.67,
-          "net_vega": 2.41,
-          "implied_volatility_pct": 11.6
+          "net_theta": -0.7,
+          "net_vega": 2.45,
+          "implied_volatility_pct": 11.5
         },
         "margin_info": {
           "index_name": "BANKNIFTY",
@@ -381,20 +381,20 @@
         "legs": [
           "BUY BANKNIFTY 57100 PE"
         ],
-        "entry_spot": 57092.25,
-        "sl_spot": 57263.53,
-        "target1_spot": 56749.7,
+        "entry_spot": 57094.75,
+        "sl_spot": 57266.03,
+        "target1_spot": 56752.18,
         "max_profit": "Unlimited Downside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bearish breakdown below VWAP (\u20b957092.2) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
+        "rationale": "Bearish breakdown below VWAP (\u20b957094.8) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
         "win_score": 65.0,
         "greeks": {
-          "net_delta": -0.469,
+          "net_delta": -0.468,
           "net_gamma": 0.00044,
-          "net_theta": -21.14,
-          "net_vega": 31.45,
-          "implied_volatility_pct": 11.6
+          "net_theta": -21.04,
+          "net_vega": 31.44,
+          "implied_volatility_pct": 11.5
         },
         "margin_info": {
           "index_name": "BANKNIFTY",
