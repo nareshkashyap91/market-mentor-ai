@@ -1,5 +1,5 @@
 {
-  "timestamp": "20-Aug-2026 01:30 PM",
+  "timestamp": "20-Aug-2026 01:36 PM",
   "data_type": "LIVE_DATA",
   "broker_status": {
     "live_trading_active": false,
@@ -40,14 +40,14 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 1.0,
+    "stale_minutes": 6.8,
     "anomalies": [],
     "clean_rows": 118,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 1.0m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 6.8m)"
   },
   "backtest_metrics": {
     "cagr_pct": -0.4,
-    "sharpe_ratio": -6.84,
+    "sharpe_ratio": -6.83,
     "max_drawdown_pct": -1.2,
     "profit_factor": 0.92,
     "win_rate_pct": 51.3,
@@ -206,27 +206,27 @@
     }
   ],
   "nifty": {
-    "spot": 24248.5,
-    "vwap": 24248.5,
+    "spot": 24250.65,
+    "vwap": 24250.65,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
     "adx": 78.1,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 3.9,
+    "volatility_percentile": 4.0,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 0.5,
-      "em_1sigma_pts": 94.93,
-      "em_2sigma_pts": 189.86,
+      "em_1sigma_pts": 95.12,
+      "em_2sigma_pts": 190.24,
       "em_pct": 0.39,
       "range_1sigma": [
-        24153.57,
-        24343.43
+        24155.53,
+        24345.77
       ],
       "range_2sigma": [
-        24058.64,
-        24438.36
+        24060.41,
+        24440.89
       ],
-      "summary_str": "\u00b194.9 pts (\u20b924154 - \u20b924343)"
+      "summary_str": "\u00b195.1 pts (\u20b924156 - \u20b924346)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -244,9 +244,9 @@
           "BUY NIFTY 24250 CE",
           "SELL NIFTY 24400 CE (Hedge)"
         ],
-        "entry_spot": 24248.5,
-        "sl_spot": 24151.51,
-        "target1_spot": 24442.49,
+        "entry_spot": 24250.65,
+        "sl_spot": 24153.65,
+        "target1_spot": 24444.66,
         "max_profit": "Fixed Spread Width (\u20b9150 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "74%",
@@ -255,8 +255,8 @@
         "greeks": {
           "net_delta": 0.165,
           "net_gamma": 6e-05,
-          "net_theta": -1.21,
-          "net_vega": 0.66,
+          "net_theta": -1.18,
+          "net_vega": 0.64,
           "implied_volatility_pct": 10.6
         },
         "margin_info": {
@@ -278,26 +278,26 @@
         "legs": [
           "BUY NIFTY 24250 CE"
         ],
-        "entry_spot": 24248.5,
-        "sl_spot": 24175.75,
-        "target1_spot": 24393.99,
+        "entry_spot": 24250.65,
+        "sl_spot": 24177.9,
+        "target1_spot": 24396.15,
         "max_profit": "Unlimited Upside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bullish breakout above VWAP (\u20b924248.5) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 1.05).",
+        "rationale": "Bullish breakout above VWAP (\u20b924250.7) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 1.05).",
         "win_score": 65.0,
         "greeks": {
-          "net_delta": 0.535,
+          "net_delta": 0.537,
           "net_gamma": 0.00112,
-          "net_theta": -12.37,
+          "net_theta": -12.39,
           "net_vega": 13.34,
           "implied_volatility_pct": 10.6
         },
         "margin_info": {
           "index_name": "NIFTY",
           "lot_size": 25,
-          "margin_required_rupees": 6062.0,
-          "margin_formatted": "\u20b96,062"
+          "margin_required_rupees": 6063.0,
+          "margin_formatted": "\u20b96,063"
         },
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY",
@@ -309,27 +309,27 @@
     ]
   },
   "banknifty": {
-    "spot": 57606.65,
-    "vwap": 57606.65,
+    "spot": 57611.6,
+    "vwap": 57611.6,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
-    "adx": 51.6,
+    "adx": 51.7,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 3.9,
+    "volatility_percentile": 4.0,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 0.5,
-      "em_1sigma_pts": 225.52,
-      "em_2sigma_pts": 451.05,
+      "em_1sigma_pts": 225.97,
+      "em_2sigma_pts": 451.94,
       "em_pct": 0.39,
       "range_1sigma": [
-        57381.12,
-        57832.17
+        57385.63,
+        57837.57
       ],
       "range_2sigma": [
-        57155.6,
-        58057.7
+        57159.66,
+        58063.54
       ],
-      "summary_str": "\u00b1225.5 pts (\u20b957381 - \u20b957832)"
+      "summary_str": "\u00b1226.0 pts (\u20b957386 - \u20b957838)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -347,9 +347,9 @@
           "BUY BANKNIFTY 57600 PE",
           "SELL BANKNIFTY 57300 PE (Hedge)"
         ],
-        "entry_spot": 57606.65,
-        "sl_spot": 57837.08,
-        "target1_spot": 57145.8,
+        "entry_spot": 57611.6,
+        "sl_spot": 57842.05,
+        "target1_spot": 57150.71,
         "max_profit": "Fixed Spread Width (\u20b9300 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "72%",
@@ -357,9 +357,9 @@
         "win_score": 72.0,
         "greeks": {
           "net_delta": -0.136,
-          "net_gamma": 4e-05,
-          "net_theta": -0.84,
-          "net_vega": 3.0,
+          "net_gamma": 5e-05,
+          "net_theta": -0.89,
+          "net_vega": 3.04,
           "implied_volatility_pct": 10.6
         },
         "margin_info": {
@@ -381,26 +381,26 @@
         "legs": [
           "BUY BANKNIFTY 57600 PE"
         ],
-        "entry_spot": 57606.65,
-        "sl_spot": 57779.47,
-        "target1_spot": 57261.01,
+        "entry_spot": 57611.6,
+        "sl_spot": 57784.44,
+        "target1_spot": 57265.93,
         "max_profit": "Unlimited Downside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bearish breakdown below VWAP (\u20b957606.6) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
+        "rationale": "Bearish breakdown below VWAP (\u20b957611.6) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
         "win_score": 65.0,
         "greeks": {
-          "net_delta": -0.46,
+          "net_delta": -0.458,
           "net_gamma": 0.00047,
-          "net_theta": -19.15,
-          "net_vega": 31.67,
+          "net_theta": -19.21,
+          "net_vega": 31.65,
           "implied_volatility_pct": 10.6
         },
         "margin_info": {
           "index_name": "BANKNIFTY",
           "lot_size": 15,
-          "margin_required_rupees": 8641.0,
-          "margin_formatted": "\u20b98,641"
+          "margin_required_rupees": 8642.0,
+          "margin_formatted": "\u20b98,642"
         },
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY",
