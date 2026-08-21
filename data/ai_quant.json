@@ -1,5 +1,5 @@
 {
-  "timestamp": "21-Aug-2026 03:15 PM",
+  "timestamp": "21-Aug-2026 03:22 PM",
   "data_type": "LIVE_DATA",
   "broker_status": {
     "live_trading_active": false,
@@ -40,14 +40,14 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 0.8,
+    "stale_minutes": 7.5,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 0.8m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 7.5m)"
   },
   "backtest_metrics": {
     "cagr_pct": -0.5,
-    "sharpe_ratio": -7.57,
+    "sharpe_ratio": -7.54,
     "max_drawdown_pct": -1.0,
     "profit_factor": 0.9,
     "win_rate_pct": 48.4,
@@ -211,22 +211,22 @@
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
     "adx": 17.1,
     "trend_intensity": "WEAK / SIDEWAYS",
-    "volatility_percentile": 8.0,
+    "volatility_percentile": 7.7,
     "confidence_score": 50.0,
     "expected_move": {
       "dte_days": 6.0,
-      "em_1sigma_pts": 347.85,
-      "em_2sigma_pts": 695.7,
-      "em_pct": 1.44,
+      "em_1sigma_pts": 346.53,
+      "em_2sigma_pts": 693.06,
+      "em_pct": 1.43,
       "range_1sigma": [
-        23886.9,
-        24582.6
+        23888.22,
+        24581.28
       ],
       "range_2sigma": [
-        23539.05,
-        24930.45
+        23541.69,
+        24927.81
       ],
-      "summary_str": "\u00b1347.8 pts (\u20b923887 - \u20b924583)"
+      "summary_str": "\u00b1346.5 pts (\u20b923888 - \u20b924581)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -253,10 +253,10 @@
         "rationale": "Rangebound market (PCR: 1.05). Collects time decay as long as NIFTY stays above \u20b924150.",
         "win_score": 82.0,
         "greeks": {
-          "net_delta": 0.097,
+          "net_delta": 0.096,
           "net_gamma": -0.00011,
           "net_theta": 0.73,
-          "net_vega": -1.44,
+          "net_vega": -1.45,
           "implied_volatility_pct": 11.2
         },
         "margin_info": {
@@ -293,7 +293,7 @@
           "net_delta": -0.002,
           "net_gamma": -0.00016,
           "net_theta": 1.62,
-          "net_vega": -2.04,
+          "net_vega": -2.05,
           "implied_volatility_pct": 11.2
         },
         "margin_info": {
@@ -317,22 +317,22 @@
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
     "adx": 25.0,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 8.0,
+    "volatility_percentile": 7.7,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 6.0,
-      "em_1sigma_pts": 827.44,
-      "em_2sigma_pts": 1654.87,
-      "em_pct": 1.44,
+      "em_1sigma_pts": 824.3,
+      "em_2sigma_pts": 1648.59,
+      "em_pct": 1.43,
       "range_1sigma": [
-        56820.21,
-        58475.09
+        56823.35,
+        58471.94
       ],
       "range_2sigma": [
-        55992.77,
-        59302.52
+        55999.06,
+        59296.24
       ],
-      "summary_str": "\u00b1827.4 pts (\u20b956820 - \u20b958475)"
+      "summary_str": "\u00b1824.3 pts (\u20b956823 - \u20b958472)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -360,9 +360,9 @@
         "win_score": 82.0,
         "greeks": {
           "net_delta": 0.08,
-          "net_gamma": -5e-05,
-          "net_theta": 1.6,
-          "net_vega": -3.04,
+          "net_gamma": -4e-05,
+          "net_theta": 1.61,
+          "net_vega": -3.06,
           "implied_volatility_pct": 11.2
         },
         "margin_info": {
@@ -399,7 +399,7 @@
           "net_delta": -0.005,
           "net_gamma": -4e-05,
           "net_theta": 2.73,
-          "net_vega": -3.39,
+          "net_vega": -3.43,
           "implied_volatility_pct": 11.2
         },
         "margin_info": {
