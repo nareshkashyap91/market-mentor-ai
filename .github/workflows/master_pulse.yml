@@ -1,11 +1,11 @@
-name: MarketMentor AI Master Engine Pulse
+name: MarketMentor AI 15-Min Live Master Pulse
 
 on:
   schedule:
-    # Runs every 15 minutes from 9:15 AM IST (3:45 AM UTC) to 3:30 PM IST (10:00 AM UTC), Monday-Friday
-    - cron: '*/15 3-10 * * 1-5'
+    # Runs every 15 minutes from 8:30 AM IST (3:00 AM UTC) to 4:30 PM IST (11:00 AM UTC), Monday to Friday
+    - cron: '*/15 3-11 * * 1-5'
   workflow_dispatch:
-    # Manual trigger anytime
+    # Allows manual triggering or external API cron-job.org dispatch
 
 jobs:
   run-master-pulse:
