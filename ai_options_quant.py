@@ -485,6 +485,11 @@ def main():
     from premarket_ai_engine import get_premarket_cues
     from backtest_ui_engine import get_1click_backtest
     
+    # 3 Ultimate Modules
+    from trade_journal_ui import get_journal_ui_analytics
+    from greeks_hedging_engine import get_greeks_and_hedging
+    from telegram_bot_interactive import process_telegram_command
+    
     # Sync Intraday Stock signals into Position DB and execute Paper Orders
     for st in long_stocks:
         sig_id = f"STK_LONG_{st['symbol']}"
@@ -523,9 +528,15 @@ def main():
     premarket_info = get_premarket_cues()
     backtest_ui_info = get_1click_backtest()
     
+    # 3 Ultimate Modules Payload Integration
+    trade_journal_ui_info = get_journal_ui_analytics()
+    greeks_hedging_info = get_greeks_and_hedging()
+    
     payload = {
         "timestamp": now_str,
         "data_type": LIVE_DATA,
+        "portfolio_greeks_hedging": greeks_hedging_info,
+        "trade_journal_ui_analytics": trade_journal_ui_info,
         "premarket_cues_analytics": premarket_info,
         "sector_rotation_analytics": sector_rotation_info,
         "backtest_analytics_ui": backtest_ui_info,
