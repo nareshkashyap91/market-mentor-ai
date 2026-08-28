@@ -475,6 +475,11 @@ def main():
     from research_ai import get_research_synthesis
     from broker_connector import get_broker_status
     
+    # 3 New Institutional Engines
+    from fii_dii_engine import get_institutional_flow
+    from volume_profile_engine import get_volume_profile
+    from iv_skew_maxpain_engine import get_iv_skew_and_max_pain
+    
     # Sync Intraday Stock signals into Position DB and execute Paper Orders
     for st in long_stocks:
         sig_id = f"STK_LONG_{st['symbol']}"
@@ -503,9 +508,17 @@ def main():
     # Phase 10 Broker Safety Status
     broker_status_info = get_broker_status()
     
+    # 3 New Institutional Engines Payload Integration
+    fii_dii_info = get_institutional_flow()
+    nifty_vp_info = get_volume_profile(nifty_df)
+    nifty_mp_skew_info = get_iv_skew_and_max_pain()
+    
     payload = {
         "timestamp": now_str,
         "data_type": LIVE_DATA,
+        "fii_dii_flow": fii_dii_info,
+        "nifty_volume_profile": nifty_vp_info,
+        "nifty_max_pain_skew": nifty_mp_skew_info,
         "broker_status": broker_status_info,
         "model_metadata": model_metadata,
         "ai_research_synthesis": ai_synthesis,
