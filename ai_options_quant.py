@@ -490,6 +490,11 @@ def main():
     from greeks_hedging_engine import get_greeks_and_hedging
     from telegram_bot_interactive import process_telegram_command
     
+    # Smart Trader Precision Suite
+    from smart_breakout_precision import get_breakout_precision
+    from intraday_orb_vwap_precision import evaluate_intraday_precision
+    from adaptive_risk_regime import get_adaptive_risk
+    
     # Sync Intraday Stock signals into Position DB and execute Paper Orders
     for st in long_stocks:
         sig_id = f"STK_LONG_{st['symbol']}"
@@ -532,9 +537,17 @@ def main():
     trade_journal_ui_info = get_journal_ui_analytics()
     greeks_hedging_info = get_greeks_and_hedging()
     
+    # Smart Trader Precision Suite Payload Integration
+    smart_breakout_info = get_breakout_precision(nifty_spot, nifty_vwap, nifty_spot * 1.005, nifty_spot * 0.995, nifty_vwap, 1.8)
+    intraday_precision_info = evaluate_intraday_precision(nifty_spot, nifty_vwap, 80.0, nifty_spot * 1.002, nifty_spot * 0.998)
+    adaptive_risk_info = get_adaptive_risk(nifty_regime, nifty_regime_info["confidence_score"], vix_val)
+    
     payload = {
         "timestamp": now_str,
         "data_type": LIVE_DATA,
+        "smart_trader_breakout_precision": smart_breakout_info,
+        "intraday_orb_vwap_precision": intraday_precision_info,
+        "adaptive_risk_regime": adaptive_risk_info,
         "portfolio_greeks_hedging": greeks_hedging_info,
         "trade_journal_ui_analytics": trade_journal_ui_info,
         "premarket_cues_analytics": premarket_info,
