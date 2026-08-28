@@ -480,6 +480,11 @@ def main():
     from volume_profile_engine import get_volume_profile
     from iv_skew_maxpain_engine import get_iv_skew_and_max_pain
     
+    # 3 Next-Level Engines
+    from sector_rotation_engine import get_sector_rotation
+    from premarket_ai_engine import get_premarket_cues
+    from backtest_ui_engine import get_1click_backtest
+    
     # Sync Intraday Stock signals into Position DB and execute Paper Orders
     for st in long_stocks:
         sig_id = f"STK_LONG_{st['symbol']}"
@@ -508,14 +513,22 @@ def main():
     # Phase 10 Broker Safety Status
     broker_status_info = get_broker_status()
     
-    # 3 New Institutional Engines Payload Integration
+    # 3 Institutional Engines Payload Integration
     fii_dii_info = get_institutional_flow()
     nifty_vp_info = get_volume_profile(nifty_df)
     nifty_mp_skew_info = get_iv_skew_and_max_pain()
     
+    # 3 Next-Level Engines Payload Integration
+    sector_rotation_info = get_sector_rotation()
+    premarket_info = get_premarket_cues()
+    backtest_ui_info = get_1click_backtest()
+    
     payload = {
         "timestamp": now_str,
         "data_type": LIVE_DATA,
+        "premarket_cues_analytics": premarket_info,
+        "sector_rotation_analytics": sector_rotation_info,
+        "backtest_analytics_ui": backtest_ui_info,
         "fii_dii_flow": fii_dii_info,
         "nifty_volume_profile": nifty_vp_info,
         "nifty_max_pain_skew": nifty_mp_skew_info,
