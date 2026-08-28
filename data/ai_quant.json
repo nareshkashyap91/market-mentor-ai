@@ -1,5 +1,5 @@
 {
-  "timestamp": "28-Aug-2026 03:18 PM",
+  "timestamp": "28-Aug-2026 03:29 PM",
   "data_type": "LIVE_DATA",
   "portfolio_greeks_hedging": {
     "net_delta": 0.58,
@@ -15,7 +15,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "28-Aug-2026 03:18 PM",
+      "timestamp": "28-Aug-2026 03:29 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -101,7 +101,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "28-Aug-2026 03:18 PM",
+    "timestamp": "28-Aug-2026 03:29 PM",
     "top_leading_sector": "NIFTY IT",
     "top_lagging_sector": "NIFTY FMCG",
     "leading_sectors": [
@@ -158,7 +158,7 @@
     "rotation_summary": "LEADING: NIFTY IT, NIFTY BANK | LAGGING: NIFTY FMCG"
   },
   "backtest_analytics_ui": {
-    "timestamp": "28-Aug-2026 03:18 PM",
+    "timestamp": "28-Aug-2026 03:29 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -176,7 +176,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "28-Aug-2026 03:18 PM",
+    "timestamp": "28-Aug-2026 03:29 PM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -242,10 +242,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 3.6,
+    "stale_minutes": 14.1,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 3.6m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 14.1m)"
   },
   "backtest_metrics": {
     "cagr_pct": -1.0,
@@ -261,10 +261,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 90000.0,
+    "allocated_margin": 93000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 60,
+    "total_trades": 62,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -727,22 +727,22 @@
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
     "adx": 38.4,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 4.9,
+    "volatility_percentile": 3.8,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 6.0,
-      "em_1sigma_pts": 332.36,
-      "em_2sigma_pts": 664.73,
-      "em_pct": 1.38,
+      "em_1sigma_pts": 327.33,
+      "em_2sigma_pts": 654.67,
+      "em_pct": 1.36,
       "range_1sigma": [
-        23810.09,
-        24474.81
+        23815.12,
+        24469.78
       ],
       "range_2sigma": [
-        23477.72,
-        24807.18
+        23487.78,
+        24797.12
       ],
-      "summary_str": "\u00b1332.4 pts (\u20b923810 - \u20b924475)"
+      "summary_str": "\u00b1327.3 pts (\u20b923815 - \u20b924470)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -769,11 +769,11 @@
         "rationale": "Rangebound market (PCR: 1.05). Collects time decay as long as NIFTY stays above \u20b924050.",
         "win_score": 82.0,
         "greeks": {
-          "net_delta": 0.098,
+          "net_delta": 0.101,
           "net_gamma": -0.00014,
           "net_theta": 0.81,
-          "net_vega": -1.61,
-          "implied_volatility_pct": 10.7
+          "net_vega": -1.65,
+          "implied_volatility_pct": 10.6
         },
         "margin_info": {
           "index_name": "NIFTY",
@@ -803,14 +803,14 @@
         "max_profit": "Max Net Premium Collected",
         "max_loss": "Defined Wing Width minus Net Premium",
         "win_prob": "78%",
-        "rationale": "Sideways consolidation regime with low VIX (10.7). Harvests dual Theta decay on both Call and Put legs.",
+        "rationale": "Sideways consolidation regime with low VIX (10.6). Harvests dual Theta decay on both Call and Put legs.",
         "win_score": 78.0,
         "greeks": {
           "net_delta": -0.003,
-          "net_gamma": -0.00018,
-          "net_theta": 1.69,
-          "net_vega": -2.23,
-          "implied_volatility_pct": 10.7
+          "net_gamma": -0.0002,
+          "net_theta": 1.72,
+          "net_vega": -2.27,
+          "implied_volatility_pct": 10.6
         },
         "margin_info": {
           "index_name": "NIFTY",
@@ -833,22 +833,22 @@
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
     "adx": 25.1,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 4.9,
+    "volatility_percentile": 3.8,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 6.0,
-      "em_1sigma_pts": 790.66,
-      "em_2sigma_pts": 1581.31,
-      "em_pct": 1.38,
+      "em_1sigma_pts": 778.69,
+      "em_2sigma_pts": 1557.38,
+      "em_pct": 1.36,
       "range_1sigma": [
-        56641.59,
-        58222.91
+        56653.56,
+        58210.94
       ],
       "range_2sigma": [
-        55850.94,
-        59013.56
+        55874.87,
+        58989.63
       ],
-      "summary_str": "\u00b1790.7 pts (\u20b956642 - \u20b958223)"
+      "summary_str": "\u00b1778.7 pts (\u20b956654 - \u20b958211)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -875,11 +875,11 @@
         "rationale": "Hedged downside strategy mitigating volatility crush.",
         "win_score": 72.0,
         "greeks": {
-          "net_delta": -0.134,
-          "net_gamma": 4e-05,
-          "net_theta": -1.07,
-          "net_vega": 3.21,
-          "implied_volatility_pct": 10.7
+          "net_delta": -0.135,
+          "net_gamma": 5e-05,
+          "net_theta": -1.09,
+          "net_vega": 3.3,
+          "implied_volatility_pct": 10.6
         },
         "margin_info": {
           "index_name": "BANKNIFTY",
@@ -909,11 +909,11 @@
         "rationale": "Bearish breakdown below VWAP (\u20b957432.2) confirmed by \ud83d\udd34 Double Top (M Pattern Breakdown) & Call writing (PCR: 0.98).",
         "win_score": 65.0,
         "greeks": {
-          "net_delta": -0.449,
-          "net_gamma": 0.00046,
-          "net_theta": -19.49,
-          "net_vega": 31.47,
-          "implied_volatility_pct": 10.7
+          "net_delta": -0.448,
+          "net_gamma": 0.00047,
+          "net_theta": -19.13,
+          "net_vega": 31.46,
+          "implied_volatility_pct": 10.6
         },
         "margin_info": {
           "index_name": "BANKNIFTY",

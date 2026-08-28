@@ -626,6 +626,15 @@ def main():
                 
     if tg_token and tg_chat_id:
         send_to_telegram(msg, tg_token, tg_chat_id)
+        
+        # 3 Multimedia Engines Broadcast
+        from telegram_audio_engine import broadcast_audio_briefing
+        from chart_plotter_engine import generate_and_send_chart
+        from whatsapp_notifier import send_whatsapp_alert
+        
+        broadcast_audio_briefing(tg_token, tg_chat_id, nifty_spot)
+        generate_and_send_chart("NIFTY", nifty_df, tg_token, tg_chat_id)
+        send_whatsapp_alert(f"🧠 Market Mentor AI Alert: Nifty Spot ₹{nifty_spot:.2f} ({nifty_regime})")
 
 if __name__ == '__main__':
     main()
