@@ -4,8 +4,9 @@ from datetime import datetime, timezone, timedelta
 
 class TelegramAudioEngine:
     """Telegram Voice Alert & Audio Summary Assistant Engine.
-    Synthesizes 30-second audio market briefings and transmits MP3 audio notes to Telegram.
+    AUDIO BROADCAST IS CURRENTLY ON HOLD / DISABLED AS PER USER REQUEST.
     """
+    AUDIO_BROADCAST_ENABLED = False  # Set to False to hold/pause Telegram audio notes
 
     @classmethod
     def generate_audio_script(cls, nifty_spot=24580.25, regime="BULLISH_TRENDING", top_stocks=None):
@@ -48,6 +49,10 @@ class TelegramAudioEngine:
     @classmethod
     def send_audio_to_telegram(cls, bot_token, chat_id, audio_path="data/audio_briefing.mp3"):
         """Transmits MP3 audio note to Telegram group/channel via Telegram sendAudio API."""
+        if not cls.AUDIO_BROADCAST_ENABLED:
+            print("[INFO] Audio broadcast is currently ON HOLD / DISABLED as per user request.")
+            return False
+
         if not bot_token or not chat_id or not os.path.exists(audio_path):
             return False
 
@@ -69,6 +74,10 @@ class TelegramAudioEngine:
 
 # Helper function
 def broadcast_audio_briefing(bot_token=None, chat_id=None, nifty_spot=24580.25):
+    if not TelegramAudioEngine.AUDIO_BROADCAST_ENABLED:
+        print("[INFO] Audio broadcast is currently ON HOLD as per user request.")
+        return {"status": "HOLD", "reason": "AUDIO_DISABLED_BY_USER"}
+
     script = TelegramAudioEngine.generate_audio_script(nifty_spot=nifty_spot)
     success, audio_path = TelegramAudioEngine.create_audio_file(script)
     if bot_token and chat_id:

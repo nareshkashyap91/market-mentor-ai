@@ -16,11 +16,11 @@ class TestTelegramAudioEngine(unittest.TestCase):
         self.assertTrue(res)
         self.assertTrue(os.path.exists(path))
 
-    def test_broadcast_helper(self):
-        """Verifies combined audio briefing generator."""
+    def test_broadcast_helper_on_hold(self):
+        """Verifies that audio broadcasting is cleanly held when disabled."""
         info = broadcast_audio_briefing()
-        self.assertEqual(info["status"], "SUCCESS")
-        self.assertTrue(os.path.exists(info["audio_path"]))
+        self.assertEqual(info["status"], "HOLD")
+        self.assertEqual(info["reason"], "AUDIO_DISABLED_BY_USER")
 
 if __name__ == '__main__':
     unittest.main()
