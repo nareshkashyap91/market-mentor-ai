@@ -37,14 +37,15 @@ async function refreshDashboard() {
     if (refreshBtnIcon) refreshBtnIcon.classList.add("fa-spin");
 
     try {
-        // Fetch JSON data concurrently
+        // Fetch JSON data concurrently with cache-busting timestamp
+        const ts = Date.now();
         const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes] = await Promise.allSettled([
-            fetch("./data/morning.json").then(r => r.json()),
-            fetch("./data/evening.json").then(r => r.json()),
-            fetch("./data/intraday.json").then(r => r.json()),
-            fetch("./data/options.json").then(r => r.json()),
-            fetch("./data/mutual_funds.json").then(r => r.json()),
-            fetch("./data/ai_quant.json").then(r => r.json())
+            fetch(`./data/morning.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/evening.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/intraday.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/options.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/mutual_funds.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/ai_quant.json?t=${ts}`).then(r => r.json())
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
