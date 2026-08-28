@@ -1,5 +1,5 @@
 {
-  "timestamp": "28-Aug-2026 03:42 PM",
+  "timestamp": "28-Aug-2026 03:52 PM",
   "data_type": "LIVE_DATA",
   "smart_trader_breakout_precision": {
     "breakout_classification": "NO BREAKOUT DETECTED",
@@ -42,7 +42,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "28-Aug-2026 03:42 PM",
+      "timestamp": "28-Aug-2026 03:52 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -128,7 +128,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "28-Aug-2026 03:42 PM",
+    "timestamp": "28-Aug-2026 03:52 PM",
     "top_leading_sector": "NIFTY IT",
     "top_lagging_sector": "NIFTY FMCG",
     "leading_sectors": [
@@ -185,7 +185,7 @@
     "rotation_summary": "LEADING: NIFTY IT, NIFTY BANK | LAGGING: NIFTY FMCG"
   },
   "backtest_analytics_ui": {
-    "timestamp": "28-Aug-2026 03:42 PM",
+    "timestamp": "28-Aug-2026 03:52 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -203,7 +203,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "28-Aug-2026 03:42 PM",
+    "timestamp": "28-Aug-2026 03:52 PM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -269,10 +269,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 27.0,
+    "stale_minutes": 37.0,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 27.0m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 37.0m)"
   },
   "backtest_metrics": {
     "cagr_pct": -0.8,
@@ -288,10 +288,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 129000.0,
+    "allocated_margin": 138000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 86,
+    "total_trades": 92,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -312,7 +312,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1143.0,
-      "current_price": 1143.8,
+      "current_price": 1144.0,
       "sl_price": 1133.86,
       "target1_price": 1153.97,
       "target2_price": 1161.29,
@@ -328,7 +328,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 2338.6,
-      "current_price": 2341.2,
+      "current_price": 2342.0,
       "sl_price": 2319.89,
       "target1_price": 2361.05,
       "target2_price": 2376.02,
@@ -536,7 +536,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1090.8,
-      "current_price": 1090.8,
+      "current_price": 1079.9,
       "sl_price": 1082.07,
       "target1_price": 1101.27,
       "target2_price": 1108.25,
@@ -957,30 +957,43 @@
   "intraday_stocks": {
     "long_setups": [
       {
-        "symbol": "TCS",
-        "action": "BUY (LONG)",
-        "close": 2341.2,
-        "vwap": 2330.12,
-        "orb_high": 2319.9,
-        "sl": 2319.9,
-        "t1": 2366.76,
-        "t2": 2383.8,
-        "rsi": 66.3,
-        "vol_exp": 2.3,
-        "pattern": "\u26a1 Volatility Contraction (VCP) Momentum Expansion"
-      },
-      {
         "symbol": "INFY",
         "action": "BUY (LONG)",
-        "close": 1143.8,
-        "vwap": 1139.79,
+        "close": 1144.0,
+        "vwap": 1139.89,
         "orb_high": 1140.8,
-        "sl": 1134.65,
-        "t1": 1154.78,
-        "t2": 1162.1,
-        "rsi": 61.0,
-        "vol_exp": 2.3,
+        "sl": 1134.85,
+        "t1": 1154.98,
+        "t2": 1162.3,
+        "rsi": 61.3,
+        "vol_exp": 3.2,
         "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
+      },
+      {
+        "symbol": "BAJFINANCE",
+        "action": "BUY (LONG)",
+        "close": 1079.9,
+        "vwap": 1076.12,
+        "orb_high": 1075.8,
+        "sl": 1071.26,
+        "t1": 1090.27,
+        "t2": 1097.18,
+        "rsi": 61.2,
+        "vol_exp": 3.0,
+        "pattern": "\ud83d\udfe2 Bullish Engulfing (Reversal Setup)"
+      },
+      {
+        "symbol": "TCS",
+        "action": "BUY (LONG)",
+        "close": 2342.0,
+        "vwap": 2330.3,
+        "orb_high": 2319.9,
+        "sl": 2319.9,
+        "t1": 2368.52,
+        "t2": 2386.2,
+        "rsi": 66.9,
+        "vol_exp": 2.6,
+        "pattern": "\u26a1 Volatility Contraction (VCP) Momentum Expansion"
       },
       {
         "symbol": "SBIN",
@@ -1021,45 +1034,6 @@
         "t2": 261.25,
         "rsi": 26.9,
         "vol_exp": 2.4,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
-      },
-      {
-        "symbol": "JSWSTEEL",
-        "action": "SHORT SELL",
-        "close": 1326.6,
-        "vwap": 1327.64,
-        "orb_low": 1333.5,
-        "sl": 1337.21,
-        "t1": 1313.86,
-        "t2": 1305.37,
-        "rsi": 47.3,
-        "vol_exp": 2.4,
-        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
-      },
-      {
-        "symbol": "ICICIBANK",
-        "action": "SHORT SELL",
-        "close": 1425.4,
-        "vwap": 1426.98,
-        "orb_low": 1429.4,
-        "sl": 1436.8,
-        "t1": 1411.72,
-        "t2": 1402.59,
-        "rsi": 45.5,
-        "vol_exp": 1.9,
-        "pattern": "\u26a1 Volatility Contraction (VCP) Momentum Expansion"
-      },
-      {
-        "symbol": "MARUTI",
-        "action": "SHORT SELL",
-        "close": 13370.0,
-        "vwap": 13410.15,
-        "orb_low": 13401.0,
-        "sl": 13476.96,
-        "t1": 13241.65,
-        "t2": 13156.08,
-        "rsi": 45.1,
-        "vol_exp": 1.8,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ]

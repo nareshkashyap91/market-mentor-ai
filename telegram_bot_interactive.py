@@ -14,6 +14,7 @@ class TelegramBotInteractive:
         "/top5": "Returns Top 5 Next-Day Momentum Stock Candidates with Live LTP & Targets.",
         "/fii": "Returns live FII/DII Big Money Net Buying/Selling (₹ Cr).",
         "/greeks": "Returns Nifty Option Chain Delta, Gamma, Theta, and Max Pain.",
+        "/mcx": "Returns live MCX Commodity Options (Crude Oil & NatGas) up to 11:30 PM IST.",
         "/help": "Displays all available Telegram commands and usage guide."
     }
 
@@ -36,6 +37,8 @@ class TelegramBotInteractive:
             return cls._handle_fii()
         elif cmd == "/greeks":
             return cls._handle_greeks()
+        elif cmd == "/mcx":
+            return cls._handle_mcx()
         elif cmd == "/help" or cmd == "/start":
             return cls._handle_help()
         else:
@@ -192,6 +195,34 @@ class TelegramBotInteractive:
             "-----------------------------------\n"
             "🎯 *Expiry Bias:* Market likely to pin near ₹24,100 on Expiry Day."
         )
+
+    @classmethod
+    def _handle_mcx(cls):
+        from mcx_commodity_engine import get_mcx_commodity_analysis
+        mcx_data = get_mcx_commodity_analysis()
+        quotes = mcx_data["quotes"]
+        strats = mcx_data["strategies"]
+
+        lines = [
+            "🛢️ *MCX COMMODITY OPTIONS QUANT MATRIX (9 AM - 11:30 PM IST)*",
+            "-----------------------------------",
+            f"🕒 *Market Status:* {mcx_data['mcx_market_status']}",
+            f"• *CRUDEOIL Spot:* `₹{quotes['CRUDEOIL']['spot']:,.2f}` ({quotes['CRUDEOIL']['change_pct']:+.2f}%)",
+            f"• *NATURALGAS Spot:* `₹{quotes['NATURALGAS']['spot']:.2f}` ({quotes['NATURALGAS']['change_pct']:+.2f}%)",
+            f"• *GOLD Spot:* `₹{quotes['GOLD']['spot']:,.0f}` | *SILVER Spot:* `₹{quotes['SILVER']['spot']:,.0f}`\n",
+            "🎯 *TOP MCX COMMODITY OPTIONS STRATEGIES:*"
+        ]
+
+        for s in strats:
+            top_tag = "⭐ *[TOP PICK]* " if s.get("is_top_pick") else "🔹 "
+            lines.append(f"{top_tag}🏆 *{s['commodity']} {s['type']}* (Lot: {s['lot_size']})")
+            lines.append(f"  • *Legs:* `{', '.join(s['legs'])}`")
+            lines.append(f"  • *Net Margin:* `{s['margin_required']}` | *Win Prob:* `{s['win_prob']}`")
+            lines.append(f"  • 💡 *Rationale:* {s['rationale']}\n")
+
+        lines.append("-----------------------------------")
+        lines.append("🌙 *Late-Night Trading:* MCX Commodity Options live until 11:30 PM IST!")
+        return "\n".join(lines)
 
     @classmethod
     def _handle_help(cls):

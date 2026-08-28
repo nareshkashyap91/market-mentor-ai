@@ -25,6 +25,13 @@ class TestTelegramBotInteractive(unittest.TestCase):
         res = process_telegram_command("/greeks")
         self.assertIn("NIFTY OPTIONS GREEKS", res)
 
+    def test_mcx_command(self):
+        """Verifies /mcx late-night commodity options command output."""
+        res = process_telegram_command("/mcx")
+        self.assertIn("MCX COMMODITY OPTIONS QUANT MATRIX", res)
+        self.assertIn("CRUDEOIL Spot", res)
+        self.assertIn("Bull Call Spread", res)
+
     def test_help_command(self):
         """Verifies /help command output."""
         res = process_telegram_command("/help")
