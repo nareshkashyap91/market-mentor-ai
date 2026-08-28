@@ -1,8 +1,8 @@
 {
-  "timestamp": "28-Aug-2026 02:22 PM",
+  "timestamp": "28-Aug-2026 02:27 PM",
   "data_type": "LIVE_DATA",
   "fii_dii_flow": {
-    "timestamp": "28-Aug-2026 02:22 PM",
+    "timestamp": "28-Aug-2026 02:27 PM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -68,16 +68,16 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 7.9,
+    "stale_minutes": 12.5,
     "anomalies": [],
     "clean_rows": 121,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 7.9m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 12.5m)"
   },
   "backtest_metrics": {
     "cagr_pct": -1.2,
-    "sharpe_ratio": -7.78,
+    "sharpe_ratio": -7.74,
     "max_drawdown_pct": -0.9,
-    "profit_factor": 0.8,
+    "profit_factor": 0.81,
     "win_rate_pct": 47.5,
     "total_backtest_trades": 120,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
@@ -87,10 +87,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 42000.0,
+    "allocated_margin": 54000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 28,
+    "total_trades": 36,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -103,15 +103,47 @@
     "formatted_realized_pnl": "\u20b9+0.00"
   },
   "trade_journal_history": [],
-  "active_positions_count": 9,
+  "active_positions_count": 11,
   "active_positions": [
+    {
+      "id": "STK_LONG_HDFCBANK",
+      "symbol": "HDFCBANK",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 718.45,
+      "current_price": 718.4,
+      "sl_price": 712.7,
+      "target1_price": 725.35,
+      "target2_price": 729.95,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "28-Aug-2026 02:26 PM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_SHORT_MARUTI",
+      "symbol": "MARUTI",
+      "strategy_name": "Intraday Short",
+      "action": "SELL",
+      "entry_price": 13346.0,
+      "current_price": 13343.0,
+      "sl_price": 13452.77,
+      "target1_price": 13217.88,
+      "target2_price": 13132.46,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "28-Aug-2026 02:26 PM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
     {
       "id": "STK_LONG_NTPC",
       "symbol": "NTPC",
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 332.1,
-      "current_price": 332.1,
+      "current_price": 332.15,
       "sl_price": 329.44,
       "target1_price": 335.29,
       "target2_price": 337.41,
@@ -127,7 +159,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 185.04,
-      "current_price": 185.04,
+      "current_price": 185.17,
       "sl_price": 187.53,
       "target1_price": 182.05,
       "target2_price": 180.06,
@@ -252,6 +284,24 @@
   ],
   "signal_audit_log": [
     {
+      "id": 11,
+      "signal_id": "STK_SHORT_MARUTI",
+      "timestamp": "28-Aug-2026 02:26 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 13346.0,
+      "notes": "Position initialized at \u20b913346.00"
+    },
+    {
+      "id": 10,
+      "signal_id": "STK_LONG_HDFCBANK",
+      "timestamp": "28-Aug-2026 02:26 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 718.45,
+      "notes": "Position initialized at \u20b9718.45"
+    },
+    {
       "id": 9,
       "signal_id": "STK_SHORT_TATASTEEL",
       "timestamp": "28-Aug-2026 02:22 PM",
@@ -334,27 +384,27 @@
     }
   ],
   "nifty": {
-    "spot": 24111.05,
-    "vwap": 24111.05,
+    "spot": 24115.65,
+    "vwap": 24115.65,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
     "adx": 31.7,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 5.6,
+    "volatility_percentile": 5.4,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 6.0,
-      "em_1sigma_pts": 334.87,
-      "em_2sigma_pts": 669.74,
+      "em_1sigma_pts": 334.16,
+      "em_2sigma_pts": 668.32,
       "em_pct": 1.39,
       "range_1sigma": [
-        23776.18,
-        24445.92
+        23781.49,
+        24449.81
       ],
       "range_2sigma": [
-        23441.31,
-        24780.79
+        23447.33,
+        24783.97
       ],
-      "summary_str": "\u00b1334.9 pts (\u20b923776 - \u20b924446)"
+      "summary_str": "\u00b1334.2 pts (\u20b923781 - \u20b924450)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -372,9 +422,9 @@
           "BUY NIFTY 24100 CE",
           "SELL NIFTY 24250 CE (Hedge)"
         ],
-        "entry_spot": 24111.05,
-        "sl_spot": 24014.61,
-        "target1_spot": 24303.94,
+        "entry_spot": 24115.65,
+        "sl_spot": 24019.19,
+        "target1_spot": 24308.58,
         "max_profit": "Fixed Spread Width (\u20b9150 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "74%",
@@ -382,9 +432,9 @@
         "win_score": 74.0,
         "greeks": {
           "net_delta": 0.163,
-          "net_gamma": 3e-05,
-          "net_theta": -1.05,
-          "net_vega": 0.46,
+          "net_gamma": 4e-05,
+          "net_theta": -1.0,
+          "net_vega": 0.39,
           "implied_volatility_pct": 10.8
         },
         "margin_info": {
@@ -406,26 +456,26 @@
         "legs": [
           "BUY NIFTY 24100 CE"
         ],
-        "entry_spot": 24111.05,
-        "sl_spot": 24038.72,
-        "target1_spot": 24255.72,
+        "entry_spot": 24115.65,
+        "sl_spot": 24043.3,
+        "target1_spot": 24260.34,
         "max_profit": "Unlimited Upside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bullish breakout above VWAP (\u20b924111.1) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 1.05).",
+        "rationale": "Bullish breakout above VWAP (\u20b924115.7) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 1.05).",
         "win_score": 65.0,
         "greeks": {
-          "net_delta": 0.548,
-          "net_gamma": 0.00109,
-          "net_theta": -12.56,
-          "net_vega": 13.22,
+          "net_delta": 0.553,
+          "net_gamma": 0.0011,
+          "net_theta": -12.54,
+          "net_vega": 13.2,
           "implied_volatility_pct": 10.8
         },
         "margin_info": {
           "index_name": "NIFTY",
           "lot_size": 25,
-          "margin_required_rupees": 6028.0,
-          "margin_formatted": "\u20b96,028"
+          "margin_required_rupees": 6029.0,
+          "margin_formatted": "\u20b96,029"
         },
         "is_top_pick": false,
         "recommendation_tag": "ALTERNATIVE STRATEGY",
@@ -437,27 +487,27 @@
     ]
   },
   "banknifty": {
-    "spot": 57442.6,
-    "vwap": 57442.6,
+    "spot": 57439.15,
+    "vwap": 57439.15,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
     "adx": 30.1,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 5.6,
+    "volatility_percentile": 5.4,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 6.0,
-      "em_1sigma_pts": 797.8,
-      "em_2sigma_pts": 1595.59,
+      "em_1sigma_pts": 795.91,
+      "em_2sigma_pts": 1591.81,
       "em_pct": 1.39,
       "range_1sigma": [
-        56644.81,
-        58240.4
+        56643.24,
+        58235.06
       ],
       "range_2sigma": [
-        55847.01,
-        59038.19
+        55847.33,
+        59030.96
       ],
-      "summary_str": "\u00b1797.8 pts (\u20b956645 - \u20b958240)"
+      "summary_str": "\u00b1795.9 pts (\u20b956643 - \u20b958235)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -475,9 +525,9 @@
           "BUY BANKNIFTY 57400 CE",
           "SELL BANKNIFTY 57700 CE (Hedge)"
         ],
-        "entry_spot": 57442.6,
-        "sl_spot": 57212.83,
-        "target1_spot": 57902.14,
+        "entry_spot": 57439.15,
+        "sl_spot": 57209.39,
+        "target1_spot": 57898.66,
         "max_profit": "Fixed Spread Width (\u20b9300 Points)",
         "max_loss": "Fixed Net Premium Paid",
         "win_prob": "74%",
@@ -486,8 +536,8 @@
         "greeks": {
           "net_delta": 0.138,
           "net_gamma": 1e-05,
-          "net_theta": -1.67,
-          "net_vega": 0.37,
+          "net_theta": -1.71,
+          "net_vega": 0.41,
           "implied_volatility_pct": 10.8
         },
         "margin_info": {
@@ -509,19 +559,19 @@
         "legs": [
           "BUY BANKNIFTY 57400 CE"
         ],
-        "entry_spot": 57442.6,
-        "sl_spot": 57270.27,
-        "target1_spot": 57787.26,
+        "entry_spot": 57439.15,
+        "sl_spot": 57266.83,
+        "target1_spot": 57783.78,
         "max_profit": "Unlimited Upside",
         "max_loss": "Defined (Option Premium Paid)",
         "win_prob": "65%",
-        "rationale": "Bullish breakout above VWAP (\u20b957442.6) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 0.98).",
+        "rationale": "Bullish breakout above VWAP (\u20b957439.1) supported by \ud83d\udfe2 Double Bottom (W Pattern Breakout) & Put writing (PCR: 0.98).",
         "win_score": 65.0,
         "greeks": {
-          "net_delta": 0.556,
+          "net_delta": 0.554,
           "net_gamma": 0.00046,
-          "net_theta": -29.93,
-          "net_vega": 31.43,
+          "net_theta": -29.87,
+          "net_vega": 31.44,
           "implied_volatility_pct": 10.8
         },
         "margin_info": {
@@ -544,28 +594,54 @@
       {
         "symbol": "NTPC",
         "action": "BUY (LONG)",
-        "close": 332.1,
-        "vwap": 330.74,
+        "close": 332.15,
+        "vwap": 330.76,
         "orb_high": 330.45,
-        "sl": 329.44,
-        "t1": 335.29,
-        "t2": 337.41,
-        "rsi": 61.1,
-        "vol_exp": 1.6,
+        "sl": 329.49,
+        "t1": 335.34,
+        "t2": 337.46,
+        "rsi": 61.5,
+        "vol_exp": 1.8,
         "pattern": "\ud83d\udd34 Shooting Star (Supply Reversal at Resistance)"
+      },
+      {
+        "symbol": "HDFCBANK",
+        "action": "BUY (LONG)",
+        "close": 718.4,
+        "vwap": 714.82,
+        "orb_high": 715.15,
+        "sl": 712.65,
+        "t1": 725.3,
+        "t2": 729.89,
+        "rsi": 61.9,
+        "vol_exp": 1.3,
+        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
       }
     ],
     "short_setups": [
       {
         "symbol": "TATASTEEL",
         "action": "SHORT SELL",
-        "close": 185.04,
+        "close": 185.17,
         "vwap": 185.76,
         "orb_low": 187.53,
         "sl": 187.53,
-        "t1": 182.05,
-        "t2": 180.06,
-        "rsi": 40.5,
+        "t1": 182.34,
+        "t2": 180.45,
+        "rsi": 41.7,
+        "vol_exp": 2.1,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "MARUTI",
+        "action": "SHORT SELL",
+        "close": 13343.0,
+        "vwap": 13419.43,
+        "orb_low": 13401.0,
+        "sl": 13449.74,
+        "t1": 13214.91,
+        "t2": 13129.51,
+        "rsi": 18.4,
         "vol_exp": 1.8,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
