@@ -38,10 +38,16 @@ def run_pulse():
         print(f"[ERROR] Failed to run ai_options_quant.py: {e}")
         
     try:
-        print("[2/2] Executing intraday_screener.py...")
+        print("[2/3] Executing intraday_screener.py...")
         subprocess.run([python_exec, "intraday_screener.py"], check=True)
     except Exception as e:
         print(f"[ERROR] Failed to run intraday_screener.py: {e}")
+
+    try:
+        print("[3/3] Executing mcx_commodity_engine.py (Crude Oil & NatGas)...")
+        subprocess.run([python_exec, "mcx_commodity_engine.py"], check=True)
+    except Exception as e:
+        print(f"[ERROR] Failed to run mcx_commodity_engine.py: {e}")
         
     # Auto-push to GitHub/Vercel
     try:
