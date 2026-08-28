@@ -1,5 +1,5 @@
 {
-  "timestamp": "28-Aug-2026 09:57 AM",
+  "timestamp": "28-Aug-2026 09:59 AM",
   "data_type": "LIVE_DATA",
   "broker_status": {
     "live_trading_active": false,
@@ -40,10 +40,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 12.8,
+    "stale_minutes": 14.5,
     "anomalies": [],
     "clean_rows": 103,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 12.8m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 14.5m)"
   },
   "backtest_metrics": {
     "cagr_pct": -1.1,
@@ -211,22 +211,22 @@
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
     "adx": 15.8,
     "trend_intensity": "WEAK / SIDEWAYS",
-    "volatility_percentile": 5.9,
+    "volatility_percentile": 6.0,
     "confidence_score": 50.0,
     "expected_move": {
       "dte_days": 6.0,
-      "em_1sigma_pts": 337.2,
-      "em_2sigma_pts": 674.4,
+      "em_1sigma_pts": 337.51,
+      "em_2sigma_pts": 675.02,
       "em_pct": 1.4,
       "range_1sigma": [
-        23819.25,
-        24493.65
+        23818.94,
+        24493.96
       ],
       "range_2sigma": [
-        23482.04,
-        24830.85
+        23481.43,
+        24831.47
       ],
-      "summary_str": "\u00b1337.2 pts (\u20b923819 - \u20b924494)"
+      "summary_str": "\u00b1337.5 pts (\u20b923819 - \u20b924494)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -289,7 +289,7 @@
         "greeks": {
           "net_delta": -0.457,
           "net_gamma": 0.00109,
-          "net_theta": -8.33,
+          "net_theta": -8.34,
           "net_vega": 13.27,
           "implied_volatility_pct": 10.9
         },
@@ -309,27 +309,27 @@
     ]
   },
   "banknifty": {
-    "spot": 57465.05,
-    "vwap": 57465.05,
+    "spot": 57443.35,
+    "vwap": 57443.35,
     "regime": "\ud83d\udfe1 SIDEWAYS_RANGEBOUND",
     "adx": 33.6,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 5.9,
+    "volatility_percentile": 6.0,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 6.0,
-      "em_1sigma_pts": 802.16,
-      "em_2sigma_pts": 1604.32,
+      "em_1sigma_pts": 802.59,
+      "em_2sigma_pts": 1605.19,
       "em_pct": 1.4,
       "range_1sigma": [
-        56662.89,
-        58267.21
+        56640.76,
+        58245.95
       ],
       "range_2sigma": [
-        55860.73,
-        59069.37
+        55838.16,
+        59048.54
       ],
-      "summary_str": "\u00b1802.2 pts (\u20b956663 - \u20b958267)"
+      "summary_str": "\u00b1802.6 pts (\u20b956641 - \u20b958246)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -344,22 +344,22 @@
         "name": "BANKNIFTY Bull Put Credit Spread (Theta Harvest)",
         "type": "THETA CREDIT SPREAD",
         "legs": [
-          "SELL BANKNIFTY 57300 PE",
-          "BUY BANKNIFTY 57100 PE (Hedge)"
+          "SELL BANKNIFTY 57200 PE",
+          "BUY BANKNIFTY 57000 PE (Hedge)"
         ],
-        "entry_spot": 57465.05,
-        "sl_spot": 57345.05,
+        "entry_spot": 57443.35,
+        "sl_spot": 57323.35,
         "target1_spot": "Full Premium Decay at Expiry",
         "max_profit": "Net Credit Received",
         "max_loss": "Defined Difference (\u20b9200 - Credit)",
         "win_prob": "82%",
-        "rationale": "Rangebound market (PCR: 0.98). Collects time decay as long as BANKNIFTY stays above \u20b957300.",
+        "rationale": "Rangebound market (PCR: 0.98). Collects time decay as long as BANKNIFTY stays above \u20b957200.",
         "win_score": 82.0,
         "greeks": {
-          "net_delta": 0.085,
-          "net_gamma": -4e-05,
-          "net_theta": 1.2,
-          "net_vega": -2.68,
+          "net_delta": 0.082,
+          "net_gamma": -5e-05,
+          "net_theta": 1.62,
+          "net_vega": -3.17,
           "implied_volatility_pct": 10.9
         },
         "margin_info": {
@@ -379,12 +379,12 @@
         "name": "BANKNIFTY Iron Butterfly (Hedged Short Straddle)",
         "type": "HEDGED STRADDLE",
         "legs": [
-          "SELL BANKNIFTY 57500 CE",
-          "SELL BANKNIFTY 57500 PE",
-          "BUY BANKNIFTY 57800 CE (Hedge)",
-          "BUY BANKNIFTY 57200 PE (Hedge)"
+          "SELL BANKNIFTY 57400 CE",
+          "SELL BANKNIFTY 57400 PE",
+          "BUY BANKNIFTY 57700 CE (Hedge)",
+          "BUY BANKNIFTY 57100 PE (Hedge)"
         ],
-        "entry_spot": 57465.05,
+        "entry_spot": 57443.35,
         "sl_spot": "Upper/Lower Wing Touch",
         "target1_spot": "Max Decay at Center ATM Strike",
         "max_profit": "Max Net Premium Collected",
@@ -393,10 +393,10 @@
         "rationale": "Sideways consolidation regime with low VIX (10.9). Harvests dual Theta decay on both Call and Put legs.",
         "win_score": 78.0,
         "greeks": {
-          "net_delta": -0.002,
-          "net_gamma": -5e-05,
-          "net_theta": 2.83,
-          "net_vega": -3.69,
+          "net_delta": -0.006,
+          "net_gamma": -6e-05,
+          "net_theta": 2.82,
+          "net_vega": -3.61,
           "implied_volatility_pct": 10.9
         },
         "margin_info": {
