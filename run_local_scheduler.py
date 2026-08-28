@@ -4,12 +4,19 @@ import time
 import subprocess
 from datetime import datetime, timezone, timedelta
 
+# Fix Windows console UTF-8 encoding
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 def get_ist_now():
     return datetime.now(timezone(timedelta(hours=5, minutes=30)))
 
 def is_market_open():
     now = get_ist_now()
-    # Monday = 0, Sunday = 6
     if now.weekday() >= 5:
         return False
     market_start = now.replace(hour=9, minute=15, second=0, microsecond=0)
@@ -18,8 +25,8 @@ def is_market_open():
 
 def run_pulse():
     print(f"\n========================================================")
-    print(f"🚀 RUNNING LOCAL AI OPTIONS QUANT ENGINE & TELEGRAM PULSE")
-    print(f"🕒 Time: {get_ist_now().strftime('%Y-%m-%d %H:%M:%S')} (IST)")
+    print(f"RUNNING LOCAL AI OPTIONS QUANT ENGINE & TELEGRAM PULSE")
+    print(f"Time: {get_ist_now().strftime('%Y-%m-%d %H:%M:%S')} (IST)")
     print(f"========================================================")
     
     python_exec = sys.executable

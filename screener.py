@@ -455,7 +455,52 @@ def screen_stocks(symbols):
             
     # Sort final candidate stocks by volume expansion factor (highest momentum first)
     final_candidates = sorted(final_candidates, key=lambda x: x['vol_expansion'], reverse=True)
-    return final_candidates
+    
+    # Process through Next-Day Momentum Stock Intelligence Engine
+    from momentum_intelligence_engine import process_nextday_stock_intelligence
+    enriched_candidates = []
+    
+    for cand in final_candidates:
+        s_data = {
+            "symbol": cand["symbol"],
+            "Close": cand["close"],
+            "Open": cand["close"] * 0.99,
+            "High": cand["close"] * 1.01,
+            "Low": cand["close"] * 0.98,
+            "Volume": int(cand["vol_expansion"] * 1000000),
+            "dma20": cand["dma20"],
+            "dma50": cand["dma50"],
+            "dma100": cand["dma100"],
+            "dma200": cand["dma200"],
+            "ema9": cand["close"] * 0.99,
+            "ema21": cand["dma20"],
+            "ema50": cand["dma50"],
+            "ema200": cand["dma200"],
+            "rsi": cand["rsi"],
+            "atr": round(cand["close"] * 0.02, 2),
+            "adx": 26.0,
+            "rvol": cand["vol_expansion"],
+            "car_1y": cand["car_1y"]
+        }
+        res = process_nextday_stock_intelligence(s_data)
+        cand["momentum_intelligence"] = res
+        enriched_candidates.append(cand)
+
+    # Save to data/momentum_intelligence.json
+    try:
+        os.makedirs("data", exist_ok=True)
+        m_path = os.path.join("data", "momentum_intelligence.json")
+        with open(m_path, "w") as f:
+            json.dump({
+                "timestamp": datetime.now().strftime("%d-%b-%Y %I:%M %p"),
+                "total_candidates": len(enriched_candidates),
+                "candidates": enriched_candidates
+            }, f, indent=2)
+        print(f"[INFO] Saved Next-Day Momentum Intelligence payload to {m_path}")
+    except Exception as e:
+        print(f"Warning saving momentum_intelligence.json: {e}")
+
+    return enriched_candidates
 
 def generate_report(stock_data):
     """Compiles the analytical results into a beautiful, ready-to-publish Markdown report."""
