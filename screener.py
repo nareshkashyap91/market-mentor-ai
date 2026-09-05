@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import requests
+import numpy as np
 import pandas as pd
 import yfinance as yf
 from mftool import Mftool
@@ -10,6 +11,33 @@ from datetime import datetime, timedelta
 
 # Ensure terminal outputs emojis correctly on Windows
 sys.stdout.reconfigure(encoding='utf-8')
+
+class NumpyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, (np.bool_, bool)):
+            return bool(obj)
+        if isinstance(obj, (np.integer, int)):
+            return int(obj)
+        if isinstance(obj, (np.floating, float)):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super().default(obj)
+
+def sanitize_for_json(obj):
+    if isinstance(obj, dict):
+        return {k: sanitize_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [sanitize_for_json(v) for v in obj]
+    elif hasattr(obj, "item"):
+        return obj.item()
+    elif isinstance(obj, (np.bool_, bool)):
+        return bool(obj)
+    elif isinstance(obj, (np.integer, int)):
+        return int(obj)
+    elif isinstance(obj, (np.floating, float)):
+        return float(obj)
+    return obj
 
 def calculate_rsi(series, period=14):
     delta = series.diff()
@@ -490,12 +518,13 @@ def screen_stocks(symbols):
     try:
         os.makedirs("data", exist_ok=True)
         m_path = os.path.join("data", "momentum_intelligence.json")
+        payload = sanitize_for_json({
+            "timestamp": datetime.now().strftime("%d-%b-%Y %I:%M %p"),
+            "total_candidates": len(enriched_candidates),
+            "candidates": enriched_candidates
+        })
         with open(m_path, "w") as f:
-            json.dump({
-                "timestamp": datetime.now().strftime("%d-%b-%Y %I:%M %p"),
-                "total_candidates": len(enriched_candidates),
-                "candidates": enriched_candidates
-            }, f, indent=2)
+            json.dump(payload, f, indent=2, cls=NumpyEncoder)
         print(f"[INFO] Saved Next-Day Momentum Intelligence payload to {m_path}")
     except Exception as e:
         print(f"Warning saving momentum_intelligence.json: {e}")
@@ -603,13 +632,13 @@ def main():
     
     # Save to JSON for Web UI Dashboard
     os.makedirs("data", exist_ok=True)
-    evening_data = {
+    evening_data = sanitize_for_json({
         "date": datetime.now().strftime("%d-%b-%Y"),
         "momentum_stocks": stock_results
-    }
+    })
     try:
         with open("data/evening.json", "w") as jf:
-            json.dump(evening_data, jf, indent=2)
+            json.dump(evening_data, jf, indent=2, cls=NumpyEncoder)
         print("[INFO] Successfully saved evening results to data/evening.json")
     except Exception as e:
         print(f"[ERROR] Failed to save evening.json: {e}")
