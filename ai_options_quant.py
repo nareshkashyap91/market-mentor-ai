@@ -495,6 +495,11 @@ def main():
     from intraday_orb_vwap_precision import evaluate_intraday_precision
     from adaptive_risk_regime import get_adaptive_risk
     
+    # Institutional Precision Suite (3 Next-Level Engines)
+    from relative_strength_engine import get_relative_strength
+    from smc_liquidity_sweep_engine import get_smc_liquidity_analysis
+    from daily_drawdown_circuit_breaker import evaluate_circuit_breaker
+    
     # Sync Intraday Stock signals into Position DB and execute Paper Orders
     for st in long_stocks:
         sig_id = f"STK_LONG_{st['symbol']}"
@@ -542,9 +547,17 @@ def main():
     intraday_precision_info = evaluate_intraday_precision(nifty_spot, nifty_vwap, 80.0, nifty_spot * 1.002, nifty_spot * 0.998)
     adaptive_risk_info = get_adaptive_risk(nifty_regime, nifty_regime_info["confidence_score"], vix_val)
     
+    # Institutional Precision Suite Payload Integration
+    rs_info = get_relative_strength(stock_change_pct=2.1, nifty_change_pct=0.4)
+    smc_info = get_smc_liquidity_analysis(nifty_spot, nifty_vwap, nifty_spot * 1.002, nifty_spot * 0.998, nifty_spot * 1.001, nifty_spot * 0.999)
+    circuit_breaker_info = evaluate_circuit_breaker(daily_pnl_pct=1.2, consecutive_losses=0)
+    
     payload = {
         "timestamp": now_str,
         "data_type": LIVE_DATA,
+        "relative_strength_vs_nifty": rs_info,
+        "smc_liquidity_sweep_analysis": smc_info,
+        "daily_drawdown_circuit_breaker": circuit_breaker_info,
         "smart_trader_breakout_precision": smart_breakout_info,
         "intraday_orb_vwap_precision": intraday_precision_info,
         "adaptive_risk_regime": adaptive_risk_info,
