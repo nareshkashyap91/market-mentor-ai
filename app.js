@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
             else if (targetTab === "options") headerTitle.textContent = "Options & Market Pulse";
             else if (targetTab === "ai-quant") headerTitle.textContent = "AI Quant Strategy";
             else if (targetTab === "funds") headerTitle.textContent = "Mutual Funds Leaderboard";
+            else if (targetTab === "journal") headerTitle.textContent = "AI Trade Journal & Performance";
         });
     });
 
@@ -39,14 +40,16 @@ async function refreshDashboard() {
     try {
         // Fetch JSON data concurrently with cache-busting timestamp
         const ts = Date.now();
-        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes] = await Promise.allSettled([
+        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes] = await Promise.allSettled([
             fetch(`./data/morning.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/evening.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/intraday.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/options.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/mutual_funds.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/ai_quant.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/momentum_intelligence.json?t=${ts}`).then(r => r.json())
+            fetch(`./data/momentum_intelligence.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/trade_journal.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/sector_rotation.json?t=${ts}`).then(r => r.json())
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
@@ -56,6 +59,8 @@ async function refreshDashboard() {
         const mfData = mfRes.status === "fulfilled" ? mfRes.value : null;
         const quantData = quantRes.status === "fulfilled" ? quantRes.value : null;
         const momIntelData = momIntelRes.status === "fulfilled" ? momIntelRes.value : null;
+        const journalData = journalRes.status === "fulfilled" ? journalRes.value : null;
+        const sectorData = sectorRes.status === "fulfilled" ? sectorRes.value : null;
 
         // Update dashboard elements
         updateHeaderAndOverview(morningData, eveningData, intradayData, momIntelData);
@@ -65,6 +70,8 @@ async function refreshDashboard() {
         if (quantData) renderAIQuantPage(quantData);
         renderMomentumStocks(eveningData, momIntelData);
         if (mfData) renderMutualFunds(mfData);
+        if (journalData) renderTradeJournal(journalData);
+        if (sectorData) renderSectorRotation(sectorData);
 
     } catch (error) {
         console.error("[ERROR] Failed to fetch or render dashboard data: ", error);
@@ -737,4 +744,56 @@ function renderAIQuantPage(data) {
             }).join("");
         }
     }
+}
+
+function renderTradeJournal(data) {
+    if (!data || !data.analytics) return;
+    const a = data.analytics;
+
+    const winRateEl = document.getElementById("journal-win-rate");
+    const winCountEl = document.getElementById("journal-win-count");
+    if (winRateEl) winRateEl.textContent = `${a.win_rate_pct}%`;
+    if (winCountEl) winCountEl.textContent = `${a.win_count} Wins / ${a.loss_count} Losses`;
+
+    const pfEl = document.getElementById("journal-profit-factor");
+    const netPnlEl = document.getElementById("journal-net-pnl");
+    if (pfEl) pfEl.textContent = a.profit_factor;
+    if (netPnlEl) netPnlEl.textContent = `Net PnL: ${a.net_pnl_pct > 0 ? '+' : ''}${a.net_pnl_pct}%`;
+
+    const rrrEl = document.getElementById("journal-avg-rrr");
+    if (rrrEl) rrrEl.textContent = `${a.avg_rrr} R`;
+
+    const maxDdEl = document.getElementById("journal-max-dd");
+    const sharpeEl = document.getElementById("journal-sharpe");
+    if (maxDdEl) maxDdEl.textContent = `-${a.max_drawdown_pct}%`;
+    if (sharpeEl) sharpeEl.textContent = `Sharpe: ${a.sharpe_ratio}`;
+
+    const list = document.getElementById("journal-trades-list");
+    if (list && a.recent_trades) {
+        list.innerHTML = a.recent_trades.map(t => {
+            const isWin = t.win_loss === "WIN";
+            const pillClass = isWin ? "target-1" : (t.win_loss === "LOSS" ? "sl-hit" : "active");
+            const pnlColor = isWin ? "var(--clr-success)" : (t.win_loss === "LOSS" ? "var(--clr-danger)" : "var(--text-muted)");
+            const exitPrice = t.exit_price ? `₹${t.exit_price.toFixed(2)}` : "--";
+
+            return `
+                <tr>
+                    <td style="font-size: 0.8rem; color: var(--text-muted);">${t.timestamp}</td>
+                    <td class="stock-ticker">NSE:${t.symbol}</td>
+                    <td><span class="status-pill ${t.direction === 'LONG' ? 'target-1' : 'sl-hit'}" style="font-size: 0.65rem; padding: 2px 6px;">${t.direction}</span></td>
+                    <td style="font-size: 0.82rem;">${t.strategy}</td>
+                    <td>₹${t.entry.toFixed(2)}</td>
+                    <td>${exitPrice}</td>
+                    <td style="color: ${pnlColor}; font-weight: 600;">${t.pnl_pct > 0 ? '+' : ''}${t.pnl_pct.toFixed(2)}%</td>
+                    <td>${t.r_multiple.toFixed(2)} R</td>
+                    <td><span class="status-pill ${pillClass}">${t.status}</span></td>
+                </tr>
+            `;
+        }).join("");
+    }
+}
+
+function renderSectorRotation(data) {
+    if (!data || !data.sectors) return;
+    // Log sector data payload
 }

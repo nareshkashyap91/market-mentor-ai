@@ -78,6 +78,47 @@ class IntradayPrecisionV3Engine:
             "risk_reward_ratio": round(risk_reward_ratio, 2)
         }
 
+    @classmethod
+    def evaluate_mtf_confluence(cls, tf_5m=True, tf_15m=True, tf_1h=True, tf_daily=True):
+        """Evaluates Multi-Timeframe Confluence across 5m, 15m, 1h, and Daily timeframes."""
+        aligned_count = sum([1 for tf in [tf_5m, tf_15m, tf_1h, tf_daily] if tf])
+
+        if aligned_count == 4:
+            stars = "⭐⭐⭐⭐⭐"
+            rating = "5-STAR CONFLUENCE SETUP"
+            score = 5.0
+            description = "100% Alignment across 5m Micro, 15m Intraday, 1h Swing, and Daily Primary DMA trends."
+        elif aligned_count == 3:
+            stars = "⭐⭐⭐⭐"
+            rating = "4-STAR HIGH CONFLUENCE SETUP"
+            score = 4.0
+            description = "Strong 3-Timeframe Confluence. High probability setup."
+        elif aligned_count == 2:
+            stars = "⭐⭐⭐"
+            rating = "3-STAR STANDARD SETUP"
+            score = 3.0
+            description = "Standard 2-Timeframe alignment."
+        else:
+            stars = "⭐⭐"
+            rating = "WEAK CONFLUENCE SETUP"
+            score = 2.0
+            description = "Fragmented timeframe alignment."
+
+        return {
+            "confluence_stars": stars,
+            "confluence_rating": rating,
+            "confluence_score": score,
+            "aligned_timeframes": f"{aligned_count}/4",
+            "tf_matrix": {
+                "5m_micro": "BULLISH" if tf_5m else "NEUTRAL",
+                "15m_intraday": "BULLISH" if tf_15m else "NEUTRAL",
+                "1h_swing": "BULLISH" if tf_1h else "NEUTRAL",
+                "daily_dma": "BULLISH" if tf_daily else "NEUTRAL"
+            },
+            "description": description
+        }
+
 # Helper function
 def evaluate_intraday_v3_helper(close, open_p, high, low, vwap, atr):
     return IntradayPrecisionV3Engine.evaluate_intraday_v3(close, open_p, high, low, vwap, atr)
+

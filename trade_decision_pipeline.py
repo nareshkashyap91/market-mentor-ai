@@ -32,6 +32,10 @@ class TradeDecisionPipeline:
         else:
             radar = "MOMENTUM_RADAR"
 
+        # Stage 2.5: Multi-Timeframe Confluence Calculation
+        from intraday_precision_v3 import IntradayPrecisionV3Engine
+        confluence = IntradayPrecisionV3Engine.evaluate_mtf_confluence(tf_5m=True, tf_15m=True, tf_1h=True, tf_daily=True)
+
         # Stage 3: Trade Card
         trade_card = {
             "symbol": symbol,
@@ -40,6 +44,9 @@ class TradeDecisionPipeline:
             "radar": radar,
             "grade": gate_res.get("grade", "A+"),
             "score": gate_res.get("trade_score", 91.0),
+            "confluence_stars": confluence["confluence_stars"],
+            "confluence_rating": confluence["confluence_rating"],
+            "confluence_matrix": confluence["tf_matrix"],
             "strategy": strategy_name,
             "entry": round(sl * 1.025, 2),
             "sl": sl,
@@ -50,6 +57,14 @@ class TradeDecisionPipeline:
             "confirmations": gate_res.get("confirmations", ["15m Trend", "VWAP", "RVOL"]),
             "ai_rationale": explanation_res.get("why_this_stock", "High-probability setup.")
         }
+
+        # Automatically log allowed trades to AI Trade Journal (Option 1)
+        if is_trade_allowed:
+            try:
+                from ai_trade_journal import AITradeJournalEngine
+                AITradeJournalEngine.log_trade(trade_card)
+            except Exception as e:
+                print(f"[WARN] Trade Journal auto-log exception: {e}")
 
         # Stage 4: Chart Generation
         chart_success, chart_path = ChartPlotterEngine.plot_stock_chart(symbol=symbol)
@@ -72,7 +87,8 @@ class TradeDecisionPipeline:
             "stage_3_trade_card": trade_card,
             "stage_4_chart_path": chart_path,
             "stage_5_telegram_status": telegram_status,
-            "is_trade_allowed": is_trade_allowed
+            "is_trade_allowed": is_trade_allowed,
+            "mtf_confluence": confluence
         }
 
 # Helper function

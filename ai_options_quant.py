@@ -619,6 +619,25 @@ def main():
     with open(json_path, "w") as f:
         json.dump(payload, f, indent=2)
     print(f"[INFO] Saved AI Quant payload to {json_path}")
+
+    # Trigger V4.0 Pro Engines (Trade Journal, Sector Rotation, Max Pain)
+    try:
+        from ai_trade_journal import AITradeJournalEngine
+        AITradeJournalEngine.export_journal_json()
+    except Exception as e:
+        print(f"[WARN] Trade Journal export error: {e}")
+
+    try:
+        from sector_rotation_engine import SectorRotationEngine
+        SectorRotationEngine.export_sector_json()
+    except Exception as e:
+        print(f"[WARN] Sector Rotation export error: {e}")
+
+    try:
+        from options_engine_v3 import OptionsEngineV3
+        OptionsEngineV3.export_max_pain_json(spot=nifty_spot)
+    except Exception as e:
+        print(f"[WARN] Options Max Pain export error: {e}")
     
     # Broadcast to Telegram (Only on weekdays or when explicitly triggered)
     ist_tz = timezone(timedelta(hours=5, minutes=30))

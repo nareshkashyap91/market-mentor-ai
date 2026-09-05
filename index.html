@@ -46,6 +46,9 @@
                 <a href="#" class="nav-item" data-tab="funds">
                     <i class="fa-solid fa-vault"></i> Mutual Funds
                 </a>
+                <a href="#" class="nav-item" data-tab="journal">
+                    <i class="fa-solid fa-book-journal-whills"></i> AI Trade Journal
+                </a>
             </nav>
             
             <div class="connection-status">
@@ -229,6 +232,71 @@
             <div class="tab-panel" id="tab-funds">
                 <div class="funds-grid" id="funds-categories-container">
                     <!-- Mutual Fund lists dynamically injected -->
+                </div>
+            </div>
+
+            <!-- AI Trade Journal Tab -->
+            <div class="tab-panel" id="tab-journal">
+                <div class="overview-grid" style="margin-bottom: 24px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="glass-card overview-card">
+                        <div class="card-icon green"><i class="fa-solid fa-trophy"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Win Rate %</span>
+                            <h3 class="stat-value" id="journal-win-rate">--%</h3>
+                            <span class="stat-sub" id="journal-win-count">-- Wins / -- Losses</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon purple"><i class="fa-solid fa-chart-line-up"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Profit Factor</span>
+                            <h3 class="stat-value" id="journal-profit-factor">--</h3>
+                            <span class="stat-sub" id="journal-net-pnl">Net PnL: --%</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon blue"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Avg Risk-Reward</span>
+                            <h3 class="stat-value" id="journal-avg-rrr">-- R</h3>
+                            <span class="stat-sub">R-Multiple Avg</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon red"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Max Drawdown</span>
+                            <h3 class="stat-value danger" id="journal-max-dd">--%</h3>
+                            <span class="stat-sub" id="journal-sharpe">Sharpe: --</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card panel-card">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-list-check"></i> Executed Trades & Performance Log</h2>
+                        <span class="badge badge-indigo">SQLite Realtime Tracker</span>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Symbol</th>
+                                    <th>Direction</th>
+                                    <th>Strategy</th>
+                                    <th>Entry</th>
+                                    <th>Exit</th>
+                                    <th>PnL %</th>
+                                    <th>R-Multiple</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="journal-trades-list">
+                                <!-- Dynamic Journal Table Rows -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
