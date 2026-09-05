@@ -15,24 +15,30 @@ if sys.platform == "win32":
 def get_ist_now():
     return datetime.now(timezone(timedelta(hours=5, minutes=30)))
 
-def is_market_open():
+def is_mcx_open():
     now = get_ist_now()
     if now.weekday() >= 5:
         return False
-    market_start = now.replace(hour=9, minute=15, second=0, microsecond=0)
-    market_end = now.replace(hour=15, minute=30, second=0, microsecond=0)
-    return market_start <= now <= market_end
+    mcx_start = now.replace(hour=9, minute=0, second=0, microsecond=0)
+    mcx_end = now.replace(hour=23, minute=30, second=0, microsecond=0)
+    return mcx_start <= now <= mcx_end
 
 def run_pulse():
+    now = get_ist_now()
     print(f"\n========================================================")
     print(f"RUNNING LOCAL AI OPTIONS QUANT ENGINE & TELEGRAM PULSE")
-    print(f"Time: {get_ist_now().strftime('%Y-%m-%d %H:%M:%S')} (IST)")
+    print(f"Time: {now.strftime('%Y-%m-%d %H:%M:%S')} (IST)")
     print(f"========================================================")
     
+    if now.weekday() >= 5:
+        print("⏸️ [MARKET CLOSED] Today is WEEKEND (Saturday/Sunday). Auto-scans & Intraday notifications are PAUSED.")
+        print("💡 Tip: Send /status or /mcx on Telegram anytime for on-demand analysis.")
+        return
+
     python_exec = sys.executable
     
     try:
-        print("[1/2] Executing ai_options_quant.py...")
+        print("[1/3] Executing ai_options_quant.py...")
         subprocess.run([python_exec, "ai_options_quant.py"], check=True)
     except Exception as e:
         print(f"[ERROR] Failed to run ai_options_quant.py: {e}")

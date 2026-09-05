@@ -607,9 +607,15 @@ def main():
         json.dump(payload, f, indent=2)
     print(f"[INFO] Saved AI Quant payload to {json_path}")
     
-    # Broadcast to Telegram
-    msg = f"🧠 **AI QUANT MULTI-REGIME OPTIONS ENGINE** 🧠\n"
-    msg += f"🕒 **Time**: {now_str} (IST)\n\n"
+    # Broadcast to Telegram (Only on weekdays or when explicitly triggered)
+    ist_tz = timezone(timedelta(hours=5, minutes=30))
+    now_dt = datetime.now(ist_tz)
+    is_weekend = now_dt.weekday() >= 5
+
+    if is_weekend:
+        print("[INFO] Weekend detected (Saturday/Sunday). Skipping automatic Telegram broadcast.")
+        tg_token = None
+        tg_chat_id = None
     
     msg += f"📊 **NIFTY 50 QUANT MATRIX**:\n"
     msg += f"• **Mood/Regime**: `{nifty_regime}`\n"
