@@ -38,32 +38,10 @@ def run_pulse():
     python_exec = sys.executable
     
     try:
-        print("[1/3] Executing ai_options_quant.py...")
-        subprocess.run([python_exec, "ai_options_quant.py"], check=True)
+        print("[MASTER] Executing master_data_fetcher.py (Single Pass Unified Data Pipeline)...")
+        subprocess.run([python_exec, "master_data_fetcher.py", "--push"], check=True)
     except Exception as e:
-        print(f"[ERROR] Failed to run ai_options_quant.py: {e}")
-        
-    try:
-        print("[2/3] Executing intraday_screener.py...")
-        subprocess.run([python_exec, "intraday_screener.py"], check=True)
-    except Exception as e:
-        print(f"[ERROR] Failed to run intraday_screener.py: {e}")
-
-    try:
-        print("[3/3] Executing mcx_commodity_engine.py (Crude Oil & NatGas)...")
-        subprocess.run([python_exec, "mcx_commodity_engine.py"], check=True)
-    except Exception as e:
-        print(f"[ERROR] Failed to run mcx_commodity_engine.py: {e}")
-        
-    # Auto-push to GitHub/Vercel
-    try:
-        print("[SYNC] Pushing updated JSON data to GitHub...")
-        subprocess.run(["git", "add", "data/*.json"], check=False)
-        subprocess.run(["git", "commit", "-m", "Local Scheduler Auto-Update [skip ci]"], check=False)
-        subprocess.run(["git", "push"], check=False)
-        print("[SUCCESS] Data synced to GitHub & Vercel!")
-    except Exception as e:
-        print(f"[WARN] Git push skipped/failed: {e}")
+        print(f"[ERROR] Failed to run master_data_fetcher.py: {e}")
 
 def main():
     print("========================================================")

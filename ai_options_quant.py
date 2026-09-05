@@ -649,6 +649,7 @@ def main():
         tg_token = None
         tg_chat_id = None
     
+    msg = ""
     msg += f"📊 **NIFTY 50 QUANT MATRIX**:\n"
     msg += f"• **Mood/Regime**: `{nifty_regime}`\n"
     msg += f"• **Chart Pattern**: `{nifty_pattern}`\n"

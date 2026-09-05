@@ -28,18 +28,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run AI Options Quant Engine & Telegram Alert
+      - name: Run Master Unified Data Fetcher Pipeline
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          python ai_options_quant.py
-          python intraday_screener.py
+          python master_data_fetcher.py
 
       - name: Commit & Push Updated Data to Dashboard
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/*.json
-          git diff-index --quiet HEAD || git commit -m "Auto-update AI Options Quant & Intraday data [skip ci]"
+          git diff-index --quiet HEAD || git commit -m "Auto-update Master Unified Data Pipeline [skip ci]"
           git push

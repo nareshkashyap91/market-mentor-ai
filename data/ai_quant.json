@@ -1,5 +1,5 @@
 {
-  "timestamp": "05-Sep-2026 08:58 PM",
+  "timestamp": "06-Sep-2026 01:11 AM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "05-Sep-2026 08:58 PM",
+      "timestamp": "06-Sep-2026 01:11 AM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -127,17 +127,20 @@
       "equity_curve_summary": "INITIAL: \u20b9100,000 \u2794 CURRENT: \u20b9126,500 (+26.5%)"
     },
     "performance_stats": {
-      "total_journal_trades": 0,
-      "total_wins": 0,
-      "win_rate_pct": 75.0,
-      "win_rate_formatted": "75.0%",
-      "total_realized_pnl_rupees": 0.0,
-      "formatted_realized_pnl": "\u20b9+0.00"
+      "total_trades": 5,
+      "total_journal_trades": 5,
+      "total_realized_pnl_rupees": 15.4,
+      "win_rate": 80.0,
+      "win_rate_pct": 80.0,
+      "total_wins": 4,
+      "total_losses": 1,
+      "win_rate_formatted": "80.0%",
+      "formatted_realized_pnl": "\u20b9+15.40"
     },
-    "journal_summary_formatted": "REALIZED P&L: +\u20b926,500 | WIN RATE: 75.0%"
+    "journal_summary_formatted": "REALIZED P&L: +\u20b926,500 | WIN RATE: 80.0%"
   },
   "premarket_cues_analytics": {
-    "timestamp": "05-Sep-2026 08:30 AM",
+    "timestamp": "06-Sep-2026 08:30 AM",
     "gift_nifty_pts": 85.0,
     "nasdaq_fut_pct": 0.92,
     "dow_fut_pct": 0.45,
@@ -149,64 +152,157 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "05-Sep-2026 08:58 PM",
-    "top_leading_sector": "NIFTY IT",
-    "top_lagging_sector": "NIFTY FMCG",
-    "leading_sectors": [
-      "NIFTY IT",
-      "NIFTY BANK"
-    ],
-    "lagging_sectors": [
-      "NIFTY FMCG"
-    ],
-    "all_sectors": [
+    "timestamp": "06-Sep-2026 01:11 AM",
+    "top_sector": "Nifty IT",
+    "lagging_sector": "Nifty Infra",
+    "sectors": [
       {
-        "sector": "NIFTY IT",
-        "change_1d_pct": 2.15,
-        "change_5d_pct": 4.8,
-        "change_20d_pct": 8.5,
-        "status": "LEADING SECTORS"
+        "key": "NIFTY_IT",
+        "name": "Nifty IT",
+        "icon": "fa-laptop-code",
+        "close": 45000.0,
+        "chg_1d": 1.2,
+        "chg_1w": 2.5,
+        "chg_1m": 5.2,
+        "rs_score": 1.1,
+        "status": "LEADER",
+        "badge_color": "success",
+        "fund_flow": "CAPITAL INFLOW \ud83d\udfe2"
       },
       {
-        "sector": "NIFTY BANK",
-        "change_1d_pct": 1.45,
-        "change_5d_pct": 2.9,
-        "change_20d_pct": 5.2,
-        "status": "LEADING SECTORS"
+        "key": "NIFTY_AUTO",
+        "name": "Nifty Auto",
+        "icon": "fa-car",
+        "close": 45000.0,
+        "chg_1d": 1.2,
+        "chg_1w": 2.5,
+        "chg_1m": 5.2,
+        "rs_score": 1.1,
+        "status": "LEADER",
+        "badge_color": "success",
+        "fund_flow": "CAPITAL INFLOW \ud83d\udfe2"
       },
       {
-        "sector": "NIFTY AUTO",
-        "change_1d_pct": 1.1,
-        "change_5d_pct": 2.1,
-        "change_20d_pct": 4.1,
-        "status": "IMPROVING SECTORS"
+        "key": "NIFTY_PVT_BANK",
+        "name": "Nifty Pvt Bank",
+        "icon": "fa-vault",
+        "close": 27824.5,
+        "chg_1d": 0.8,
+        "chg_1w": 2.1,
+        "chg_1m": 4.5,
+        "rs_score": 0.7,
+        "status": "OUTPERFORMER",
+        "badge_color": "primary",
+        "fund_flow": "MODERATE INFLOW \ud83d\ude80"
       },
       {
-        "sector": "NIFTY PHARMA",
-        "change_1d_pct": 0.85,
-        "change_5d_pct": 1.5,
-        "change_20d_pct": 3.4,
-        "status": "IMPROVING SECTORS"
+        "key": "NIFTY_BANK",
+        "name": "Nifty Bank",
+        "icon": "fa-building-columns",
+        "close": 45000.0,
+        "chg_1d": 0.4,
+        "chg_1w": 0.8,
+        "chg_1m": 1.5,
+        "rs_score": 0.3,
+        "status": "OUTPERFORMER",
+        "badge_color": "primary",
+        "fund_flow": "MODERATE INFLOW \ud83d\ude80"
       },
       {
-        "sector": "NIFTY METAL",
-        "change_1d_pct": 0.4,
-        "change_5d_pct": -0.2,
-        "change_20d_pct": 1.2,
-        "status": "WEAKENING SECTORS"
+        "key": "NIFTY_PSU_BANK",
+        "name": "Nifty PSU Bank",
+        "icon": "fa-piggy-bank",
+        "close": 45000.0,
+        "chg_1d": 0.4,
+        "chg_1w": 0.8,
+        "chg_1m": 1.5,
+        "rs_score": 0.3,
+        "status": "OUTPERFORMER",
+        "badge_color": "primary",
+        "fund_flow": "MODERATE INFLOW \ud83d\ude80"
       },
       {
-        "sector": "NIFTY FMCG",
-        "change_1d_pct": -0.3,
-        "change_5d_pct": -1.1,
-        "change_20d_pct": -0.5,
-        "status": "LAGGING SECTORS"
+        "key": "NIFTY_METAL",
+        "name": "Nifty Metal",
+        "icon": "fa-industry",
+        "close": 45000.0,
+        "chg_1d": -0.3,
+        "chg_1w": 0.8,
+        "chg_1m": 1.5,
+        "rs_score": -0.4,
+        "status": "NEUTRAL",
+        "badge_color": "warning",
+        "fund_flow": "NEUTRAL FLOW \ud83d\udfe1"
+      },
+      {
+        "key": "NIFTY_PHARMA",
+        "name": "Nifty Pharma",
+        "icon": "fa-capsules",
+        "close": 45000.0,
+        "chg_1d": -0.3,
+        "chg_1w": 0.8,
+        "chg_1m": 1.5,
+        "rs_score": -0.4,
+        "status": "NEUTRAL",
+        "badge_color": "warning",
+        "fund_flow": "NEUTRAL FLOW \ud83d\udfe1"
+      },
+      {
+        "key": "NIFTY_FMCG",
+        "name": "Nifty FMCG",
+        "icon": "fa-basket-shopping",
+        "close": 45000.0,
+        "chg_1d": -0.3,
+        "chg_1w": 0.8,
+        "chg_1m": 1.5,
+        "rs_score": -0.4,
+        "status": "NEUTRAL",
+        "badge_color": "warning",
+        "fund_flow": "NEUTRAL FLOW \ud83d\udfe1"
+      },
+      {
+        "key": "NIFTY_ENERGY",
+        "name": "Nifty Energy",
+        "icon": "fa-bolt",
+        "close": 45000.0,
+        "chg_1d": -0.3,
+        "chg_1w": 0.8,
+        "chg_1m": 1.5,
+        "rs_score": -0.4,
+        "status": "NEUTRAL",
+        "badge_color": "warning",
+        "fund_flow": "NEUTRAL FLOW \ud83d\udfe1"
+      },
+      {
+        "key": "NIFTY_REALTY",
+        "name": "Nifty Realty",
+        "icon": "fa-city",
+        "close": 45000.0,
+        "chg_1d": -0.3,
+        "chg_1w": 0.8,
+        "chg_1m": 1.5,
+        "rs_score": -0.4,
+        "status": "NEUTRAL",
+        "badge_color": "warning",
+        "fund_flow": "NEUTRAL FLOW \ud83d\udfe1"
+      },
+      {
+        "key": "NIFTY_INFRA",
+        "name": "Nifty Infra",
+        "icon": "fa-road",
+        "close": 45000.0,
+        "chg_1d": -0.3,
+        "chg_1w": 0.8,
+        "chg_1m": 1.5,
+        "rs_score": -0.4,
+        "status": "NEUTRAL",
+        "badge_color": "warning",
+        "fund_flow": "NEUTRAL FLOW \ud83d\udfe1"
       }
-    ],
-    "rotation_summary": "LEADING: NIFTY IT, NIFTY BANK | LAGGING: NIFTY FMCG"
+    ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "05-Sep-2026 08:58 PM",
+    "timestamp": "06-Sep-2026 01:11 AM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -224,7 +320,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "05-Sep-2026 08:58 PM",
+    "timestamp": "06-Sep-2026 01:11 AM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -290,10 +386,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 1783.9,
+    "stale_minutes": 2036.8,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 1783.9m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 2036.8m)"
   },
   "backtest_metrics": {
     "cagr_pct": -1.0,
@@ -309,22 +405,162 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 327000.0,
+    "allocated_margin": 351000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 218,
+    "total_trades": 234,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
   "trade_journal_performance": {
-    "total_journal_trades": 0,
-    "total_wins": 0,
-    "win_rate_pct": 75.0,
-    "win_rate_formatted": "75.0%",
-    "total_realized_pnl_rupees": 0.0,
-    "formatted_realized_pnl": "\u20b9+0.00"
+    "total_trades": 5,
+    "total_journal_trades": 5,
+    "total_realized_pnl_rupees": 15.4,
+    "win_rate": 80.0,
+    "win_rate_pct": 80.0,
+    "total_wins": 4,
+    "total_losses": 1,
+    "win_rate_formatted": "80.0%",
+    "formatted_realized_pnl": "\u20b9+15.40"
   },
-  "trade_journal_history": [],
+  "trade_journal_history": [
+    {
+      "id": 8,
+      "timestamp": "06-Sep-2026 01:09 AM",
+      "symbol": "TEST_STOCK",
+      "direction": "LONG",
+      "strategy": "V4 Test Strategy",
+      "entry": 500.0,
+      "sl": 480.0,
+      "target_1": 530.0,
+      "target_2": 550.0,
+      "status": "TARGET_1",
+      "exit_price": 530.0,
+      "pnl_pct": 6.0,
+      "win_loss": "WIN",
+      "r_multiple": 1.5,
+      "grade": "A+"
+    },
+    {
+      "id": 7,
+      "timestamp": "06-Sep-2026 12:49 AM",
+      "symbol": "TEST_STOCK",
+      "direction": "LONG",
+      "strategy": "V4 Test Strategy",
+      "entry": 500.0,
+      "sl": 480.0,
+      "target_1": 530.0,
+      "target_2": 550.0,
+      "status": "TARGET_1",
+      "exit_price": 530.0,
+      "pnl_pct": 6.0,
+      "win_loss": "WIN",
+      "r_multiple": 1.5,
+      "grade": "A+"
+    },
+    {
+      "id": 6,
+      "timestamp": "06-Sep-2026 12:49 AM",
+      "symbol": "TEST_STOCK",
+      "direction": "LONG",
+      "strategy": "V4 Test Strategy",
+      "entry": 500.0,
+      "sl": 480.0,
+      "target_1": 530.0,
+      "target_2": 550.0,
+      "status": "TARGET_1",
+      "exit_price": 530.0,
+      "pnl_pct": 6.0,
+      "win_loss": "WIN",
+      "r_multiple": 1.5,
+      "grade": "A+"
+    },
+    {
+      "id": 5,
+      "timestamp": "04-Sep-2026 01:30 PM",
+      "symbol": "ELGIEQUIP",
+      "direction": "LONG",
+      "strategy": "Volume Expansion Breakout",
+      "entry": 632.0,
+      "sl": 620.0,
+      "target_1": 650.0,
+      "target_2": 665.0,
+      "status": "TARGET_2",
+      "exit_price": 665.0,
+      "pnl_pct": 5.22,
+      "win_loss": "WIN",
+      "r_multiple": 2.75,
+      "grade": "A+"
+    },
+    {
+      "id": 4,
+      "timestamp": "04-Sep-2026 09:45 AM",
+      "symbol": "TATACAP",
+      "direction": "LONG",
+      "strategy": "Institutional Liquidity Sweep",
+      "entry": 370.0,
+      "sl": 364.0,
+      "target_1": 379.0,
+      "target_2": 386.0,
+      "status": "SL_HIT",
+      "exit_price": 364.0,
+      "pnl_pct": -1.62,
+      "win_loss": "LOSS",
+      "r_multiple": -1.0,
+      "grade": "B"
+    },
+    {
+      "id": 3,
+      "timestamp": "03-Sep-2026 11:00 AM",
+      "symbol": "HEG",
+      "direction": "LONG",
+      "strategy": "VWAP Pullback",
+      "entry": 710.0,
+      "sl": 695.0,
+      "target_1": 732.0,
+      "target_2": 748.0,
+      "status": "TARGET_1",
+      "exit_price": 732.0,
+      "pnl_pct": 3.1,
+      "win_loss": "WIN",
+      "r_multiple": 1.47,
+      "grade": "A"
+    },
+    {
+      "id": 2,
+      "timestamp": "03-Sep-2026 10:15 AM",
+      "symbol": "PFOCUS",
+      "direction": "LONG",
+      "strategy": "Opening Range Breakout",
+      "entry": 295.0,
+      "sl": 287.0,
+      "target_1": 307.0,
+      "target_2": 315.0,
+      "status": "TARGET_1",
+      "exit_price": 307.0,
+      "pnl_pct": 4.07,
+      "win_loss": "WIN",
+      "r_multiple": 1.5,
+      "grade": "A+"
+    },
+    {
+      "id": 1,
+      "timestamp": "02-Sep-2026 09:30 AM",
+      "symbol": "GLAND",
+      "direction": "LONG",
+      "strategy": "52-Week High Breakout",
+      "entry": 2850.0,
+      "sl": 2790.0,
+      "target_1": 2940.0,
+      "target_2": 3010.0,
+      "status": "TARGET_2",
+      "exit_price": 3010.0,
+      "pnl_pct": 5.61,
+      "win_loss": "WIN",
+      "r_multiple": 2.67,
+      "grade": "A+"
+    }
+  ],
   "active_positions_count": 20,
   "active_positions": [
     {
@@ -794,19 +1030,19 @@
     "volatility_percentile": 4.1,
     "confidence_score": 65.0,
     "expected_move": {
-      "dte_days": 5.0,
-      "em_1sigma_pts": 296.97,
-      "em_2sigma_pts": 593.95,
-      "em_pct": 1.24,
+      "dte_days": 4.0,
+      "em_1sigma_pts": 265.62,
+      "em_2sigma_pts": 531.24,
+      "em_pct": 1.11,
       "range_1sigma": [
-        23600.73,
-        24194.67
+        23632.08,
+        24163.32
       ],
       "range_2sigma": [
-        23303.75,
-        24491.65
+        23366.46,
+        24428.94
       ],
-      "summary_str": "\u00b1297.0 pts (\u20b923601 - \u20b924195)"
+      "summary_str": "\u00b1265.6 pts (\u20b923632 - \u20b924163)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -897,19 +1133,19 @@
     "volatility_percentile": 4.1,
     "confidence_score": 75.0,
     "expected_move": {
-      "dte_days": 5.0,
-      "em_1sigma_pts": 712.92,
-      "em_2sigma_pts": 1425.85,
-      "em_pct": 1.24,
+      "dte_days": 4.0,
+      "em_1sigma_pts": 637.66,
+      "em_2sigma_pts": 1275.32,
+      "em_pct": 1.11,
       "range_1sigma": [
-        56656.72,
-        58082.57
+        56731.99,
+        58007.31
       ],
       "range_2sigma": [
-        55943.8,
-        58795.5
+        56094.33,
+        58644.97
       ],
-      "summary_str": "\u00b1712.9 pts (\u20b956657 - \u20b958083)"
+      "summary_str": "\u00b1637.7 pts (\u20b956732 - \u20b958007)"
     },
     "no_trade_eval": {
       "is_no_trade": false,

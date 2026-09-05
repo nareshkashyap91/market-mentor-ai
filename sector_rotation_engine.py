@@ -133,5 +133,8 @@ class SectorRotationEngine:
         print(f"[INFO] Exported Sector Rotation payload to {cls.JSON_PATH}")
         return payload
 
+def get_sector_rotation():
+    return SectorRotationEngine.export_sector_json()
+
 if __name__ == "__main__":
     SectorRotationEngine.export_sector_json()
