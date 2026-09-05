@@ -12,6 +12,7 @@ class TelegramBotInteractive:
     COMMANDS = {
         "/status": "Returns live Market Regime (Nifty/BankNifty), Spot LTP, VWAP, and VIX.",
         "/top5": "Returns Top 5 Next-Day Momentum Stock Candidates with Live LTP & Targets.",
+        "/morning": "Returns 9:30 AM Live Breakout Confirmation (Confirmed Buys vs Rejected).",
         "/fii": "Returns live FII/DII Big Money Net Buying/Selling (₹ Cr).",
         "/greeks": "Returns Nifty Option Chain Delta, Gamma, Theta, and Max Pain.",
         "/mcx": "Returns live MCX Commodity Options (Crude Oil & NatGas) up to 11:30 PM IST.",
@@ -33,6 +34,8 @@ class TelegramBotInteractive:
             return cls._handle_status()
         elif cmd == "/top5":
             return cls._handle_top5()
+        elif cmd == "/morning":
+            return cls._handle_morning()
         elif cmd == "/fii":
             return cls._handle_fii()
         elif cmd == "/greeks":
@@ -109,6 +112,12 @@ class TelegramBotInteractive:
             "-----------------------------------\n"
             "💡 *Actionable Bias:* Favor High-Quality Long Breakouts & Bullish Spreads."
         )
+
+    @classmethod
+    def _handle_morning(cls):
+        from morning_breakout_validator import MorningBreakoutValidatorEngine
+        res = MorningBreakoutValidatorEngine.validate_morning_candidates()
+        return MorningBreakoutValidatorEngine.format_telegram_morning_alert(res)
 
     @classmethod
     def _handle_top5(cls):

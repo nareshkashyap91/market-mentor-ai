@@ -15,6 +15,12 @@ class TestTelegramBotInteractive(unittest.TestCase):
         self.assertIn("TOP 5 NEXT-DAY MOMENTUM CANDIDATES", res)
         self.assertIn("Live Close", res)
 
+    def test_morning_command(self):
+        """Verifies /morning 9:30 AM live breakout confirmation command output."""
+        res = process_telegram_command("/morning")
+        self.assertIn("MORNING LIVE BREAKOUT CONFIRMATION", res)
+        self.assertIn("Yesterday's Candidates Validation Results", res)
+
     def test_fii_command(self):
         """Verifies /fii command output."""
         res = process_telegram_command("/fii")
