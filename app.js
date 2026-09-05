@@ -39,13 +39,14 @@ async function refreshDashboard() {
     try {
         // Fetch JSON data concurrently with cache-busting timestamp
         const ts = Date.now();
-        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes] = await Promise.allSettled([
+        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes] = await Promise.allSettled([
             fetch(`./data/morning.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/evening.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/intraday.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/options.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/mutual_funds.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/ai_quant.json?t=${ts}`).then(r => r.json())
+            fetch(`./data/ai_quant.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/momentum_intelligence.json?t=${ts}`).then(r => r.json())
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
@@ -54,14 +55,15 @@ async function refreshDashboard() {
         const optionsData = optionsRes.status === "fulfilled" ? optionsRes.value : null;
         const mfData = mfRes.status === "fulfilled" ? mfRes.value : null;
         const quantData = quantRes.status === "fulfilled" ? quantRes.value : null;
+        const momIntelData = momIntelRes.status === "fulfilled" ? momIntelRes.value : null;
 
         // Update dashboard elements
-        updateHeaderAndOverview(morningData, eveningData, intradayData);
+        updateHeaderAndOverview(morningData, eveningData, intradayData, momIntelData);
         if (intradayData) renderIntradaySignals(intradayData);
         if (morningData) renderMorningInsights(morningData);
         if (optionsData) renderOptionsPage(optionsData);
         if (quantData) renderAIQuantPage(quantData);
-        if (eveningData) renderMomentumStocks(eveningData);
+        renderMomentumStocks(eveningData, momIntelData);
         if (mfData) renderMutualFunds(mfData);
 
     } catch (error) {
@@ -75,7 +77,7 @@ async function refreshDashboard() {
     }
 }
 
-function updateHeaderAndOverview(morning, evening, intraday) {
+function updateHeaderAndOverview(morning, evening, intraday, momIntel) {
     // Update Date Label
     const dateLabel = document.getElementById("date-label");
     const activeDate = intraday?.date || morning?.date || evening?.date;
@@ -93,7 +95,7 @@ function updateHeaderAndOverview(morning, evening, intraday) {
 
     const momentumCount = document.getElementById("momentum-count");
     if (momentumCount) {
-        momentumCount.textContent = evening?.momentum_stocks?.length || 0;
+        momentumCount.textContent = evening?.momentum_stocks?.length || momIntel?.candidates?.length || momIntel?.momentum_stocks?.length || 0;
     }
 
     const giftChangePct = document.getElementById("gift-change-pct");
@@ -326,14 +328,16 @@ function renderMorningInsights(data) {
     }
 }
 
-function renderMomentumStocks(data) {
+function renderMomentumStocks(eveningData, momIntelData) {
     const list = document.getElementById("momentum-stocks-list");
     if (!list) return;
 
-    if (!data.momentum_stocks || data.momentum_stocks.length === 0) {
+    const stocks = eveningData?.momentum_stocks || momIntelData?.candidates || momIntelData?.momentum_stocks || [];
+
+    if (!stocks || stocks.length === 0) {
         list.innerHTML = `
             <tr>
-                <td colspan="6" style="text-align: center; color: var(--text-muted);">
+                <td colspan="8" style="text-align: center; color: var(--text-muted);">
                     No momentum stocks found passing swing screening criteria.
                 </td>
             </tr>
@@ -341,7 +345,7 @@ function renderMomentumStocks(data) {
         return;
     }
 
-    list.innerHTML = data.momentum_stocks.map(s => {
+    list.innerHTML = stocks.map(s => {
         // Build DMA badge and description
         let dmaBadge = "";
         if (s.dma20 && s.dma50 && s.dma100 && s.dma200) {
@@ -359,19 +363,23 @@ function renderMomentumStocks(data) {
             dmaBadge = `<span style="color: var(--text-muted); font-size: 0.8rem;">N/A</span>`;
         }
 
-        const carVal = s.car_1y !== undefined ? `${s.car_1y > 0 ? '+' : ''}${s.car_1y.toFixed(1)}%` : "N/A";
-        const carColor = s.car_1y > 0 ? "var(--clr-success)" : "var(--clr-danger)";
+        const carVal = s.car_1y !== undefined && s.car_1y !== null ? `${s.car_1y > 0 ? '+' : ''}${s.car_1y.toFixed(1)}%` : "N/A";
+        const carColor = (s.car_1y !== undefined && s.car_1y > 0) ? "var(--clr-success)" : "var(--clr-danger)";
+        const closePrice = s.close ? `₹${s.close.toFixed(2)}` : "--";
+        const turnoverVal = s.turnover ? `₹${s.turnover.toFixed(1)} Cr` : "--";
+        const volExp = s.vol_expansion ? `${s.vol_expansion.toFixed(1)}x` : "--";
+        const rsiVal = s.rsi !== undefined && s.rsi !== null ? s.rsi.toFixed(1) : "N/A";
 
         return `
             <tr>
                 <td class="stock-ticker">NSE:${s.symbol}</td>
-                <td>₹${s.close.toFixed(2)}</td>
+                <td>${closePrice}</td>
                 <td style="color: ${carColor}; font-weight: 600;">${carVal}</td>
-                <td>₹${s.turnover.toFixed(1)} Cr</td>
-                <td><span style="color: var(--clr-success); font-weight: 600;">${s.vol_expansion.toFixed(1)}x</span></td>
-                <td>${s.rsi ? s.rsi.toFixed(1) : "N/A"}</td>
+                <td>${turnoverVal}</td>
+                <td><span style="color: var(--clr-success); font-weight: 600;">${volExp}</span></td>
+                <td>${rsiVal}</td>
                 <td>${dmaBadge}</td>
-                <td style="font-size: 0.8rem; line-height: 1.4; color: var(--text-secondary); max-width: 320px;">${s.why}</td>
+                <td style="font-size: 0.8rem; line-height: 1.4; color: var(--text-secondary); max-width: 320px;">${s.why || s.rationale || "Passes momentum criteria."}</td>
             </tr>
         `;
     }).join("");
