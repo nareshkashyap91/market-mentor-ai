@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
             else if (targetTab === "ai-quant") headerTitle.textContent = "AI Quant Strategy";
             else if (targetTab === "funds") headerTitle.textContent = "Mutual Funds Leaderboard";
             else if (targetTab === "journal") headerTitle.textContent = "AI Trade Journal & Performance";
+            else if (targetTab === "ml-optimizer") headerTitle.textContent = "ML Dynamic Target & SL Optimizer";
+            else if (targetTab === "portfolio-rebalancer") headerTitle.textContent = "Portfolio Risk-Parity Rebalancer";
         });
     });
 
@@ -40,7 +42,7 @@ async function refreshDashboard() {
     try {
         // Fetch JSON data concurrently with cache-busting timestamp
         const ts = Date.now();
-        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes] = await Promise.allSettled([
+        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes] = await Promise.allSettled([
             fetch(`./data/morning.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/evening.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/intraday.json?t=${ts}`).then(r => r.json()),
@@ -49,7 +51,9 @@ async function refreshDashboard() {
             fetch(`./data/ai_quant.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/momentum_intelligence.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/trade_journal.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/sector_rotation.json?t=${ts}`).then(r => r.json())
+            fetch(`./data/sector_rotation.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/ml_target_sl_optimized.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/portfolio_rebalancing.json?t=${ts}`).then(r => r.json())
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
@@ -61,6 +65,8 @@ async function refreshDashboard() {
         const momIntelData = momIntelRes.status === "fulfilled" ? momIntelRes.value : null;
         const journalData = journalRes.status === "fulfilled" ? journalRes.value : null;
         const sectorData = sectorRes.status === "fulfilled" ? sectorRes.value : null;
+        const mlOptData = mlOptRes.status === "fulfilled" ? mlOptRes.value : null;
+        const portfolioData = portfolioRes.status === "fulfilled" ? portfolioRes.value : null;
 
         // Update dashboard elements
         updateHeaderAndOverview(morningData, eveningData, intradayData, momIntelData);
@@ -72,6 +78,8 @@ async function refreshDashboard() {
         if (mfData) renderMutualFunds(mfData);
         if (journalData) renderTradeJournal(journalData);
         if (sectorData) renderSectorRotation(sectorData);
+        if (mlOptData) renderMLOptimizer(mlOptData);
+        if (portfolioData) renderPortfolioRebalancer(portfolioData);
 
     } catch (error) {
         console.error("[ERROR] Failed to fetch or render dashboard data: ", error);
@@ -796,4 +804,140 @@ function renderTradeJournal(data) {
 function renderSectorRotation(data) {
     if (!data || !data.sectors) return;
     // Log sector data payload
+}
+
+function renderMLOptimizer(data) {
+    if (!data || !data.candidates) return;
+    const container = document.getElementById("ml-optimizer-container");
+    if (!container) return;
+
+    container.innerHTML = data.candidates.map(item => {
+        const isLong = item.direction.toUpperCase() === "LONG";
+        const pillClass = isLong ? "target-1" : "sl-hit";
+        
+        return `
+            <div class="signal-card" style="border-left: 4px solid ${isLong ? 'var(--clr-success)' : 'var(--clr-danger)'};">
+                <div class="signal-card-header">
+                    <div class="stock-info">
+                        <div class="stock-symbol">
+                            ${item.symbol}
+                            <span class="status-pill ${pillClass}">${item.direction}</span>
+                            <span class="status-pill active">${item.volatility_regime}</span>
+                        </div>
+                        <span class="stock-company">${item.regime_description}</span>
+                    </div>
+                    <span class="signal-time-badge" style="background: rgba(255,255,255,0.08);">
+                        <i class="fa-solid fa-bullseye"></i> Win Prob: ${item.ml_win_probability_pct}%
+                    </span>
+                </div>
+
+                <div class="signal-values-grid">
+                    <div class="val-box">
+                        <span class="val-lbl">Current Price</span>
+                        <span class="val-num">₹${item.current_price.toFixed(2)}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Optimized ATR SL</span>
+                        <span class="val-num danger">₹${item.optimized_sl.toFixed(2)}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Target 1</span>
+                        <span class="val-num success">₹${item.target_1.toFixed(2)}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Target 2</span>
+                        <span class="val-num success">₹${item.target_2.toFixed(2)}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">RRR Multiplier</span>
+                        <span class="val-num purple">${item.risk_reward_ratio}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+function renderPortfolioRebalancer(data) {
+    if (!data || !data.portfolio_summary) return;
+    const summary = data.portfolio_summary;
+    const container = document.getElementById("portfolio-rebalancer-container");
+    const healthTag = document.getElementById("rebalancer-health-tag");
+
+    if (healthTag) healthTag.textContent = summary.overall_health;
+
+    if (!container) return;
+
+    const cardsHtml = summary.category_analysis.map(cat => {
+        const isSell = cat.action_signal.includes("SELL");
+        const isBuy = cat.action_signal.includes("BUY");
+        const badgeColor = isSell ? "var(--clr-danger)" : (isBuy ? "var(--clr-success)" : "var(--clr-warning)");
+
+        return `
+            <div class="signal-card">
+                <div class="signal-card-header">
+                    <div class="stock-info">
+                        <div class="stock-symbol">
+                            ${cat.category.replace('_', ' ')}
+                            <span class="status-pill" style="background: ${badgeColor}; color: #000; font-weight: 700;">
+                                ${cat.action_signal}
+                            </span>
+                        </div>
+                        <span class="stock-company">${cat.recommendation}</span>
+                    </div>
+                    <span class="signal-time-badge">Drift: ${cat.drift_pct > 0 ? '+' : ''}${cat.drift_pct}%</span>
+                </div>
+
+                <div class="signal-values-grid">
+                    <div class="val-box">
+                        <span class="val-lbl">Current Valuation</span>
+                        <span class="val-num">₹${cat.current_value.toLocaleString("en-IN")}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Current Allocation</span>
+                        <span class="val-num">${cat.current_allocation_pct}%</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Target Parity Weight</span>
+                        <span class="val-num purple">${cat.target_allocation_pct}%</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Risk Contribution</span>
+                        <span class="val-num danger">${cat.risk_contribution_pct}%</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    const metricsHeaderHtml = `
+        <div class="overview-grid" style="margin-bottom: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="glass-card overview-card">
+                <div class="card-stats">
+                    <span class="stat-label">Total Portfolio</span>
+                    <h3 class="stat-value" style="font-size: 1.1rem;">₹${summary.total_portfolio_value.toLocaleString("en-IN")}</h3>
+                </div>
+            </div>
+            <div class="glass-card overview-card">
+                <div class="card-stats">
+                    <span class="stat-label">Sharpe Ratio</span>
+                    <h3 class="stat-value" style="font-size: 1.1rem; color: var(--clr-success);">${summary.sharpe_ratio}</h3>
+                </div>
+            </div>
+            <div class="glass-card overview-card">
+                <div class="card-stats">
+                    <span class="stat-label">Sortino Ratio</span>
+                    <h3 class="stat-value" style="font-size: 1.1rem; color: var(--clr-purple);">${summary.sortino_ratio}</h3>
+                </div>
+            </div>
+            <div class="glass-card overview-card">
+                <div class="card-stats">
+                    <span class="stat-label">Max Drawdown</span>
+                    <h3 class="stat-value" style="font-size: 1.1rem; color: var(--clr-danger);">${summary.max_drawdown_pct}%</h3>
+                </div>
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = metricsHeaderHtml + cardsHtml;
 }

@@ -1,0 +1,82 @@
+{
+  "timestamp": "06-Sep-2026 01:18:08 AM IST",
+  "engine_version": "Portfolio Risk-Parity Engine V5.0",
+  "portfolio_summary": {
+    "total_portfolio_value": 1000000.0,
+    "portfolio_return_pct": 18.73,
+    "sharpe_ratio": 0.81,
+    "sortino_ratio": 1.12,
+    "portfolio_beta": 0.92,
+    "max_drawdown_pct": -8.4,
+    "overall_health": "\ud83d\udfe2 EXCELLENT (RISK-PARITY OPTIMIZED)",
+    "category_analysis": [
+      {
+        "category": "EQUITY_STOCKS",
+        "current_value": 630000.0,
+        "current_allocation_pct": 63.0,
+        "target_allocation_pct": 60.0,
+        "drift_pct": 3.0,
+        "action_signal": "\ud83d\udfe1 HOLD_IN_LINE (BALANCED)",
+        "recommendation": "EQUITY STOCKS allocation is well within risk threshold (\u00b15%).",
+        "risk_contribution_pct": 11.34
+      },
+      {
+        "category": "MUTUAL_FUNDS",
+        "current_value": 280000.0,
+        "current_allocation_pct": 28.0,
+        "target_allocation_pct": 25.0,
+        "drift_pct": 3.0,
+        "action_signal": "\ud83d\udfe1 HOLD_IN_LINE (BALANCED)",
+        "recommendation": "MUTUAL FUNDS allocation is well within risk threshold (\u00b15%).",
+        "risk_contribution_pct": 3.08
+      },
+      {
+        "category": "COMMODITY_GOLD",
+        "current_value": 90000.0,
+        "current_allocation_pct": 9.0,
+        "target_allocation_pct": 15.0,
+        "drift_pct": -6.0,
+        "action_signal": "\ud83d\udfe2 REBALANCE_BUY (UNDERWEIGHT)",
+        "recommendation": "Accumulate COMMODITY GOLD by 6.0% to match risk-parity target.",
+        "risk_contribution_pct": 0.77
+      }
+    ],
+    "holdings": [
+      {
+        "name": "Nifty 50 Index Basket",
+        "category": "EQUITY_STOCKS",
+        "current_value": 350000.0,
+        "pnl_pct": 18.5,
+        "annual_volatility_pct": 14.2
+      },
+      {
+        "name": "MidCap Momentum Stocks",
+        "category": "EQUITY_STOCKS",
+        "current_value": 280000.0,
+        "pnl_pct": 26.4,
+        "annual_volatility_pct": 21.0
+      },
+      {
+        "name": "Parag Parikh Flexi Cap Fund",
+        "category": "MUTUAL_FUNDS",
+        "current_value": 180000.0,
+        "pnl_pct": 15.2,
+        "annual_volatility_pct": 11.5
+      },
+      {
+        "name": "Mirae Asset Large Cap Fund",
+        "category": "MUTUAL_FUNDS",
+        "current_value": 100000.0,
+        "pnl_pct": 12.8,
+        "annual_volatility_pct": 10.8
+      },
+      {
+        "name": "MCX Sovereign Gold / ETF",
+        "category": "COMMODITY_GOLD",
+        "current_value": 90000.0,
+        "pnl_pct": 9.4,
+        "annual_volatility_pct": 8.5
+      }
+    ]
+  }
+}

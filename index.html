@@ -49,6 +49,12 @@
                 <a href="#" class="nav-item" data-tab="journal">
                     <i class="fa-solid fa-book-journal-whills"></i> AI Trade Journal
                 </a>
+                <a href="#" class="nav-item" data-tab="ml-optimizer">
+                    <i class="fa-solid fa-calculator"></i> ML Target/SL Optimizer
+                </a>
+                <a href="#" class="nav-item" data-tab="portfolio-rebalancer">
+                    <i class="fa-solid fa-chart-pie"></i> Portfolio Rebalancer
+                </a>
             </nav>
             
             <div class="connection-status">
@@ -406,6 +412,30 @@
                                 <!-- Dynamic Intraday Long & Short Cards -->
                             </div>
                         </div>
+                    </div>
+                </div>
+            <!-- ML Target/SL Optimizer Tab -->
+            <div class="tab-panel" id="tab-ml-optimizer">
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-calculator"></i> ML Dynamic Target & Stop-Loss Optimizer (14-Period ATR Regime)</h2>
+                        <span class="badge badge-pulse">Adaptive Multiples & Win Rate %</span>
+                    </div>
+                    <div class="signals-container" id="ml-optimizer-container">
+                        <!-- Dynamic ML Optimizer Cards -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Rebalancer Tab -->
+            <div class="tab-panel" id="tab-portfolio-rebalancer">
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-chart-pie"></i> Portfolio Risk-Parity & Multi-Asset Auto-Rebalancing Screener</h2>
+                        <span class="badge badge-pulse" id="rebalancer-health-tag">Risk-Parity Active</span>
+                    </div>
+                    <div class="signals-container" id="portfolio-rebalancer-container">
+                        <!-- Dynamic Rebalancer Content -->
                     </div>
                 </div>
             </div>

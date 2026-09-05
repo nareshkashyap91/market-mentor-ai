@@ -86,18 +86,18 @@ class TradeJournalEngine:
         cursor = conn.cursor()
 
         try:
-            cursor.execute("SELECT COUNT(*), SUM(pnl_pct) FROM trade_journal")
+            cursor.execute("SELECT COUNT(*), SUM(pnl_rupees) FROM trade_journal")
             row = cursor.fetchone()
             total_count = row[0] if row and row[0] else 0
             total_pnl = row[1] if row and row[1] else 0.0
 
-            cursor.execute("SELECT COUNT(*) FROM trade_journal WHERE win_loss = 'WIN' OR win_loss_status = 'WIN'")
+            cursor.execute("SELECT COUNT(*) FROM trade_journal WHERE win_loss_status = 'WIN'")
             wins_row = cursor.fetchone()
             wins = wins_row[0] if wins_row and wins_row[0] else 0
-        except Exception:
-            total_count = 5
-            total_pnl = 15.4
-            wins = 4
+        except Exception as e:
+            total_count = 0
+            total_pnl = 0.0
+            wins = 0
         finally:
             conn.close()
 
