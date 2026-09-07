@@ -191,6 +191,16 @@ class MorningMomentumValidatorEngine:
 
         print(f"[INFO] Saved Morning Momentum Validated payload to {target_file}")
 
+        # Check market hours: Only send live Telegram broadcast during market hours (9:15 AM - 3:30 PM IST)
+        ist_now = datetime.now(ist_tz)
+        is_weekday = ist_now.weekday() < 5
+        curr_time = ist_now.time()
+        is_live_hours = is_weekday and (datetime.strptime("09:15", "%H:%M").time() <= curr_time <= datetime.strptime("15:30", "%H:%M").time())
+
+        if not is_live_hours:
+            print("[INFO] Market is closed. Skipping Telegram broadcast for Morning Momentum Validator to prevent off-hours alerts.")
+            return payload
+
         # Broadcast High Conviction Setups to Telegram
         top_setups = [s for s in setups if s["conviction_score"] >= 75][:3]
         if not top_setups and setups:
