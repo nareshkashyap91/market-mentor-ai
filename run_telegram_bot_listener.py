@@ -8,24 +8,10 @@ from telegram_bot_interactive import TelegramBotInteractive
 # Ensure stdout handles UTF-8 on Windows
 sys.stdout.reconfigure(encoding='utf-8')
 
+from telegram_config import get_telegram_credentials
+
 def load_telegram_credentials():
-    tg_token = os.environ.get("TELEGRAM_BOT_TOKEN")
-    tg_chat_id = os.environ.get("TELEGRAM_CHAT_ID")
-    config_file = "config.json"
-
-    if os.path.exists(config_file):
-        try:
-            with open(config_file, "r") as cf:
-                config = json.load(cf)
-            tg = config.get("telegram", {})
-            if not tg_token:
-                tg_token = tg.get("bot_token")
-            if not tg_chat_id:
-                tg_chat_id = tg.get("chat_id")
-        except Exception:
-            pass
-
-    return tg_token, tg_chat_id
+    return get_telegram_credentials()
 
 def send_telegram_reply(bot_token, chat_id, text):
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"

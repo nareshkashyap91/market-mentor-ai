@@ -342,25 +342,18 @@ def main():
     print("   MARKETMENTOR INTRADAY ENGINE (ORB)    ")
     print("=========================================")
     
-    # Load configuration
-    config_file = "config.json"
-    tg_token = os.environ.get("TELEGRAM_BOT_TOKEN")
-    tg_chat_id = os.environ.get("TELEGRAM_CHAT_ID")
+    from telegram_config import get_telegram_credentials
+    tg_token, tg_chat_id = get_telegram_credentials()
     
     dhan_enabled = False
     client_id = None
     access_token = None
     
+    config_file = "config.json"
     if os.path.exists(config_file):
         try:
             with open(config_file, "r") as cf:
                 config = json.load(cf)
-            tg = config.get("telegram", {})
-            if not tg_token:
-                tg_token = tg.get("bot_token")
-            if not tg_chat_id:
-                tg_chat_id = tg.get("chat_id")
-                
             dhan_config = config.get("dhan", {})
             dhan_enabled = dhan_config.get("enabled", False)
             client_id = dhan_config.get("client_id")

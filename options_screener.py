@@ -252,22 +252,8 @@ def main():
     print("  MARKETMENTOR OPTIONS & PULSE ENGINE    ")
     print("=========================================")
     
-    # Load configuration
-    config_file = "config.json"
-    tg_token = os.environ.get("TELEGRAM_BOT_TOKEN")
-    tg_chat_id = os.environ.get("TELEGRAM_CHAT_ID")
-    
-    if os.path.exists(config_file):
-        try:
-            with open(config_file, "r") as cf:
-                config = json.load(cf)
-            tg = config.get("telegram", {})
-            if not tg_token:
-                tg_token = tg.get("bot_token")
-            if not tg_chat_id:
-                tg_chat_id = tg.get("chat_id")
-        except Exception as e:
-            print(f"[WARNING] Could not parse config.json: {e}")
+    from telegram_config import get_telegram_credentials
+    tg_token, tg_chat_id = get_telegram_credentials()
             
     is_live = check_market_hours()
     is_github = os.environ.get("GITHUB_ACTIONS") == "true"
