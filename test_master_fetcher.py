@@ -33,7 +33,8 @@ class TestMasterFetcherSuite(unittest.TestCase):
             "trade_journal.json",
             "options_max_pain.json",
             "ml_target_sl_optimized.json",
-            "portfolio_rebalancing.json"
+            "portfolio_rebalancing.json",
+            "morning_momentum_validated.json"
         ]
 
         for fname in required_json_files:

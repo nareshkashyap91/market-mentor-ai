@@ -85,7 +85,7 @@ class MasterDataFetcher:
 
         # 8. ML Dynamic Target & Stop-Loss Optimizer
         try:
-            print("\n[8/9] Executing ML Dynamic Target & Stop-Loss Optimizer...")
+            print("\n[8/10] Executing ML Dynamic Target & Stop-Loss Optimizer...")
             from ml_target_sl_optimizer import MLTargetSLOptimizer
             MLTargetSLOptimizer.export_ml_optimizer_json()
         except Exception as e:
@@ -93,14 +93,22 @@ class MasterDataFetcher:
 
         # 9. Portfolio Risk-Parity & Auto-Rebalancing Screener
         try:
-            print("\n[9/9] Executing Portfolio Risk-Parity & Auto-Rebalancing Screener...")
+            print("\n[9/10] Executing Portfolio Risk-Parity & Auto-Rebalancing Screener...")
             from portfolio_rebalancer import PortfolioRebalancerEngine
             PortfolioRebalancerEngine.export_portfolio_json()
         except Exception as e:
             print(f"[WARN] Portfolio Rebalancer step error: {e}")
 
+        # 10. Morning Pre-Market & 15m ORB High-Conviction Momentum Validator
+        try:
+            print("\n[10/10] Executing Morning Momentum Validation & Signal Dispatcher...")
+            from morning_momentum_validator import MorningMomentumValidatorEngine
+            MorningMomentumValidatorEngine.export_and_broadcast_morning_signals()
+        except Exception as e:
+            print(f"[WARN] Morning Momentum Validator step error: {e}")
+
         print("\n==========================================================================")
-        print("  [SUCCESS] All Market Mentor AI V5.0 Data Payloads Refreshed in 1 Pass!")
+        print("  [SUCCESS] All Market Mentor AI V5.5 Data Payloads Refreshed in 1 Pass!")
         print("==========================================================================")
 
         # Single Git Push (Optional / Enabled in Automated Schedulers)
