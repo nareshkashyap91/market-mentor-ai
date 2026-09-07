@@ -108,21 +108,10 @@ def check_market_hours():
     market_end = time(15, 30)
     return market_start <= current_time <= market_end
 
+from telegram_config import send_deduplicated_telegram_alert
+
 def send_to_telegram(message, bot_token, chat_id):
-    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-    payload = {
-        "chat_id": chat_id,
-        "text": message,
-        "parse_mode": "Markdown"
-    }
-    try:
-        response = requests.post(url, json=payload, timeout=15)
-        if response.status_code == 200:
-            print("[INFO] Successfully sent intraday signal to Telegram!")
-        else:
-            print(f"[ERROR] Telegram sending failed: {response.text}")
-    except Exception as e:
-        print(f"[ERROR] Exception sending to Telegram: {e}")
+    return send_deduplicated_telegram_alert(message, bot_token, chat_id)
 
 def fetch_dhan_data(symbol, client_id, access_token):
     """Fetches 15m intraday data from Dhan API."""

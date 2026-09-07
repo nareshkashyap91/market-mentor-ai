@@ -37,21 +37,10 @@ def check_market_hours():
     market_end = time(15, 30)
     return market_start <= current_time <= market_end
 
+from telegram_config import send_deduplicated_telegram_alert
+
 def send_to_telegram(message, bot_token, chat_id):
-    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-    payload = {
-        "chat_id": chat_id,
-        "text": message,
-        "parse_mode": "Markdown"
-    }
-    try:
-        res = requests.post(url, json=payload, timeout=15)
-        if res.status_code == 200:
-            print("[INFO] AI Quant Telegram Alert sent successfully!")
-        else:
-            print(f"[ERROR] Telegram failed: {res.text}")
-    except Exception as e:
-        print(f"[ERROR] Exception sending AI Quant Alert: {e}")
+    return send_deduplicated_telegram_alert(message, bot_token, chat_id)
 
 def detect_chart_patterns(df):
     """Automated Chart Pattern Recognition engine on 15m intraday candle data."""
