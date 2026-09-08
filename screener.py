@@ -6,7 +6,11 @@ import requests
 import numpy as np
 import pandas as pd
 import yfinance as yf
-from mftool import Mftool
+try:
+    from mftool import Mftool
+    HAS_MFTOOL = True
+except Exception:
+    HAS_MFTOOL = False
 from datetime import datetime, timedelta
 
 # Ensure terminal outputs emojis correctly on Windows

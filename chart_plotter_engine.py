@@ -2,9 +2,13 @@ import os
 import requests
 import numpy as np
 import pandas as pd
-import matplotlib
-matplotlib.use('Agg') # Non-gui background renderer
-import matplotlib.pyplot as plt
+try:
+    import matplotlib
+    matplotlib.use('Agg') # Non-gui background renderer
+    import matplotlib.pyplot as plt
+    HAS_MATPLOTLIB = True
+except Exception:
+    HAS_MATPLOTLIB = False
 from datetime import datetime, timezone, timedelta
 
 class ChartPlotterEngine:
@@ -17,6 +21,10 @@ class ChartPlotterEngine:
         """Generates HD technical chart image for a stock or index symbol."""
         os.makedirs(output_dir, exist_ok=True)
         img_path = os.path.join(output_dir, f"{symbol}_chart.png")
+
+        if not HAS_MATPLOTLIB:
+            print("[WARN] matplotlib is not available. Skipping chart plotting.")
+            return False, ""
 
         fig, ax = plt.subplots(figsize=(10, 5), dpi=150)
         fig.patch.set_facecolor('#0f172a')
