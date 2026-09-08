@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Main Style Sheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- TradingView Embed Widget JS -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 </head>
 <body>
     <!-- Background blur effects -->
@@ -54,6 +56,9 @@
                 </a>
                 <a href="#" class="nav-item" data-tab="portfolio-rebalancer">
                     <i class="fa-solid fa-chart-pie"></i> Portfolio Rebalancer
+                </a>
+                <a href="#" class="nav-item" data-tab="tv-charts">
+                    <i class="fa-solid fa-chart-candlestick"></i> Interactive Pro Charts
                 </a>
             </nav>
             
@@ -436,6 +441,31 @@
                     </div>
                     <div class="signals-container" id="portfolio-rebalancer-container">
                         <!-- Dynamic Rebalancer Content -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive TradingView Pro Charts Tab -->
+            <div class="tab-panel" id="tab-tv-charts">
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-chart-candlestick"></i> Interactive TradingView Pro Technical Analysis & Indicators</h2>
+                        <span class="badge badge-pulse">Real-Time Candle Feed</span>
+                    </div>
+                    
+                    <!-- Quick Symbol Select Pills -->
+                    <div class="symbol-pills-bar" style="margin: 16px 0; display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="symbol-pill active" onclick="loadTvChart('NSE:NIFTY')"><i class="fa-solid fa-chart-line"></i> Nifty 50</button>
+                        <button class="symbol-pill" onclick="loadTvChart('NSE:BANKNIFTY')"><i class="fa-solid fa-building-columns"></i> Bank Nifty</button>
+                        <button class="symbol-pill" onclick="loadTvChart('NSE:HOMEFIRST')">🚀 HOMEFIRST</button>
+                        <button class="symbol-pill" onclick="loadTvChart('NSE:PFOCUS')">🚀 PFOCUS</button>
+                        <button class="symbol-pill" onclick="loadTvChart('NSE:PPLPHARMA')">🚀 PPLPHARMA</button>
+                        <button class="symbol-pill" onclick="loadTvChart('NSE:RELIANCE')">💎 RELIANCE</button>
+                    </div>
+
+                    <!-- TradingView Widget Container -->
+                    <div id="tradingview_widget_wrapper" style="height: 620px; width: 100%; border-radius: 12px; overflow: hidden;">
+                        <div id="tradingview_widget_container" style="height: 100%; width: 100%;"></div>
                     </div>
                 </div>
             </div>

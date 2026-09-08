@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
             else if (targetTab === "journal") headerTitle.textContent = "AI Trade Journal & Performance";
             else if (targetTab === "ml-optimizer") headerTitle.textContent = "ML Dynamic Target & SL Optimizer";
             else if (targetTab === "portfolio-rebalancer") headerTitle.textContent = "Portfolio Risk-Parity Rebalancer";
+            else if (targetTab === "tv-charts") {
+                headerTitle.textContent = "Interactive TradingView Pro Charts";
+                loadTvChart("NSE:NIFTY");
+            }
         });
     });
 
@@ -934,10 +938,247 @@ function renderPortfolioRebalancer(data) {
                 <div class="card-stats">
                     <span class="stat-label">Max Drawdown</span>
                     <h3 class="stat-value" style="font-size: 1.1rem; color: var(--clr-danger);">${summary.max_drawdown_pct}%</h3>
+                                <span class="val-lbl">Target 1</span>
+                                <span class="val-num success">₹${st.t1.toFixed(2)}</span>
+                            </div>
+                            <div class="val-box">
+                                <span class="val-lbl">Target 2</span>
+                                <span class="val-num success">₹${st.t2.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+    }
+}
+
+function renderTradeJournal(data) {
+    if (!data || !data.analytics) return;
+    const a = data.analytics;
+
+    const winRateEl = document.getElementById("journal-win-rate");
+    const winCountEl = document.getElementById("journal-win-count");
+    if (winRateEl) winRateEl.textContent = `${a.win_rate_pct}%`;
+    if (winCountEl) winCountEl.textContent = `${a.win_count} Wins / ${a.loss_count} Losses`;
+
+    const pfEl = document.getElementById("journal-profit-factor");
+    const netPnlEl = document.getElementById("journal-net-pnl");
+    if (pfEl) pfEl.textContent = a.profit_factor;
+    if (netPnlEl) netPnlEl.textContent = `Net PnL: ${a.net_pnl_pct > 0 ? '+' : ''}${a.net_pnl_pct}%`;
+
+    const rrrEl = document.getElementById("journal-avg-rrr");
+    if (rrrEl) rrrEl.textContent = `${a.avg_rrr} R`;
+
+    const maxDdEl = document.getElementById("journal-max-dd");
+    const sharpeEl = document.getElementById("journal-sharpe");
+    if (maxDdEl) maxDdEl.textContent = `-${a.max_drawdown_pct}%`;
+    if (sharpeEl) sharpeEl.textContent = `Sharpe: ${a.sharpe_ratio}`;
+
+    const list = document.getElementById("journal-trades-list");
+    if (list && a.recent_trades) {
+        list.innerHTML = a.recent_trades.map(t => {
+            const isWin = t.win_loss === "WIN";
+            const pillClass = isWin ? "target-1" : (t.win_loss === "LOSS" ? "sl-hit" : "active");
+            const pnlColor = isWin ? "var(--clr-success)" : (t.win_loss === "LOSS" ? "var(--clr-danger)" : "var(--text-muted)");
+            const exitPrice = t.exit_price ? `₹${t.exit_price.toFixed(2)}` : "--";
+
+            return `
+                <tr>
+                    <td style="font-size: 0.8rem; color: var(--text-muted);">${t.timestamp}</td>
+                    <td class="stock-ticker">NSE:${t.symbol}</td>
+                    <td><span class="status-pill ${t.direction === 'LONG' ? 'target-1' : 'sl-hit'}" style="font-size: 0.65rem; padding: 2px 6px;">${t.direction}</span></td>
+                    <td style="font-size: 0.82rem;">${t.strategy}</td>
+                    <td>₹${t.entry.toFixed(2)}</td>
+                    <td>${exitPrice}</td>
+                    <td style="color: ${pnlColor}; font-weight: 600;">${t.pnl_pct > 0 ? '+' : ''}${t.pnl_pct.toFixed(2)}%</td>
+                    <td>${t.r_multiple.toFixed(2)} R</td>
+                    <td><span class="status-pill ${pillClass}">${t.status}</span></td>
+                </tr>
+            `;
+        }).join("");
+    }
+}
+
+function renderSectorRotation(data) {
+    if (!data || !data.sectors) return;
+    // Log sector data payload
+}
+
+function renderMLOptimizer(data) {
+    if (!data || !data.candidates) return;
+    const container = document.getElementById("ml-optimizer-container");
+    if (!container) return;
+
+    container.innerHTML = data.candidates.map(item => {
+        const isLong = item.direction.toUpperCase() === "LONG";
+        const pillClass = isLong ? "target-1" : "sl-hit";
+        
+        return `
+            <div class="signal-card" style="border-left: 4px solid ${isLong ? 'var(--clr-success)' : 'var(--clr-danger)'};">
+                <div class="signal-card-header">
+                    <div class="stock-info">
+                        <div class="stock-symbol">
+                            ${item.symbol}
+                            <span class="status-pill ${pillClass}">${item.direction}</span>
+                            <span class="status-pill active">${item.volatility_regime}</span>
+                        </div>
+                        <span class="stock-company">${item.regime_description}</span>
+                    </div>
+                    <span class="signal-time-badge" style="background: rgba(255,255,255,0.08);">
+                        <i class="fa-solid fa-bullseye"></i> Win Prob: ${item.ml_win_probability_pct}%
+                    </span>
+                </div>
+
+                <div class="signal-values-grid">
+                    <div class="val-box">
+                        <span class="val-lbl">Current Price</span>
+                        <span class="val-num">₹${item.current_price.toFixed(2)}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Optimized ATR SL</span>
+                        <span class="val-num danger">₹${item.optimized_sl.toFixed(2)}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Target 1</span>
+                        <span class="val-num success">₹${item.target_1.toFixed(2)}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Target 2</span>
+                        <span class="val-num success">₹${item.target_2.toFixed(2)}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">RRR Multiplier</span>
+                        <span class="val-num purple">${item.risk_reward_ratio}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+function renderPortfolioRebalancer(data) {
+    if (!data || !data.portfolio_summary) return;
+    const summary = data.portfolio_summary;
+    const container = document.getElementById("portfolio-rebalancer-container");
+    const healthTag = document.getElementById("rebalancer-health-tag");
+
+    if (healthTag) healthTag.textContent = summary.overall_health;
+
+    if (!container) return;
+
+    const cardsHtml = summary.category_analysis.map(cat => {
+        const isSell = cat.action_signal.includes("SELL");
+        const isBuy = cat.action_signal.includes("BUY");
+        const badgeColor = isSell ? "var(--clr-danger)" : (isBuy ? "var(--clr-success)" : "var(--clr-warning)");
+
+        return `
+            <div class="signal-card">
+                <div class="signal-card-header">
+                    <div class="stock-info">
+                        <div class="stock-symbol">
+                            ${cat.category.replace('_', ' ')}
+                            <span class="status-pill" style="background: ${badgeColor}; color: #000; font-weight: 700;">
+                                ${cat.action_signal}
+                            </span>
+                        </div>
+                        <span class="stock-company">${cat.recommendation}</span>
+                    </div>
+                    <span class="signal-time-badge">Drift: ${cat.drift_pct > 0 ? '+' : ''}${cat.drift_pct}%</span>
+                </div>
+
+                <div class="signal-values-grid">
+                    <div class="val-box">
+                        <span class="val-lbl">Current Valuation</span>
+                        <span class="val-num">₹${cat.current_value.toLocaleString("en-IN")}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Current Allocation</span>
+                        <span class="val-num">${cat.current_allocation_pct}%</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Target Parity Weight</span>
+                        <span class="val-num purple">${cat.target_allocation_pct}%</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Risk Contribution</span>
+                        <span class="val-num danger">${cat.risk_contribution_pct}%</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    const metricsHeaderHtml = `
+        <div class="overview-grid" style="margin-bottom: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="glass-card overview-card">
+                <div class="card-stats">
+                    <span class="stat-label">Total Portfolio</span>
+                    <h3 class="stat-value" style="font-size: 1.1rem;">₹${summary.total_portfolio_value.toLocaleString("en-IN")}</h3>
+                </div>
+            </div>
+            <div class="glass-card overview-card">
+                <div class="card-stats">
+                    <span class="stat-label">Sharpe Ratio</span>
+                    <h3 class="stat-value" style="font-size: 1.1rem; color: var(--clr-success);">${summary.sharpe_ratio}</h3>
+                </div>
+            </div>
+            <div class="glass-card overview-card">
+                <div class="card-stats">
+                    <span class="stat-label">Sortino Ratio</span>
+                    <h3 class="stat-value" style="font-size: 1.1rem; color: var(--clr-purple);">${summary.sortino_ratio}</h3>
+                </div>
+            </div>
+            <div class="glass-card overview-card">
+                <div class="card-stats">
+                    <span class="stat-label">Max Drawdown</span>
+                    <h3 class="stat-value" style="font-size: 1.1rem; color: var(--clr-danger);">${summary.max_drawdown_pct}%</h3>
                 </div>
             </div>
         </div>
     `;
 
     container.innerHTML = metricsHeaderHtml + cardsHtml;
+}
+
+let currentTvSymbol = "NSE:NIFTY";
+
+function loadTvChart(symbol) {
+    currentTvSymbol = symbol || "NSE:NIFTY";
+
+    const pills = document.querySelectorAll(".symbol-pill");
+    pills.forEach(p => {
+        if (p.getAttribute("onclick")?.includes(symbol)) {
+            p.classList.add("active");
+        } else {
+            p.classList.remove("active");
+        }
+    });
+
+    const container = document.getElementById("tradingview_widget_container");
+    if (!container) return;
+    container.innerHTML = "";
+
+    if (typeof TradingView !== "undefined") {
+        new TradingView.widget({
+            "autosize": true,
+            "symbol": currentTvSymbol,
+            "interval": "15",
+            "timezone": "Asia/Kolkata",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "allow_symbol_change": true,
+            "container_id": "tradingview_widget_container",
+            "studies": [
+                "VWAP@tv-basicstudies",
+                "RSI@tv-basicstudies",
+                "MASimple@tv-basicstudies"
+            ]
+        });
+    } else {
+        container.innerHTML = `<div class="empty-state"><p>Loading TradingView Widget Library...</p></div>`;
+    }
 }
