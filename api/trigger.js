@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -12,13 +12,13 @@ export default async function handler(req, res) {
   const WORKFLOW_ID = "master_pulse.yml";
 
   // If token is set in environment or provided via query param ?token=xxx
-  const tokenToUse = req.query.token || GITHUB_TOKEN;
+  const tokenToUse = (req.query && req.query.token) || GITHUB_TOKEN;
 
   if (!tokenToUse) {
     return res.status(400).json({
       success: false,
       error: "Missing GitHub Personal Access Token (GITHUB_TOKEN). Please add GITHUB_TOKEN in Vercel Environment Variables or pass ?token=YOUR_PAT",
-      instructions: "Generate a Fine-Grained Personal Access Token with 'Actions: Write' permission at https://github.com/settings/tokens"
+      instructions: "Generate a Personal Access Token with 'Actions: Write' permission at https://github.com/settings/tokens"
     });
   }
 
@@ -56,4 +56,4 @@ export default async function handler(req, res) {
       error: err.message
     });
   }
-}
+};
