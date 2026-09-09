@@ -63,6 +63,9 @@
                 <a href="#" class="nav-item" data-tab="sector-gex">
                     <i class="fa-solid fa-fire-flame-curved"></i> Sector Heatmap & GEX
                 </a>
+                <a href="#" class="nav-item" data-tab="smc-radar">
+                    <i class="fa-solid fa-radar"></i> SMC Order Block Radar
+                </a>
             </nav>
             
             <div class="connection-status">
@@ -522,6 +525,56 @@
                             <div style="font-size: 22px; font-weight: 700; color: #3b82f6; margin-top: 6px;" id="gex-pinning-target">₹23,550</div>
                             <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px;" id="gex-pinning-prob">78% Pinning Probability</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SMC Multi-Timeframe Order Block & Liquidity Radar Tab -->
+            <div class="tab-panel" id="tab-smc-radar">
+                <!-- Summary Metrics Cards -->
+                <div class="overview-grid" style="margin-bottom: 20px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="glass-card overview-card">
+                        <div class="card-icon green"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Active BOS Expansions</span>
+                            <h3 class="stat-value" id="smc-bos-count">0</h3>
+                            <span class="stat-sub">Break of Structure</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon red"><i class="fa-solid fa-arrows-rotate"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">CHOCH Reversals</span>
+                            <h3 class="stat-value" id="smc-choch-count">0</h3>
+                            <span class="stat-sub">Character Shifts</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon purple"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Demand Order Blocks</span>
+                            <h3 class="stat-value" id="smc-demand-count">0</h3>
+                            <span class="stat-sub">Institutional Support</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon blue"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Fair Value Gaps (FVG)</span>
+                            <h3 class="stat-value" id="smc-fvg-count">0</h3>
+                            <span class="stat-sub">Imbalance Zones</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card panel-card">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-radar"></i> Institutional Order Block & Liquidity Radar Candidates</h2>
+                        <span class="badge badge-pulse" id="smc-regime-badge">SMC Engine Active</span>
+                    </div>
+
+                    <div id="smc-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Dynamic SMC Cards Rendered Here -->
                     </div>
                 </div>
             </div>

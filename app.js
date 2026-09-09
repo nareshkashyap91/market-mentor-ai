@@ -29,6 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 headerTitle.textContent = "Interactive TradingView Pro Charts";
                 loadTvChart("NSE:NIFTY");
             }
+            else if (targetTab === "sector-gex") {
+                headerTitle.textContent = "Real-Time Sector Heatmap & Gamma Exposure";
+            }
+            else if (targetTab === "smc-radar") {
+                headerTitle.textContent = "SMC Multi-Timeframe Order Block Radar";
+            }
         });
     });
 
@@ -46,7 +52,7 @@ async function refreshDashboard() {
     try {
         // Fetch JSON data concurrently with cache-busting timestamp
         const ts = Date.now();
-        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes] = await Promise.allSettled([
+        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes] = await Promise.allSettled([
             fetch(`./data/morning.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/evening.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/intraday.json?t=${ts}`).then(r => r.json()),
@@ -57,7 +63,8 @@ async function refreshDashboard() {
             fetch(`./data/trade_journal.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/sector_rotation.json?t=${ts}`).then(r => r.json()),
             fetch(`./data/ml_target_sl_optimized.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/portfolio_rebalancing.json?t=${ts}`).then(r => r.json())
+            fetch(`./data/portfolio_rebalancing.json?t=${ts}`).then(r => r.json()),
+            fetch(`./data/smc_market_structure.json?t=${ts}`).then(r => r.json())
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
@@ -71,6 +78,7 @@ async function refreshDashboard() {
         const sectorData = sectorRes.status === "fulfilled" ? sectorRes.value : null;
         const mlOptData = mlOptRes.status === "fulfilled" ? mlOptRes.value : null;
         const portfolioData = portfolioRes.status === "fulfilled" ? portfolioRes.value : null;
+        const smcData = smcRes.status === "fulfilled" ? smcRes.value : null;
 
         // Update dashboard elements
         updateHeaderAndOverview(morningData, eveningData, intradayData, momIntelData);
@@ -84,6 +92,7 @@ async function refreshDashboard() {
         if (sectorData) renderSectorRotation(sectorData);
         if (mlOptData) renderMLOptimizer(mlOptData);
         if (portfolioData) renderPortfolioRebalancer(portfolioData);
+        if (smcData) renderSMCRadar(smcData);
 
     } catch (error) {
         console.error("[ERROR] Failed to fetch or render dashboard data: ", error);
@@ -1288,3 +1297,74 @@ function loadTvChart(symbol) {
         container.innerHTML = `<div class="empty-state"><p>Loading TradingView Widget Library...</p></div>`;
     }
 }
+
+function renderSMCRadar(data) {
+    if (!data) return;
+
+    // Summary counts
+    if (data.summary) {
+        const s = data.summary;
+        const bosEl = document.getElementById("smc-bos-count");
+        const chochEl = document.getElementById("smc-choch-count");
+        const demandEl = document.getElementById("smc-demand-count");
+        const fvgEl = document.getElementById("smc-fvg-count");
+        const regimeEl = document.getElementById("smc-regime-badge");
+
+        if (bosEl) bosEl.textContent = s.active_bos_count || 0;
+        if (chochEl) chochEl.textContent = s.choch_reversals || 0;
+        if (demandEl) demandEl.textContent = s.demand_zones_count || 0;
+        if (fvgEl) fvgEl.textContent = s.fvg_gaps_count || 0;
+        if (regimeEl && s.overall_smc_regime) regimeEl.textContent = s.overall_smc_regime;
+    }
+
+    // Candidates Grid Cards
+    const container = document.getElementById("smc-cards-grid");
+    if (!container || !data.candidates || data.candidates.length === 0) return;
+
+    container.innerHTML = data.candidates.map(item => {
+        const isBullish = item.structure_state.includes("BULLISH");
+        const pillClass = isBullish ? "target-1" : (item.structure_state.includes("BEARISH") ? "sl-hit" : "active");
+        const bgClr = isBullish ? "rgba(16, 185, 129, 0.05)" : "rgba(239, 68, 68, 0.05)";
+
+        return `
+            <div class="signal-card" style="border-left: 4px solid ${isBullish ? 'var(--clr-success)' : 'var(--clr-danger)'}; background: ${bgClr};">
+                <div class="signal-card-header">
+                    <div class="stock-info">
+                        <div class="stock-symbol">
+                            ${item.symbol}
+                            <span class="status-pill ${pillClass}">${item.structure_state}</span>
+                        </div>
+                        <span class="stock-company">${item.bias}</span>
+                    </div>
+                    <span class="signal-time-badge" style="background: rgba(255,255,255,0.08);">
+                        <i class="fa-solid fa-bolt"></i> SMC Score: ${item.smc_score}/100
+                    </span>
+                </div>
+
+                <div class="signal-values-grid">
+                    <div class="val-box">
+                        <span class="val-lbl">Current LTP</span>
+                        <span class="val-num">₹${item.current_price.toFixed(2)}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">RVOL Multiplier</span>
+                        <span class="val-num purple">${item.rvol}x</span>
+                    </div>
+                    <div class="val-box" style="grid-column: span 2;">
+                        <span class="val-lbl">🛡️ Institutional Demand OB</span>
+                        <span class="val-num success" style="font-size: 0.85rem;">${item.demand_order_block}</span>
+                    </div>
+                    <div class="val-box" style="grid-column: span 2;">
+                        <span class="val-lbl">⚔️ Overhead Supply OB</span>
+                        <span class="val-num danger" style="font-size: 0.85rem;">${item.supply_order_block}</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px; font-size: 11px; font-weight: 600; text-align: center; background: rgba(255,255,255,0.04); padding: 6px 10px; border-radius: 6px; color: #cbd5e1;">
+                    ⚡ ${item.fvg_status}
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+

@@ -15,6 +15,7 @@ class TelegramBotInteractive:
         "/morning": "Returns 9:30 AM Live Breakout Confirmation (Confirmed Buys vs Rejected).",
         "/fii": "Returns live FII/DII Big Money Net Buying/Selling (₹ Cr).",
         "/greeks": "Returns Nifty Option Chain Delta, Gamma, Theta, and Max Pain.",
+        "/smc": "Returns Multi-Timeframe (MTF) SMC Break of Structure (BOS), CHOCH, and Order Blocks.",
         "/mcx": "Returns live MCX Commodity Options (Crude Oil & NatGas) up to 11:30 PM IST.",
         "/help": "Displays all available Telegram commands and usage guide."
     }
@@ -40,6 +41,8 @@ class TelegramBotInteractive:
             return cls._handle_fii()
         elif cmd == "/greeks":
             return cls._handle_greeks()
+        elif cmd == "/smc":
+            return cls._handle_smc()
         elif cmd == "/mcx":
             return cls._handle_mcx()
         elif cmd == "/help" or cmd == "/start":
@@ -204,6 +207,43 @@ class TelegramBotInteractive:
             "-----------------------------------\n"
             "🎯 *Expiry Bias:* Market likely to pin near ₹24,100 on Expiry Day."
         )
+
+    @classmethod
+    def _handle_smc(cls):
+        smc_path = os.path.join("data", "smc_market_structure.json")
+        if not os.path.exists(smc_path):
+            from smc_liquidity_sweep_engine import SMCLiquiditySweepEngine
+            SMCLiquiditySweepEngine.export_smc_json()
+
+        try:
+            with open(smc_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            summary = data.get("summary", {})
+            candidates = data.get("candidates", [])
+
+            lines = [
+                "📡 *SMC MULTI-TIMEFRAME ORDER BLOCK & LIQUIDITY RADAR*",
+                "-----------------------------------",
+                f"🕒 *Timestamp:* {data.get('timestamp', 'Live')}",
+                f"🔥 *Regime:* {summary.get('overall_smc_regime', 'INSTITUTIONAL ACCUMULATION')}",
+                f"• *BOS Confirmations:* `{summary.get('active_bos_count', 0)}` | *CHOCH Reversals:* `{summary.get('choch_reversals', 0)}`",
+                f"• *Demand OB Zones:* `{summary.get('demand_zones_count', 0)}` | *Fair Value Gaps (FVG):* `{summary.get('fvg_gaps_count', 0)}`",
+                "-----------------------------------\n",
+                "🎯 *TOP INSTITUTIONAL ORDER BLOCK RADAR CANDIDATES:*\n"
+            ]
+
+            for c in candidates[:5]:
+                lines.append(f"📌 *{c['symbol']}* — LTP: `₹{c['current_price']}` | *SMC Score:* `{c['smc_score']}/100`")
+                lines.append(f"  • *Structure:* `{c['structure_state']}` ({c['bias']})")
+                lines.append(f"  • 🛡️ *Demand OB:* `{c['demand_order_block']}`")
+                lines.append(f"  • ⚔️ *Supply OB:* `{c['supply_order_block']}`")
+                lines.append(f"  • ⚡ *FVG Gap:* `{c['fvg_status']}`\n")
+
+            lines.append("-----------------------------------")
+            lines.append("💡 *Tip:* Avoid buying near Supply Order Blocks or selling inside Demand Zones!")
+            return "\n".join(lines)
+        except Exception as e:
+            return f"❌ Error loading SMC data: {e}"
 
     @classmethod
     def _handle_mcx(cls):

@@ -16,5 +16,18 @@ class TestSMCLiquiditySweepEngine(unittest.TestCase):
         self.assertEqual(res["smc_status"], "INSTITUTIONAL ORDER BLOCK BREAKOUT (GENUINE EXPANSION)")
         self.assertTrue(res["is_valid_setup"])
 
+    def test_mtf_smc_analysis(self):
+        """Verifies Multi-Timeframe SMC structure evaluation."""
+        res = SMCLiquiditySweepEngine.analyze_stock_mtf_smc("NIFTY 50", 23542.0, 26000.0, 21000.0, 23500.0, 23350.0, 1.6)
+        self.assertEqual(res["structure_state"], "BOS_BULLISH")
+        self.assertIn("INSTITUTIONAL ACCUMULATION", res["bias"])
+
+    def test_export_smc_json(self):
+        """Verifies export_smc_json exports data payload cleanly."""
+        payload = SMCLiquiditySweepEngine.export_smc_json()
+        self.assertIn("summary", payload)
+        self.assertIn("candidates", payload)
+        self.assertGreater(len(payload["candidates"]), 0)
+
 if __name__ == '__main__':
     unittest.main()

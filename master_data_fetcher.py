@@ -101,14 +101,22 @@ class MasterDataFetcher:
 
         # 10. Morning Pre-Market & 15m ORB High-Conviction Momentum Validator
         try:
-            print("\n[10/10] Executing Morning Momentum Validation & Signal Dispatcher...")
+            print("\n[10/11] Executing Morning Momentum Validation & Signal Dispatcher...")
             from morning_momentum_validator import MorningMomentumValidatorEngine
             MorningMomentumValidatorEngine.export_and_broadcast_morning_signals()
         except Exception as e:
             print(f"[WARN] Morning Momentum Validator step error: {e}")
 
+        # 11. MTF SMC Market Structure & Order Block Radar Engine
+        try:
+            print("\n[11/11] Executing MTF SMC Market Structure & Order Block Radar...")
+            from smc_liquidity_sweep_engine import SMCLiquiditySweepEngine
+            SMCLiquiditySweepEngine.export_smc_json()
+        except Exception as e:
+            print(f"[WARN] MTF SMC Market Structure step error: {e}")
+
         print("\n==========================================================================")
-        print("  [SUCCESS] All Market Mentor AI V5.5 Data Payloads Refreshed in 1 Pass!")
+        print("  [SUCCESS] All Market Mentor AI V8.0 Data Payloads Refreshed in 1 Pass!")
         print("==========================================================================")
 
         # Single Git Push (Optional / Enabled in Automated Schedulers)
