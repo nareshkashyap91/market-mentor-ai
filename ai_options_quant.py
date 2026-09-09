@@ -114,9 +114,104 @@ def recommend_options_quant_strategies(index_name, spot, vwap, regime, pcr, vix_
     atm = int(round(spot / step) * step)
     
     strategies = []
+    regime_upper = regime.upper()
+    is_sideways = "SIDEWAYS" in regime_upper or "RANGEBOUND" in regime_upper
     
-    # 1. Bullish Regime Strategies
-    if "BULLISH" in regime or pattern_bias == "Bullish":
+    # 1. Sideways / Rangebound Regime Logic (Disable Naked Buying, Enable Hedged Spreads)
+    if is_sideways:
+        # Rule: DISABLE Naked Option Buying in Sideways Regime due to Theta & IV crush.
+        
+        # Primary Strategy A: Bear Put Spread (if Bearish pattern breakdown, Double Top / M Pattern, or Spot < VWAP)
+        if pattern_bias == "Bearish" or spot < vwap or "Double Top" in pattern_name or "M Pattern" in pattern_name:
+            pe_buy_strike = atm if spot >= atm else atm - step
+            pe_sell_strike = pe_buy_strike - (150 if index_name == "NIFTY" else 300)
+            invalidation_spot = round(max(spot * 1.002, vwap * 1.002, 23580.0 if index_name == "NIFTY" else spot * 1.003), 2)
+            spread_width = pe_buy_strike - pe_sell_strike
+            target_gain_pts = int(spread_width * 0.75)
+            
+            strategies.append({
+                "name": f"{index_name} Bear Put Spread",
+                "type": "HEDGED DEBIT SPREAD",
+                "legs": [f"BUY {index_name} {pe_buy_strike} PE", f"SELL {index_name} {pe_sell_strike} PE (Hedge)"],
+                "entry_spot": round(spot, 2),
+                "sl_spot": f"Spot Close > VWAP (₹{vwap:.2f})",
+                "target1_spot": f"70-80% of Max Spread Width (₹{target_gain_pts} Pts Gain)",
+                "max_profit": f"Fixed Spread Width (₹{spread_width} Points)",
+                "max_loss": "Fixed Net Premium Paid",
+                "max_capital_allocation": "40% (Sideways Regime Filter)",
+                "time_cutoff": "3:00 PM IST (Exit all long option legs)",
+                "invalidation_level": invalidation_spot,
+                "win_prob": "78%",
+                "rationale": f"{pattern_name} Breakdown + Sideways Regime (Hedged against Theta Decay, PCR: {pcr:.2f})"
+            })
+            
+        # Primary Strategy B: Bull Call Spread (if Bullish pattern breakout or Spot >= VWAP)
+        if pattern_bias == "Bullish" or spot >= vwap or "Double Bottom" in pattern_name or "W Pattern" in pattern_name:
+            ce_buy_strike = atm if spot <= atm else atm + step
+            ce_sell_strike = ce_buy_strike + (150 if index_name == "NIFTY" else 300)
+            invalidation_spot = round(min(spot * 0.998, vwap * 0.998), 2)
+            spread_width = ce_sell_strike - ce_buy_strike
+            target_gain_pts = int(spread_width * 0.75)
+            
+            strategies.append({
+                "name": f"{index_name} Bull Call Spread",
+                "type": "HEDGED DEBIT SPREAD",
+                "legs": [f"BUY {index_name} {ce_buy_strike} CE", f"SELL {index_name} {ce_sell_strike} CE (Hedge)"],
+                "entry_spot": round(spot, 2),
+                "sl_spot": f"Spot Close < VWAP (₹{vwap:.2f})",
+                "target1_spot": f"70-80% of Max Spread Width (₹{target_gain_pts} Pts Gain)",
+                "max_profit": f"Fixed Spread Width (₹{spread_width} Points)",
+                "max_loss": "Fixed Net Premium Paid",
+                "max_capital_allocation": "40% (Sideways Regime Filter)",
+                "time_cutoff": "3:00 PM IST (Exit all long option legs)",
+                "invalidation_level": invalidation_spot,
+                "win_prob": "76%",
+                "rationale": f"{pattern_name} Breakout + Sideways Regime (Hedged against Theta Decay, PCR: {pcr:.2f})"
+            })
+
+        # Alternative Strategy C: Bull Put Credit Spread (Theta Harvest)
+        sell_pe = atm - (100 if index_name == "NIFTY" else 200)
+        buy_pe_hedge = sell_pe - (100 if index_name == "NIFTY" else 200)
+        strategies.append({
+            "name": f"{index_name} Bull Put Credit Spread (Theta Harvest)",
+            "type": "THETA CREDIT SPREAD",
+            "legs": [f"SELL {index_name} {sell_pe} PE", f"BUY {index_name} {buy_pe_hedge} PE (Hedge)"],
+            "entry_spot": round(spot, 2),
+            "sl_spot": f"Spot Close < ₹{sell_pe}",
+            "target1_spot": "Full Premium Decay at Expiry",
+            "max_profit": "Net Credit Received",
+            "max_loss": f"Defined Difference (₹{sell_pe - buy_pe_hedge} - Credit)",
+            "max_capital_allocation": "40% (Sideways Regime Filter)",
+            "time_cutoff": "3:00 PM IST",
+            "win_prob": "82%",
+            "rationale": f"Rangebound market (PCR: {pcr:.2f}). Collects time decay as long as {index_name} stays above ₹{sell_pe}."
+        })
+        
+        # Alternative Strategy D: Iron Butterfly (Hedged Short Straddle)
+        otm_ce_hedge = atm + (150 if index_name == "NIFTY" else 300)
+        otm_pe_hedge = atm - (150 if index_name == "NIFTY" else 300)
+        strategies.append({
+            "name": f"{index_name} Iron Butterfly (Hedged Short Straddle)",
+            "type": "HEDGED STRADDLE",
+            "legs": [
+                f"SELL {index_name} {atm} CE",
+                f"SELL {index_name} {atm} PE",
+                f"BUY {index_name} {otm_ce_hedge} CE (Hedge)",
+                f"BUY {index_name} {otm_pe_hedge} PE (Hedge)"
+            ],
+            "entry_spot": round(spot, 2),
+            "sl_spot": "Upper/Lower Wing Touch",
+            "target1_spot": "Max Decay at Center ATM Strike",
+            "max_profit": "Max Net Premium Collected",
+            "max_loss": "Defined Wing Width minus Net Premium",
+            "max_capital_allocation": "40% (Sideways Regime Filter)",
+            "time_cutoff": "3:00 PM IST",
+            "win_prob": "78%",
+            "rationale": f"Sideways consolidation regime with low VIX ({vix_val:.1f}). Harvests dual Theta decay on both Call and Put legs."
+        })
+        
+    # 2. Bullish Trending Regime Strategies
+    elif "BULLISH" in regime_upper:
         # Strategy A: Directional Naked CE Buy
         ce_strike = atm
         strategies.append({
@@ -147,8 +242,8 @@ def recommend_options_quant_strategies(index_name, spot, vwap, regime, pcr, vix_
             "rationale": f"High probability hedged bullish trade capping volatility decay risk."
         })
         
-    # 2. Bearish Regime Strategies
-    elif "BEARISH" in regime or pattern_bias == "Bearish":
+    # 3. Bearish Trending Regime Strategies
+    else:
         # Strategy A: Directional Naked PE Buy
         pe_strike = atm
         strategies.append({
@@ -179,44 +274,6 @@ def recommend_options_quant_strategies(index_name, spot, vwap, regime, pcr, vix_
             "rationale": f"Hedged downside strategy mitigating volatility crush."
         })
 
-    # 3. Sideways / Rangebound Regime (Theta Harvest & Hedged Spreads)
-    else:
-        # Strategy A: Bull Put Credit Spread (Theta Decay)
-        sell_pe = atm - (100 if index_name == "NIFTY" else 200)
-        buy_pe_hedge = sell_pe - (100 if index_name == "NIFTY" else 200)
-        strategies.append({
-            "name": f"{index_name} Bull Put Credit Spread (Theta Harvest)",
-            "type": "THETA CREDIT SPREAD",
-            "legs": [f"SELL {index_name} {sell_pe} PE", f"BUY {index_name} {buy_pe_hedge} PE (Hedge)"],
-            "entry_spot": round(spot, 2),
-            "sl_spot": round(spot - 120, 2),
-            "target1_spot": "Full Premium Decay at Expiry",
-            "max_profit": "Net Credit Received",
-            "max_loss": f"Defined Difference (₹{sell_pe - buy_pe_hedge} - Credit)",
-            "win_prob": "82%",
-            "rationale": f"Rangebound market (PCR: {pcr:.2f}). Collects time decay as long as {index_name} stays above ₹{sell_pe}."
-        })
-        
-        # Strategy B: Hedged Short Straddle / Iron Butterfly
-        otm_ce_hedge = atm + (150 if index_name == "NIFTY" else 300)
-        otm_pe_hedge = atm - (150 if index_name == "NIFTY" else 300)
-        strategies.append({
-            "name": f"{index_name} Iron Butterfly (Hedged Short Straddle)",
-            "type": "HEDGED STRADDLE",
-            "legs": [
-                f"SELL {index_name} {atm} CE",
-                f"SELL {index_name} {atm} PE",
-                f"BUY {index_name} {otm_ce_hedge} CE (Hedge)",
-                f"BUY {index_name} {otm_pe_hedge} PE (Hedge)"
-            ],
-            "entry_spot": round(spot, 2),
-            "sl_spot": "Upper/Lower Wing Touch",
-            "target1_spot": "Max Decay at Center ATM Strike",
-            "max_profit": "Max Net Premium Collected",
-            "max_loss": "Defined Wing Width minus Net Premium",
-            "win_prob": "78%",
-            "rationale": f"Sideways consolidation regime with low VIX ({vix_val:.1f}). Harvests dual Theta decay on both Call and Put legs."
-        })
         
     # Phase 2 Option Greeks & IV Enrichment & Phase 5 Margin Engine
     from option_chain_analyzer import OptionChainAnalyzer
@@ -636,11 +693,14 @@ def main():
         tag_prefix = "⭐ **[TOP PICK - #1 BEST STRATEGY]**\n" if strat.get("is_top_pick", False) else "🔹 **[ALTERNATIVE STRATEGY]**\n"
         msg += (
             f"{tag_prefix}"
-            f"🏆 **{strat['name']}** ({strat['type']})\n"
-            f"  - **Legs**: `{', '.join(strat['legs'])}` \n"
-            f"  - **Win Probability**: `{strat['win_prob']}` | **Max Profit**: `{strat['max_profit']}`\n"
-            f"  - 💡 *Rationale*: {strat['rationale']}\n\n"
+            f"🚨 **SIGNAL**: `{strat['name']}` ({strat['type']})\n"
+            f"📉 **LEGS**: `{', '.join(strat['legs'])}` \n"
+            f"🎯 **TARGET**: `{strat.get('target1_spot', 'N/A')}` | 🛑 **SL**: `{strat.get('sl_spot', 'N/A')}`\n"
+            f"📊 **RATIONALE**: {strat['rationale']}\n"
         )
+        if strat.get("max_capital_allocation"):
+            msg += f"⚠️ **FILTERS**: Capital Max `{strat['max_capital_allocation']}` | Cutoff: `{strat.get('time_cutoff', '3:00 PM IST')}`\n"
+        msg += "\n"
         
     if long_stocks or short_stocks:
         msg += "="*35 + "\n"

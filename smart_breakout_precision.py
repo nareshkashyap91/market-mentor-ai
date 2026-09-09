@@ -24,7 +24,7 @@ class SmartBreakoutPrecisionEngine:
             last5 = df_history.tail(5)
             c_min = last5['Low'].min()
             c_max = last5['High'].max()
-            consolidation_width_pct = round(((c_max - c_min) / close) * 100.0, 2)
+            consolidation_width_pct = round(((c_max - c_min) / close) * 100.0, 2) if close > 0 else 3.5
             consolidation_days = 5
 
         tight_consolidation = consolidation_width_pct <= 5.0

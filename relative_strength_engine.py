@@ -16,8 +16,8 @@ class RelativeStrengthEngine:
             n_close = nifty_df['Close'].values
             min_len = min(len(s_close), len(n_close))
             if min_len >= 5:
-                s_ret = (s_close[-1] - s_close[-5]) / s_close[-5] * 100.0
-                n_ret = (n_close[-1] - n_close[-5]) / n_close[-5] * 100.0
+                s_ret = ((s_close[-1] - s_close[-5]) / s_close[-5] * 100.0) if s_close[-5] > 0 else 0.0
+                n_ret = ((n_close[-1] - n_close[-5]) / n_close[-5] * 100.0) if n_close[-5] > 0 else 0.0
                 rs_score = round(s_ret - n_ret, 2)
 
         if rs_score >= 1.0:
