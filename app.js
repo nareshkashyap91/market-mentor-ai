@@ -1001,8 +1001,114 @@ function renderTradeJournal(data) {
 }
 
 function renderSectorRotation(data) {
-    if (!data || !data.sectors) return;
-    // Log sector data payload
+    if (!data) return;
+
+    // 1. Update Market Breadth Widgets
+    if (data.market_breadth) {
+        const mb = data.market_breadth;
+        const advEl = document.getElementById("breadth-advances-count");
+        const decEl = document.getElementById("breadth-declines-count");
+        const adrEl = document.getElementById("breadth-adr-label");
+        const barEl = document.getElementById("breadth-advance-bar");
+        const badgeEl = document.getElementById("breadth-status-badge");
+
+        if (advEl) advEl.textContent = mb.advances || 0;
+        if (decEl) decEl.textContent = mb.declines || 0;
+        if (adrEl) adrEl.textContent = `A/D Ratio: ${mb.advance_decline_ratio || 1.0}`;
+        if (barEl) barEl.style.width = `${mb.advance_pct || 50}%`;
+        if (badgeEl && mb.breadth_status) badgeEl.textContent = mb.breadth_status;
+    }
+
+    // 2. Update Gamma Exposure (GEX) Analytics Cards
+    if (data.gamma_exposure_analytics) {
+        const gex = data.gamma_exposure_analytics;
+        const netValEl = document.getElementById("gex-net-val");
+        const regimeTagEl = document.getElementById("gex-regime-tag");
+        const flipLevelEl = document.getElementById("gex-flip-level");
+        const pinningTargetEl = document.getElementById("gex-pinning-target");
+        const pinningProbEl = document.getElementById("gex-pinning-prob");
+
+        if (netValEl) {
+            const netVal = gex.net_gex_crores;
+            const formattedVal = netVal >= 0 ? `+₹${netVal.toLocaleString("en-IN")} Cr` : `-₹${Math.abs(netVal).toLocaleString("en-IN")} Cr`;
+            netValEl.textContent = formattedVal;
+            netValEl.style.color = netVal >= 0 ? "#10b981" : "#ef4444";
+        }
+        if (regimeTagEl && gex.gex_regime) regimeTagEl.textContent = gex.gex_regime;
+        if (flipLevelEl && gex.zero_gamma_flip_level) {
+            flipLevelEl.textContent = `₹${gex.zero_gamma_flip_level.toLocaleString("en-IN")}`;
+        }
+        if (pinningTargetEl) {
+            const targetStrike = gex.max_gex_strike || 23550;
+            pinningTargetEl.textContent = `₹${targetStrike.toLocaleString("en-IN")}`;
+        }
+        if (pinningProbEl && gex.pinning_probability) {
+            pinningProbEl.textContent = gex.pinning_probability;
+        }
+    }
+
+    // 3. Update 10-Sector Heatmap Grid
+    const gridContainer = document.getElementById("sector-heatmap-grid-container");
+    if (!gridContainer || !data.sectors || data.sectors.length === 0) return;
+
+    gridContainer.innerHTML = data.sectors.map(sec => {
+        let borderClr = "rgba(255, 255, 255, 0.08)";
+        let bgClr = "rgba(15, 23, 42, 0.6)";
+        let badgeStyle = "background: rgba(59, 130, 246, 0.2); color: #60a5fa;";
+
+        if (sec.status === "LEADER") {
+            borderClr = "rgba(16, 185, 129, 0.4)";
+            bgClr = "rgba(16, 185, 129, 0.08)";
+            badgeStyle = "background: rgba(16, 185, 129, 0.2); color: #10b981;";
+        } else if (sec.status === "OUTPERFORMER") {
+            borderClr = "rgba(59, 130, 246, 0.4)";
+            bgClr = "rgba(59, 130, 246, 0.08)";
+            badgeStyle = "background: rgba(59, 130, 246, 0.2); color: #60a5fa;";
+        } else if (sec.status === "LAGGARD") {
+            borderClr = "rgba(239, 68, 68, 0.4)";
+            bgClr = "rgba(239, 68, 68, 0.08)";
+            badgeStyle = "background: rgba(239, 68, 68, 0.2); color: #ef4444;";
+        } else if (sec.status === "WEAK") {
+            borderClr = "rgba(245, 158, 11, 0.4)";
+            bgClr = "rgba(245, 158, 11, 0.08)";
+            badgeStyle = "background: rgba(245, 158, 11, 0.2); color: #f59e0b;";
+        }
+
+        const chgSign = sec.chg_1d >= 0 ? "+" : "";
+        const chgColor = sec.chg_1d >= 0 ? "#10b981" : "#ef4444";
+
+        return `
+            <div style="background: ${bgClr}; border: 1px solid ${borderClr}; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="font-weight: 700; font-size: 15px; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid ${sec.icon || 'fa-chart-line'}" style="color: #94a3b8;"></i>
+                        ${sec.name}
+                    </div>
+                    <span style="font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; ${badgeStyle}">
+                        ${sec.status}
+                    </span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 4px;">
+                    <span style="font-size: 20px; font-weight: 800; color: ${chgColor};">
+                        ${chgSign}${sec.chg_1d}%
+                    </span>
+                    <span style="font-size: 12px; color: #94a3b8; font-weight: 600;">
+                        RS Score: ${sec.rs_score > 0 ? '+' : ''}${sec.rs_score}
+                    </span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; font-size: 12px; color: #cbd5e1; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 8px;">
+                    <span>1W: <strong style="color: ${sec.chg_1w >= 0 ? '#10b981' : '#ef4444'}">${sec.chg_1w >= 0 ? '+' : ''}${sec.chg_1w}%</strong></span>
+                    <span>1M: <strong style="color: ${sec.chg_1m >= 0 ? '#10b981' : '#ef4444'}">${sec.chg_1m >= 0 ? '+' : ''}${sec.chg_1m}%</strong></span>
+                </div>
+
+                <div style="font-size: 11px; font-weight: 600; text-align: center; background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 6px; color: #cbd5e1;">
+                    ${sec.fund_flow}
+                </div>
+            </div>
+        `;
+    }).join("");
 }
 
 function renderMLOptimizer(data) {

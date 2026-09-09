@@ -60,6 +60,9 @@
                 <a href="#" class="nav-item" data-tab="tv-charts">
                     <i class="fa-solid fa-chart-candlestick"></i> Interactive Pro Charts
                 </a>
+                <a href="#" class="nav-item" data-tab="sector-gex">
+                    <i class="fa-solid fa-fire-flame-curved"></i> Sector Heatmap & GEX
+                </a>
             </nav>
             
             <div class="connection-status">
@@ -469,6 +472,60 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Live Sector Heatmap & GEX Analytics Tab -->
+            <div class="tab-panel" id="tab-sector-gex">
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-fire-flame-curved"></i> Real-Time Sector Heatmap & Market Breadth</h2>
+                        <span class="badge badge-pulse" id="breadth-status-badge">Market Breadth Online</span>
+                    </div>
+
+                    <!-- Market Breadth Progress Bar -->
+                    <div class="breadth-widget-box" style="margin: 16px 0; background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600;">
+                            <span style="color: #10b981;"><i class="fa-solid fa-arrow-trend-up"></i> Advances: <span id="breadth-advances-count">0</span></span>
+                            <span style="color: #cbd5e1;" id="breadth-adr-label">A/D Ratio: 1.0</span>
+                            <span style="color: #ef4444;"><i class="fa-solid fa-arrow-trend-down"></i> Declines: <span id="breadth-declines-count">0</span></span>
+                        </div>
+                        <div style="height: 12px; width: 100%; background: #ef4444; border-radius: 6px; overflow: hidden; display: flex;">
+                            <div id="breadth-advance-bar" style="height: 100%; width: 50%; background: #10b981; transition: width 0.5s ease;"></div>
+                        </div>
+                    </div>
+
+                    <!-- 10-Sector Heatmap Grid -->
+                    <div class="sector-heatmap-grid" id="sector-heatmap-grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Dynamic Sector Cards Rendered Here -->
+                    </div>
+                </div>
+
+                <!-- Gamma Exposure (GEX) & Option Pinning Widget -->
+                <div class="glass-card panel-card">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-bolt"></i> Gamma Exposure (GEX) & Options Pinning Analytics</h2>
+                        <span class="badge badge-pulse">Options Market Maker Positioning</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px;" id="gex-analytics-cards">
+                        <div style="background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                            <div style="font-size: 13px; color: #94a3b8; text-transform: uppercase;">Net Market GEX</div>
+                            <div style="font-size: 22px; font-weight: 700; color: #10b981; margin-top: 6px;" id="gex-net-val">+₹4,250 Cr</div>
+                            <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px;" id="gex-regime-tag">POSITIVE GAMMA (DAMPENED VOLATILITY)</div>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                            <div style="font-size: 13px; color: #94a3b8; text-transform: uppercase;">Zero Gamma Flip Level</div>
+                            <div style="font-size: 22px; font-weight: 700; color: #f59e0b; margin-top: 6px;" id="gex-flip-level">₹23,500</div>
+                            <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px;">Volatility Trigger Threshold</div>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                            <div style="font-size: 13px; color: #94a3b8; text-transform: uppercase;">Expiry Pinning Target</div>
+                            <div style="font-size: 22px; font-weight: 700; color: #3b82f6; margin-top: 6px;" id="gex-pinning-target">₹23,550</div>
+                            <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px;" id="gex-pinning-prob">78% Pinning Probability</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
