@@ -121,12 +121,33 @@ class MorningMomentumValidatorEngine:
                 is_above_vwap = latest_close >= vwap
                 is_orb_breakout = latest_close >= (first_candle_high * 0.998) or is_simulation
 
-                # Calculate Multi-Factor Conviction Score
+                # Calculate Candle Quality & Anti-False-Breakout Metrics
+                latest_high = float(df["High"].iloc[-1])
+                latest_low = float(df["Low"].iloc[-1])
+                latest_open = float(df["Open"].iloc[-1])
+                candle_range = max(latest_high - latest_low, 1e-6)
+                body_ratio = abs(latest_close - latest_open) / candle_range
+                upper_wick = latest_high - max(latest_open, latest_close)
+                upper_wick_ratio = upper_wick / candle_range
+                
+                # Relative Volume (RVOL)
+                avg_vol = df["Volume"].iloc[-6:-1].mean() if len(df) >= 6 else df["Volume"].mean()
+                rvol = (df["Volume"].iloc[-1] / avg_vol) if avg_vol > 0 else 1.5
+
+                # Calculate Institutional Multi-Factor Conviction Score
                 score = 50
-                if gap_pct > 0: score += 15
+                if gap_pct > 0: score += 10
                 if is_above_vwap: score += 15
-                if is_orb_breakout: score += 10
-                if item.get("rsi", 60) > 60: score += 10
+                if is_orb_breakout: score += 15
+                if rvol >= 1.5: score += 10
+                if body_ratio >= 0.60: score += 10
+                if item.get("rsi", 60) >= 55 and item.get("rsi", 60) <= 72: score += 10
+                
+                # Anti-False-Trade Penalties
+                if upper_wick_ratio > 0.35: # Upper Wick Rejection at Resistance (SMC Trap)
+                    score -= 20
+                if rvol < 1.0: # Low Volume Breakout (Retail Trap)
+                    score -= 15
 
                 stars = "⭐⭐⭐⭐⭐" if score >= 85 else ("⭐⭐⭐⭐" if score >= 70 else "⭐⭐⭐")
 
