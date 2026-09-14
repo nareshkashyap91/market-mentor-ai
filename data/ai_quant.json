@@ -1,5 +1,5 @@
 {
-  "timestamp": "14-Sep-2026 03:16 PM",
+  "timestamp": "14-Sep-2026 03:31 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "14-Sep-2026 03:16 PM",
+      "timestamp": "14-Sep-2026 03:31 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "14-Sep-2026 09:46 AM",
+    "timestamp": "14-Sep-2026 10:01 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "market_breadth": {
@@ -318,7 +318,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "14-Sep-2026 03:16 PM",
+    "timestamp": "14-Sep-2026 03:31 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -336,7 +336,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "14-Sep-2026 03:16 PM",
+    "timestamp": "14-Sep-2026 03:31 PM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -399,15 +399,13 @@
     "research_tag": "AI QUANT EXECUTIVE RESEARCH SYNTHESIS"
   },
   "data_quality": {
-    "is_valid": false,
+    "is_valid": true,
     "data_type": "LIVE_DATA",
-    "is_stale": true,
-    "stale_minutes": 4321.1,
-    "anomalies": [
-      "Data is stale (4321.1m old > 15m threshold)"
-    ],
+    "is_stale": false,
+    "stale_minutes": 4336.6,
+    "anomalies": [],
     "clean_rows": 100,
-    "status_summary": "STALE_WARNING (LIVE_DATA | Freshness: 4321.1m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 4336.6m)"
   },
   "backtest_metrics": {
     "cagr_pct": -2.3,
@@ -423,10 +421,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 510000.0,
+    "allocated_margin": 498000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 340,
+    "total_trades": 332,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -850,7 +848,7 @@
       "target1_price": 11165.6,
       "target2_price": 11276.0,
       "status": "ACTIVE_POSITION",
-      "entry_time": "14-Sep-2026 03:15 PM",
+      "entry_time": "14-Sep-2026 03:31 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1116,7 +1114,7 @@
     {
       "id": 31,
       "signal_id": "STK_LONG_ULTRACEMCO",
-      "timestamp": "14-Sep-2026 03:15 PM",
+      "timestamp": "14-Sep-2026 03:31 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 11000.0,
@@ -1273,12 +1271,10 @@
       "summary_str": "\u00b1259.7 pts (\u20b923138 - \u20b923658)"
     },
     "no_trade_eval": {
-      "is_no_trade": true,
-      "trade_status": "NO TRADE (CAPITAL PROTECTION ACTIVE)",
-      "reasons": [
-        "STALE DATA: "
-      ],
-      "summary": "STALE DATA: "
+      "is_no_trade": false,
+      "trade_status": "ACTIVE QUANT SIGNALS",
+      "reasons": [],
+      "summary": "Market Conditions Optimal for Execution"
     },
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 1.05,
@@ -1423,12 +1419,10 @@
       "summary_str": "\u00b1628.3 pts (\u20b955978 - \u20b957235)"
     },
     "no_trade_eval": {
-      "is_no_trade": true,
-      "trade_status": "NO TRADE (CAPITAL PROTECTION ACTIVE)",
-      "reasons": [
-        "STALE DATA: "
-      ],
-      "summary": "STALE DATA: "
+      "is_no_trade": false,
+      "trade_status": "ACTIVE QUANT SIGNALS",
+      "reasons": [],
+      "summary": "Market Conditions Optimal for Execution"
     },
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 0.98,
