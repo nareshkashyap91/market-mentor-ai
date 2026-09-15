@@ -2,21 +2,151 @@
   "date": "15-Sep-2026",
   "momentum_stocks": [
     {
+      "symbol": "ACMESOLAR",
+      "close": 414.7,
+      "turnover": 107.65,
+      "vol_expansion": 1.36,
+      "why": "Outperforming market (RSI: 61.2, 1Y CAR: +30.2%), closed 0.1% above VWAP with bullish DMA alignment (20>50>100>200) and 1.4x volume expansion.",
+      "dma20": 400.05,
+      "dma50": 383.39,
+      "dma100": 353.64,
+      "dma200": 296.54,
+      "dma_aligned": true,
+      "car_1y": 30.2,
+      "rsi": 61.2,
+      "momentum_intelligence": {
+        "symbol": "ACMESOLAR",
+        "close": 414.7,
+        "direction": "LONG",
+        "setup_name": "52-Week High Breakout",
+        "momentum_quality_score": 83.0,
+        "trade_setup_score": 71.0,
+        "momentum_grade": "A (STRONG)",
+        "trade_setup_grade": "B (MODERATE)",
+        "trend_info": {
+          "trend_classification": "STRONG BULLISH TREND",
+          "trend_score": 15,
+          "dma_aligned": true,
+          "above_all_dmas": true,
+          "below_all_dmas": false,
+          "dma_compression": false,
+          "dma_spread_pct": 24.96
+        },
+        "momentum_info": {
+          "momentum_classification": "STRONG",
+          "momentum_score": 8,
+          "rvol_label": "Improving (1.0-1.5)",
+          "rvol_score": 10,
+          "pv_relationship": "Price \u2191 + Volume \u2191 (Accumulation Proxy)"
+        },
+        "relative_strength_info": {
+          "rs_score": 68.2,
+          "rs_classification": "STRONG",
+          "outperforming_nifty": true,
+          "rs_nifty_diff_pct": 15.2
+        },
+        "price_action_info": {
+          "pattern_name": "52-Week High Breakout",
+          "price_action_score": 15,
+          "proximity_status": "52W BREAKOUT",
+          "dist_52w_high_pct": 0.99,
+          "vwap_reclaim": false
+        },
+        "breakout_quality": {
+          "breakout_quality": "B BREAKOUT",
+          "breakout_score": 9,
+          "candle_strength": 0.67,
+          "atr_expansion": true
+        },
+        "extension_info": {
+          "extension_status": "EXTENDED",
+          "penalty": 12,
+          "recommendation": "CAUTION (REQUIRE TIGHT ENTRY)",
+          "dist_ema20_atr": 1.77,
+          "dist_vwap_pct": 0.0
+        },
+        "market_regime_info": {
+          "market_regime": "\ud83d\udfe2 BULLISH_TRENDING",
+          "regime_confidence": 75.0,
+          "market_alignment_score": 10,
+          "regime_action": "FAVOR LONG MOMENTUM SETUPS"
+        },
+        "entry_plan": {
+          "entry_zone_str": "\u20b9414.70 - \u20b9421.33",
+          "entry_min": 414.7,
+          "entry_max": 421.33,
+          "confirmation_condition": "15-minute candle closes above \u20b9418.85 with RVOL > 1.5 and sustained VWAP support.",
+          "invalidation_level": 406.41
+        },
+        "risk_plan": {
+          "entry_price": 414.7,
+          "stop_loss": 406.41,
+          "target1": 427.14,
+          "target2": 435.42,
+          "target3": 447.86,
+          "risk_per_share": 8.29,
+          "rrr_t1": 1.5,
+          "rrr_t2": 2.5,
+          "rrr_acceptable": true
+        },
+        "position_sizing": {
+          "trading_capital": 100000.0,
+          "risk_pct": 1.0,
+          "max_risk_amount": 1000.0,
+          "risk_per_share": 8.29,
+          "quantity": 120,
+          "capital_required": 49764.0,
+          "max_loss": 994.8
+        },
+        "scenarios": {
+          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b9428.79, CHASE TRADE - AVOID. Wait for pullback to \u20b9418.85 and 15m VWAP reclaim.",
+          "scenario_flat": "FLAT OPEN: Look for entry between \u20b9414.70 - \u20b9418.85 on 15m candle close above \u20b9418.85 with RVOL > 1.5.",
+          "scenario_gap_down": "GAP DOWN: If opens below \u20b9406.41, SETUP INVALIDATED. No Trade.",
+          "chase_avoid_level": 428.79,
+          "invalidation_level": 406.41
+        },
+        "event_risk_info": {
+          "event_risk_level": "LOW",
+          "event_penalty": 0,
+          "event_risk_reason": "Low Event Risk: Clean Corporate Calendar"
+        },
+        "guardrail_eval": {
+          "is_no_trade": false,
+          "no_trade_reasons": [],
+          "no_trade_summary": "PASSED ALL RISK GUARDRAILS"
+        },
+        "status": "CANDIDATE",
+        "ai_explanation": {
+          "why_selected": [
+            "DMA Alignment: STRONG BULLISH TREND",
+            "Volume Confirmation: RVOL Improving (1.0-1.5)",
+            "Relative Strength: STRONG vs NIFTY 50",
+            "Chart Pattern: 52-Week High Breakout (52W BREAKOUT)",
+            "Price-Volume Behavior: Price \u2191 + Volume \u2191 (Accumulation Proxy)",
+            "Acceptable Risk-Reward: 1.50 RRR to Target 1"
+          ],
+          "key_risks": [
+            "Near 52W Overhead Resistance (1.0% below 52W High)"
+          ]
+        }
+      }
+    },
+    {
       "symbol": "YESBANK",
-      "close": 23.33,
-      "turnover": 164.44,
-      "vol_expansion": 1.07,
-      "why": "Outperforming market (RSI: 59.3, 1Y CAR: +11.8%), closed 0.1% above VWAP with sustaining above all key DMAs (20, 50, 100, 200) and 1.1x volume expansion.",
+      "close": 23.32,
+      "turnover": 168.95,
+      "vol_expansion": 1.09,
+      "why": "Outperforming market (RSI: 59.1, 1Y CAR: +11.8%), closed 0.1% above VWAP with sustaining above all key DMAs (20, 50, 100, 200) and 1.1x volume expansion.",
       "dma20": 22.56,
       "dma50": 22.9,
       "dma100": 22.91,
       "dma200": 21.86,
       "dma_aligned": false,
       "car_1y": 11.8,
-      "rsi": 59.3,
+      "rsi": 59.1,
       "momentum_intelligence": {
         "symbol": "YESBANK",
-        "close": 23.33,
+        "close": 23.32,
         "direction": "LONG",
         "setup_name": "52-Week High Breakout",
         "momentum_quality_score": 78.0,
@@ -62,7 +192,7 @@
           "extension_status": "EXTENDED",
           "penalty": 12,
           "recommendation": "CAUTION (REQUIRE TIGHT ENTRY)",
-          "dist_ema20_atr": 1.64,
+          "dist_ema20_atr": 1.62,
           "dist_vwap_pct": 0.0
         },
         "market_regime_info": {
@@ -72,21 +202,21 @@
           "regime_action": "FAVOR LONG MOMENTUM SETUPS"
         },
         "entry_plan": {
-          "entry_zone_str": "\u20b923.33 - \u20b923.70",
-          "entry_min": 23.33,
-          "entry_max": 23.7,
-          "confirmation_condition": "15-minute candle closes above \u20b923.56 with RVOL > 1.5 and sustained VWAP support.",
-          "invalidation_level": 22.86
+          "entry_zone_str": "\u20b923.32 - \u20b923.69",
+          "entry_min": 23.32,
+          "entry_max": 23.69,
+          "confirmation_condition": "15-minute candle closes above \u20b923.55 with RVOL > 1.5 and sustained VWAP support.",
+          "invalidation_level": 22.85
         },
         "risk_plan": {
-          "entry_price": 23.33,
-          "stop_loss": 22.86,
-          "target1": 24.03,
+          "entry_price": 23.32,
+          "stop_loss": 22.85,
+          "target1": 24.02,
           "target2": 24.5,
-          "target3": 25.21,
+          "target3": 25.2,
           "risk_per_share": 0.47,
           "rrr_t1": 1.49,
-          "rrr_t2": 2.49,
+          "rrr_t2": 2.51,
           "rrr_acceptable": false
         },
         "position_sizing": {
@@ -95,15 +225,15 @@
           "max_risk_amount": 1000.0,
           "risk_per_share": 0.5,
           "quantity": 2000,
-          "capital_required": 46660.0,
+          "capital_required": 46640.0,
           "max_loss": 1000.0
         },
         "scenarios": {
-          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b924.13, CHASE TRADE - AVOID. Wait for pullback to \u20b923.56 and 15m VWAP reclaim.",
-          "scenario_flat": "FLAT OPEN: Look for entry between \u20b923.33 - \u20b923.56 on 15m candle close above \u20b923.56 with RVOL > 1.5.",
-          "scenario_gap_down": "GAP DOWN: If opens below \u20b922.86, SETUP INVALIDATED. No Trade.",
-          "chase_avoid_level": 24.13,
-          "invalidation_level": 22.86
+          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b924.12, CHASE TRADE - AVOID. Wait for pullback to \u20b923.55 and 15m VWAP reclaim.",
+          "scenario_flat": "FLAT OPEN: Look for entry between \u20b923.32 - \u20b923.55 on 15m candle close above \u20b923.55 with RVOL > 1.5.",
+          "scenario_gap_down": "GAP DOWN: If opens below \u20b922.85, SETUP INVALIDATED. No Trade.",
+          "chase_avoid_level": 24.12,
+          "invalidation_level": 22.85
         },
         "event_risk_info": {
           "event_risk_level": "LOW",
