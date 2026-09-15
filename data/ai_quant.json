@@ -1,5 +1,5 @@
 {
-  "timestamp": "15-Sep-2026 03:31 PM",
+  "timestamp": "15-Sep-2026 03:45 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "15-Sep-2026 03:31 PM",
+      "timestamp": "15-Sep-2026 03:45 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "15-Sep-2026 10:01 AM",
+    "timestamp": "15-Sep-2026 10:15 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "market_breadth": {
@@ -318,7 +318,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "15-Sep-2026 03:31 PM",
+    "timestamp": "15-Sep-2026 03:45 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -336,7 +336,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "15-Sep-2026 03:31 PM",
+    "timestamp": "15-Sep-2026 03:45 PM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -402,10 +402,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 16.1,
+    "stale_minutes": 30.8,
     "anomalies": [],
     "clean_rows": 100,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 16.1m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.8m)"
   },
   "backtest_metrics": {
     "cagr_pct": -3.4,
@@ -611,7 +611,7 @@
       "grade": "A+"
     }
   ],
-  "active_positions_count": 32,
+  "active_positions_count": 33,
   "active_positions": [
     {
       "id": "STK_LONG_INFY",
@@ -731,7 +731,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1322.7,
-      "current_price": 1234.0,
+      "current_price": 1302.4,
       "sl_price": 1333.5,
       "target1_price": 1309.74,
       "target2_price": 1301.1,
@@ -827,7 +827,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 265.6,
-      "current_price": 265.5,
+      "current_price": 259.45,
       "sl_price": 267.72,
       "target1_price": 263.05,
       "target2_price": 261.35,
@@ -848,7 +848,7 @@
       "target1_price": 323.96,
       "target2_price": 321.87,
       "status": "ACTIVE_POSITION",
-      "entry_time": "15-Sep-2026 03:31 PM",
+      "entry_time": "15-Sep-2026 03:45 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -864,7 +864,23 @@
       "target1_price": 952.56,
       "target2_price": 939.2,
       "status": "ACTIVE_POSITION",
-      "entry_time": "15-Sep-2026 03:31 PM",
+      "entry_time": "15-Sep-2026 03:45 PM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_SHORT_HDFCBANK",
+      "symbol": "HDFCBANK",
+      "strategy_name": "Intraday Short",
+      "action": "SELL",
+      "entry_price": 716.6,
+      "current_price": 716.6,
+      "sl_price": 722.5,
+      "target1_price": 709.52,
+      "target2_price": 704.8,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "15-Sep-2026 03:45 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -971,7 +987,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1087.8,
-      "current_price": 1076.2,
+      "current_price": 1087.4,
       "sl_price": 1100.9,
       "target1_price": 1072.08,
       "target2_price": 1061.6,
@@ -987,7 +1003,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 4983.5,
-      "current_price": 4885.0,
+      "current_price": 4983.5,
       "sl_price": 5023.37,
       "target1_price": 4935.66,
       "target2_price": 4903.76,
@@ -1051,7 +1067,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 11235.0,
-      "current_price": 11201.0,
+      "current_price": 10697.0,
       "sl_price": 11324.88,
       "target1_price": 11127.14,
       "target2_price": 11055.24,
@@ -1128,9 +1144,18 @@
   ],
   "signal_audit_log": [
     {
+      "id": 33,
+      "signal_id": "STK_SHORT_HDFCBANK",
+      "timestamp": "15-Sep-2026 03:45 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 716.6,
+      "notes": "Position initialized at \u20b9716.60"
+    },
+    {
       "id": 32,
       "signal_id": "STK_SHORT_SBIN",
-      "timestamp": "15-Sep-2026 03:31 PM",
+      "timestamp": "15-Sep-2026 03:45 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 972.6,
@@ -1139,7 +1164,7 @@
     {
       "id": 31,
       "signal_id": "STK_SHORT_NTPC",
-      "timestamp": "15-Sep-2026 03:31 PM",
+      "timestamp": "15-Sep-2026 03:45 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 327.1,
@@ -1252,15 +1277,6 @@
       "new_status": "ACTIVE_POSITION",
       "spot_price": 1143.0,
       "notes": "Position initialized at \u20b91143.00"
-    },
-    {
-      "id": 18,
-      "signal_id": "STK_LONG_TCS",
-      "timestamp": "28-Aug-2026 02:59 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 2338.6,
-      "notes": "Position initialized at \u20b92338.60"
     }
   ],
   "nifty": {
@@ -1604,7 +1620,7 @@
         "symbol": "NTPC",
         "action": "SHORT SELL",
         "close": 327.1,
-        "vwap": 328.07,
+        "vwap": 328.01,
         "orb_low": 328.95,
         "sl": 329.72,
         "t1": 323.96,
@@ -1614,10 +1630,23 @@
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       },
       {
+        "symbol": "ULTRACEMCO",
+        "action": "SHORT SELL",
+        "close": 10697.0,
+        "vwap": 10790.79,
+        "orb_low": 10886.0,
+        "sl": 10886.0,
+        "t1": 10470.2,
+        "t2": 10319.0,
+        "rsi": 35.8,
+        "vol_exp": 3.1,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
         "symbol": "SBIN",
         "action": "SHORT SELL",
         "close": 972.6,
-        "vwap": 979.45,
+        "vwap": 979.12,
         "orb_low": 989.3,
         "sl": 989.3,
         "t1": 952.56,
@@ -1627,42 +1656,29 @@
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       },
       {
-        "symbol": "TITAN",
+        "symbol": "ITC",
         "action": "SHORT SELL",
-        "close": 4885.0,
-        "vwap": 4909.36,
-        "orb_low": 4929.5,
-        "sl": 4929.5,
-        "t1": 4831.6,
-        "t2": 4796.0,
-        "rsi": 42.1,
-        "vol_exp": 2.6,
-        "pattern": "\ud83d\udd34 Double Top (M Pattern Breakdown)"
-      },
-      {
-        "symbol": "JSWSTEEL",
-        "action": "SHORT SELL",
-        "close": 1234.0,
-        "vwap": 1247.47,
-        "orb_low": 1252.2,
-        "sl": 1252.2,
-        "t1": 1212.16,
-        "t2": 1197.6,
-        "rsi": 32.4,
-        "vol_exp": 2.5,
+        "close": 259.45,
+        "vwap": 261.22,
+        "orb_low": 260.85,
+        "sl": 261.53,
+        "t1": 256.96,
+        "t2": 255.3,
+        "rsi": 19.0,
+        "vol_exp": 2.2,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       },
       {
-        "symbol": "INFY",
+        "symbol": "HDFCBANK",
         "action": "SHORT SELL",
-        "close": 1076.2,
-        "vwap": 1083.3,
-        "orb_low": 1077.2,
-        "sl": 1084.81,
-        "t1": 1065.87,
-        "t2": 1058.98,
-        "rsi": 29.4,
-        "vol_exp": 2.4,
+        "close": 716.6,
+        "vwap": 721.51,
+        "orb_low": 722.5,
+        "sl": 722.5,
+        "t1": 709.52,
+        "t2": 704.8,
+        "rsi": 32.8,
+        "vol_exp": 2.1,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ]
