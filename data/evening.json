@@ -3,12 +3,12 @@
   "momentum_stocks": [
     {
       "symbol": "TBOTEK",
-      "close": 1729.4,
-      "turnover": 28.66,
-      "vol_expansion": 1.4,
-      "why": "Outperforming market (RSI: 58.3, 1Y CAR: +8.0%), closed 0.2% above VWAP with bullish DMA alignment (20>50>100>200) and 1.4x volume expansion.",
-      "dma20": 1697.59,
-      "dma50": 1615.19,
+      "close": 1729.2,
+      "turnover": 30.79,
+      "vol_expansion": 1.49,
+      "why": "Outperforming market (RSI: 58.3, 1Y CAR: +8.0%), closed 0.2% above VWAP with bullish DMA alignment (20>50>100>200) and 1.5x volume expansion.",
+      "dma20": 1697.58,
+      "dma50": 1615.18,
       "dma100": 1468.34,
       "dma200": 1429.02,
       "dma_aligned": true,
@@ -16,7 +16,7 @@
       "rsi": 58.3,
       "momentum_intelligence": {
         "symbol": "TBOTEK",
-        "close": 1729.4,
+        "close": 1729.2,
         "direction": "LONG",
         "setup_name": "52-Week High Breakout",
         "momentum_quality_score": 81.0,
@@ -62,7 +62,7 @@
           "extension_status": "NORMAL",
           "penalty": 0,
           "recommendation": "ACTIONABLE ENTRY ZONE",
-          "dist_ema20_atr": 0.92,
+          "dist_ema20_atr": 0.91,
           "dist_vwap_pct": 0.0
         },
         "market_regime_info": {
@@ -72,19 +72,19 @@
           "regime_action": "FAVOR LONG MOMENTUM SETUPS"
         },
         "entry_plan": {
-          "entry_zone_str": "\u20b91729.40 - \u20b91757.07",
-          "entry_min": 1729.4,
-          "entry_max": 1757.07,
-          "confirmation_condition": "15-minute candle closes above \u20b91746.69 with RVOL > 1.5 and sustained VWAP support.",
-          "invalidation_level": 1694.81
+          "entry_zone_str": "\u20b91729.20 - \u20b91756.87",
+          "entry_min": 1729.2,
+          "entry_max": 1756.87,
+          "confirmation_condition": "15-minute candle closes above \u20b91746.49 with RVOL > 1.5 and sustained VWAP support.",
+          "invalidation_level": 1694.62
         },
         "risk_plan": {
-          "entry_price": 1729.4,
-          "stop_loss": 1694.81,
-          "target1": 1781.28,
-          "target2": 1815.88,
-          "target3": 1867.76,
-          "risk_per_share": 34.59,
+          "entry_price": 1729.2,
+          "stop_loss": 1694.62,
+          "target1": 1781.07,
+          "target2": 1815.65,
+          "target3": 1867.52,
+          "risk_per_share": 34.58,
           "rrr_t1": 1.5,
           "rrr_t2": 2.5,
           "rrr_acceptable": true
@@ -93,17 +93,17 @@
           "trading_capital": 100000.0,
           "risk_pct": 1.0,
           "max_risk_amount": 1000.0,
-          "risk_per_share": 34.59,
+          "risk_per_share": 34.58,
           "quantity": 28,
-          "capital_required": 48423.2,
-          "max_loss": 968.52
+          "capital_required": 48417.6,
+          "max_loss": 968.24
         },
         "scenarios": {
-          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b91788.20, CHASE TRADE - AVOID. Wait for pullback to \u20b91746.69 and 15m VWAP reclaim.",
-          "scenario_flat": "FLAT OPEN: Look for entry between \u20b91729.40 - \u20b91746.69 on 15m candle close above \u20b91746.69 with RVOL > 1.5.",
-          "scenario_gap_down": "GAP DOWN: If opens below \u20b91694.81, SETUP INVALIDATED. No Trade.",
-          "chase_avoid_level": 1788.2,
-          "invalidation_level": 1694.81
+          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b91787.99, CHASE TRADE - AVOID. Wait for pullback to \u20b91746.49 and 15m VWAP reclaim.",
+          "scenario_flat": "FLAT OPEN: Look for entry between \u20b91729.20 - \u20b91746.49 on 15m candle close above \u20b91746.49 with RVOL > 1.5.",
+          "scenario_gap_down": "GAP DOWN: If opens below \u20b91694.62, SETUP INVALIDATED. No Trade.",
+          "chase_avoid_level": 1787.99,
+          "invalidation_level": 1694.62
         },
         "event_risk_info": {
           "event_risk_level": "LOW",
