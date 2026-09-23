@@ -1,5 +1,5 @@
 {
-  "timestamp": "23-Sep-2026 03:45 PM",
+  "timestamp": "23-Sep-2026 04:00 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "23-Sep-2026 03:45 PM",
+      "timestamp": "23-Sep-2026 04:00 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "23-Sep-2026 10:15 AM",
+    "timestamp": "23-Sep-2026 10:30 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "market_breadth": {
@@ -318,7 +318,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "23-Sep-2026 03:45 PM",
+    "timestamp": "23-Sep-2026 04:00 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -336,7 +336,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "23-Sep-2026 03:45 PM",
+    "timestamp": "23-Sep-2026 04:00 PM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -402,10 +402,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 30.9,
+    "stale_minutes": 45.9,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.9m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 45.9m)"
   },
   "backtest_metrics": {
     "cagr_pct": 1.4,
@@ -421,10 +421,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 514500.0,
+    "allocated_margin": 511500.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 343,
+    "total_trades": 341,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -611,7 +611,7 @@
       "grade": "A+"
     }
   ],
-  "active_positions_count": 36,
+  "active_positions_count": 35,
   "active_positions": [
     {
       "id": "STK_LONG_INFY",
@@ -667,7 +667,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1923.8,
-      "current_price": 1923.1,
+      "current_price": 1865.0,
       "sl_price": 1908.41,
       "target1_price": 1942.27,
       "target2_price": 1954.58,
@@ -842,29 +842,29 @@
       "symbol": "TATASTEEL",
       "strategy_name": "Intraday Long",
       "action": "BUY",
-      "entry_price": 190.68,
-      "current_price": 190.68,
+      "entry_price": 190.82,
+      "current_price": 190.82,
       "sl_price": 187.34,
-      "target1_price": 194.69,
-      "target2_price": 197.36,
+      "target1_price": 195.0,
+      "target2_price": 197.78,
       "status": "ACTIVE_POSITION",
-      "entry_time": "23-Sep-2026 03:45 PM",
+      "entry_time": "23-Sep-2026 04:00 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
     },
     {
-      "id": "STK_LONG_ITC",
-      "symbol": "ITC",
+      "id": "STK_LONG_JSWSTEEL",
+      "symbol": "JSWSTEEL",
       "strategy_name": "Intraday Long",
       "action": "BUY",
-      "entry_price": 269.9,
-      "current_price": 269.9,
-      "sl_price": 266.55,
-      "target1_price": 273.92,
-      "target2_price": 276.6,
+      "entry_price": 1297.8,
+      "current_price": 1297.8,
+      "sl_price": 1282.6,
+      "target1_price": 1316.04,
+      "target2_price": 1328.2,
       "status": "ACTIVE_POSITION",
-      "entry_time": "23-Sep-2026 03:45 PM",
+      "entry_time": "23-Sep-2026 04:00 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -880,23 +880,7 @@
       "target1_price": 2964.47,
       "target2_price": 2945.31,
       "status": "ACTIVE_POSITION",
-      "entry_time": "23-Sep-2026 03:45 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
-    {
-      "id": "STK_SHORT_KOTAKBANK",
-      "symbol": "KOTAKBANK",
-      "strategy_name": "Intraday Short",
-      "action": "SELL",
-      "entry_price": 413.0,
-      "current_price": 413.0,
-      "sl_price": 416.3,
-      "target1_price": 409.04,
-      "target2_price": 406.39,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "23-Sep-2026 03:45 PM",
+      "entry_time": "23-Sep-2026 04:00 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -923,7 +907,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 323.65,
-      "current_price": 327.15,
+      "current_price": 326.0,
       "sl_price": 327.8,
       "target1_price": 318.67,
       "target2_price": 315.35,
@@ -939,7 +923,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1090.8,
-      "current_price": 1038.6,
+      "current_price": 1079.9,
       "sl_price": 1082.07,
       "target1_price": 1101.27,
       "target2_price": 1108.25,
@@ -955,7 +939,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 4070.7,
-      "current_price": 3999.0,
+      "current_price": 3929.9,
       "sl_price": 4025.6,
       "target1_price": 4124.82,
       "target2_price": 4160.9,
@@ -1131,7 +1115,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 267.7,
-      "current_price": 270.4,
+      "current_price": 270.3,
       "sl_price": 265.56,
       "target1_price": 270.27,
       "target2_price": 271.98,
@@ -1163,7 +1147,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 2271.3,
-      "current_price": 2082.0,
+      "current_price": 2105.0,
       "sl_price": 2289.47,
       "target1_price": 2249.5,
       "target2_price": 2234.96,
@@ -1192,18 +1176,9 @@
   ],
   "signal_audit_log": [
     {
-      "id": 36,
-      "signal_id": "STK_SHORT_KOTAKBANK",
-      "timestamp": "23-Sep-2026 03:45 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 413.0,
-      "notes": "Position initialized at \u20b9413.00"
-    },
-    {
       "id": 35,
       "signal_id": "STK_SHORT_ADANIENT",
-      "timestamp": "23-Sep-2026 03:45 PM",
+      "timestamp": "23-Sep-2026 04:00 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 2993.2,
@@ -1211,21 +1186,21 @@
     },
     {
       "id": 34,
-      "signal_id": "STK_LONG_ITC",
-      "timestamp": "23-Sep-2026 03:45 PM",
+      "signal_id": "STK_LONG_JSWSTEEL",
+      "timestamp": "23-Sep-2026 04:00 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
-      "spot_price": 269.9,
-      "notes": "Position initialized at \u20b9269.90"
+      "spot_price": 1297.8,
+      "notes": "Position initialized at \u20b91297.80"
     },
     {
       "id": 33,
       "signal_id": "STK_LONG_TATASTEEL",
-      "timestamp": "23-Sep-2026 03:45 PM",
+      "timestamp": "23-Sep-2026 04:00 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
-      "spot_price": 190.68,
-      "notes": "Position initialized at \u20b9190.68"
+      "spot_price": 190.82,
+      "notes": "Position initialized at \u20b9190.82"
     },
     {
       "id": 32,
@@ -1325,6 +1300,15 @@
       "new_status": "ACTIVE_POSITION",
       "spot_price": 11235.0,
       "notes": "Position initialized at \u20b911235.00"
+    },
+    {
+      "id": 21,
+      "signal_id": "STK_LONG_POWERGRID",
+      "timestamp": "07-Sep-2026 12:33 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 267.7,
+      "notes": "Position initialized at \u20b9267.70"
     }
   ],
   "nifty": {
@@ -1626,43 +1610,17 @@
   "intraday_stocks": {
     "long_setups": [
       {
-        "symbol": "POWERGRID",
-        "action": "BUY (LONG)",
-        "close": 270.4,
-        "vwap": 269.34,
-        "orb_high": 267.1,
-        "sl": 267.1,
-        "t1": 274.36,
-        "t2": 277.0,
-        "rsi": 76.6,
-        "vol_exp": 3.8,
-        "pattern": "\ud83d\udfe2 Bullish Engulfing (Reversal Setup)"
-      },
-      {
-        "symbol": "BAJFINANCE",
-        "action": "BUY (LONG)",
-        "close": 1038.6,
-        "vwap": 1033.82,
-        "orb_high": 1033.2,
-        "sl": 1030.29,
-        "t1": 1048.57,
-        "t2": 1055.22,
-        "rsi": 60.2,
-        "vol_exp": 3.3,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
-      },
-      {
         "symbol": "TATASTEEL",
         "action": "BUY (LONG)",
-        "close": 190.68,
-        "vwap": 189.6,
+        "close": 190.82,
+        "vwap": 189.62,
         "orb_high": 187.34,
         "sl": 187.34,
-        "t1": 194.69,
-        "t2": 197.36,
-        "rsi": 68.7,
-        "vol_exp": 2.7,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+        "t1": 195.0,
+        "t2": 197.78,
+        "rsi": 69.4,
+        "vol_exp": 2.9,
+        "pattern": "\ud83d\udfe2 Bullish Engulfing (Reversal Setup)"
       },
       {
         "symbol": "BHARTIARTL",
@@ -1678,16 +1636,42 @@
         "pattern": "\ud83d\udfe2 Bullish Engulfing (Reversal Setup)"
       },
       {
-        "symbol": "ITC",
+        "symbol": "LT",
         "action": "BUY (LONG)",
-        "close": 269.9,
-        "vwap": 268.97,
-        "orb_high": 266.55,
-        "sl": 266.55,
-        "t1": 273.92,
-        "t2": 276.6,
-        "rsi": 66.3,
-        "vol_exp": 1.7,
+        "close": 3929.9,
+        "vwap": 3920.43,
+        "orb_high": 3912.0,
+        "sl": 3898.46,
+        "t1": 3967.63,
+        "t2": 3992.78,
+        "rsi": 52.4,
+        "vol_exp": 1.6,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "SUNPHARMA",
+        "action": "BUY (LONG)",
+        "close": 1865.0,
+        "vwap": 1858.94,
+        "orb_high": 1856.5,
+        "sl": 1850.08,
+        "t1": 1882.9,
+        "t2": 1894.84,
+        "rsi": 82.5,
+        "vol_exp": 1.4,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "JSWSTEEL",
+        "action": "BUY (LONG)",
+        "close": 1297.8,
+        "vwap": 1292.18,
+        "orb_high": 1282.6,
+        "sl": 1282.6,
+        "t1": 1316.04,
+        "t2": 1328.2,
+        "rsi": 59.1,
+        "vol_exp": 1.4,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ],
@@ -1708,41 +1692,15 @@
       {
         "symbol": "NTPC",
         "action": "SHORT SELL",
-        "close": 327.15,
-        "vwap": 327.33,
+        "close": 326.0,
+        "vwap": 327.3,
         "orb_low": 327.3,
-        "sl": 329.77,
-        "t1": 324.01,
-        "t2": 321.92,
-        "rsi": 44.6,
-        "vol_exp": 3.0,
-        "pattern": "\ud83d\udfe2 Hammer Pattern (Demand Reversal at Support)"
-      },
-      {
-        "symbol": "TCS",
-        "action": "SHORT SELL",
-        "close": 2082.0,
-        "vwap": 2087.49,
-        "orb_low": 2086.5,
-        "sl": 2098.66,
-        "t1": 2062.01,
-        "t2": 2048.69,
-        "rsi": 25.2,
-        "vol_exp": 2.7,
+        "sl": 328.61,
+        "t1": 322.87,
+        "t2": 320.78,
+        "rsi": 25.5,
+        "vol_exp": 1.3,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
-      },
-      {
-        "symbol": "KOTAKBANK",
-        "action": "SHORT SELL",
-        "close": 413.0,
-        "vwap": 414.1,
-        "orb_low": 414.65,
-        "sl": 416.3,
-        "t1": 409.04,
-        "t2": 406.39,
-        "rsi": 27.0,
-        "vol_exp": 2.3,
-        "pattern": "\u26a1 Volatility Contraction (VCP) Momentum Expansion"
       }
     ]
   }
