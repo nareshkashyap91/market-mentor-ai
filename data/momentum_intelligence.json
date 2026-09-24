@@ -1,6 +1,6 @@
 {
-  "timestamp": "23-Sep-2026 11:47 PM",
-  "total_candidates": 15,
+  "timestamp": "24-Sep-2026 12:01 AM",
+  "total_candidates": 14,
   "candidates": [
     {
       "symbol": "RADICO",
@@ -271,7 +271,7 @@
       "dma20": 8821.48,
       "dma50": 8832.96,
       "dma100": 8622.16,
-      "dma200": 7990.34,
+      "dma200": 7990.35,
       "dma_aligned": false,
       "car_1y": 18.3,
       "rsi": 60.6,
@@ -527,7 +527,7 @@
       "close": 1886.3,
       "turnover": 467.41,
       "vol_expansion": 1.56,
-      "why": "Outperforming market (RSI: 61.3, 1Y CAR: +5.0%), closed 0.3% above VWAP with bullish DMA alignment (20>50>100>200) and 1.6x volume expansion.",
+      "why": "Outperforming market (RSI: 61.3, 1Y CAR: +5.0%), closed 0.8% above VWAP with bullish DMA alignment (20>50>100>200) and 1.6x volume expansion.",
       "dma20": 1813.98,
       "dma50": 1720.59,
       "dma100": 1680.93,
@@ -1043,141 +1043,11 @@
       }
     },
     {
-      "symbol": "LGEINDIA",
-      "close": 1694.2,
-      "turnover": 133.17,
-      "vol_expansion": 1.41,
-      "why": "Outperforming market (RSI: 58.9, 1Y CAR: +0.3%), closed 0.1% above VWAP with bullish DMA alignment (20>50>100>200) and 1.4x volume expansion.",
-      "dma20": 1661.23,
-      "dma50": 1615.46,
-      "dma100": 1579.95,
-      "dma200": 1546.05,
-      "dma_aligned": true,
-      "car_1y": 0.3,
-      "rsi": 58.9,
-      "momentum_intelligence": {
-        "symbol": "LGEINDIA",
-        "close": 1694.2,
-        "direction": "LONG",
-        "setup_name": "52-Week High Breakout",
-        "momentum_quality_score": 80.0,
-        "trade_setup_score": 80.0,
-        "momentum_grade": "A (STRONG)",
-        "trade_setup_grade": "A (STRONG)",
-        "trend_info": {
-          "trend_classification": "STRONG BULLISH TREND",
-          "trend_score": 15,
-          "dma_aligned": true,
-          "above_all_dmas": true,
-          "below_all_dmas": false,
-          "dma_compression": false,
-          "dma_spread_pct": 6.8
-        },
-        "momentum_info": {
-          "momentum_classification": "STRONG",
-          "momentum_score": 8,
-          "rvol_label": "Improving (1.0-1.5)",
-          "rvol_score": 10,
-          "pv_relationship": "Price \u2191 + Volume \u2191 (Accumulation Proxy)"
-        },
-        "relative_strength_info": {
-          "rs_score": 32.4,
-          "rs_classification": "WEAK",
-          "outperforming_nifty": false,
-          "rs_nifty_diff_pct": -14.7
-        },
-        "price_action_info": {
-          "pattern_name": "52-Week High Breakout",
-          "price_action_score": 15,
-          "proximity_status": "52W BREAKOUT",
-          "dist_52w_high_pct": 0.99,
-          "vwap_reclaim": false
-        },
-        "breakout_quality": {
-          "breakout_quality": "B BREAKOUT",
-          "breakout_score": 9,
-          "candle_strength": 0.67,
-          "atr_expansion": true
-        },
-        "extension_info": {
-          "extension_status": "NORMAL",
-          "penalty": 0,
-          "recommendation": "ACTIONABLE ENTRY ZONE",
-          "dist_ema20_atr": 0.97,
-          "dist_vwap_pct": 0.0
-        },
-        "market_regime_info": {
-          "market_regime": "\ud83d\udfe2 BULLISH_TRENDING",
-          "regime_confidence": 75.0,
-          "market_alignment_score": 10,
-          "regime_action": "FAVOR LONG MOMENTUM SETUPS"
-        },
-        "entry_plan": {
-          "entry_zone_str": "\u20b91694.20 - \u20b91721.31",
-          "entry_min": 1694.2,
-          "entry_max": 1721.31,
-          "confirmation_condition": "15-minute candle closes above \u20b91711.14 with RVOL > 1.5 and sustained VWAP support.",
-          "invalidation_level": 1660.32
-        },
-        "risk_plan": {
-          "entry_price": 1694.2,
-          "stop_loss": 1660.32,
-          "target1": 1745.02,
-          "target2": 1778.9,
-          "target3": 1829.72,
-          "risk_per_share": 33.88,
-          "rrr_t1": 1.5,
-          "rrr_t2": 2.5,
-          "rrr_acceptable": true
-        },
-        "position_sizing": {
-          "trading_capital": 100000.0,
-          "risk_pct": 1.0,
-          "max_risk_amount": 1000.0,
-          "risk_per_share": 33.88,
-          "quantity": 29,
-          "capital_required": 49131.8,
-          "max_loss": 982.52
-        },
-        "scenarios": {
-          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b91751.80, CHASE TRADE - AVOID. Wait for pullback to \u20b91711.14 and 15m VWAP reclaim.",
-          "scenario_flat": "FLAT OPEN: Look for entry between \u20b91694.20 - \u20b91711.14 on 15m candle close above \u20b91711.14 with RVOL > 1.5.",
-          "scenario_gap_down": "GAP DOWN: If opens below \u20b91660.32, SETUP INVALIDATED. No Trade.",
-          "chase_avoid_level": 1751.8,
-          "invalidation_level": 1660.32
-        },
-        "event_risk_info": {
-          "event_risk_level": "LOW",
-          "event_penalty": 0,
-          "event_risk_reason": "Low Event Risk: Clean Corporate Calendar"
-        },
-        "guardrail_eval": {
-          "is_no_trade": false,
-          "no_trade_reasons": [],
-          "no_trade_summary": "PASSED ALL RISK GUARDRAILS"
-        },
-        "status": "WAIT",
-        "ai_explanation": {
-          "why_selected": [
-            "DMA Alignment: STRONG BULLISH TREND",
-            "Volume Confirmation: RVOL Improving (1.0-1.5)",
-            "Relative Strength: WEAK vs NIFTY 50",
-            "Chart Pattern: 52-Week High Breakout (52W BREAKOUT)",
-            "Price-Volume Behavior: Price \u2191 + Volume \u2191 (Accumulation Proxy)",
-            "Acceptable Risk-Reward: 1.50 RRR to Target 1"
-          ],
-          "key_risks": [
-            "Near 52W Overhead Resistance (1.0% below 52W High)"
-          ]
-        }
-      }
-    },
-    {
       "symbol": "DEVYANI",
       "close": 144.51,
       "turnover": 34.18,
       "vol_expansion": 1.4,
-      "why": "Outperforming market (RSI: 64.2, 1Y CAR: -17.7%), closed 2.0% above VWAP with bullish DMA alignment (20>50>100>200) and 1.4x volume expansion.",
+      "why": "Outperforming market (RSI: 64.2, 1Y CAR: -17.7%), closed 2.1% above VWAP with bullish DMA alignment (20>50>100>200) and 1.4x volume expansion.",
       "dma20": 139.69,
       "dma50": 132.03,
       "dma100": 123.22,
@@ -1437,7 +1307,7 @@
       "close": 585.75,
       "turnover": 31.37,
       "vol_expansion": 1.19,
-      "why": "Outperforming market (RSI: 55.2, 1Y CAR: -13.8%), closed 0.2% above VWAP with sustaining above all key DMAs (20, 50, 100, 200) and 1.2x volume expansion.",
+      "why": "Outperforming market (RSI: 55.2, 1Y CAR: -13.8%), closed 0.3% above VWAP with sustaining above all key DMAs (20, 50, 100, 200) and 1.2x volume expansion.",
       "dma20": 574.72,
       "dma50": 583.46,
       "dma100": 541.49,
@@ -1567,7 +1437,7 @@
       "close": 2195.0,
       "turnover": 131.47,
       "vol_expansion": 1.16,
-      "why": "Outperforming market (RSI: 55.9, 1Y CAR: +31.2%), closed 0.1% above VWAP with sustaining above all key DMAs (20, 50, 100, 200) and 1.2x volume expansion.",
+      "why": "Outperforming market (RSI: 55.9, 1Y CAR: +31.2%), closed 0.2% above VWAP with sustaining above all key DMAs (20, 50, 100, 200) and 1.2x volume expansion.",
       "dma20": 2185.84,
       "dma50": 2041.41,
       "dma100": 1936.84,
@@ -1827,7 +1697,7 @@
       "close": 2219.5,
       "turnover": 87.84,
       "vol_expansion": 1.03,
-      "why": "Outperforming market (RSI: 55.7, 1Y CAR: +130.9%), closed 1.0% above VWAP with sustaining above all key DMAs (20, 50, 100, 200) and 1.0x volume expansion.",
+      "why": "Outperforming market (RSI: 55.7, 1Y CAR: +130.9%), closed 2.0% above VWAP with sustaining above all key DMAs (20, 50, 100, 200) and 1.0x volume expansion.",
       "dma20": 2159.24,
       "dma50": 2160.92,
       "dma100": 2084.81,
