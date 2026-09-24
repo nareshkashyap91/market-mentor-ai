@@ -1,5 +1,5 @@
 {
-  "timestamp": "24-Sep-2026 03:45 PM",
+  "timestamp": "24-Sep-2026 04:00 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "24-Sep-2026 03:45 PM",
+      "timestamp": "24-Sep-2026 04:00 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "24-Sep-2026 10:15 AM",
+    "timestamp": "24-Sep-2026 10:30 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "market_breadth": {
@@ -318,7 +318,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "24-Sep-2026 03:45 PM",
+    "timestamp": "24-Sep-2026 04:00 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -336,7 +336,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "24-Sep-2026 03:45 PM",
+    "timestamp": "24-Sep-2026 04:00 PM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -402,10 +402,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 30.7,
+    "stale_minutes": 45.9,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.7m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 45.9m)"
   },
   "backtest_metrics": {
     "cagr_pct": -1.7,
@@ -763,7 +763,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 13346.0,
-      "current_price": 12000.0,
+      "current_price": 11990.0,
       "sl_price": 13452.77,
       "target1_price": 13217.88,
       "target2_price": 13132.46,
@@ -795,7 +795,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 185.04,
-      "current_price": 188.1,
+      "current_price": 185.24,
       "sl_price": 187.53,
       "target1_price": 182.05,
       "target2_price": 180.06,
@@ -838,17 +838,17 @@
       "realized_pnl": 0.0
     },
     {
-      "id": "STK_SHORT_M&M",
-      "symbol": "M&M",
+      "id": "STK_SHORT_ADANIENT",
+      "symbol": "ADANIENT",
       "strategy_name": "Intraday Short",
       "action": "SELL",
-      "entry_price": 2990.0,
-      "current_price": 2990.0,
-      "sl_price": 3013.92,
-      "target1_price": 2961.3,
-      "target2_price": 2942.16,
+      "entry_price": 2900.0,
+      "current_price": 2900.0,
+      "sl_price": 2955.1,
+      "target1_price": 2833.88,
+      "target2_price": 2789.8,
       "status": "ACTIVE_POSITION",
-      "entry_time": "24-Sep-2026 03:45 PM",
+      "entry_time": "24-Sep-2026 04:00 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1003,7 +1003,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 4983.5,
-      "current_price": 4831.0,
+      "current_price": 4983.5,
       "sl_price": 5023.37,
       "target1_price": 4935.66,
       "target2_price": 4903.76,
@@ -1067,7 +1067,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 11235.0,
-      "current_price": 11201.0,
+      "current_price": 11056.0,
       "sl_price": 11324.88,
       "target1_price": 11127.14,
       "target2_price": 11055.24,
@@ -1131,7 +1131,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1840.0,
-      "current_price": 1840.0,
+      "current_price": 1795.8,
       "sl_price": 1861.1,
       "target1_price": 1814.68,
       "target2_price": 1797.8,
@@ -1145,12 +1145,12 @@
   "signal_audit_log": [
     {
       "id": 33,
-      "signal_id": "STK_SHORT_M&M",
-      "timestamp": "24-Sep-2026 03:45 PM",
+      "signal_id": "STK_SHORT_ADANIENT",
+      "timestamp": "24-Sep-2026 04:00 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
-      "spot_price": 2990.0,
-      "notes": "Position initialized at \u20b92990.00"
+      "spot_price": 2900.0,
+      "notes": "Position initialized at \u20b92900.00"
     },
     {
       "id": 32,
@@ -1630,56 +1630,56 @@
         "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)"
       },
       {
-        "symbol": "TITAN",
-        "action": "SHORT SELL",
-        "close": 4831.0,
-        "vwap": 4862.01,
-        "orb_low": 4860.0,
-        "sl": 4869.65,
-        "t1": 4784.62,
-        "t2": 4753.7,
-        "rsi": 21.6,
-        "vol_exp": 3.5,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
-      },
-      {
-        "symbol": "TATASTEEL",
-        "action": "SHORT SELL",
-        "close": 188.1,
-        "vwap": 189.35,
-        "orb_low": 188.6,
-        "sl": 189.6,
-        "t1": 186.29,
-        "t2": 185.09,
-        "rsi": 33.1,
-        "vol_exp": 3.5,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
-      },
-      {
         "symbol": "MARUTI",
         "action": "SHORT SELL",
-        "close": 12000.0,
-        "vwap": 12074.61,
+        "close": 11990.0,
+        "vwap": 12073.66,
         "orb_low": 12130.0,
         "sl": 12130.0,
-        "t1": 11844.0,
-        "t2": 11740.0,
-        "rsi": 22.8,
-        "vol_exp": 3.0,
-        "pattern": "\ud83d\udfe2 Hammer Pattern (Demand Reversal at Support)"
+        "t1": 11822.0,
+        "t2": 11710.0,
+        "rsi": 22.0,
+        "vol_exp": 3.2,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       },
       {
-        "symbol": "M&M",
+        "symbol": "ADANIENT",
         "action": "SHORT SELL",
-        "close": 2990.0,
-        "vwap": 3007.03,
-        "orb_low": 3009.7,
-        "sl": 3013.92,
-        "t1": 2961.3,
-        "t2": 2942.16,
-        "rsi": 16.1,
-        "vol_exp": 2.9,
-        "pattern": "\ud83d\udfe2 Hammer Pattern (Demand Reversal at Support)"
+        "close": 2900.0,
+        "vwap": 2928.78,
+        "orb_low": 2955.1,
+        "sl": 2955.1,
+        "t1": 2833.88,
+        "t2": 2789.8,
+        "rsi": 19.8,
+        "vol_exp": 2.2,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "ULTRACEMCO",
+        "action": "SHORT SELL",
+        "close": 11056.0,
+        "vwap": 11127.87,
+        "orb_low": 11064.0,
+        "sl": 11144.45,
+        "t1": 10949.86,
+        "t2": 10879.1,
+        "rsi": 21.6,
+        "vol_exp": 1.8,
+        "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)"
+      },
+      {
+        "symbol": "BHARTIARTL",
+        "action": "SHORT SELL",
+        "close": 1795.8,
+        "vwap": 1806.99,
+        "orb_low": 1820.3,
+        "sl": 1820.3,
+        "t1": 1766.4,
+        "t2": 1746.8,
+        "rsi": 11.3,
+        "vol_exp": 1.7,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ]
   }
