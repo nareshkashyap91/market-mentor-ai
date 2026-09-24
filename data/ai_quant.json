@@ -1,5 +1,5 @@
 {
-  "timestamp": "24-Sep-2026 03:31 PM",
+  "timestamp": "24-Sep-2026 03:45 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "24-Sep-2026 03:31 PM",
+      "timestamp": "24-Sep-2026 03:45 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "24-Sep-2026 10:01 AM",
+    "timestamp": "24-Sep-2026 10:15 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "market_breadth": {
@@ -318,7 +318,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "24-Sep-2026 03:31 PM",
+    "timestamp": "24-Sep-2026 03:45 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -336,7 +336,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "24-Sep-2026 03:31 PM",
+    "timestamp": "24-Sep-2026 03:45 PM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -402,10 +402,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 16.1,
+    "stale_minutes": 30.7,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 16.1m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.7m)"
   },
   "backtest_metrics": {
     "cagr_pct": -1.7,
@@ -731,7 +731,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1322.7,
-      "current_price": 1274.5,
+      "current_price": 1302.4,
       "sl_price": 1333.5,
       "target1_price": 1309.74,
       "target2_price": 1301.1,
@@ -848,7 +848,7 @@
       "target1_price": 2961.3,
       "target2_price": 2942.16,
       "status": "ACTIVE_POSITION",
-      "entry_time": "24-Sep-2026 03:31 PM",
+      "entry_time": "24-Sep-2026 03:45 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -955,7 +955,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 266.6,
-      "current_price": 266.6,
+      "current_price": 266.4,
       "sl_price": 268.73,
       "target1_price": 264.04,
       "target2_price": 262.33,
@@ -1146,7 +1146,7 @@
     {
       "id": 33,
       "signal_id": "STK_SHORT_M&M",
-      "timestamp": "24-Sep-2026 03:31 PM",
+      "timestamp": "24-Sep-2026 03:45 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 2990.0,
@@ -1617,10 +1617,23 @@
     "long_setups": [],
     "short_setups": [
       {
+        "symbol": "POWERGRID",
+        "action": "SHORT SELL",
+        "close": 266.4,
+        "vwap": 267.39,
+        "orb_low": 268.35,
+        "sl": 268.53,
+        "t1": 263.84,
+        "t2": 262.14,
+        "rsi": 41.9,
+        "vol_exp": 3.5,
+        "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)"
+      },
+      {
         "symbol": "TITAN",
         "action": "SHORT SELL",
         "close": 4831.0,
-        "vwap": 4862.21,
+        "vwap": 4862.01,
         "orb_low": 4860.0,
         "sl": 4869.65,
         "t1": 4784.62,
@@ -1646,7 +1659,7 @@
         "symbol": "MARUTI",
         "action": "SHORT SELL",
         "close": 12000.0,
-        "vwap": 12075.53,
+        "vwap": 12074.61,
         "orb_low": 12130.0,
         "sl": 12130.0,
         "t1": 11844.0,
@@ -1659,7 +1672,7 @@
         "symbol": "M&M",
         "action": "SHORT SELL",
         "close": 2990.0,
-        "vwap": 3006.83,
+        "vwap": 3007.03,
         "orb_low": 3009.7,
         "sl": 3013.92,
         "t1": 2961.3,
@@ -1667,19 +1680,6 @@
         "rsi": 16.1,
         "vol_exp": 2.9,
         "pattern": "\ud83d\udfe2 Hammer Pattern (Demand Reversal at Support)"
-      },
-      {
-        "symbol": "JSWSTEEL",
-        "action": "SHORT SELL",
-        "close": 1274.5,
-        "vwap": 1281.28,
-        "orb_low": 1282.4,
-        "sl": 1284.7,
-        "t1": 1262.26,
-        "t2": 1254.11,
-        "rsi": 25.8,
-        "vol_exp": 2.7,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ]
   }
