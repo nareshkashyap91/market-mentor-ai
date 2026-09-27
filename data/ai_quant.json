@@ -1,5 +1,5 @@
 {
-  "timestamp": "27-Sep-2026 11:45 PM",
+  "timestamp": "28-Sep-2026 12:00 AM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "27-Sep-2026 11:45 PM",
+      "timestamp": "28-Sep-2026 12:00 AM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -140,7 +140,7 @@
     "journal_summary_formatted": "REALIZED P&L: +\u20b926,500 | WIN RATE: 75.0%"
   },
   "premarket_cues_analytics": {
-    "timestamp": "27-Sep-2026 08:30 AM",
+    "timestamp": "28-Sep-2026 08:30 AM",
     "gift_nifty_pts": 85.0,
     "nasdaq_fut_pct": 0.92,
     "dow_fut_pct": 0.45,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "27-Sep-2026 06:15 PM",
+    "timestamp": "27-Sep-2026 06:30 PM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "market_breadth": {
@@ -318,7 +318,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "27-Sep-2026 11:45 PM",
+    "timestamp": "28-Sep-2026 12:00 AM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -336,7 +336,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "27-Sep-2026 11:45 PM",
+    "timestamp": "28-Sep-2026 12:00 AM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -402,10 +402,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 3390.8,
+    "stale_minutes": 3405.9,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 3390.8m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 3405.9m)"
   },
   "backtest_metrics": {
     "cagr_pct": -1.8,
@@ -613,6 +613,54 @@
   ],
   "active_positions_count": 35,
   "active_positions": [
+    {
+      "id": "STK_LONG_TITAN",
+      "symbol": "TITAN",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 4884.0,
+      "current_price": 4884.0,
+      "sl_price": 4844.5,
+      "target1_price": 4931.4,
+      "target2_price": 4963.0,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "28-Sep-2026 12:00 AM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_LONG_ULTRACEMCO",
+      "symbol": "ULTRACEMCO",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 11155.0,
+      "current_price": 11155.0,
+      "sl_price": 11065.76,
+      "target1_price": 11262.09,
+      "target2_price": 11333.48,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "28-Sep-2026 12:00 AM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_LONG_RELIANCE",
+      "symbol": "RELIANCE",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 1226.0,
+      "current_price": 1226.0,
+      "sl_price": 1216.19,
+      "target1_price": 1237.77,
+      "target2_price": 1245.62,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "28-Sep-2026 12:00 AM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
     {
       "id": "STK_LONG_INFY",
       "symbol": "INFY",
@@ -833,54 +881,6 @@
       "target2_price": 261.35,
       "status": "ACTIVE_POSITION",
       "entry_time": "28-Aug-2026 01:19 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
-    {
-      "id": "STK_LONG_TITAN",
-      "symbol": "TITAN",
-      "strategy_name": "Intraday Long",
-      "action": "BUY",
-      "entry_price": 4884.0,
-      "current_price": 4884.0,
-      "sl_price": 4844.5,
-      "target1_price": 4931.4,
-      "target2_price": 4963.0,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "27-Sep-2026 11:45 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
-    {
-      "id": "STK_LONG_ULTRACEMCO",
-      "symbol": "ULTRACEMCO",
-      "strategy_name": "Intraday Long",
-      "action": "BUY",
-      "entry_price": 11155.0,
-      "current_price": 11155.0,
-      "sl_price": 11065.76,
-      "target1_price": 11262.09,
-      "target2_price": 11333.48,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "27-Sep-2026 11:45 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
-    {
-      "id": "STK_LONG_RELIANCE",
-      "symbol": "RELIANCE",
-      "strategy_name": "Intraday Long",
-      "action": "BUY",
-      "entry_price": 1226.0,
-      "current_price": 1226.0,
-      "sl_price": 1216.19,
-      "target1_price": 1237.77,
-      "target2_price": 1245.62,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "27-Sep-2026 11:45 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1178,7 +1178,7 @@
     {
       "id": 35,
       "signal_id": "STK_LONG_RELIANCE",
-      "timestamp": "27-Sep-2026 11:45 PM",
+      "timestamp": "28-Sep-2026 12:00 AM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 1226.0,
@@ -1187,7 +1187,7 @@
     {
       "id": 34,
       "signal_id": "STK_LONG_ULTRACEMCO",
-      "timestamp": "27-Sep-2026 11:45 PM",
+      "timestamp": "28-Sep-2026 12:00 AM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 11155.0,
@@ -1196,7 +1196,7 @@
     {
       "id": 33,
       "signal_id": "STK_LONG_TITAN",
-      "timestamp": "27-Sep-2026 11:45 PM",
+      "timestamp": "28-Sep-2026 12:00 AM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 4884.0,
@@ -1320,19 +1320,19 @@
     "volatility_percentile": 14.2,
     "confidence_score": 65.0,
     "expected_move": {
-      "dte_days": 4.0,
-      "em_1sigma_pts": 293.9,
-      "em_2sigma_pts": 587.81,
-      "em_pct": 1.27,
+      "dte_days": 3.0,
+      "em_1sigma_pts": 254.53,
+      "em_2sigma_pts": 509.06,
+      "em_pct": 1.1,
       "range_1sigma": [
-        22846.6,
-        23434.4
+        22885.97,
+        23395.03
       ],
       "range_2sigma": [
-        22552.69,
-        23728.31
+        22631.44,
+        23649.56
       ],
-      "summary_str": "\u00b1293.9 pts (\u20b922847 - \u20b923434)"
+      "summary_str": "\u00b1254.5 pts (\u20b922886 - \u20b923395)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -1468,19 +1468,19 @@
     "volatility_percentile": 14.2,
     "confidence_score": 75.0,
     "expected_move": {
-      "dte_days": 4.0,
-      "em_1sigma_pts": 705.92,
-      "em_2sigma_pts": 1411.84,
-      "em_pct": 1.27,
+      "dte_days": 3.0,
+      "em_1sigma_pts": 611.34,
+      "em_2sigma_pts": 1222.69,
+      "em_pct": 1.1,
       "range_1sigma": [
-        54874.48,
-        56286.32
+        54969.05,
+        56191.74
       ],
       "range_2sigma": [
-        54168.56,
-        56992.24
+        54357.71,
+        56803.09
       ],
-      "summary_str": "\u00b1705.9 pts (\u20b954874 - \u20b956286)"
+      "summary_str": "\u00b1611.3 pts (\u20b954969 - \u20b956192)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
