@@ -1,28 +1,28 @@
 {
-  "timestamp": "29-Sep-2026 07:02 AM",
+  "timestamp": "29-Sep-2026 07:16 AM",
   "total_candidates": 1,
   "candidates": [
     {
       "symbol": "KIRLOSENG",
-      "close": 2255.0,
-      "turnover": 124.88,
-      "vol_expansion": 1.32,
-      "why": "Outperforming market (RSI: 57.4, 1Y CAR: +139.6%), closed 2.0% above VWAP with bullish DMA alignment (20>50>100>200) and 1.3x volume expansion.",
-      "dma20": 2170.94,
-      "dma50": 2154.88,
-      "dma100": 2099.32,
-      "dma200": 1733.21,
+      "close": 2268.9,
+      "turnover": 153.33,
+      "vol_expansion": 1.56,
+      "why": "Outperforming market (RSI: 58.3, 1Y CAR: +141.1%), closed 2.3% above VWAP with bullish DMA alignment (20>50>100>200) and 1.6x volume expansion.",
+      "dma20": 2171.64,
+      "dma50": 2155.16,
+      "dma100": 2099.46,
+      "dma200": 1733.28,
       "dma_aligned": true,
-      "car_1y": 139.6,
-      "rsi": 57.4,
+      "car_1y": 141.1,
+      "rsi": 58.3,
       "momentum_intelligence": {
         "symbol": "KIRLOSENG",
-        "close": 2255.0,
+        "close": 2268.9,
         "direction": "LONG",
         "setup_name": "52-Week High Breakout",
-        "momentum_quality_score": 87.0,
-        "trade_setup_score": 75.0,
-        "momentum_grade": "A (STRONG)",
+        "momentum_quality_score": 90.0,
+        "trade_setup_score": 78.0,
+        "momentum_grade": "A+ (EXCEPTIONAL)",
         "trade_setup_grade": "B (MODERATE)",
         "trend_info": {
           "trend_classification": "STRONG BULLISH TREND",
@@ -31,20 +31,20 @@
           "above_all_dmas": true,
           "below_all_dmas": false,
           "dma_compression": false,
-          "dma_spread_pct": 19.41
+          "dma_spread_pct": 19.32
         },
         "momentum_info": {
           "momentum_classification": "STRONG",
           "momentum_score": 8,
-          "rvol_label": "Improving (1.0-1.5)",
-          "rvol_score": 10,
+          "rvol_label": "Strong (1.5-2.0)",
+          "rvol_score": 13,
           "pv_relationship": "Price \u2191 + Volume \u2191 (Accumulation Proxy)"
         },
         "relative_strength_info": {
           "rs_score": 100.0,
           "rs_classification": "VERY STRONG",
           "outperforming_nifty": true,
-          "rs_nifty_diff_pct": 124.6
+          "rs_nifty_diff_pct": 126.1
         },
         "price_action_info": {
           "pattern_name": "52-Week High Breakout",
@@ -54,8 +54,8 @@
           "vwap_reclaim": false
         },
         "breakout_quality": {
-          "breakout_quality": "B BREAKOUT",
-          "breakout_score": 9,
+          "breakout_quality": "A BREAKOUT",
+          "breakout_score": 12,
           "candle_strength": 0.67,
           "atr_expansion": true
         },
@@ -63,7 +63,7 @@
           "extension_status": "EXTENDED",
           "penalty": 12,
           "recommendation": "CAUTION (REQUIRE TIGHT ENTRY)",
-          "dist_ema20_atr": 1.86,
+          "dist_ema20_atr": 2.14,
           "dist_vwap_pct": 0.0
         },
         "market_regime_info": {
@@ -73,19 +73,19 @@
           "regime_action": "FAVOR LONG MOMENTUM SETUPS"
         },
         "entry_plan": {
-          "entry_zone_str": "\u20b92255.00 - \u20b92291.08",
-          "entry_min": 2255.0,
-          "entry_max": 2291.08,
-          "confirmation_condition": "15-minute candle closes above \u20b92277.55 with RVOL > 1.5 and sustained VWAP support.",
-          "invalidation_level": 2209.9
+          "entry_zone_str": "\u20b92268.90 - \u20b92305.20",
+          "entry_min": 2268.9,
+          "entry_max": 2305.2,
+          "confirmation_condition": "15-minute candle closes above \u20b92291.59 with RVOL > 1.5 and sustained VWAP support.",
+          "invalidation_level": 2223.52
         },
         "risk_plan": {
-          "entry_price": 2255.0,
-          "stop_loss": 2209.9,
-          "target1": 2322.65,
-          "target2": 2367.75,
-          "target3": 2435.4,
-          "risk_per_share": 45.1,
+          "entry_price": 2268.9,
+          "stop_loss": 2223.52,
+          "target1": 2336.97,
+          "target2": 2382.35,
+          "target3": 2450.42,
+          "risk_per_share": 45.38,
           "rrr_t1": 1.5,
           "rrr_t2": 2.5,
           "rrr_acceptable": true
@@ -94,17 +94,17 @@
           "trading_capital": 100000.0,
           "risk_pct": 1.0,
           "max_risk_amount": 1000.0,
-          "risk_per_share": 45.1,
+          "risk_per_share": 45.38,
           "quantity": 22,
-          "capital_required": 49610.0,
-          "max_loss": 992.2
+          "capital_required": 49915.8,
+          "max_loss": 998.36
         },
         "scenarios": {
-          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b92331.67, CHASE TRADE - AVOID. Wait for pullback to \u20b92277.55 and 15m VWAP reclaim.",
-          "scenario_flat": "FLAT OPEN: Look for entry between \u20b92255.00 - \u20b92277.55 on 15m candle close above \u20b92277.55 with RVOL > 1.5.",
-          "scenario_gap_down": "GAP DOWN: If opens below \u20b92209.90, SETUP INVALIDATED. No Trade.",
-          "chase_avoid_level": 2331.67,
-          "invalidation_level": 2209.9
+          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b92346.04, CHASE TRADE - AVOID. Wait for pullback to \u20b92291.59 and 15m VWAP reclaim.",
+          "scenario_flat": "FLAT OPEN: Look for entry between \u20b92268.90 - \u20b92291.59 on 15m candle close above \u20b92291.59 with RVOL > 1.5.",
+          "scenario_gap_down": "GAP DOWN: If opens below \u20b92223.52, SETUP INVALIDATED. No Trade.",
+          "chase_avoid_level": 2346.04,
+          "invalidation_level": 2223.52
         },
         "event_risk_info": {
           "event_risk_level": "LOW",
@@ -120,7 +120,7 @@
         "ai_explanation": {
           "why_selected": [
             "DMA Alignment: STRONG BULLISH TREND",
-            "Volume Confirmation: RVOL Improving (1.0-1.5)",
+            "Volume Confirmation: RVOL Strong (1.5-2.0)",
             "Relative Strength: VERY STRONG vs NIFTY 50",
             "Chart Pattern: 52-Week High Breakout (52W BREAKOUT)",
             "Price-Volume Behavior: Price \u2191 + Volume \u2191 (Accumulation Proxy)",
