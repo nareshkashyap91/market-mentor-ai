@@ -1,5 +1,5 @@
 {
-  "timestamp": "02-Oct-2026 09:01 AM",
+  "timestamp": "02-Oct-2026 09:16 AM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "02-Oct-2026 09:01 AM",
+      "timestamp": "02-Oct-2026 09:16 AM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "02-Oct-2026 03:31 AM",
+    "timestamp": "02-Oct-2026 03:46 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "market_breadth": {
@@ -318,7 +318,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "02-Oct-2026 09:01 AM",
+    "timestamp": "02-Oct-2026 09:16 AM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -336,7 +336,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "02-Oct-2026 09:01 AM",
+    "timestamp": "02-Oct-2026 09:16 AM",
     "fii_cash_net_cr": 1850.5,
     "dii_cash_net_cr": 1240.2,
     "total_net_cr": 3090.7,
@@ -347,10 +347,10 @@
     "formatted_summary": "FII: +\u20b91,850 Cr | DII: +\u20b91,240 Cr | Net: +\u20b93,091 Cr"
   },
   "nifty_volume_profile": {
-    "poc": 22242.52,
-    "vah": 23162.55,
-    "val": 23112.82,
-    "value_area_width_pct": 0.22,
+    "poc": 22240.34,
+    "vah": 23079.75,
+    "val": 23034.38,
+    "value_area_width_pct": 0.2,
     "profile_status": "HIGH VOLUME ACCUMULATION ZONE (POC)"
   },
   "nifty_max_pain_skew": {
@@ -399,21 +399,23 @@
     "research_tag": "AI QUANT EXECUTIVE RESEARCH SYNTHESIS"
   },
   "data_quality": {
-    "is_valid": true,
+    "is_valid": false,
     "data_type": "LIVE_DATA",
-    "is_stale": false,
-    "stale_minutes": 1066.0,
-    "anomalies": [],
-    "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 1066.0m)"
+    "is_stale": true,
+    "stale_minutes": 1081.1,
+    "anomalies": [
+      "Data is stale (1081.1m old > 15m threshold)"
+    ],
+    "clean_rows": 100,
+    "status_summary": "STALE_WARNING (LIVE_DATA | Freshness: 1081.1m)"
   },
   "backtest_metrics": {
-    "cagr_pct": -4.8,
-    "sharpe_ratio": -5.57,
-    "max_drawdown_pct": -3.1,
-    "profit_factor": 0.62,
-    "win_rate_pct": 51.6,
-    "total_backtest_trades": 124,
+    "cagr_pct": -4.3,
+    "sharpe_ratio": -5.94,
+    "max_drawdown_pct": -2.2,
+    "profit_factor": 0.65,
+    "win_rate_pct": 49.5,
+    "total_backtest_trades": 99,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
     "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
   },
@@ -421,10 +423,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 510000.0,
+    "allocated_margin": 519000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 340,
+    "total_trades": 346,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -1136,7 +1138,7 @@
       "target1_price": 3657.94,
       "target2_price": 3634.31,
       "status": "ACTIVE_POSITION",
-      "entry_time": "02-Oct-2026 09:01 AM",
+      "entry_time": "02-Oct-2026 09:15 AM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1146,7 +1148,7 @@
     {
       "id": 33,
       "signal_id": "STK_SHORT_LT",
-      "timestamp": "02-Oct-2026 09:01 AM",
+      "timestamp": "02-Oct-2026 09:15 AM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 3693.4,
@@ -1303,10 +1305,12 @@
       "summary_str": "\u00b1415.0 pts (\u20b922007 - \u20b922837)"
     },
     "no_trade_eval": {
-      "is_no_trade": false,
-      "trade_status": "ACTIVE QUANT SIGNALS",
-      "reasons": [],
-      "summary": "Market Conditions Optimal for Execution"
+      "is_no_trade": true,
+      "trade_status": "NO TRADE (CAPITAL PROTECTION ACTIVE)",
+      "reasons": [
+        "STALE DATA: "
+      ],
+      "summary": "STALE DATA: "
     },
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 1.05,
@@ -1451,10 +1455,12 @@
       "summary_str": "\u00b11007.7 pts (\u20b953443 - \u20b955458)"
     },
     "no_trade_eval": {
-      "is_no_trade": false,
-      "trade_status": "ACTIVE QUANT SIGNALS",
-      "reasons": [],
-      "summary": "Market Conditions Optimal for Execution"
+      "is_no_trade": true,
+      "trade_status": "NO TRADE (CAPITAL PROTECTION ACTIVE)",
+      "reasons": [
+        "STALE DATA: "
+      ],
+      "summary": "STALE DATA: "
     },
     "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)",
     "pcr": 0.98,
