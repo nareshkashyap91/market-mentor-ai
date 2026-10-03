@@ -1,5 +1,10 @@
 {
-  "timestamp": "03-Oct-2026 05:45 PM",
+  "timestamp": "03-Oct-2026 06:01 PM",
+  "is_simulated": true,
+  "simulated_components": [
+    "nifty",
+    "banknifty"
+  ],
   "nifty": {
     "symbol": "NIFTY",
     "spot": 24580.25,
@@ -132,7 +137,8 @@
         "put_iv": 15.1
       }
     ],
-    "data_source": "ANALYTICAL_MODEL_FALLBACK"
+    "is_simulated": true,
+    "data_source": "ANALYTICAL_MODEL_FALLBACK (fabricated OI/IV structure \u2014 not real market data)"
   },
   "banknifty": {
     "symbol": "BANKNIFTY",
@@ -266,6 +272,7 @@
         "put_iv": 15.1
       }
     ],
-    "data_source": "ANALYTICAL_MODEL_FALLBACK"
+    "is_simulated": true,
+    "data_source": "ANALYTICAL_MODEL_FALLBACK (fabricated OI/IV structure \u2014 not real market data)"
   }
 }

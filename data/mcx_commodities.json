@@ -1,0 +1,74 @@
+{
+  "mcx_market_status": "MCX CLOSED (WEEKEND)",
+  "is_mcx_open": false,
+  "is_simulated": true,
+  "simulated_components": [
+    "NATURALGAS",
+    "GOLD",
+    "SILVER",
+    "strategy_premiums (always illustrative)"
+  ],
+  "data_source": "MCX_PARTIAL_FALLBACK",
+  "quotes": {
+    "CRUDEOIL": {
+      "spot": 7653.24,
+      "change_pct": 1.85,
+      "is_simulated": false,
+      "data_source": "YFINANCE_LIVE (CL=F x84 INR proxy)"
+    },
+    "NATURALGAS": {
+      "spot": 185.4,
+      "change_pct": -0.95,
+      "is_simulated": true,
+      "data_source": "PLACEHOLDER (not fetched)"
+    },
+    "GOLD": {
+      "spot": 72400.0,
+      "change_pct": 0.4,
+      "is_simulated": true,
+      "data_source": "PLACEHOLDER (not fetched)"
+    },
+    "SILVER": {
+      "spot": 85200.0,
+      "change_pct": 0.75,
+      "is_simulated": true,
+      "data_source": "PLACEHOLDER (not fetched)"
+    }
+  },
+  "strategies": [
+    {
+      "commodity": "CRUDEOIL",
+      "type": "Bull Call Spread",
+      "is_top_pick": true,
+      "legs": [
+        "BUY CRUDEOIL 100 7650 CALL @ \u20b9120.00",
+        "SELL CRUDEOIL 100 7750 CALL @ \u20b965.00"
+      ],
+      "lot_size": 100,
+      "margin_required": 5500.0,
+      "max_profit": "\u20b94,500",
+      "max_loss": "\u20b95,500",
+      "win_prob": "76.4%",
+      "rationale": "Crude Oil in Strong Bullish Trend above \u20b97650. Low margin requirement with 1:1.8 Risk-Reward.",
+      "is_simulated": true,
+      "data_source": "ANALYTICAL_MODEL (premiums & win-prob are illustrative, not live quotes)"
+    },
+    {
+      "commodity": "NATURALGAS",
+      "type": "Bear Put Spread",
+      "is_top_pick": false,
+      "legs": [
+        "BUY NATURALGAS 1250 185 PUT @ \u20b98.50",
+        "SELL NATURALGAS 1250 175 PUT @ \u20b93.20"
+      ],
+      "lot_size": 1250,
+      "margin_required": 6625.0,
+      "max_profit": "\u20b95,875",
+      "max_loss": "\u20b96,625",
+      "win_prob": "72.8%",
+      "rationale": "Natural Gas resistance at upper VWAP band. High-reward Bear Put Spread.",
+      "is_simulated": true,
+      "data_source": "ANALYTICAL_MODEL (premiums & win-prob are illustrative, not live quotes)"
+    }
+  ]
+}

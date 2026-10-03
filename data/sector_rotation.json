@@ -1,7 +1,21 @@
 {
-  "timestamp": "03-Oct-2026 05:46 PM",
+  "timestamp": "03-Oct-2026 06:01 PM",
   "top_sector": "Nifty IT",
   "lagging_sector": "Nifty Infra",
+  "is_simulated": true,
+  "data_source": "YFINANCE_PARTIAL_FALLBACK",
+  "simulated_components": [
+    "Nifty IT",
+    "Nifty Auto",
+    "Nifty Bank",
+    "Nifty PSU Bank",
+    "Nifty Metal",
+    "Nifty Pharma",
+    "Nifty FMCG",
+    "Nifty Energy",
+    "Nifty Realty",
+    "Nifty Infra"
+  ],
   "market_breadth": {
     "advances": 5,
     "declines": 6,
@@ -12,6 +26,8 @@
     "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
   },
   "gamma_exposure_analytics": {
+    "is_simulated": true,
+    "data_source": "ANALYTICAL_MODEL_PLACEHOLDER (no live GEX feed \u2014 values are illustrative)",
     "net_gex_crores": -1850.0,
     "gex_regime": "\ud83d\udd34 NEGATIVE GAMMA (VOLATILITY SPIKE RISK)",
     "zero_gamma_flip_level": 23500.0,
@@ -30,7 +46,9 @@
       "rs_score": 2.08,
       "status": "LEADER",
       "badge_color": "success",
-      "fund_flow": "CAPITAL INFLOW \ud83d\udfe2"
+      "fund_flow": "CAPITAL INFLOW \ud83d\udfe2",
+      "is_simulated": true,
+      "data_source": "YFINANCE_TICKER_FALLBACK (fabricated values \u2014 do not trade on this sector)"
     },
     {
       "key": "NIFTY_AUTO",
@@ -43,7 +61,9 @@
       "rs_score": 2.08,
       "status": "LEADER",
       "badge_color": "success",
-      "fund_flow": "CAPITAL INFLOW \ud83d\udfe2"
+      "fund_flow": "CAPITAL INFLOW \ud83d\udfe2",
+      "is_simulated": true,
+      "data_source": "YFINANCE_TICKER_FALLBACK (fabricated values \u2014 do not trade on this sector)"
     },
     {
       "key": "NIFTY_PVT_BANK",
@@ -56,7 +76,9 @@
       "rs_score": 1.68,
       "status": "OUTPERFORMER",
       "badge_color": "primary",
-      "fund_flow": "MODERATE INFLOW \ud83d\ude80"
+      "fund_flow": "MODERATE INFLOW \ud83d\ude80",
+      "is_simulated": false,
+      "data_source": "YFINANCE_LIVE"
     },
     {
       "key": "NIFTY_BANK",
@@ -69,7 +91,9 @@
       "rs_score": 1.28,
       "status": "OUTPERFORMER",
       "badge_color": "primary",
-      "fund_flow": "MODERATE INFLOW \ud83d\ude80"
+      "fund_flow": "MODERATE INFLOW \ud83d\ude80",
+      "is_simulated": true,
+      "data_source": "YFINANCE_TICKER_FALLBACK (fabricated values \u2014 do not trade on this sector)"
     },
     {
       "key": "NIFTY_PSU_BANK",
@@ -82,7 +106,9 @@
       "rs_score": 1.28,
       "status": "OUTPERFORMER",
       "badge_color": "primary",
-      "fund_flow": "MODERATE INFLOW \ud83d\ude80"
+      "fund_flow": "MODERATE INFLOW \ud83d\ude80",
+      "is_simulated": true,
+      "data_source": "YFINANCE_TICKER_FALLBACK (fabricated values \u2014 do not trade on this sector)"
     },
     {
       "key": "NIFTY_METAL",
@@ -95,7 +121,9 @@
       "rs_score": 0.58,
       "status": "OUTPERFORMER",
       "badge_color": "primary",
-      "fund_flow": "MODERATE INFLOW \ud83d\ude80"
+      "fund_flow": "MODERATE INFLOW \ud83d\ude80",
+      "is_simulated": true,
+      "data_source": "YFINANCE_TICKER_FALLBACK (fabricated values \u2014 do not trade on this sector)"
     },
     {
       "key": "NIFTY_PHARMA",
@@ -108,7 +136,9 @@
       "rs_score": 0.58,
       "status": "OUTPERFORMER",
       "badge_color": "primary",
-      "fund_flow": "MODERATE INFLOW \ud83d\ude80"
+      "fund_flow": "MODERATE INFLOW \ud83d\ude80",
+      "is_simulated": true,
+      "data_source": "YFINANCE_TICKER_FALLBACK (fabricated values \u2014 do not trade on this sector)"
     },
     {
       "key": "NIFTY_FMCG",
@@ -121,7 +151,9 @@
       "rs_score": 0.58,
       "status": "OUTPERFORMER",
       "badge_color": "primary",
-      "fund_flow": "MODERATE INFLOW \ud83d\ude80"
+      "fund_flow": "MODERATE INFLOW \ud83d\ude80",
+      "is_simulated": true,
+      "data_source": "YFINANCE_TICKER_FALLBACK (fabricated values \u2014 do not trade on this sector)"
     },
     {
       "key": "NIFTY_ENERGY",
@@ -134,7 +166,9 @@
       "rs_score": 0.58,
       "status": "OUTPERFORMER",
       "badge_color": "primary",
-      "fund_flow": "MODERATE INFLOW \ud83d\ude80"
+      "fund_flow": "MODERATE INFLOW \ud83d\ude80",
+      "is_simulated": true,
+      "data_source": "YFINANCE_TICKER_FALLBACK (fabricated values \u2014 do not trade on this sector)"
     },
     {
       "key": "NIFTY_REALTY",
@@ -147,7 +181,9 @@
       "rs_score": 0.58,
       "status": "OUTPERFORMER",
       "badge_color": "primary",
-      "fund_flow": "MODERATE INFLOW \ud83d\ude80"
+      "fund_flow": "MODERATE INFLOW \ud83d\ude80",
+      "is_simulated": true,
+      "data_source": "YFINANCE_TICKER_FALLBACK (fabricated values \u2014 do not trade on this sector)"
     },
     {
       "key": "NIFTY_INFRA",
@@ -160,7 +196,9 @@
       "rs_score": 0.58,
       "status": "OUTPERFORMER",
       "badge_color": "primary",
-      "fund_flow": "MODERATE INFLOW \ud83d\ude80"
+      "fund_flow": "MODERATE INFLOW \ud83d\ude80",
+      "is_simulated": true,
+      "data_source": "YFINANCE_TICKER_FALLBACK (fabricated values \u2014 do not trade on this sector)"
     }
   ]
 }
