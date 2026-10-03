@@ -23,12 +23,17 @@ class MorningBreakoutValidatorEngine:
                 except Exception:
                     pass
 
+        used_fallback_candidates = False
         if not candidates:
+            # CRITICAL: These are DEMO placeholders, not real screened stocks.
+            # They must never be broadcast as tradable signals without a loud warning.
+            used_fallback_candidates = True
             candidates = [
                 {"symbol": "BHEL", "close": 420.0, "yday_high": 418.0, "morning_open": 421.0, "morning_close": 423.0, "vwap": 420.50},
                 {"symbol": "SBIN", "close": 842.50, "yday_high": 840.0, "morning_open": 843.0, "morning_close": 846.0, "vwap": 842.00},
                 {"symbol": "HAL", "close": 4650.0, "yday_high": 4640.0, "morning_open": 4820.0, "morning_close": 4830.0, "vwap": 4790.00} # Gap Up > 3.5%
             ]
+            print("[WARN] evening.json candidates missing — using DEMO placeholder stocks (BHEL/SBIN/HAL). These are NOT live signals!")
 
         confirmed_buys = []
         rejected_stocks = []
@@ -73,13 +78,18 @@ class MorningBreakoutValidatorEngine:
                     "t1": t1,
                     "t2": t2,
                     "gap_pct": round(gap_pct, 1),
-                    "confidence": "⭐⭐⭐⭐⭐ (CONFIRMED 9:30 AM BUY)"
+                    "confidence": "⭐⭐⭐⭐⭐ (DEMO SIMULATED — NOT A REAL SIGNAL)" if used_fallback_candidates else "⭐⭐⭐⭐⭐ (CONFIRMED 9:30 AM BUY)"
                 })
 
         return {
             "timestamp": datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime("%d-%b-%Y 09:30 AM"),
             "confirmed_buys": confirmed_buys,
-            "rejected_stocks": rejected_stocks
+            "rejected_stocks": rejected_stocks,
+            "is_simulated": used_fallback_candidates,
+            "data_source": (
+                "FALLBACK_CANDIDATES (evening.json missing — DEMO placeholder stocks, NOT live signals)"
+                if used_fallback_candidates else "EVENING_CANDIDATES_LIVE"
+            )
         }
 
     @classmethod
@@ -95,6 +105,10 @@ class MorningBreakoutValidatorEngine:
             f"🕒 *Evaluation Time:* `{ts}`",
             "📊 *Yesterday's Candidates Validation Results:*\n"
         ]
+
+        if validation_res.get("is_simulated"):
+            lines.insert(1, "🚨 *SIMULATED DEMO DATA — DO NOT TRADE!*\n🚨 *No live candidates were available (evening.json missing). "
+                            "The stocks below are placeholder examples only.*\n")
 
         if buys:
             lines.append("✅ *CONFIRMED HIGH-PROBABILITY BUYS (BUY NOW):*")
@@ -137,8 +151,8 @@ class MorningBreakoutValidatorEngine:
             with open(out_path, "w") as f:
                 json.dump(res, f, indent=2)
             print(f"[INFO] Saved Morning Validation payload to {out_path}")
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[ERROR] Failed to write {out_path}: {e}")
 
         return res
 

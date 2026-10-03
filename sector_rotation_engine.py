@@ -48,12 +48,16 @@ class SectorRotationEngine:
                     chg_1d = float(((close - s_series.iloc[-2]) / s_series.iloc[-2]) * 100.0) if len(s_series) > 1 else 0.8
                     chg_1w = float(((close - s_series.iloc[-5]) / s_series.iloc[-5]) * 100.0) if len(s_series) > 4 else 2.1
                     chg_1m = float(((close - s_series.iloc[0]) / s_series.iloc[0]) * 100.0) if len(s_series) > 15 else 4.5
+                    is_sim = False
+                    sim_src = "YFINANCE_LIVE"
                 else:
                     # High-precision default mock data fallback if yfinance index ticker rate-limited
                     close = 45000.0
                     chg_1d = 1.2 if "IT" in key or "AUTO" in key else (0.4 if "BANK" in key else -0.3)
                     chg_1w = 2.5 if "IT" in key or "AUTO" in key else 0.8
                     chg_1m = 5.2 if "IT" in key or "AUTO" in key else 1.5
+                    is_sim = True
+                    sim_src = "YFINANCE_TICKER_FALLBACK (fabricated values — do not trade on this sector)"
 
                 rs_score = round(chg_1d - nifty_1d, 2)
                 
@@ -86,7 +90,9 @@ class SectorRotationEngine:
                     "rs_score": rs_score,
                     "status": status,
                     "badge_color": badge_color,
-                    "fund_flow": flow
+                    "fund_flow": flow,
+                    "is_simulated": is_sim,
+                    "data_source": sim_src
                 })
 
         except Exception as e:
@@ -113,7 +119,9 @@ class SectorRotationEngine:
         return [{
             "key": item[0], "name": item[1], "icon": item[2], "close": item[3],
             "chg_1d": item[4], "chg_1w": item[5], "chg_1m": item[6], "rs_score": item[7],
-            "status": item[8], "badge_color": item[9], "fund_flow": item[10]
+            "status": item[8], "badge_color": item[9], "fund_flow": item[10],
+            "is_simulated": True,
+            "data_source": "HARDCODED_FALLBACK (fabricated values — do not trade on this sector)"
         } for item in fallback_data]
 
     @classmethod
@@ -140,6 +148,14 @@ class SectorRotationEngine:
             "timestamp": datetime.now().strftime("%d-%b-%Y %I:%M %p"),
             "top_sector": sectors[0]["name"] if sectors else "Nifty IT",
             "lagging_sector": sectors[-1]["name"] if sectors else "Nifty Energy",
+            # --- Honest data provenance flags (consumed by dashboard isSimulatedPayload) ---
+            "is_simulated": any(s.get("is_simulated") for s in sectors),
+            "data_source": (
+                "HARDCODED_FALLBACK" if all(s.get("is_simulated") for s in sectors)
+                else ("YFINANCE_PARTIAL_FALLBACK" if any(s.get("is_simulated") for s in sectors)
+                      else "YFINANCE_LIVE")
+            ),
+            "simulated_components": [s["name"] for s in sectors if s.get("is_simulated")],
             "market_breadth": {
                 "advances": advances,
                 "declines": declines,
@@ -150,6 +166,9 @@ class SectorRotationEngine:
                 "breadth_status": breadth_status
             },
             "gamma_exposure_analytics": {
+                # GEX numbers below are hardcoded analytical placeholders, NOT live dealer positioning.
+                "is_simulated": True,
+                "data_source": "ANALYTICAL_MODEL_PLACEHOLDER (no live GEX feed — values are illustrative)",
                 "net_gex_crores": +4250.0 if advances >= declines else -1850.0,
                 "gex_regime": "🟢 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE)" if advances >= declines else "🔴 NEGATIVE GAMMA (VOLATILITY SPIKE RISK)",
                 "zero_gamma_flip_level": 23500.0,

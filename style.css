@@ -187,6 +187,16 @@ body {
     box-shadow: 0 0 8px var(--clr-success);
 }
 
+.status-indicator.degraded {
+    background: #f59e0b;
+    box-shadow: 0 0 8px #f59e0b;
+}
+
+.status-indicator.offline {
+    background: var(--clr-danger);
+    box-shadow: 0 0 8px var(--clr-danger);
+}
+
 .status-label {
     font-size: 0.8rem;
     color: var(--text-secondary);

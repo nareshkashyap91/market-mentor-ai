@@ -13,10 +13,12 @@ class FIIDIIEngine:
         now_str = datetime.now(ist_tz).strftime("%d-%b-%Y %I:%M %p")
 
         # Simulated / Live Institutional Data Proxy
-        fii_cash_net = 1850.50   # ₹ Cr Net Buy
-        dii_cash_net = 1240.20   # ₹ Cr Net Buy
-        fii_fut_ratio = 68.5     # 68.5% FII Futures Long
-        fii_opt_bias = "NET CALL BUYING (BULLISH DELTA)"
+        # NOTE: No free FII/DII cash-market feed is wired. The numbers below are
+        # ILLUSTRATIVE ONLY and must never be interpreted as real institutional flow.
+        fii_cash_net = 1850.50   # ₹ Cr Net Buy (SIMULATED PLACEHOLDER)
+        dii_cash_net = 1240.20   # ₹ Cr Net Buy (SIMULATED PLACEHOLDER)
+        fii_fut_ratio = 68.5     # 68.5% FII Futures Long (SIMULATED PLACEHOLDER)
+        fii_opt_bias = "NET CALL BUYING (BULLISH DELTA)"  # (SIMULATED PLACEHOLDER)
 
         total_net = fii_cash_net + dii_cash_net
 
@@ -45,7 +47,9 @@ class FIIDIIEngine:
             "fii_options_bias": fii_opt_bias,
             "institutional_sentiment": sentiment,
             "institutional_score": score,
-            "formatted_summary": f"FII: +₹{fii_cash_net:,.0f} Cr | DII: +₹{dii_cash_net:,.0f} Cr | Net: +₹{total_net:,.0f} Cr"
+            "formatted_summary": f"FII: +₹{fii_cash_net:,.0f} Cr | DII: +₹{dii_cash_net:,.0f} Cr | Net: +₹{total_net:,.0f} Cr",
+            "is_simulated": True,
+            "data_source": "SIMULATED_PLACEHOLDER (illustrative values — no live FII/DII feed wired)"
         }
 
     @classmethod

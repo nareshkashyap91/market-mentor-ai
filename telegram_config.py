@@ -5,14 +5,19 @@ import time
 import requests
 from datetime import datetime, timezone, timedelta
 
-DEFAULT_BOT_TOKEN = "8702571549:AAGRucsXGDKGHmZZ9JtgRTvttRFKq8fVHAU"
-DEFAULT_CHAT_ID = "-1004347306692"
+# SECURITY: Never hardcode bot tokens here — this file is tracked in git.
+# Credentials resolve in this order:
+#   1. Environment variables: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+#      (set in GitHub Actions secrets for cloud runs)
+#   2. Local untracked config.json (see config.example.json for template)
+#   3. None -> Telegram alerts are disabled with a warning (nothing crashes)
+
 CACHE_FILE = os.path.join("data", "telegram_broadcast_cache.json")
 
 def get_telegram_credentials():
-    """Returns Telegram Bot Token and Chat ID.
-    Checks Environment Variables -> config.json -> Production Fallback Defaults.
-    Ensures 100% Cloud Execution compatibility even when local PC is OFF.
+    """Returns Telegram Bot Token and Chat ID, or (None, None) if unconfigured.
+    Resolution order: Environment Variables -> local config.json.
+    Keep secrets in GitHub repo Secrets (cloud) and config.json (local, gitignored).
     """
     tg_token = os.environ.get("TELEGRAM_BOT_TOKEN")
     tg_chat_id = os.environ.get("TELEGRAM_CHAT_ID")
@@ -30,10 +35,16 @@ def get_telegram_credentials():
         except Exception:
             pass
 
-    if not tg_token:
-        tg_token = DEFAULT_BOT_TOKEN
-    if not tg_chat_id:
-        tg_chat_id = DEFAULT_CHAT_ID
+    # Placeholder sanity check: a template value is as bad as a missing one
+    if tg_token and "YOUR_TELEGRAM" in str(tg_token).upper():
+        tg_token = None
+    if tg_chat_id and "YOUR_TELEGRAM" in str(tg_chat_id).upper():
+        tg_chat_id = None
+
+    if not tg_token or not tg_chat_id:
+        print("[WARN] Telegram credentials not configured. "
+              "Set TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID env vars "
+              "or fill config.json (template: config.example.json). Alerts disabled.")
 
     return tg_token, tg_chat_id
 
@@ -43,6 +54,10 @@ def send_deduplicated_telegram_alert(message, bot_token=None, chat_id=None, forc
     """
     if not bot_token or not chat_id:
         bot_token, chat_id = get_telegram_credentials()
+
+    if not bot_token or not chat_id:
+        print("[WARN] Telegram broadcast skipped: no credentials configured.")
+        return False
 
     if not message or not message.strip():
         return False

@@ -87,7 +87,9 @@ def process_option_chain_metrics(oc_data, spot_price):
             "max_call_oi_strike": round(spot_price, -2) + 200,
             "max_put_oi_strike": round(spot_price, -2) - 200,
             "total_call_oi": 0,
-            "total_put_oi": 0
+            "total_put_oi": 0,
+            "is_simulated": True,
+            "data_source": "FALLBACK_ESTIMATE (NSE chain blocked — PCR & OI levels are synthetic)"
         }
         
     records = oc_data.get("records", {})
@@ -128,7 +130,9 @@ def process_option_chain_metrics(oc_data, spot_price):
         "max_call_oi_strike": float(max_call_strike),
         "max_put_oi_strike": float(max_put_strike),
         "total_call_oi": int(total_call_oi),
-        "total_put_oi": int(total_put_oi)
+        "total_put_oi": int(total_put_oi),
+        "is_simulated": False,
+        "data_source": "NSE_LIVE"
     }
 
 def analyze_index_sentiment(df, oc_metrics):
@@ -263,8 +267,11 @@ def main():
     vix_df = fetch_index_15m('^INDIAVIX')
     
     vix_val = 14.5
+    simulated_components = []
     if vix_df is not None and not vix_df.empty:
         vix_val = round(float(vix_df['Close'].iloc[-1]), 2)
+    else:
+        simulated_components.append("vix (default 14.5 used)")
         
     # VIX Volatility status
     if vix_val < 13.0:
@@ -277,12 +284,20 @@ def main():
     # 2. Fetch Option Chains
     nifty_spot = float(nifty_df['Close'].iloc[-1]) if nifty_df is not None and not nifty_df.empty else 24700.0
     banknifty_spot = float(banknifty_df['Close'].iloc[-1]) if banknifty_df is not None and not banknifty_df.empty else 51500.0
+    if nifty_spot == 24700.0 and (nifty_df is None or nifty_df.empty):
+        simulated_components.append("nifty_spot (default 24700 used)")
+    if banknifty_spot == 51500.0 and (banknifty_df is None or banknifty_df.empty):
+        simulated_components.append("banknifty_spot (default 51500 used)")
     
     nifty_oc_raw = fetch_nse_option_chain('NIFTY')
     banknifty_oc_raw = fetch_nse_option_chain('BANKNIFTY')
     
     nifty_oc = process_option_chain_metrics(nifty_oc_raw, nifty_spot)
     banknifty_oc = process_option_chain_metrics(banknifty_oc_raw, banknifty_spot)
+    if nifty_oc.get("is_simulated"):
+        simulated_components.append("nifty_option_chain")
+    if banknifty_oc.get("is_simulated"):
+        simulated_components.append("banknifty_option_chain")
     
     # 3. Analyze Market Sentiments
     nifty_sentiment, nifty_close, nifty_vwap = analyze_index_sentiment(nifty_df, nifty_oc)
@@ -298,6 +313,10 @@ def main():
     # Compile JSON Output payload
     pulse_payload = {
         "timestamp": now_str,
+        # --- Honest data provenance flags (consumed by dashboard isSimulatedPayload) ---
+        "is_simulated": bool(simulated_components),
+        "simulated_components": simulated_components,
+        "data_source": ("PARTIAL_FALLBACK" if simulated_components else "YFINANCE_NSE_LIVE"),
         "vix": {
             "value": vix_val,
             "status": vix_status
@@ -339,6 +358,12 @@ def main():
         f"  - Major OI Support: `₹{banknifty_oc['max_put_oi_strike']:.0f}` | Resistance: `₹{banknifty_oc['max_call_oi_strike']:.0f}`\n\n"
         f"📈 **India VIX**: `{vix_val}` ({vix_status})\n"
     )
+
+    if simulated_components:
+        pulse_msg += (
+            f"\n⚠️ *DATA WARNING:* Simulated/fallback values in this pulse: "
+            f"{', '.join(simulated_components)}. Verify on your broker terminal before trading!\n"
+        )
     
     if nifty_signal or banknifty_signal:
         pulse_msg += "\n" + "="*35 + "\n"

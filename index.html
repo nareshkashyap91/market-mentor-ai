@@ -69,8 +69,8 @@
             </nav>
             
             <div class="connection-status">
-                <div class="status-indicator live"></div>
-                <span class="status-label">Cloud Sync Online</span>
+                <div class="status-indicator live" id="sync-status-dot"></div>
+                <span class="status-label" id="sync-status-label">Syncing data…</span>
             </div>
         </aside>
 
@@ -84,6 +84,10 @@
                 </div>
                 
                 <div class="header-right">
+                    <div class="widget-mini" id="data-freshness-widget" style="display: none;" title="">
+                        <span class="widget-title">Data Freshness</span>
+                        <div class="widget-val" id="data-freshness-val">--</div>
+                    </div>
                     <div class="widget-mini gift-nifty-mini">
                         <span class="widget-title">GIFT Nifty</span>
                         <div class="widget-val" id="gift-mini-val">--</div>
@@ -372,6 +376,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             <!-- AI Quant Strategy Tab -->
             <div class="tab-panel" id="tab-ai-quant">
                 <div class="overview-grid" style="margin-bottom: 24px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
@@ -425,6 +430,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             <!-- ML Target/SL Optimizer Tab -->
             <div class="tab-panel" id="tab-ml-optimizer">
                 <div class="glass-card panel-card" style="margin-bottom: 24px;">

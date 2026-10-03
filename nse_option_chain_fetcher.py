@@ -120,6 +120,7 @@ class NSEOptionChainFetcher:
                     "max_call_oi_strike": max_call_strike,
                     "max_put_oi_strike": max_put_strike,
                     "strikes": strike_table[:11],
+                    "is_simulated": False,
                     "data_source": "NSE_OFFICIAL_LIVE_API"
                 }
 
@@ -165,7 +166,8 @@ class NSEOptionChainFetcher:
             "max_call_oi_strike": max_call_strike,
             "max_put_oi_strike": max_put_strike,
             "strikes": strikes,
-            "data_source": "ANALYTICAL_MODEL_FALLBACK"
+            "is_simulated": True,
+            "data_source": "ANALYTICAL_MODEL_FALLBACK (fabricated OI/IV structure — not real market data)"
         }
 
     @classmethod
@@ -175,6 +177,8 @@ class NSEOptionChainFetcher:
 
         payload = {
             "timestamp": datetime.now().strftime("%d-%b-%Y %I:%M %p"),
+            "is_simulated": bool(nifty_chain.get("is_simulated") or bank_chain.get("is_simulated")),
+            "simulated_components": [k for k, v in (("nifty", nifty_chain), ("banknifty", bank_chain)) if v.get("is_simulated")],
             "nifty": nifty_chain,
             "banknifty": bank_chain
         }

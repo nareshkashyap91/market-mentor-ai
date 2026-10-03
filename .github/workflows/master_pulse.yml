@@ -36,6 +36,10 @@ jobs:
           python master_data_fetcher.py
 
       - name: Commit & Push Updated Data to Dashboard
+        # always() -> even when the pipeline reported failures (red run), whatever
+        # payloads DID refresh still sync to the dashboard. The red status itself
+        # is the signal that some tabs may be showing stale data.
+        if: always()
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"

@@ -37,12 +37,16 @@ class MCXCommodityEngine:
 
     @classmethod
     def get_commodity_quotes(cls):
-        """Fetches live quotes for Crude Oil, Natural Gas, Gold, and Silver."""
+        """Fetches live quotes for Crude Oil, Natural Gas, Gold, and Silver.
+
+        Quotes start as SIMULATED placeholders and are only marked live when a
+        real feed succeeds (currently only Crude via yfinance CL=F proxy).
+        """
         quotes = {
-            "CRUDEOIL": {"spot": 6450.0, "change_pct": +1.85},
-            "NATURALGAS": {"spot": 185.40, "change_pct": -0.95},
-            "GOLD": {"spot": 72400.0, "change_pct": +0.40},
-            "SILVER": {"spot": 85200.0, "change_pct": +0.75}
+            "CRUDEOIL": {"spot": 6450.0, "change_pct": +1.85, "is_simulated": True, "data_source": "PLACEHOLDER (not fetched)"},
+            "NATURALGAS": {"spot": 185.40, "change_pct": -0.95, "is_simulated": True, "data_source": "PLACEHOLDER (not fetched)"},
+            "GOLD": {"spot": 72400.0, "change_pct": +0.40, "is_simulated": True, "data_source": "PLACEHOLDER (not fetched)"},
+            "SILVER": {"spot": 85200.0, "change_pct": +0.75, "is_simulated": True, "data_source": "PLACEHOLDER (not fetched)"}
         }
 
         try:
@@ -54,6 +58,8 @@ class MCXCommodityEngine:
                     spot = float(crude_df['Close'].iloc[-1])
                 # Convert USD crude barrel to INR proxy (~x84)
                 quotes["CRUDEOIL"]["spot"] = round(spot * 84.0, 2)
+                quotes["CRUDEOIL"]["is_simulated"] = False
+                quotes["CRUDEOIL"]["data_source"] = "YFINANCE_LIVE (CL=F x84 INR proxy)"
         except Exception:
             pass
 
@@ -85,7 +91,9 @@ class MCXCommodityEngine:
             "max_profit": f"₹{round(100 * (100 - 55.0), 2):,.0f}",
             "max_loss": "₹5,500",
             "win_prob": "76.4%",
-            "rationale": f"Crude Oil in Strong Bullish Trend above ₹{crude_buy_strike}. Low margin requirement with 1:1.8 Risk-Reward."
+            "rationale": f"Crude Oil in Strong Bullish Trend above ₹{crude_buy_strike}. Low margin requirement with 1:1.8 Risk-Reward.",
+            "is_simulated": True,
+            "data_source": "ANALYTICAL_MODEL (premiums & win-prob are illustrative, not live quotes)"
         }
 
         # Natural Gas Bear Put Spread Strategy
@@ -105,12 +113,22 @@ class MCXCommodityEngine:
             "max_profit": f"₹{round(1250 * (10.0 - 5.30), 2):,.0f}",
             "max_loss": "₹6,625",
             "win_prob": "72.8%",
-            "rationale": "Natural Gas resistance at upper VWAP band. High-reward Bear Put Spread."
+            "rationale": "Natural Gas resistance at upper VWAP band. High-reward Bear Put Spread.",
+            "is_simulated": True,
+            "data_source": "ANALYTICAL_MODEL (premiums & win-prob are illustrative, not live quotes)"
         }
+
+        simulated_components = [
+            name for name, q in quotes.items() if q.get("is_simulated")
+        ] + ["strategy_premiums (always illustrative)"]
 
         return {
             "mcx_market_status": status_msg,
             "is_mcx_open": is_open,
+            # --- Honest data provenance flags (consumed by dashboard isSimulatedPayload) ---
+            "is_simulated": bool(simulated_components),
+            "simulated_components": simulated_components,
+            "data_source": "MCX_PARTIAL_FALLBACK" if simulated_components else "MCX_LIVE",
             "quotes": quotes,
             "strategies": [crude_strategy, natgas_strategy]
         }
@@ -118,3 +136,16 @@ class MCXCommodityEngine:
 # Helper function
 def get_mcx_commodity_analysis():
     return MCXCommodityEngine.generate_mcx_options_strategies()
+
+
+if __name__ == "__main__":
+    # Pipeline entrypoint: writes data/mcx_commodities.json so the master
+    # pipeline step actually produces output (previously this script was a no-op).
+    analysis = MCXCommodityEngine.generate_mcx_options_strategies()
+    os.makedirs("data", exist_ok=True)
+    out_path = os.path.join("data", "mcx_commodities.json")
+    with open(out_path, "w") as f:
+        json.dump(analysis, f, indent=2)
+    print(f"[INFO] Exported MCX Commodity analysis payload to {out_path}")
+    if analysis.get("is_simulated"):
+        print(f"[WARN] MCX payload contains SIMULATED components: {', '.join(analysis['simulated_components'])}")

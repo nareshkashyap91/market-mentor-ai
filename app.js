@@ -45,6 +45,107 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(refreshDashboard, 60000);
 });
 
+// ---------- Data integrity & security helpers ----------
+
+// Escape untrusted strings before interpolating into innerHTML (XSS guard).
+// All pipeline payloads (symbols, rationales, fund names, LLM text) pass through here.
+function esc(v) {
+    if (v === null || v === undefined) return "--";
+    return String(v)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+// Fetch JSON with HTTP status validation — a 404/500 HTML error page is not data.
+async function fetchJson(path) {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error(`HTTP ${res.status} for ${path}`);
+    const data = await res.json();
+    if (!data || typeof data !== "object") throw new Error(`Invalid payload for ${path}`);
+    return data;
+}
+
+// Best-effort extraction of the pipeline generation timestamp from a payload.
+function getDataTimestamp(payload) {
+    if (!payload || typeof payload !== "object") return null;
+    for (const key of ["generated_at", "last_updated", "updated_at", "timestamp", "as_of", "fetch_time"]) {
+        const v = payload[key];
+        if (typeof v === "string" || typeof v === "number") {
+            const d = new Date(v);
+            if (!isNaN(d.getTime())) return d;
+        }
+    }
+    return null;
+}
+
+// Detect payloads produced by fallback/simulation code paths instead of live market feeds.
+function isSimulatedPayload(p) {
+    if (!p || typeof p !== "object") return false;
+    if (p.is_simulated === true) return true;
+    const src = `${p.data_source || ""} ${p.data_type || ""}`.toUpperCase();
+    return src.includes("FALLBACK") || src.includes("SIMULAT") || src.includes("MOCK") || src.includes("ANALYTICAL_MODEL");
+}
+
+// Reflect real feed health in the sidebar indicator + header freshness widget.
+// Replaces the previously hardcoded "Cloud Sync Online" label.
+function updateSyncStatus(feeds) {
+    const dot = document.getElementById("sync-status-dot");
+    const label = document.getElementById("sync-status-label");
+    const freshWidget = document.getElementById("data-freshness-widget");
+    const freshVal = document.getElementById("data-freshness-val");
+
+    const total = feeds.length;
+    const failedCount = feeds.filter(f => f.status === "rejected").length;
+
+    if (label) {
+        if (failedCount === 0) {
+            label.textContent = "Cloud Sync Online";
+            if (dot) dot.className = "status-indicator live";
+        } else if (failedCount === total) {
+            label.textContent = "Data Feed Offline";
+            if (dot) dot.className = "status-indicator offline";
+        } else {
+            label.textContent = `Data Feed: ${total - failedCount}/${total} OK`;
+            if (dot) dot.className = "status-indicator degraded";
+        }
+    }
+
+    if (!freshWidget || !freshVal) return;
+
+    const names = ["morning", "evening", "intraday", "options", "mutual_funds", "ai_quant",
+                   "momentum_intel", "journal", "sector", "ml_optimizer", "portfolio", "smc"];
+    const simulated = [];
+    let newest = null;
+
+    feeds.forEach((f, i) => {
+        if (f.status !== "fulfilled" || !f.value) return;
+        if (isSimulatedPayload(f.value)) simulated.push(names[i] || `feed_${i}`);
+        const t = getDataTimestamp(f.value);
+        if (t && (!newest || t > newest)) newest = t;
+    });
+
+    freshWidget.style.display = "";
+    if (simulated.length > 0) {
+        freshVal.textContent = `⚠ SIMULATED: ${simulated.join(", ")}`;
+        freshVal.style.color = "var(--clr-danger)";
+        freshWidget.title = "These feeds failed to fetch live market data and contain analytical fallback values — NOT real prices. Do not trade on them.";
+    } else if (newest) {
+        const ageMin = Math.max(0, Math.round((Date.now() - newest.getTime()) / 60000));
+        const ageStr = ageMin < 60 ? `${ageMin}m ago`
+                     : ageMin < 2880 ? `${Math.round(ageMin / 60)}h ago`
+                     : `${Math.round(ageMin / 1440)}d ago`;
+        freshVal.textContent = ageStr;
+        freshVal.style.color = ageMin > 720 ? "#f59e0b" : "var(--clr-success)";
+        freshWidget.title = `Newest pipeline payload generated at ${newest.toLocaleString()}`;
+    } else {
+        freshVal.textContent = "no timestamp";
+        freshVal.style.color = "#f59e0b";
+    }
+}
+
 async function refreshDashboard() {
     const refreshBtnIcon = document.querySelector(".btn-refresh i");
     if (refreshBtnIcon) refreshBtnIcon.classList.add("fa-spin");
@@ -53,18 +154,18 @@ async function refreshDashboard() {
         // Fetch JSON data concurrently with cache-busting timestamp
         const ts = Date.now();
         const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes] = await Promise.allSettled([
-            fetch(`./data/morning.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/evening.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/intraday.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/options.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/mutual_funds.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/ai_quant.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/momentum_intelligence.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/trade_journal.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/sector_rotation.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/ml_target_sl_optimized.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/portfolio_rebalancing.json?t=${ts}`).then(r => r.json()),
-            fetch(`./data/smc_market_structure.json?t=${ts}`).then(r => r.json())
+            fetchJson(`./data/morning.json?t=${ts}`),
+            fetchJson(`./data/evening.json?t=${ts}`),
+            fetchJson(`./data/intraday.json?t=${ts}`),
+            fetchJson(`./data/options.json?t=${ts}`),
+            fetchJson(`./data/mutual_funds.json?t=${ts}`),
+            fetchJson(`./data/ai_quant.json?t=${ts}`),
+            fetchJson(`./data/momentum_intelligence.json?t=${ts}`),
+            fetchJson(`./data/trade_journal.json?t=${ts}`),
+            fetchJson(`./data/sector_rotation.json?t=${ts}`),
+            fetchJson(`./data/ml_target_sl_optimized.json?t=${ts}`),
+            fetchJson(`./data/portfolio_rebalancing.json?t=${ts}`),
+            fetchJson(`./data/smc_market_structure.json?t=${ts}`)
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
@@ -79,6 +180,9 @@ async function refreshDashboard() {
         const mlOptData = mlOptRes.status === "fulfilled" ? mlOptRes.value : null;
         const portfolioData = portfolioRes.status === "fulfilled" ? portfolioRes.value : null;
         const smcData = smcRes.status === "fulfilled" ? smcRes.value : null;
+
+        // Reflect feed health (failed fetches / stale / simulated data) in the UI
+        updateSyncStatus([morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes]);
 
         // Update dashboard elements
         updateHeaderAndOverview(morningData, eveningData, intradayData, momIntelData);
@@ -221,10 +325,10 @@ function renderIntradaySignals(data) {
                 <div class="signal-card-header">
                     <div class="stock-info">
                         <div class="stock-symbol">
-                            ${s.symbol}
+                            ${esc(s.symbol)}
                             <span class="status-pill ${pillClass}">${statusText}</span>
                         </div>
-                        <span class="stock-company">${s.company}</span>
+                        <span class="stock-company">${esc(s.company)}</span>
                     </div>
                     <span class="signal-time-badge"><i class="fa-regular fa-clock"></i> ${s.trigger_time}</span>
                 </div>
@@ -301,7 +405,7 @@ function renderMorningInsights(data) {
             const sign = isUp ? "+" : "";
             return `
                 <div class="index-card">
-                    <span class="index-name">${idx.name}</span>
+                    <span class="index-name">${esc(idx.name)}</span>
                     <div class="index-val-row">
                         <span class="index-val">${idx.price.toLocaleString('en-IN', { maximumFractionDigits: 1 })}</span>
                         <span class="index-chg ${isUp ? "success" : "danger"}">${sign}${idx.change_pct.toFixed(2)}%</span>
@@ -331,7 +435,7 @@ function renderMorningInsights(data) {
 
             return `
                 <div class="index-card">
-                    <span class="index-name">${m.name}</span>
+                    <span class="index-name">${esc(m.name)}</span>
                     <div class="index-val-row">
                         <span class="index-val">${displayVal}</span>
                         <span class="index-chg ${isUp ? "success" : "danger"}">${sign}${m.change_pct.toFixed(2)}%</span>
@@ -350,7 +454,7 @@ function renderMorningInsights(data) {
             insightsList.innerHTML = data.insights.map(ins => {
                 // Remove Markdown bold markers if any
                 const cleanText = ins.replace(/\*\*/g, "");
-                return `<li><i class="fa-solid fa-circle-check" style="color: var(--clr-success)"></i> ${cleanText}</li>`;
+                return `<li><i class="fa-solid fa-circle-check" style="color: var(--clr-success)"></i> ${esc(cleanText)}</li>`;
             }).join("");
         }
     }
@@ -400,14 +504,14 @@ function renderMomentumStocks(eveningData, momIntelData) {
 
         return `
             <tr>
-                <td class="stock-ticker">NSE:${s.symbol}</td>
+                <td class="stock-ticker">NSE:${esc(s.symbol)}</td>
                 <td>${closePrice}</td>
                 <td style="color: ${carColor}; font-weight: 600;">${carVal}</td>
                 <td>${turnoverVal}</td>
                 <td><span style="color: var(--clr-success); font-weight: 600;">${volExp}</span></td>
                 <td>${rsiVal}</td>
                 <td>${dmaBadge}</td>
-                <td style="font-size: 0.8rem; line-height: 1.4; color: var(--text-secondary); max-width: 320px;">${s.why || s.rationale || "Passes momentum criteria."}</td>
+                <td style="font-size: 0.8rem; line-height: 1.4; color: var(--text-secondary); max-width: 320px;">${esc(s.why || s.rationale || "Passes momentum criteria.")}</td>
             </tr>
         `;
     }).join("");
@@ -439,7 +543,7 @@ function renderMutualFunds(data) {
         return `
             <div class="glass-card fund-list-card">
                 <h3 class="fund-category-title">
-                    <i class="fa-solid ${iconClass}" style="color: var(--clr-primary)"></i> ${cat} Funds
+                    <i class="fa-solid ${iconClass}" style="color: var(--clr-primary)"></i> ${esc(cat)} Funds
                 </h3>
                 
                 <div class="fund-list">
@@ -451,14 +555,14 @@ function renderMutualFunds(data) {
 
                         return `
                             <div class="fund-item">
-                                <div class="fund-item-name">${idx + 1}. ${f.name}</div>
+                                <div class="fund-item-name">${idx + 1}. ${esc(f.name)}</div>
                                 <div class="fund-cagr-row">
                                     <span>1Y: <strong>${r_1y}</strong></span>
                                     <span>3Y: <strong>${r_3y}</strong></span>
                                     <span>5Y: <strong>${r_5y}</strong></span>
                                     <span>10Y: <strong>${r_10y}</strong></span>
                                 </div>
-                                <div class="fund-rationale">${f.why}</div>
+                                <div class="fund-rationale">${esc(f.why)}</div>
                             </div>
                         `;
                     }).join("")}
@@ -511,8 +615,8 @@ function renderOptionsPage(data) {
             return `
                 <div class="index-card" style="padding: 20px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <span class="index-name" style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary);">${key} SPOT</span>
-                        <span class="badge" style="background: rgba(255,255,255,0.03); color: ${sentColor}; border: 1px solid var(--border-glass);">${idx.sentiment}</span>
+                        <span class="index-name" style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary);">${esc(key)} SPOT</span>
+                        <span class="badge" style="background: rgba(255,255,255,0.03); color: ${sentColor}; border: 1px solid var(--border-glass);">${esc(idx.sentiment)}</span>
                     </div>
                     
                     <div class="signal-values-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 0;">
@@ -559,10 +663,10 @@ function renderOptionsPage(data) {
                         <div class="signal-card-header">
                             <div class="stock-info">
                                 <div class="stock-symbol">
-                                    ${sig.option_symbol}
-                                    <span class="status-pill ${pillClass}">${sig.type}</span>
+                                    ${esc(sig.option_symbol)}
+                                    <span class="status-pill ${pillClass}">${esc(sig.type)}</span>
                                 </div>
-                                <span class="stock-company">${sig.index} Index Option Setup</span>
+                                <span class="stock-company">${esc(sig.index)} Index Option Setup</span>
                             </div>
                             <span class="signal-time-badge">PCR: ${sig.pcr}</span>
                         </div>
@@ -587,7 +691,7 @@ function renderOptionsPage(data) {
                         </div>
 
                         <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
-                            <strong style="color: var(--text-primary)">Rationale:</strong> ${sig.rationale}
+                            <strong style="color: var(--text-primary)">Rationale:</strong> ${esc(sig.rationale)}
                         </p>
                     </div>
                 `;
@@ -644,6 +748,7 @@ function renderAIQuantPage(data) {
                     <p>Evaluating multi-regime options matrix...</p>
                 </div>
             `;
+        } else {
             stratsContainer.innerHTML = allStrats.map(s => {
                 const isTop = s.is_top_pick;
                 const isCredit = s.type.includes("CREDIT") || s.type.includes("STRADDLE");
@@ -675,11 +780,11 @@ function renderAIQuantPage(data) {
                         <div class="signal-card-header">
                             <div class="stock-info">
                                 <div class="stock-symbol">
-                                    ${s.name}
+                                    ${esc(s.name)}
                                     ${topBadgeMarkup}
-                                    <span class="status-pill ${badgeClass}">${s.type}</span>
+                                    <span class="status-pill ${badgeClass}">${esc(s.type)}</span>
                                 </div>
-                                <span class="stock-company">Legs: ${s.legs ? s.legs.join(" | ") : "Single Leg"}</span>
+                                <span class="stock-company">Legs: ${s.legs ? esc(s.legs.join(" | ")) : "Single Leg"}</span>
                             </div>
                             <span class="signal-time-badge" style="${isTop ? 'color: #FFD700; font-weight: 700;' : ''}">Win Prob: ${s.win_prob}</span>
                         </div>
@@ -702,7 +807,7 @@ function renderAIQuantPage(data) {
                         </div>
 
                         <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
-                            <strong style="color: var(--text-primary)">Rationale:</strong> ${s.rationale}
+                            <strong style="color: var(--text-primary)">Rationale:</strong> ${esc(s.rationale)}
                         </p>
                     </div>
                 `;
@@ -734,10 +839,10 @@ function renderAIQuantPage(data) {
                         <div class="signal-card-header">
                             <div class="stock-info">
                                 <div class="stock-symbol">
-                                    NSE:${st.symbol}
-                                    <span class="status-pill ${badgeClass}">${st.action}</span>
+                                    NSE:${esc(st.symbol)}
+                                    <span class="status-pill ${badgeClass}">${esc(st.action)}</span>
                                 </div>
-                                <span class="stock-company">Chart Pattern: ${st.pattern}</span>
+                                <span class="stock-company">Chart Pattern: ${esc(st.pattern)}</span>
                             </div>
                             <span class="signal-time-badge">Vol: ${st.vol_exp}x</span>
                         </div>
@@ -767,200 +872,6 @@ function renderAIQuantPage(data) {
     }
 }
 
-function renderTradeJournal(data) {
-    if (!data || !data.analytics) return;
-    const a = data.analytics;
-
-    const winRateEl = document.getElementById("journal-win-rate");
-    const winCountEl = document.getElementById("journal-win-count");
-    if (winRateEl) winRateEl.textContent = `${a.win_rate_pct}%`;
-    if (winCountEl) winCountEl.textContent = `${a.win_count} Wins / ${a.loss_count} Losses`;
-
-    const pfEl = document.getElementById("journal-profit-factor");
-    const netPnlEl = document.getElementById("journal-net-pnl");
-    if (pfEl) pfEl.textContent = a.profit_factor;
-    if (netPnlEl) netPnlEl.textContent = `Net PnL: ${a.net_pnl_pct > 0 ? '+' : ''}${a.net_pnl_pct}%`;
-
-    const rrrEl = document.getElementById("journal-avg-rrr");
-    if (rrrEl) rrrEl.textContent = `${a.avg_rrr} R`;
-
-    const maxDdEl = document.getElementById("journal-max-dd");
-    const sharpeEl = document.getElementById("journal-sharpe");
-    if (maxDdEl) maxDdEl.textContent = `-${a.max_drawdown_pct}%`;
-    if (sharpeEl) sharpeEl.textContent = `Sharpe: ${a.sharpe_ratio}`;
-
-    const list = document.getElementById("journal-trades-list");
-    if (list && a.recent_trades) {
-        list.innerHTML = a.recent_trades.map(t => {
-            const isWin = t.win_loss === "WIN";
-            const pillClass = isWin ? "target-1" : (t.win_loss === "LOSS" ? "sl-hit" : "active");
-            const pnlColor = isWin ? "var(--clr-success)" : (t.win_loss === "LOSS" ? "var(--clr-danger)" : "var(--text-muted)");
-            const exitPrice = t.exit_price ? `₹${t.exit_price.toFixed(2)}` : "--";
-
-            return `
-                <tr>
-                    <td style="font-size: 0.8rem; color: var(--text-muted);">${t.timestamp}</td>
-                    <td class="stock-ticker">NSE:${t.symbol}</td>
-                    <td><span class="status-pill ${t.direction === 'LONG' ? 'target-1' : 'sl-hit'}" style="font-size: 0.65rem; padding: 2px 6px;">${t.direction}</span></td>
-                    <td style="font-size: 0.82rem;">${t.strategy}</td>
-                    <td>₹${t.entry.toFixed(2)}</td>
-                    <td>${exitPrice}</td>
-                    <td style="color: ${pnlColor}; font-weight: 600;">${t.pnl_pct > 0 ? '+' : ''}${t.pnl_pct.toFixed(2)}%</td>
-                    <td>${t.r_multiple.toFixed(2)} R</td>
-                    <td><span class="status-pill ${pillClass}">${t.status}</span></td>
-                </tr>
-            `;
-        }).join("");
-    }
-}
-
-function renderSectorRotation(data) {
-    if (!data || !data.sectors) return;
-    // Log sector data payload
-}
-
-function renderMLOptimizer(data) {
-    if (!data || !data.candidates) return;
-    const container = document.getElementById("ml-optimizer-container");
-    if (!container) return;
-
-    container.innerHTML = data.candidates.map(item => {
-        const isLong = item.direction.toUpperCase() === "LONG";
-        const pillClass = isLong ? "target-1" : "sl-hit";
-        
-        return `
-            <div class="signal-card" style="border-left: 4px solid ${isLong ? 'var(--clr-success)' : 'var(--clr-danger)'};">
-                <div class="signal-card-header">
-                    <div class="stock-info">
-                        <div class="stock-symbol">
-                            ${item.symbol}
-                            <span class="status-pill ${pillClass}">${item.direction}</span>
-                            <span class="status-pill active">${item.volatility_regime}</span>
-                        </div>
-                        <span class="stock-company">${item.regime_description}</span>
-                    </div>
-                    <span class="signal-time-badge" style="background: rgba(255,255,255,0.08);">
-                        <i class="fa-solid fa-bullseye"></i> Win Prob: ${item.ml_win_probability_pct}%
-                    </span>
-                </div>
-
-                <div class="signal-values-grid">
-                    <div class="val-box">
-                        <span class="val-lbl">Current Price</span>
-                        <span class="val-num">₹${item.current_price.toFixed(2)}</span>
-                    </div>
-                    <div class="val-box">
-                        <span class="val-lbl">Optimized ATR SL</span>
-                        <span class="val-num danger">₹${item.optimized_sl.toFixed(2)}</span>
-                    </div>
-                    <div class="val-box">
-                        <span class="val-lbl">Target 1</span>
-                        <span class="val-num success">₹${item.target_1.toFixed(2)}</span>
-                    </div>
-                    <div class="val-box">
-                        <span class="val-lbl">Target 2</span>
-                        <span class="val-num success">₹${item.target_2.toFixed(2)}</span>
-                    </div>
-                    <div class="val-box">
-                        <span class="val-lbl">RRR Multiplier</span>
-                        <span class="val-num purple">${item.risk_reward_ratio}</span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join("");
-}
-
-function renderPortfolioRebalancer(data) {
-    if (!data || !data.portfolio_summary) return;
-    const summary = data.portfolio_summary;
-    const container = document.getElementById("portfolio-rebalancer-container");
-    const healthTag = document.getElementById("rebalancer-health-tag");
-
-    if (healthTag) healthTag.textContent = summary.overall_health;
-
-    if (!container) return;
-
-    const cardsHtml = summary.category_analysis.map(cat => {
-        const isSell = cat.action_signal.includes("SELL");
-        const isBuy = cat.action_signal.includes("BUY");
-        const badgeColor = isSell ? "var(--clr-danger)" : (isBuy ? "var(--clr-success)" : "var(--clr-warning)");
-
-        return `
-            <div class="signal-card">
-                <div class="signal-card-header">
-                    <div class="stock-info">
-                        <div class="stock-symbol">
-                            ${cat.category.replace('_', ' ')}
-                            <span class="status-pill" style="background: ${badgeColor}; color: #000; font-weight: 700;">
-                                ${cat.action_signal}
-                            </span>
-                        </div>
-                        <span class="stock-company">${cat.recommendation}</span>
-                    </div>
-                    <span class="signal-time-badge">Drift: ${cat.drift_pct > 0 ? '+' : ''}${cat.drift_pct}%</span>
-                </div>
-
-                <div class="signal-values-grid">
-                    <div class="val-box">
-                        <span class="val-lbl">Current Valuation</span>
-                        <span class="val-num">₹${cat.current_value.toLocaleString("en-IN")}</span>
-                    </div>
-                    <div class="val-box">
-                        <span class="val-lbl">Current Allocation</span>
-                        <span class="val-num">${cat.current_allocation_pct}%</span>
-                    </div>
-                    <div class="val-box">
-                        <span class="val-lbl">Target Parity Weight</span>
-                        <span class="val-num purple">${cat.target_allocation_pct}%</span>
-                    </div>
-                    <div class="val-box">
-                        <span class="val-lbl">Risk Contribution</span>
-                        <span class="val-num danger">${cat.risk_contribution_pct}%</span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join("");
-
-    const metricsHeaderHtml = `
-        <div class="overview-grid" style="margin-bottom: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-            <div class="glass-card overview-card">
-                <div class="card-stats">
-                    <span class="stat-label">Total Portfolio</span>
-                    <h3 class="stat-value" style="font-size: 1.1rem;">₹${summary.total_portfolio_value.toLocaleString("en-IN")}</h3>
-                </div>
-            </div>
-            <div class="glass-card overview-card">
-                <div class="card-stats">
-                    <span class="stat-label">Sharpe Ratio</span>
-                    <h3 class="stat-value" style="font-size: 1.1rem; color: var(--clr-success);">${summary.sharpe_ratio}</h3>
-                </div>
-            </div>
-            <div class="glass-card overview-card">
-                <div class="card-stats">
-                    <span class="stat-label">Sortino Ratio</span>
-                    <h3 class="stat-value" style="font-size: 1.1rem; color: var(--clr-purple);">${summary.sortino_ratio}</h3>
-                </div>
-            </div>
-            <div class="glass-card overview-card">
-                <div class="card-stats">
-                    <span class="stat-label">Max Drawdown</span>
-                    <h3 class="stat-value" style="font-size: 1.1rem; color: var(--clr-danger);">${summary.max_drawdown_pct}%</h3>
-                                <span class="val-lbl">Target 1</span>
-                                <span class="val-num success">₹${st.t1.toFixed(2)}</span>
-                            </div>
-                            <div class="val-box">
-                                <span class="val-lbl">Target 2</span>
-                                <span class="val-num success">₹${st.t2.toFixed(2)}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join("");
-        }
-    }
-}
 
 function renderTradeJournal(data) {
     if (!data || !data.analytics) return;
@@ -994,15 +905,15 @@ function renderTradeJournal(data) {
 
             return `
                 <tr>
-                    <td style="font-size: 0.8rem; color: var(--text-muted);">${t.timestamp}</td>
-                    <td class="stock-ticker">NSE:${t.symbol}</td>
-                    <td><span class="status-pill ${t.direction === 'LONG' ? 'target-1' : 'sl-hit'}" style="font-size: 0.65rem; padding: 2px 6px;">${t.direction}</span></td>
-                    <td style="font-size: 0.82rem;">${t.strategy}</td>
+                    <td style="font-size: 0.8rem; color: var(--text-muted);">${esc(t.timestamp)}</td>
+                    <td class="stock-ticker">NSE:${esc(t.symbol)}</td>
+                    <td><span class="status-pill ${t.direction === 'LONG' ? 'target-1' : 'sl-hit'}" style="font-size: 0.65rem; padding: 2px 6px;">${esc(t.direction)}</span></td>
+                    <td style="font-size: 0.82rem;">${esc(t.strategy)}</td>
                     <td>₹${t.entry.toFixed(2)}</td>
                     <td>${exitPrice}</td>
                     <td style="color: ${pnlColor}; font-weight: 600;">${t.pnl_pct > 0 ? '+' : ''}${t.pnl_pct.toFixed(2)}%</td>
                     <td>${t.r_multiple.toFixed(2)} R</td>
-                    <td><span class="status-pill ${pillClass}">${t.status}</span></td>
+                    <td><span class="status-pill ${pillClass}">${esc(t.status)}</span></td>
                 </tr>
             `;
         }).join("");
@@ -1054,6 +965,10 @@ function renderSectorRotation(data) {
         if (pinningProbEl && gex.pinning_probability) {
             pinningProbEl.textContent = gex.pinning_probability;
         }
+        // Honest provenance: GEX numbers are analytical placeholders until a live feed is wired
+        if (gex.is_simulated && regimeTagEl) {
+            regimeTagEl.textContent = `${gex.gex_regime || ""} (SIMULATED)`;
+        }
     }
 
     // 3. Update 10-Sector Heatmap Grid
@@ -1090,11 +1005,11 @@ function renderSectorRotation(data) {
             <div style="background: ${bgClr}; border: 1px solid ${borderClr}; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="font-weight: 700; font-size: 15px; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid ${sec.icon || 'fa-chart-line'}" style="color: #94a3b8;"></i>
-                        ${sec.name}
+                        <i class="fa-solid ${esc(sec.icon || 'fa-chart-line')}" style="color: #94a3b8;"></i>
+                        ${esc(sec.name)}
                     </div>
                     <span style="font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; ${badgeStyle}">
-                        ${sec.status}
+                        ${esc(sec.status)}
                     </span>
                 </div>
 
@@ -1113,7 +1028,7 @@ function renderSectorRotation(data) {
                 </div>
 
                 <div style="font-size: 11px; font-weight: 600; text-align: center; background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 6px; color: #cbd5e1;">
-                    ${sec.fund_flow}
+                    ${esc(sec.fund_flow)}
                 </div>
             </div>
         `;
@@ -1134,11 +1049,11 @@ function renderMLOptimizer(data) {
                 <div class="signal-card-header">
                     <div class="stock-info">
                         <div class="stock-symbol">
-                            ${item.symbol}
-                            <span class="status-pill ${pillClass}">${item.direction}</span>
-                            <span class="status-pill active">${item.volatility_regime}</span>
+                            ${esc(item.symbol)}
+                            <span class="status-pill ${pillClass}">${esc(item.direction)}</span>
+                            <span class="status-pill active">${esc(item.volatility_regime)}</span>
                         </div>
-                        <span class="stock-company">${item.regime_description}</span>
+                        <span class="stock-company">${esc(item.regime_description)}</span>
                     </div>
                     <span class="signal-time-badge" style="background: rgba(255,255,255,0.08);">
                         <i class="fa-solid fa-bullseye"></i> Win Prob: ${item.ml_win_probability_pct}%
@@ -1192,12 +1107,12 @@ function renderPortfolioRebalancer(data) {
                 <div class="signal-card-header">
                     <div class="stock-info">
                         <div class="stock-symbol">
-                            ${cat.category.replace('_', ' ')}
+                            ${esc(cat.category.replace('_', ' '))}
                             <span class="status-pill" style="background: ${badgeColor}; color: #000; font-weight: 700;">
-                                ${cat.action_signal}
+                                ${esc(cat.action_signal)}
                             </span>
                         </div>
-                        <span class="stock-company">${cat.recommendation}</span>
+                        <span class="stock-company">${esc(cat.recommendation)}</span>
                     </div>
                     <span class="signal-time-badge">Drift: ${cat.drift_pct > 0 ? '+' : ''}${cat.drift_pct}%</span>
                 </div>
@@ -1331,10 +1246,10 @@ function renderSMCRadar(data) {
                 <div class="signal-card-header">
                     <div class="stock-info">
                         <div class="stock-symbol">
-                            ${item.symbol}
-                            <span class="status-pill ${pillClass}">${item.structure_state}</span>
+                            ${esc(item.symbol)}
+                            <span class="status-pill ${pillClass}">${esc(item.structure_state)}</span>
                         </div>
-                        <span class="stock-company">${item.bias}</span>
+                        <span class="stock-company">${esc(item.bias)}</span>
                     </div>
                     <span class="signal-time-badge" style="background: rgba(255,255,255,0.08);">
                         <i class="fa-solid fa-bolt"></i> SMC Score: ${item.smc_score}/100
@@ -1352,16 +1267,16 @@ function renderSMCRadar(data) {
                     </div>
                     <div class="val-box" style="grid-column: span 2;">
                         <span class="val-lbl">🛡️ Institutional Demand OB</span>
-                        <span class="val-num success" style="font-size: 0.85rem;">${item.demand_order_block}</span>
+                        <span class="val-num success" style="font-size: 0.85rem;">${esc(item.demand_order_block)}</span>
                     </div>
                     <div class="val-box" style="grid-column: span 2;">
                         <span class="val-lbl">⚔️ Overhead Supply OB</span>
-                        <span class="val-num danger" style="font-size: 0.85rem;">${item.supply_order_block}</span>
+                        <span class="val-num danger" style="font-size: 0.85rem;">${esc(item.supply_order_block)}</span>
                     </div>
                 </div>
 
                 <div style="margin-top: 10px; font-size: 11px; font-weight: 600; text-align: center; background: rgba(255,255,255,0.04); padding: 6px 10px; border-radius: 6px; color: #cbd5e1;">
-                    ⚡ ${item.fvg_status}
+                    ⚡ ${esc(item.fvg_status)}
                 </div>
             </div>
         `;
