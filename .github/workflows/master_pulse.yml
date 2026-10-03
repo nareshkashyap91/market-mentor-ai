@@ -39,11 +39,18 @@ jobs:
         # always() -> even when the pipeline reported failures (red run), whatever
         # payloads DID refresh still sync to the dashboard. The red status itself
         # is the signal that some tabs may be showing stale data.
+        #
+        # IMPORTANT: the commit message must NOT contain "[skip ci]" / "[ci skip]".
+        # The Vercel site is a STATIC snapshot of this repo, and data/*.json is baked
+        # into each deployment — so the live dashboard only refreshes when a commit
+        # TRIGGERS a Vercel redeploy. Vercel skips deploys for commits containing
+        # "[skip ci]", which froze the live site for weeks. This workflow has no
+        # `push:` trigger, so these commits cannot re-trigger Actions (no loop risk).
         if: always()
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/*.json
-          git diff-index --quiet HEAD || git commit -m "Auto-update Master Unified Data Pipeline [skip ci]"
+          git diff-index --quiet HEAD || git commit -m "Auto-update Master Unified Data Pipeline (dashboard data refresh)"
           git pull --rebase origin main || true
           git push
