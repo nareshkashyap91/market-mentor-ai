@@ -181,17 +181,47 @@ class TelegramBotInteractive:
     @classmethod
     def _handle_fii(cls):
         flow = FIIDIIEngine.get_fii_dii_flow()
-        return (
-            "🏛️ *INSTITUTIONAL FII / DII MONEY FLOW*\n"
-            "-----------------------------------\n"
-            f"*FII Cash Net:* +₹{flow['fii_cash_net_cr']:,.0f} Cr\n"
-            f"*DII Cash Net:* +₹{flow['dii_cash_net_cr']:,.0f} Cr\n"
-            f"*Total Net Buy:* +₹{flow['total_net_cr']:,.0f} Cr\n"
-            f"*FII Futures Long Ratio:* {flow['fii_futures_long_ratio']}%\n"
-            f"*Sentiment:* {flow['institutional_sentiment']}\n"
-            "-----------------------------------\n"
-            "✅ *Smart Money Status:* CONFIRMED ACCUMULATION (Safe for Longs)"
-        )
+
+        def fmt_cr(v):
+            return f"{'-' if v < 0 else '+'}₹{abs(v):,.0f} Cr"
+
+        lines = [
+            "🏛️ *INSTITUTIONAL FII / DII MONEY FLOW*",
+            "-----------------------------------",
+            f"*FII Cash Net:* {fmt_cr(flow['fii_cash_net_cr'])}",
+            f"*DII Cash Net:* {fmt_cr(flow['dii_cash_net_cr'])}",
+            f"*Total Net:* {fmt_cr(flow['total_net_cr'])}",
+        ]
+
+        # Real derivatives positioning when available (never fabricated)
+        if flow.get("fii_index_futures_net_cr") is not None:
+            lines.append(f"*FII Index Futures Net:* {fmt_cr(flow['fii_index_futures_net_cr'])}")
+        if flow.get("fii_futures_long_ratio") is not None:
+            lines.append(f"*FII Futures Long Ratio:* {flow['fii_futures_long_ratio']}%")
+        if flow.get("fii_options_bias"):
+            lines.append(f"*FII Options Bias:* {flow['fii_options_bias']}")
+
+        # Trend context (7d / 30d aggregates when the source provides them)
+        if flow.get("fii_cash_net_7d_cr") is not None:
+            lines.append(f"*Last 7d — FII:* {fmt_cr(flow['fii_cash_net_7d_cr'])} | "
+                         f"*DII:* {fmt_cr(flow.get('dii_cash_net_7d_cr') or 0)}")
+        if flow.get("fii_cash_net_30d_cr") is not None:
+            lines.append(f"*Last 30d — FII:* {fmt_cr(flow['fii_cash_net_30d_cr'])} | "
+                         f"*DII:* {fmt_cr(flow.get('dii_cash_net_30d_cr') or 0)}")
+
+        lines.append(f"*Sentiment:* {flow['institutional_sentiment']} (score {flow['institutional_score']}/100)")
+
+        if flow.get("as_of_date"):
+            lines.append(f"*Data as of:* {flow['as_of_date']} (NSE/ET publish post-close)")
+
+        if flow.get("is_simulated"):
+            lines.append("⚠️ *DATA WARNING:* Some values are simulated placeholders — "
+                         "do not trade on them! " + str(flow.get("simulated_components")))
+        elif flow.get("unavailable_components"):
+            lines.append("ℹ️ Omitted (no live source): " + ", ".join(
+                c.split(" (")[0] for c in flow["unavailable_components"]))
+
+        return "\n".join(lines)
 
     @classmethod
     def _handle_greeks(cls):
