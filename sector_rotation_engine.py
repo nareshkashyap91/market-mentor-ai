@@ -6,6 +6,8 @@ import pandas as pd
 import yfinance as yf
 from datetime import datetime
 
+from gex_engine import get_gex_analytics
+
 class SectorRotationEngine:
     """Sector Rotation & Relative Strength Heatmap Engine.
     Tracks 11 key NSE Sector Indices vs Nifty 50 benchmark to detect institutional money flow.
@@ -144,18 +146,23 @@ class SectorRotationEngine:
         else:
             breadth_status = "🔴 BEARISH BREADTH (HEAVY SECTOR SELLING)"
             
+        # Real GEX from the Groww-sourced NIFTY chain (honest fallback inside)
+        gex = get_gex_analytics(breadth_bullish=(advances >= declines))
+
         payload = {
             "timestamp": datetime.now().strftime("%d-%b-%Y %I:%M %p"),
             "top_sector": sectors[0]["name"] if sectors else "Nifty IT",
             "lagging_sector": sectors[-1]["name"] if sectors else "Nifty Energy",
             # --- Honest data provenance flags (consumed by dashboard isSimulatedPayload) ---
-            "is_simulated": any(s.get("is_simulated") for s in sectors),
+            "is_simulated": any(s.get("is_simulated") for s in sectors) or bool(gex.get("is_simulated")),
             "data_source": (
                 "HARDCODED_FALLBACK" if all(s.get("is_simulated") for s in sectors)
                 else ("YFINANCE_PARTIAL_FALLBACK" if any(s.get("is_simulated") for s in sectors)
                       else "YFINANCE_LIVE")
             ),
-            "simulated_components": [s["name"] for s in sectors if s.get("is_simulated")],
+            "simulated_components": ([s["name"] for s in sectors if s.get("is_simulated")] +
+                                     (["gamma_exposure_analytics (Groww chain unreachable)"]
+                                      if gex.get("is_simulated") else [])),
             "market_breadth": {
                 "advances": advances,
                 "declines": declines,
@@ -165,16 +172,7 @@ class SectorRotationEngine:
                 "advance_pct": round((advances / total) * 100.0, 1),
                 "breadth_status": breadth_status
             },
-            "gamma_exposure_analytics": {
-                # GEX numbers below are hardcoded analytical placeholders, NOT live dealer positioning.
-                "is_simulated": True,
-                "data_source": "ANALYTICAL_MODEL_PLACEHOLDER (no live GEX feed — values are illustrative)",
-                "net_gex_crores": +4250.0 if advances >= declines else -1850.0,
-                "gex_regime": "🟢 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE)" if advances >= declines else "🔴 NEGATIVE GAMMA (VOLATILITY SPIKE RISK)",
-                "zero_gamma_flip_level": 23500.0,
-                "max_gex_strike": 23700.0,
-                "pinning_probability": "78% (EXPIRY PIN NEAR MAX PAIN STRIKE ₹23,550)"
-            },
+            "gamma_exposure_analytics": gex,
             "sectors": sectors
         }
 

@@ -22,7 +22,7 @@ class BrokerConnector:
             "live_trading_active": is_live,
             "safety_lock_status": "LOCKED_OFF (PAPER TRADING ONLY)" if not is_live else "UNLOCKED (LIVE EXECUTION)",
             "hedge_failure_protection": "ENABLED (Hedge Leg Verification Active)",
-            "broker_gateway": "Dhan API Gateway (Simulated / Ready)"
+            "broker_gateway": "YFinance & NSE Public Feeds (Paper Trading)"
         }
 
     @classmethod

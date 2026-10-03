@@ -114,10 +114,8 @@ def send_to_telegram(message, bot_token, chat_id):
     return send_deduplicated_telegram_alert(message, bot_token, chat_id)
 
 def fetch_dhan_data(symbol, client_id, access_token):
-    """Fetches 15m intraday data from Dhan API."""
-    security_id = DHAN_MAPPING.get(symbol)
-    if not security_id:
-        return None
+    """Fetches 15m intraday data (Dhan API disabled; uses YFinance free feeds)."""
+    return None
         
     url = "https://api.dhan.co/v2/charts/intraday"
     headers = {

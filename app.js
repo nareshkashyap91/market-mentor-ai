@@ -959,8 +959,8 @@ function renderSectorRotation(data) {
             flipLevelEl.textContent = `₹${gex.zero_gamma_flip_level.toLocaleString("en-IN")}`;
         }
         if (pinningTargetEl) {
-            const targetStrike = gex.max_gex_strike || 23550;
-            pinningTargetEl.textContent = `₹${targetStrike.toLocaleString("en-IN")}`;
+            const targetStrike = gex.max_gex_strike;
+            pinningTargetEl.textContent = targetStrike ? `₹${targetStrike.toLocaleString("en-IN")}` : "N/A";
         }
         if (pinningProbEl && gex.pinning_probability) {
             pinningProbEl.textContent = gex.pinning_probability;
