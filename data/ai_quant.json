@@ -1,5 +1,5 @@
 {
-  "timestamp": "04-Oct-2026 12:15 AM",
+  "timestamp": "04-Oct-2026 12:31 AM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "04-Oct-2026 12:15 AM",
+      "timestamp": "04-Oct-2026 12:31 AM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "03-Oct-2026 06:45 PM",
+    "timestamp": "03-Oct-2026 07:01 PM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -356,7 +356,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "04-Oct-2026 12:15 AM",
+    "timestamp": "04-Oct-2026 12:31 AM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -374,17 +374,29 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "04-Oct-2026 12:15 AM",
-    "fii_cash_net_cr": 1850.5,
-    "dii_cash_net_cr": 1240.2,
-    "total_net_cr": 3090.7,
-    "fii_futures_long_ratio": 68.5,
-    "fii_options_bias": "NET CALL BUYING (BULLISH DELTA)",
-    "institutional_sentiment": "EXTREMELY BULLISH (INSTITUTIONAL ACCUMULATION)",
-    "institutional_score": 92,
-    "formatted_summary": "FII: +\u20b91,850 Cr | DII: +\u20b91,240 Cr | Net: +\u20b93,091 Cr",
-    "is_simulated": true,
-    "data_source": "SIMULATED_PLACEHOLDER (illustrative values \u2014 no live FII/DII feed wired)"
+    "timestamp": "04-Oct-2026 12:31 AM",
+    "as_of_date": "01-Oct-2026",
+    "fii_cash_net_cr": -9484.3,
+    "dii_cash_net_cr": 10041.9,
+    "total_net_cr": 557.6,
+    "fii_futures_long_ratio": null,
+    "fii_options_bias": "NET LONG INDEX OPTIONS (+\u20b95,014 Cr premium)",
+    "institutional_sentiment": "BULLISH (DII ABSORPTION OF FII SELLING)",
+    "institutional_score": 75,
+    "formatted_summary": "FII: -\u20b99,484 Cr | DII: +\u20b910,042 Cr | Net: +\u20b9558 Cr (as of 01-Oct-2026)",
+    "is_simulated": false,
+    "simulated_components": [],
+    "unavailable_components": [
+      "fii_futures_long_ratio (no source reachable \u2014 omitted, not fabricated)"
+    ],
+    "data_source": "ET_MARKETS (fii-dii-activity page) + ET_MARKETS (fii-fno page)",
+    "fii_cash_net_7d_cr": -34966.1,
+    "dii_cash_net_7d_cr": 33455.3,
+    "fii_cash_net_30d_cr": -58983.0,
+    "dii_cash_net_30d_cr": 76434.7,
+    "fii_index_futures_net_cr": -3955.0,
+    "fii_index_options_net_cr": 5014.0,
+    "fno_as_of_date": "01-Oct-2026"
   },
   "nifty_volume_profile": {
     "poc": 22240.34,
@@ -442,10 +454,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 3420.8,
+    "stale_minutes": 3436.1,
     "anomalies": [],
     "clean_rows": 100,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 3420.8m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 3436.1m)"
   },
   "backtest_metrics": {
     "cagr_pct": -4.3,
@@ -1176,7 +1188,7 @@
       "target1_price": 3657.94,
       "target2_price": 3634.31,
       "status": "ACTIVE_POSITION",
-      "entry_time": "04-Oct-2026 12:15 AM",
+      "entry_time": "04-Oct-2026 12:31 AM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1186,7 +1198,7 @@
     {
       "id": 33,
       "signal_id": "STK_SHORT_LT",
-      "timestamp": "04-Oct-2026 12:15 AM",
+      "timestamp": "04-Oct-2026 12:31 AM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 3693.4,
