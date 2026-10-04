@@ -77,8 +77,11 @@ class ChartPlotterEngine:
                 else:
                     print(f"[WARNING] sendPhoto returned status: {res.status_code}")
                     return False
+        except requests.RequestException as e:
+            print(f"[ERROR] Chart Telegram send failed: {type(e).__name__}")
+            return False
         except Exception as e:
-            print(f"[ERROR] Exception sending chart photo: {e}")
+            print(f"[ERROR] Exception sending chart photo: {type(e).__name__}")
             return False
 
 # Helper function

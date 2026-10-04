@@ -49,9 +49,9 @@ class BrokerConnector:
             }
 
         return {
-            "success": True,
-            "status": "LIVE_ORDER_EXECUTED",
-            "message": f"Successfully placed hedged order for {strategy_name}."
+            "success": False,
+            "status": "NOT_IMPLEMENTED",
+            "message": "Live broker API abhi connected nahi hai."
         }
 
 # Helper function

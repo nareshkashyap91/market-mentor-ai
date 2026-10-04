@@ -22,9 +22,15 @@ def send_telegram_reply(bot_token, chat_id, text):
     }
     try:
         res = requests.post(url, json=payload, timeout=15)
+        if res.status_code == 400:
+            payload.pop("parse_mode", None)
+            res = requests.post(url, json=payload, timeout=15)
         return res.status_code == 200
+    except requests.RequestException as e:
+        print(f"[ERROR] Failed to send Telegram reply: {type(e).__name__}")
+        return False
     except Exception as e:
-        print(f"[ERROR] Failed to send Telegram reply: {e}")
+        print(f"[ERROR] Failed to send Telegram reply: {type(e).__name__}")
         return False
 
 def start_telegram_listener():

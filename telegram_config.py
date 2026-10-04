@@ -93,6 +93,11 @@ def send_deduplicated_telegram_alert(message, bot_token=None, chat_id=None, forc
 
     try:
         res = requests.post(url, json=payload, timeout=15)
+        if res.status_code == 400:
+            # Markdown formatting error (e.g. unescaped _ or *). Retry with plain text.
+            payload.pop("parse_mode", None)
+            res = requests.post(url, json=payload, timeout=15)
+
         if res.status_code == 200:
             print("[INFO] Telegram alert broadcasted successfully!")
             # Update cache
@@ -105,8 +110,11 @@ def send_deduplicated_telegram_alert(message, bot_token=None, chat_id=None, forc
                 json.dump(cache_data, f, indent=2)
             return True
         else:
-            print(f"[ERROR] Telegram API Error ({res.status_code}): {res.text}")
+            print(f"[ERROR] Telegram API Error ({res.status_code})")
             return False
+    except requests.RequestException as e:
+        print(f"[ERROR] Telegram send failed: {type(e).__name__}")
+        return False
     except Exception as e:
-        print(f"[ERROR] Failed to dispatch Telegram broadcast: {e}")
+        print(f"[ERROR] Failed to dispatch Telegram broadcast: {type(e).__name__}")
         return False

@@ -68,8 +68,11 @@ class TelegramAudioEngine:
                 else:
                     print(f"[WARNING] sendAudio returned status: {res.status_code}")
                     return False
+        except requests.RequestException as e:
+            print(f"[ERROR] Audio Telegram send failed: {type(e).__name__}")
+            return False
         except Exception as e:
-            print(f"[ERROR] Exception sending audio briefing: {e}")
+            print(f"[ERROR] Exception sending audio briefing: {type(e).__name__}")
             return False
 
 # Helper function
