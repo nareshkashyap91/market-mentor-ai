@@ -26,7 +26,7 @@ class MasterDataFetcher:
         `if: always()`, so whatever payloads DID refresh still get pushed to the dashboard.
     """
 
-    TOTAL_STEPS = 11
+    TOTAL_STEPS = 12
 
     @classmethod
     def run_master_pipeline(cls, auto_git_push=False):
@@ -140,6 +140,15 @@ class MasterDataFetcher:
         except Exception as e:
             failures.append(f"MTF SMC Market Structure (import failed: {e})")
             print(f"[FAIL] MTF SMC Market Structure step: {e}")
+
+        # 12. InvestingPro Valuation, Health Score & ProPicks Engine
+        print(f"\n[12/{cls.TOTAL_STEPS}] Executing InvestingPro Valuation, Health Score & ProPicks Engine...")
+        try:
+            from investing_pro_engine import InvestingProEngine
+            run_imported("InvestingPro Valuation & ProPicks", InvestingProEngine.export_investing_pro_json)
+        except Exception as e:
+            failures.append(f"InvestingPro Engine (import failed: {e})")
+            print(f"[FAIL] InvestingPro Engine step: {e}")
 
         # ---------------- Honest pipeline summary ----------------
         print("\n==========================================================================")

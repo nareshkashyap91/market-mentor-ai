@@ -35,6 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
             else if (targetTab === "smc-radar") {
                 headerTitle.textContent = "SMC Multi-Timeframe Order Block Radar";
             }
+            else if (targetTab === "investing-pro") {
+                headerTitle.textContent = "InvestingPro Intrinsic Valuation & ProPicks";
+            }
         });
     });
 
@@ -153,7 +156,7 @@ async function refreshDashboard() {
     try {
         // Fetch JSON data concurrently with cache-busting timestamp
         const ts = Date.now();
-        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes] = await Promise.allSettled([
+        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes, iproRes] = await Promise.allSettled([
             fetchJson(`./data/morning.json?t=${ts}`),
             fetchJson(`./data/evening.json?t=${ts}`),
             fetchJson(`./data/intraday.json?t=${ts}`),
@@ -165,7 +168,8 @@ async function refreshDashboard() {
             fetchJson(`./data/sector_rotation.json?t=${ts}`),
             fetchJson(`./data/ml_target_sl_optimized.json?t=${ts}`),
             fetchJson(`./data/portfolio_rebalancing.json?t=${ts}`),
-            fetchJson(`./data/smc_market_structure.json?t=${ts}`)
+            fetchJson(`./data/smc_market_structure.json?t=${ts}`),
+            fetchJson(`./data/investing_pro.json?t=${ts}`)
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
@@ -180,9 +184,10 @@ async function refreshDashboard() {
         const mlOptData = mlOptRes.status === "fulfilled" ? mlOptRes.value : null;
         const portfolioData = portfolioRes.status === "fulfilled" ? portfolioRes.value : null;
         const smcData = smcRes.status === "fulfilled" ? smcRes.value : null;
+        const iproData = iproRes.status === "fulfilled" ? iproRes.value : null;
 
         // Reflect feed health (failed fetches / stale / simulated data) in the UI
-        updateSyncStatus([morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes]);
+        updateSyncStatus([morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes, iproRes]);
 
         // Update dashboard elements
         updateHeaderAndOverview(morningData, eveningData, intradayData, momIntelData);
@@ -197,6 +202,7 @@ async function refreshDashboard() {
         if (mlOptData) renderMLOptimizer(mlOptData);
         if (portfolioData) renderPortfolioRebalancer(portfolioData);
         if (smcData) renderSMCRadar(smcData);
+        if (iproData) renderInvestingPro(iproData);
 
     } catch (error) {
         console.error("[ERROR] Failed to fetch or render dashboard data: ", error);
@@ -1277,6 +1283,127 @@ function renderSMCRadar(data) {
 
                 <div style="margin-top: 10px; font-size: 11px; font-weight: 600; text-align: center; background: rgba(255,255,255,0.04); padding: 6px 10px; border-radius: 6px; color: #cbd5e1;">
                     ⚡ ${esc(item.fvg_status)}
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+function renderInvestingPro(data) {
+    if (!data) return;
+
+    // Update Summary Header Widgets
+    if (data.summary) {
+        const s = data.summary;
+        const uvEl = document.getElementById("ipro-undervalued-count");
+        const ovEl = document.getElementById("ipro-overvalued-count");
+        const ghEl = document.getElementById("ipro-great-health-count");
+        const upEl = document.getElementById("ipro-avg-upside-val");
+
+        if (uvEl) uvEl.textContent = s.undervalued_count || 0;
+        if (ovEl) ovEl.textContent = s.overvalued_count || 0;
+        if (ghEl) ghEl.textContent = s.great_health_count || 0;
+        if (upEl) {
+            const val = s.avg_upside_pct || 0.0;
+            upEl.textContent = `${val > 0 ? '+' : ''}${val.toFixed(1)}%`;
+            upEl.style.color = val >= 0 ? "var(--clr-success)" : "var(--clr-danger)";
+        }
+    }
+
+    // Render AI ProPicks Portfolios
+    const propicksContainer = document.getElementById("ipro-propicks-container");
+    if (propicksContainer && data.propicks) {
+        const themes = [
+            { key: "alpha_champions", title: "🏆 Nifty Alpha Champions", desc: "Great Financial Health (Score ≥ 3.5) + Positive Fair Value Upside", color: "#10b981" },
+            { key: "value_bargains", title: "💎 Value Bargains", desc: "High Intrinsic Fair Value Upside (≥ 8.0%) with Sound Multiples", color: "#3b82f6" },
+            { key: "growth_leaders", title: "⚡ High-Growth Multibaggers", desc: "Accelerating Revenue & Profit Margins with Strong Momentum", color: "#a855f7" }
+        ];
+
+        propicksContainer.innerHTML = themes.map(t => {
+            const list = data.propicks[t.key] || [];
+            const symbolPills = list.map(s => `
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 6px 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+                    <span style="font-weight: 700; color: #f8fafc;">${esc(s.symbol)}</span>
+                    <span style="font-size: 11px; font-weight: 600; color: ${s.upside_pct >= 0 ? '#10b981' : '#ef4444'};">
+                        FV: ₹${s.fair_value} (${s.upside_pct >= 0 ? '+' : ''}${s.upside_pct}%)
+                    </span>
+                </div>
+            `).join("");
+
+            return `
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid ${t.color}40; border-radius: 12px; padding: 16px;">
+                    <div style="font-weight: 700; font-size: 15px; color: ${t.color}; margin-bottom: 4px;">${t.title}</div>
+                    <div style="font-size: 11px; color: #94a3b8; margin-bottom: 10px;">${t.desc}</div>
+                    <div>${symbolPills || '<div style="font-size: 11px; color: #94a3b8;">Scanning portfolio candidates...</div>'}</div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    // Render Detailed Stock Cards Grid
+    const stocksContainer = document.getElementById("ipro-stocks-grid");
+    if (!stocksContainer || !data.stocks || data.stocks.length === 0) return;
+
+    stocksContainer.innerHTML = data.stocks.map(item => {
+        const isUndervalued = item.upside_pct >= 10.0;
+        const borderClr = isUndervalued ? "rgba(16, 185, 129, 0.4)" : (item.upside_pct <= -10.0 ? "rgba(239, 68, 68, 0.4)" : "rgba(245, 158, 11, 0.4)");
+        const bgClr = isUndervalued ? "rgba(16, 185, 129, 0.04)" : "rgba(15, 23, 42, 0.6)";
+
+        const protipsHtml = (item.protips || []).map(pt => `
+            <div style="font-size: 11px; color: #cbd5e1; padding: 2px 0;">${pt}</div>
+        `).join("");
+
+        return `
+            <div class="signal-card" style="border: 1px solid ${borderClr}; background: ${bgClr}; padding: 16px; border-radius: 12px;">
+                <div class="signal-card-header" style="margin-bottom: 12px;">
+                    <div class="stock-info">
+                        <div class="stock-symbol" style="display: flex; align-items: center; gap: 8px;">
+                            ${esc(item.symbol)}
+                            <span style="font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; ${item.badge_style}">
+                                ${esc(item.valuation_status)}
+                            </span>
+                        </div>
+                        <span class="stock-company">${esc(item.company_name)}</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 14px; font-weight: 800; color: #f8fafc;">Score: ${item.health_score} / 5.0</div>
+                        <div style="font-size: 10px; color: #10b981; font-weight: 600;">${esc(item.health_tag)}</div>
+                    </div>
+                </div>
+
+                <div class="signal-values-grid" style="margin-bottom: 12px;">
+                    <div class="val-box">
+                        <span class="val-lbl">Current LTP</span>
+                        <span class="val-num">₹${item.current_price.toFixed(2)}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">AI Fair Value</span>
+                        <span class="val-num success">₹${item.fair_value}</span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">Upside / Downside</span>
+                        <span class="val-num" style="color: ${item.upside_pct >= 0 ? 'var(--clr-success)' : 'var(--clr-danger)'}">
+                            ${item.upside_pct >= 0 ? '+' : ''}${item.upside_pct}%
+                        </span>
+                    </div>
+                    <div class="val-box">
+                        <span class="val-lbl">P/E Multiple</span>
+                        <span class="val-num purple">${item.pe_ratio}x</span>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                    <div style="font-size: 10px; text-transform: uppercase; color: #94a3b8; margin-bottom: 6px; font-weight: 700;">Valuation Breakdown</div>
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; color: #cbd5e1;">
+                        <span>DCF Model: <strong>₹${item.dcf_fair_value}</strong></span>
+                        <span>Graham Model: <strong>₹${item.graham_fair_value}</strong></span>
+                        <span>P/E Model: <strong>₹${item.multiples_fair_value}</strong></span>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 10px; border-radius: 8px;">
+                    <div style="font-size: 10px; text-transform: uppercase; color: #94a3b8; margin-bottom: 4px; font-weight: 700;">AI ProTips Highlights</div>
+                    ${protipsHtml}
                 </div>
             </div>
         `;

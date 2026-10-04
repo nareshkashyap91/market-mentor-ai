@@ -66,6 +66,9 @@
                 <a href="#" class="nav-item" data-tab="smc-radar">
                     <i class="fa-solid fa-radar"></i> SMC Order Block Radar
                 </a>
+                <a href="#" class="nav-item" data-tab="investing-pro">
+                    <i class="fa-solid fa-gem"></i> InvestingPro Fair Value
+                </a>
             </nav>
             
             <div class="connection-status">
@@ -581,6 +584,69 @@
 
                     <div id="smc-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 16px;">
                         <!-- Dynamic SMC Cards Rendered Here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- InvestingPro Intrinsic Valuation, Financial Health & ProPicks Tab -->
+            <div class="tab-panel" id="tab-investing-pro">
+                <!-- Summary Metrics Cards -->
+                <div class="overview-grid" style="margin-bottom: 20px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="glass-card overview-card">
+                        <div class="card-icon green"><i class="fa-solid fa-gem"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Undervalued Stocks</span>
+                            <h3 class="stat-value" id="ipro-undervalued-count">0</h3>
+                            <span class="stat-sub">AI Fair Value Upside</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Overvalued Warnings</span>
+                            <h3 class="stat-value" id="ipro-overvalued-count">0</h3>
+                            <span class="stat-sub">Trading At Premium</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon purple"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Great Financial Health</span>
+                            <h3 class="stat-value" id="ipro-great-health-count">0</h3>
+                            <span class="stat-sub">Health Score ≥ 4.0</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon blue"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Avg Valuation Upside</span>
+                            <h3 class="stat-value" id="ipro-avg-upside-val">0.0%</h3>
+                            <span class="stat-sub">DCF + Graham + Multiples</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ProPicks AI Themed Portfolios Section -->
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-wand-magic-sparkles"></i> AI ProPicks Themed Indian Portfolios</h2>
+                        <span class="badge badge-pulse">Dynamic Fundamental Screener</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px;" id="ipro-propicks-container">
+                        <!-- Dynamic ProPicks Cards Rendered Here -->
+                    </div>
+                </div>
+
+                <!-- Detailed Fair Value & 5-Pillar Health Cards Grid -->
+                <div class="glass-card panel-card">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-scale-balanced"></i> Fair Value Intrinsic Models & 5-Pillar Health Scores</h2>
+                        <span class="badge badge-pulse">100% Live YFinance Feed</span>
+                    </div>
+
+                    <div id="ipro-stocks-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Dynamic Stock Cards Rendered Here -->
                     </div>
                 </div>
             </div>
