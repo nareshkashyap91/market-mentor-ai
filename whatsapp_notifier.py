@@ -45,14 +45,17 @@ class WhatsAppNotifier:
         try:
             res = requests.get(url, timeout=15)
             if res.status_code == 200:
-                print(f"[INFO] WhatsApp Alert sent successfully to {phone}!")
+                print("[INFO] WhatsApp Alert sent successfully!")
                 return {"status": "SUCCESS", "phone": phone}
             else:
-                print(f"[WARNING] CallMeBot returned status {res.status_code}: {res.text}")
+                print(f"[WARNING] CallMeBot returned status {res.status_code}")
                 return {"status": "FAILED", "status_code": res.status_code}
+        except requests.RequestException as e:
+            print(f"[ERROR] WhatsApp send failed: {type(e).__name__}")
+            return {"status": "ERROR", "error": type(e).__name__}
         except Exception as e:
-            print(f"[ERROR] Exception sending WhatsApp alert: {e}")
-            return {"status": "ERROR", "error": str(e)}
+            print(f"[ERROR] Exception sending WhatsApp alert: {type(e).__name__}")
+            return {"status": "ERROR", "error": type(e).__name__}
 
 # Helper function
 def send_whatsapp_alert(message_text):

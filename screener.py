@@ -567,43 +567,9 @@ def generate_report(stock_data):
     return final_report
 
 def send_to_telegram(report, token, chat_id):
-    """Sends the formatted report to a Telegram chat/channel using the Telegram Bot API.
-    Splits the message automatically if it exceeds Telegram's 4096 character limit.
-    """
-    url = f"https://api.telegram.org/bot{token}/sendMessage"
-    MAX_LENGTH = 4000
-    
-    if len(report) <= MAX_LENGTH:
-        payload = {
-            "chat_id": chat_id,
-            "text": report,
-            "parse_mode": "Markdown"
-        }
-        try:
-            response = requests.post(url, json=payload, timeout=15)
-            if response.status_code == 200:
-                print("[INFO] Report sent successfully to Telegram!")
-            else:
-                print(f"[ERROR] Telegram sending failed: {response.text}")
-        except Exception as e:
-            print(f"[ERROR] Exception sending to Telegram: {e}")
-    else:
-        print(f"[INFO] Report length ({len(report)}) exceeds limit. Sending in parts...")
-        parts = [report[i:i+MAX_LENGTH] for i in range(0, len(report), MAX_LENGTH)]
-        for idx, part in enumerate(parts):
-            payload = {
-                "chat_id": chat_id,
-                "text": f"*Part {idx+1}/{len(parts)}*\n\n" + part,
-                "parse_mode": "Markdown"
-            }
-            try:
-                response = requests.post(url, json=payload, timeout=15)
-                if response.status_code == 200:
-                    print(f"[INFO] Part {idx+1} sent successfully to Telegram!")
-                else:
-                    print(f"[ERROR] Part {idx+1} failed: {response.text}")
-            except Exception as e:
-                print(f"[ERROR] Exception sending part {idx+1}: {e}")
+    """Sends the formatted report to a Telegram chat/channel using central telegram_config logic."""
+    from telegram_config import send_deduplicated_telegram_alert
+    return send_deduplicated_telegram_alert(report, bot_token=token, chat_id=chat_id)
 
 def send_to_whatsapp_callmebot(report, phone, apikey):
     """Fallback notification via CallMeBot API."""
