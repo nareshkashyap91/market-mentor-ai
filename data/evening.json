@@ -1,4 +1,135 @@
 {
   "date": "05-Oct-2026",
-  "momentum_stocks": []
+  "momentum_stocks": [
+    {
+      "symbol": "REDINGTON",
+      "close": 412.3,
+      "turnover": 272.16,
+      "vol_expansion": 1.62,
+      "why": "Outperforming market (RSI: 64.1, 1Y CAR: +50.6%), closed 0.5% above VWAP with bullish DMA alignment (20>50>100>200) and 1.6x volume expansion.",
+      "dma20": 396.03,
+      "dma50": 363.57,
+      "dma100": 307.7,
+      "dma200": 273.64,
+      "dma_aligned": true,
+      "car_1y": 50.6,
+      "rsi": 64.1,
+      "momentum_intelligence": {
+        "symbol": "REDINGTON",
+        "close": 412.3,
+        "direction": "LONG",
+        "setup_name": "52-Week High Breakout",
+        "momentum_quality_score": 91.0,
+        "trade_setup_score": 79.0,
+        "momentum_grade": "A+ (EXCEPTIONAL)",
+        "trade_setup_grade": "B (MODERATE)",
+        "trend_info": {
+          "trend_classification": "STRONG BULLISH TREND",
+          "trend_score": 15,
+          "dma_aligned": true,
+          "above_all_dmas": true,
+          "below_all_dmas": false,
+          "dma_compression": false,
+          "dma_spread_pct": 29.68
+        },
+        "momentum_info": {
+          "momentum_classification": "VERY STRONG",
+          "momentum_score": 10,
+          "rvol_label": "Strong (1.5-2.0)",
+          "rvol_score": 13,
+          "pv_relationship": "Price \u2191 + Volume \u2191 (Accumulation Proxy)"
+        },
+        "relative_strength_info": {
+          "rs_score": 92.7,
+          "rs_classification": "VERY STRONG",
+          "outperforming_nifty": true,
+          "rs_nifty_diff_pct": 35.6
+        },
+        "price_action_info": {
+          "pattern_name": "52-Week High Breakout",
+          "price_action_score": 15,
+          "proximity_status": "52W BREAKOUT",
+          "dist_52w_high_pct": 0.99,
+          "vwap_reclaim": false
+        },
+        "breakout_quality": {
+          "breakout_quality": "A BREAKOUT",
+          "breakout_score": 12,
+          "candle_strength": 0.67,
+          "atr_expansion": true
+        },
+        "extension_info": {
+          "extension_status": "EXTENDED",
+          "penalty": 12,
+          "recommendation": "CAUTION (REQUIRE TIGHT ENTRY)",
+          "dist_ema20_atr": 1.97,
+          "dist_vwap_pct": 0.0
+        },
+        "market_regime_info": {
+          "market_regime": "\ud83d\udfe2 BULLISH_TRENDING",
+          "regime_confidence": 75.0,
+          "market_alignment_score": 10,
+          "regime_action": "FAVOR LONG MOMENTUM SETUPS"
+        },
+        "entry_plan": {
+          "entry_zone_str": "\u20b9412.30 - \u20b9418.90",
+          "entry_min": 412.3,
+          "entry_max": 418.9,
+          "confirmation_condition": "15-minute candle closes above \u20b9416.42 with RVOL > 1.5 and sustained VWAP support.",
+          "invalidation_level": 404.05
+        },
+        "risk_plan": {
+          "entry_price": 412.3,
+          "stop_loss": 404.05,
+          "target1": 424.68,
+          "target2": 432.92,
+          "target3": 445.3,
+          "risk_per_share": 8.25,
+          "rrr_t1": 1.5,
+          "rrr_t2": 2.5,
+          "rrr_acceptable": true
+        },
+        "position_sizing": {
+          "trading_capital": 100000.0,
+          "risk_pct": 1.0,
+          "max_risk_amount": 1000.0,
+          "risk_per_share": 8.25,
+          "quantity": 121,
+          "capital_required": 49888.3,
+          "max_loss": 998.25
+        },
+        "scenarios": {
+          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b9426.32, CHASE TRADE - AVOID. Wait for pullback to \u20b9416.42 and 15m VWAP reclaim.",
+          "scenario_flat": "FLAT OPEN: Look for entry between \u20b9412.30 - \u20b9416.42 on 15m candle close above \u20b9416.42 with RVOL > 1.5.",
+          "scenario_gap_down": "GAP DOWN: If opens below \u20b9404.05, SETUP INVALIDATED. No Trade.",
+          "chase_avoid_level": 426.32,
+          "invalidation_level": 404.05
+        },
+        "event_risk_info": {
+          "event_risk_level": "LOW",
+          "event_penalty": 0,
+          "event_risk_reason": "Low Event Risk: Clean Corporate Calendar"
+        },
+        "guardrail_eval": {
+          "is_no_trade": false,
+          "no_trade_reasons": [],
+          "no_trade_summary": "PASSED ALL RISK GUARDRAILS"
+        },
+        "status": "WAIT",
+        "ai_explanation": {
+          "why_selected": [
+            "DMA Alignment: STRONG BULLISH TREND",
+            "Volume Confirmation: RVOL Strong (1.5-2.0)",
+            "Relative Strength: VERY STRONG vs NIFTY 50",
+            "Chart Pattern: 52-Week High Breakout (52W BREAKOUT)",
+            "Price-Volume Behavior: Price \u2191 + Volume \u2191 (Accumulation Proxy)",
+            "Acceptable Risk-Reward: 1.50 RRR to Target 1"
+          ],
+          "key_risks": [
+            "Near 52W Overhead Resistance (1.0% below 52W High)"
+          ]
+        }
+      }
+    }
+  ]
 }
