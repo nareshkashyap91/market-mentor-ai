@@ -1,5 +1,5 @@
 {
-  "timestamp": "08-Oct-2026 03:31 PM",
+  "timestamp": "08-Oct-2026 03:46 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "08-Oct-2026 03:31 PM",
+      "timestamp": "08-Oct-2026 03:46 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "08-Oct-2026 10:01 AM",
+    "timestamp": "08-Oct-2026 10:16 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,22 +179,22 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "08-Oct-2026 03:31 PM",
-      "net_gex_crores": 8063.0,
-      "total_call_gex_crores": 40812.5,
-      "total_put_gex_crores": 32749.5,
+      "timestamp": "08-Oct-2026 03:46 PM",
+      "net_gex_crores": 8094.9,
+      "total_call_gex_crores": 40509.9,
+      "total_put_gex_crores": 32415.0,
       "gex_regime": "\ud83d\udfe2 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE) | FLIP \u20b922,675",
       "zero_gamma_flip_level": 22675.0,
       "max_gex_strike": 22500.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "48% (heuristic: spot \u20b922,232 vs pin \u20b922,500, 5d to expiry, exp. move \u00b1\u20b9355)",
+      "pinning_probability": "48% (heuristic: spot \u20b922,232 vs pin \u20b922,500, 5d to expiry, exp. move \u00b1\u20b9356)",
       "spot": 22231.8,
       "expiry_date": "2026-10-13",
       "days_to_expiry": 5,
-      "atm_iv": 13.64,
-      "expected_move_till_expiry": 354.9,
-      "total_call_oi": 3431040,
-      "total_put_oi": 2111757,
+      "atm_iv": 13.69,
+      "expected_move_till_expiry": 356.2,
+      "total_call_oi": 3509431,
+      "total_put_oi": 2160799,
       "pcr": 0.62,
       "is_simulated": false,
       "simulated_components": [],
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "08-Oct-2026 03:31 PM",
+    "timestamp": "08-Oct-2026 03:46 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "08-Oct-2026 03:31 PM",
+    "timestamp": "08-Oct-2026 03:46 PM",
     "as_of_date": "07-Oct-2026",
     "fii_cash_net_cr": -6121.4,
     "dii_cash_net_cr": 4596.6,
@@ -470,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 16.2,
+    "stale_minutes": 31.0,
     "anomalies": [],
     "clean_rows": 100,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 16.2m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 31.0m)"
   },
   "backtest_metrics": {
     "cagr_pct": -3.0,
@@ -679,7 +679,7 @@
       "grade": "A+"
     }
   ],
-  "active_positions_count": 33,
+  "active_positions_count": 34,
   "active_positions": [
     {
       "id": "STK_LONG_INFY",
@@ -895,7 +895,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 265.6,
-      "current_price": 255.5,
+      "current_price": 262.3,
       "sl_price": 267.72,
       "target1_price": 263.05,
       "target2_price": 261.35,
@@ -1029,6 +1029,22 @@
       "target2_price": 1422.81,
       "status": "ACTIVE_POSITION",
       "entry_time": "09-Sep-2026 02:09 PM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_SHORT_SBIN",
+      "symbol": "SBIN",
+      "strategy_name": "Intraday Short",
+      "action": "SELL",
+      "entry_price": 938.15,
+      "current_price": 938.15,
+      "sl_price": 947.2,
+      "target1_price": 927.29,
+      "target2_price": 920.05,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "08-Oct-2026 03:46 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1212,6 +1228,15 @@
   ],
   "signal_audit_log": [
     {
+      "id": 34,
+      "signal_id": "STK_SHORT_SBIN",
+      "timestamp": "08-Oct-2026 03:46 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 938.15,
+      "notes": "Position initialized at \u20b9938.15"
+    },
+    {
       "id": 33,
       "signal_id": "STK_SHORT_LT",
       "timestamp": "04-Oct-2026 01:04 PM",
@@ -1336,15 +1361,6 @@
       "new_status": "ACTIVE_POSITION",
       "spot_price": 1840.0,
       "notes": "Position initialized at \u20b91840.00"
-    },
-    {
-      "id": 19,
-      "signal_id": "STK_LONG_INFY",
-      "timestamp": "28-Aug-2026 03:17 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 1143.0,
-      "notes": "Position initialized at \u20b91143.00"
     }
   ],
   "nifty": {
@@ -1699,17 +1715,17 @@
         "pattern": "\u26a1 Volatility Contraction (VCP) Momentum Expansion"
       },
       {
-        "symbol": "ITC",
+        "symbol": "SBIN",
         "action": "SHORT SELL",
-        "close": 255.5,
-        "vwap": 256.63,
-        "orb_low": 258.25,
-        "sl": 258.25,
-        "t1": 252.2,
-        "t2": 250.0,
-        "rsi": 47.0,
-        "vol_exp": 2.5,
-        "pattern": "\ud83d\udfe2 Hammer Pattern (Demand Reversal at Support)"
+        "close": 938.15,
+        "vwap": 944.08,
+        "orb_low": 947.2,
+        "sl": 947.2,
+        "t1": 927.29,
+        "t2": 920.05,
+        "rsi": 20.9,
+        "vol_exp": 2.4,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ]
   }
