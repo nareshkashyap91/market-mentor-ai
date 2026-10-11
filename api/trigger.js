@@ -22,6 +22,28 @@ module.exports = async function handler(req, res) {
     });
   }
 
+  // IST Market & Post-Market Window Guard (UTC + 5:30)
+  const nowUtc = new Date();
+  const istOffsetMs = 5.5 * 60 * 60 * 1000;
+  const nowIst = new Date(nowUtc.getTime() + istOffsetMs);
+  const istDay = nowIst.getUTCDay(); // 0 = Sunday, 6 = Saturday
+  const istHours = nowIst.getUTCHours();
+  const istMinutes = nowIst.getUTCMinutes();
+  const istDecimal = istHours + istMinutes / 60;
+
+  const isWeekend = istDay === 0 || istDay === 6;
+  // Active window: 8:45 AM (8.75) to 6:00 PM (18.0) IST covers live trading + 5:00 PM Momentum Wrap
+  const isOffHours = istDecimal < 8.75 || istDecimal > 18.0;
+  const isForced = req.query && (req.query.force === 'true' || req.query.force === '1');
+
+  if (!isForced && (isWeekend || isOffHours)) {
+    return res.status(200).json({
+      success: false,
+      message: `Trigger skipped: Outside Indian Market & EOD Wrap Window (IST: ${nowIst.toISOString()}). No night or weekend runs.`,
+      is_off_hours: true
+    });
+  }
+
   try {
     const ghRes = await fetch(
       `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_ID}/dispatches`,
