@@ -3,20 +3,20 @@
   "momentum_stocks": [
     {
       "symbol": "ABDL",
-      "close": 713.95,
-      "turnover": 55.98,
-      "vol_expansion": 1.0,
-      "why": "Outperforming market (RSI: 62.3, 1Y CAR: +29.4%), closed 0.8% above VWAP with bullish DMA alignment (20>50>100>200) and 1.0x volume expansion.",
-      "dma20": 683.15,
-      "dma50": 639.71,
-      "dma100": 625.39,
-      "dma200": 563.57,
+      "close": 713.1,
+      "turnover": 56.32,
+      "vol_expansion": 1.01,
+      "why": "Outperforming market (RSI: 62.2, 1Y CAR: +29.3%), closed 0.6% above VWAP with bullish DMA alignment (20>50>100>200) and 1.0x volume expansion.",
+      "dma20": 683.11,
+      "dma50": 639.69,
+      "dma100": 625.38,
+      "dma200": 563.56,
       "dma_aligned": true,
-      "car_1y": 29.4,
-      "rsi": 62.3,
+      "car_1y": 29.3,
+      "rsi": 62.2,
       "momentum_intelligence": {
         "symbol": "ABDL",
-        "close": 713.95,
+        "close": 713.1,
         "direction": "LONG",
         "setup_name": "52-Week High Breakout",
         "momentum_quality_score": 83.0,
@@ -30,7 +30,7 @@
           "above_all_dmas": true,
           "below_all_dmas": false,
           "dma_compression": false,
-          "dma_spread_pct": 16.75
+          "dma_spread_pct": 16.76
         },
         "momentum_info": {
           "momentum_classification": "STRONG",
@@ -40,10 +40,10 @@
           "pv_relationship": "Price \u2193 + Volume \u2193 (Normal Pullback)"
         },
         "relative_strength_info": {
-          "rs_score": 67.3,
+          "rs_score": 67.2,
           "rs_classification": "STRONG",
           "outperforming_nifty": true,
-          "rs_nifty_diff_pct": 14.4
+          "rs_nifty_diff_pct": 14.3
         },
         "price_action_info": {
           "pattern_name": "52-Week High Breakout",
@@ -62,7 +62,7 @@
           "extension_status": "EXTENDED",
           "penalty": 12,
           "recommendation": "CAUTION (REQUIRE TIGHT ENTRY)",
-          "dist_ema20_atr": 2.16,
+          "dist_ema20_atr": 2.1,
           "dist_vwap_pct": 0.0
         },
         "market_regime_info": {
@@ -72,19 +72,19 @@
           "regime_action": "FAVOR LONG MOMENTUM SETUPS"
         },
         "entry_plan": {
-          "entry_zone_str": "\u20b9713.95 - \u20b9725.37",
-          "entry_min": 713.95,
-          "entry_max": 725.37,
-          "confirmation_condition": "15-minute candle closes above \u20b9721.09 with RVOL > 1.5 and sustained VWAP support.",
-          "invalidation_level": 699.67
+          "entry_zone_str": "\u20b9713.10 - \u20b9724.51",
+          "entry_min": 713.1,
+          "entry_max": 724.51,
+          "confirmation_condition": "15-minute candle closes above \u20b9720.23 with RVOL > 1.5 and sustained VWAP support.",
+          "invalidation_level": 698.84
         },
         "risk_plan": {
-          "entry_price": 713.95,
-          "stop_loss": 699.67,
-          "target1": 735.37,
-          "target2": 749.65,
-          "target3": 771.07,
-          "risk_per_share": 14.28,
+          "entry_price": 713.1,
+          "stop_loss": 698.84,
+          "target1": 734.49,
+          "target2": 748.75,
+          "target3": 770.14,
+          "risk_per_share": 14.26,
           "rrr_t1": 1.5,
           "rrr_t2": 2.5,
           "rrr_acceptable": true
@@ -93,17 +93,17 @@
           "trading_capital": 100000.0,
           "risk_pct": 1.0,
           "max_risk_amount": 1000.0,
-          "risk_per_share": 14.28,
+          "risk_per_share": 14.26,
           "quantity": 70,
-          "capital_required": 49976.5,
-          "max_loss": 999.6
+          "capital_required": 49917.0,
+          "max_loss": 998.2
         },
         "scenarios": {
-          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b9738.23, CHASE TRADE - AVOID. Wait for pullback to \u20b9721.09 and 15m VWAP reclaim.",
-          "scenario_flat": "FLAT OPEN: Look for entry between \u20b9713.95 - \u20b9721.09 on 15m candle close above \u20b9721.09 with RVOL > 1.5.",
-          "scenario_gap_down": "GAP DOWN: If opens below \u20b9699.67, SETUP INVALIDATED. No Trade.",
-          "chase_avoid_level": 738.23,
-          "invalidation_level": 699.67
+          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b9737.34, CHASE TRADE - AVOID. Wait for pullback to \u20b9720.23 and 15m VWAP reclaim.",
+          "scenario_flat": "FLAT OPEN: Look for entry between \u20b9713.10 - \u20b9720.23 on 15m candle close above \u20b9720.23 with RVOL > 1.5.",
+          "scenario_gap_down": "GAP DOWN: If opens below \u20b9698.84, SETUP INVALIDATED. No Trade.",
+          "chase_avoid_level": 737.34,
+          "invalidation_level": 698.84
         },
         "event_risk_info": {
           "event_risk_level": "LOW",
