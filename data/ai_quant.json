@@ -1,5 +1,5 @@
 {
-  "timestamp": "14-Oct-2026 04:00 PM",
+  "timestamp": "14-Oct-2026 04:15 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "14-Oct-2026 04:01 PM",
+      "timestamp": "14-Oct-2026 04:15 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "14-Oct-2026 10:31 AM",
+    "timestamp": "14-Oct-2026 10:45 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "14-Oct-2026 04:01 PM",
+      "timestamp": "14-Oct-2026 04:15 PM",
       "net_gex_crores": 8031.8,
       "total_call_gex_crores": 34257.3,
       "total_put_gex_crores": 26225.5,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "14-Oct-2026 04:01 PM",
+    "timestamp": "14-Oct-2026 04:15 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "14-Oct-2026 04:00 PM",
+    "timestamp": "14-Oct-2026 04:15 PM",
     "as_of_date": "13-Oct-2026",
     "fii_cash_net_cr": -1305.2,
     "dii_cash_net_cr": 2439.3,
@@ -470,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 45.9,
+    "stale_minutes": 60.9,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 45.9m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 60.9m)"
   },
   "backtest_metrics": {
     "cagr_pct": 0.9,
@@ -489,10 +489,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 525000.0,
+    "allocated_margin": 526500.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 350,
+    "total_trades": 351,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -679,7 +679,7 @@
       "grade": "A+"
     }
   ],
-  "active_positions_count": 34,
+  "active_positions_count": 35,
   "active_positions": [
     {
       "id": "STK_LONG_INFY",
@@ -938,6 +938,22 @@
       "realized_pnl": 0.0
     },
     {
+      "id": "STK_SHORT_HDFCBANK",
+      "symbol": "HDFCBANK",
+      "strategy_name": "Intraday Short",
+      "action": "SELL",
+      "entry_price": 710.7,
+      "current_price": 710.7,
+      "sl_price": 716.39,
+      "target1_price": 703.88,
+      "target2_price": 699.33,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "14-Oct-2026 04:15 PM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
       "id": "STK_SHORT_KOTAKBANK",
       "symbol": "KOTAKBANK",
       "strategy_name": "Intraday Short",
@@ -948,7 +964,7 @@
       "target1_price": 433.84,
       "target2_price": 431.04,
       "status": "ACTIVE_POSITION",
-      "entry_time": "14-Oct-2026 04:00 PM",
+      "entry_time": "14-Oct-2026 04:15 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1228,13 +1244,22 @@
   ],
   "signal_audit_log": [
     {
-      "id": 34,
+      "id": 35,
       "signal_id": "STK_SHORT_KOTAKBANK",
-      "timestamp": "14-Oct-2026 04:00 PM",
+      "timestamp": "14-Oct-2026 04:15 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 438.05,
       "notes": "Position initialized at \u20b9438.05"
+    },
+    {
+      "id": 34,
+      "signal_id": "STK_SHORT_HDFCBANK",
+      "timestamp": "14-Oct-2026 04:15 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 710.7,
+      "notes": "Position initialized at \u20b9710.70"
     },
     {
       "id": 33,
@@ -1352,15 +1377,6 @@
       "new_status": "ACTIVE_POSITION",
       "spot_price": 267.7,
       "notes": "Position initialized at \u20b9267.70"
-    },
-    {
-      "id": 20,
-      "signal_id": "STK_SHORT_BHARTIARTL",
-      "timestamp": "05-Sep-2026 04:41 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 1840.0,
-      "notes": "Position initialized at \u20b91840.00"
     }
   ],
   "nifty": {
@@ -1674,6 +1690,19 @@
         "rsi": 22.8,
         "vol_exp": 2.4,
         "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)"
+      },
+      {
+        "symbol": "HDFCBANK",
+        "action": "SHORT SELL",
+        "close": 710.7,
+        "vwap": 712.45,
+        "orb_low": 711.35,
+        "sl": 716.39,
+        "t1": 703.88,
+        "t2": 699.33,
+        "rsi": 40.4,
+        "vol_exp": 1.7,
+        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
       },
       {
         "symbol": "ICICIBANK",
