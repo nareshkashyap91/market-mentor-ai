@@ -1,5 +1,5 @@
 {
-  "timestamp": "16-Oct-2026 12:16 PM",
+  "timestamp": "16-Oct-2026 12:31 PM",
   "top_sector": "Nifty IT",
   "lagging_sector": "Nifty Infra",
   "is_simulated": true,
@@ -14,7 +14,8 @@
     "Nifty FMCG",
     "Nifty Energy",
     "Nifty Realty",
-    "Nifty Infra"
+    "Nifty Infra",
+    "gamma_exposure_analytics (Groww chain unreachable)"
   ],
   "market_breadth": {
     "advances": 5,
@@ -26,29 +27,18 @@
     "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
   },
   "gamma_exposure_analytics": {
-    "timestamp": "16-Oct-2026 05:46 PM",
-    "net_gex_crores": -4529.0,
-    "total_call_gex_crores": 59376.0,
-    "total_put_gex_crores": 63905.0,
+    "timestamp": "16-Oct-2026 06:01 PM",
+    "net_gex_crores": -1850.0,
     "gex_regime": "\ud83d\udd34 NEGATIVE GAMMA (VOLATILITY SPIKE RISK)",
     "zero_gamma_flip_level": null,
-    "max_gex_strike": 23200.0,
-    "max_gex_strike_side": "CALL",
-    "pinning_probability": "63% (heuristic: spot \u20b923,146 vs pin \u20b923,200, 3d to expiry, exp. move \u00b1\u20b9222)",
-    "spot": 23146.15,
-    "expiry_date": "2026-10-19",
-    "days_to_expiry": 3,
-    "atm_iv": 10.57,
-    "expected_move_till_expiry": 221.8,
-    "total_call_oi": 2779878,
-    "total_put_oi": 3692027,
-    "pcr": 1.33,
-    "is_simulated": false,
-    "simulated_components": [],
-    "modeled_components": [
-      "pinning_probability (heuristic from live IV/GEX/DTE \u2014 not market-sourced)"
+    "max_gex_strike": null,
+    "pinning_probability": "N/A (live chain unavailable)",
+    "is_simulated": true,
+    "simulated_components": [
+      "gamma_exposure_analytics (Groww chain unreachable \u2014 illustrative values)"
     ],
-    "data_source": "GROWW_LIVE (server-rendered NIFTY chain, nearest expiry 2026-10-19, lot 65)"
+    "modeled_components": [],
+    "data_source": "ANALYTICAL_MODEL_PLACEHOLDER (Groww chain unreachable \u2014 values are illustrative, not live dealer positioning)"
   },
   "sectors": [
     {
