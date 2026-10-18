@@ -1,5 +1,5 @@
 {
-  "timestamp": "18-Oct-2026 11:45 PM",
+  "timestamp": "19-Oct-2026 12:00 AM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "18-Oct-2026 11:45 PM",
+      "timestamp": "19-Oct-2026 12:01 AM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -140,7 +140,7 @@
     "journal_summary_formatted": "REALIZED P&L: +\u20b926,500 | WIN RATE: 75.0%"
   },
   "premarket_cues_analytics": {
-    "timestamp": "18-Oct-2026 08:30 AM",
+    "timestamp": "19-Oct-2026 08:30 AM",
     "gift_nifty_pts": 85.0,
     "nasdaq_fut_pct": 0.92,
     "dow_fut_pct": 0.45,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "18-Oct-2026 06:15 PM",
+    "timestamp": "18-Oct-2026 06:31 PM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "18-Oct-2026 11:45 PM",
+      "timestamp": "19-Oct-2026 12:01 AM",
       "net_gex_crores": -5078.6,
       "total_call_gex_crores": 57199.1,
       "total_put_gex_crores": 62277.7,
@@ -187,12 +187,12 @@
       "zero_gamma_flip_level": null,
       "max_gex_strike": 23200.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "68% (heuristic: spot \u20b923,146 vs pin \u20b923,200, 1d to expiry, exp. move \u00b1\u20b9128)",
+      "pinning_probability": "61% (heuristic: spot \u20b923,146 vs pin \u20b923,200, 0d to expiry, exp. move \u00b1\u20b991)",
       "spot": 23146.15,
       "expiry_date": "2026-10-19",
-      "days_to_expiry": 1,
+      "days_to_expiry": 0,
       "atm_iv": 10.57,
-      "expected_move_till_expiry": 128.1,
+      "expected_move_till_expiry": 90.6,
       "total_call_oi": 2739317,
       "total_put_oi": 3626596,
       "pcr": 1.32,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "18-Oct-2026 11:45 PM",
+    "timestamp": "19-Oct-2026 12:01 AM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "18-Oct-2026 11:45 PM",
+    "timestamp": "19-Oct-2026 12:00 AM",
     "as_of_date": "16-Oct-2026",
     "fii_cash_net_cr": 1166.0,
     "dii_cash_net_cr": -3661.3,
@@ -470,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 3390.7,
+    "stale_minutes": 3405.9,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 3390.7m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 3405.9m)"
   },
   "backtest_metrics": {
     "cagr_pct": 4.1,
@@ -1356,19 +1356,19 @@
     "volatility_percentile": 26.7,
     "confidence_score": 75.0,
     "expected_move": {
-      "dte_days": 4.0,
-      "em_1sigma_pts": 339.35,
-      "em_2sigma_pts": 678.7,
-      "em_pct": 1.47,
+      "dte_days": 3.0,
+      "em_1sigma_pts": 293.88,
+      "em_2sigma_pts": 587.77,
+      "em_pct": 1.27,
       "range_1sigma": [
-        22806.8,
-        23485.5
+        22852.27,
+        23440.03
       ],
       "range_2sigma": [
-        22467.45,
-        23824.85
+        22558.38,
+        23733.92
       ],
-      "summary_str": "\u00b1339.3 pts (\u20b922807 - \u20b923486)"
+      "summary_str": "\u00b1293.9 pts (\u20b922852 - \u20b923440)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -1504,19 +1504,19 @@
     "volatility_percentile": 26.7,
     "confidence_score": 50.0,
     "expected_move": {
-      "dte_days": 4.0,
-      "em_1sigma_pts": 818.73,
-      "em_2sigma_pts": 1637.47,
-      "em_pct": 1.47,
+      "dte_days": 3.0,
+      "em_1sigma_pts": 709.05,
+      "em_2sigma_pts": 1418.09,
+      "em_pct": 1.27,
       "range_1sigma": [
-        55025.27,
-        56662.73
+        55134.95,
+        56553.05
       ],
       "range_2sigma": [
-        54206.53,
-        57481.47
+        54425.91,
+        57262.09
       ],
-      "summary_str": "\u00b1818.7 pts (\u20b955025 - \u20b956663)"
+      "summary_str": "\u00b1709.0 pts (\u20b955135 - \u20b956553)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
