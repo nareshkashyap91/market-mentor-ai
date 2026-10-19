@@ -1,5 +1,5 @@
 {
-  "timestamp": "19-Oct-2026 08:01 PM",
+  "timestamp": "19-Oct-2026 08:15 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "19-Oct-2026 08:01 PM",
+      "timestamp": "19-Oct-2026 08:15 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "19-Oct-2026 02:31 PM",
+    "timestamp": "19-Oct-2026 02:45 PM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,30 +179,29 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "19-Oct-2026 08:01 PM",
-      "net_gex_crores": 57931.5,
-      "total_call_gex_crores": 178381.3,
-      "total_put_gex_crores": 120449.8,
-      "gex_regime": "\ud83d\udfe2 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE) | FLIP \u20b922,875",
-      "zero_gamma_flip_level": 22875.0,
-      "max_gex_strike": 22900.0,
+      "timestamp": "19-Oct-2026 08:15 PM",
+      "net_gex_crores": 3016.1,
+      "total_call_gex_crores": 27895.7,
+      "total_put_gex_crores": 24879.6,
+      "gex_regime": "\ud83d\udfe2 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE) | FLIP \u20b923,475",
+      "zero_gamma_flip_level": 23475.0,
+      "max_gex_strike": 23200.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "83% (heuristic: spot \u20b922,889 vs pin \u20b922,900, 0d to expiry, exp. move \u00b1\u20b9278)",
+      "pinning_probability": "48% (heuristic: spot \u20b922,889 vs pin \u20b923,200, 8d to expiry, exp. move \u00b1\u20b9427)",
       "spot": 22888.95,
-      "expiry_date": "2026-10-19",
-      "days_to_expiry": 0,
-      "atm_iv": 32.83,
-      "expected_move_till_expiry": 278.1,
-      "total_call_oi": 3310430,
-      "total_put_oi": 2666148,
-      "pcr": 0.81,
+      "expiry_date": "2026-10-27",
+      "days_to_expiry": 8,
+      "atm_iv": 12.61,
+      "expected_move_till_expiry": 427.3,
+      "total_call_oi": 2243915,
+      "total_put_oi": 1975690,
+      "pcr": 0.88,
       "is_simulated": false,
       "simulated_components": [],
       "modeled_components": [
-        "pinning_probability (heuristic from live IV/GEX/DTE \u2014 not market-sourced)",
-        "per-strike gamma (Black-Scholes approximation \u2014 Groww greeks missing on some strikes)"
+        "pinning_probability (heuristic from live IV/GEX/DTE \u2014 not market-sourced)"
       ],
-      "data_source": "GROWW_LIVE (server-rendered NIFTY chain, nearest expiry 2026-10-19, lot 65)"
+      "data_source": "GROWW_LIVE (server-rendered NIFTY chain, nearest expiry 2026-10-27, lot 65)"
     },
     "sectors": [
       {
@@ -373,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "19-Oct-2026 08:01 PM",
+    "timestamp": "19-Oct-2026 08:15 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -391,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "19-Oct-2026 08:01 PM",
+    "timestamp": "19-Oct-2026 08:15 PM",
     "as_of_date": "16-Oct-2026",
     "fii_cash_net_cr": 1166.0,
     "dii_cash_net_cr": -3661.3,
@@ -471,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 286.1,
+    "stale_minutes": 300.8,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 286.1m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 300.8m)"
   },
   "backtest_metrics": {
     "cagr_pct": 3.0,
