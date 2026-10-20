@@ -1,5 +1,5 @@
 {
-  "timestamp": "20-Oct-2026 03:16 PM",
+  "timestamp": "20-Oct-2026 03:31 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "20-Oct-2026 03:16 PM",
+      "timestamp": "20-Oct-2026 03:31 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "20-Oct-2026 09:46 AM",
+    "timestamp": "20-Oct-2026 10:01 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "20-Oct-2026 03:16 PM",
+      "timestamp": "20-Oct-2026 03:31 PM",
       "net_gex_crores": 3164.9,
       "total_call_gex_crores": 27811.6,
       "total_put_gex_crores": 24646.7,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "20-Oct-2026 03:16 PM",
+    "timestamp": "20-Oct-2026 03:31 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "20-Oct-2026 03:16 PM",
+    "timestamp": "20-Oct-2026 03:31 PM",
     "as_of_date": "19-Oct-2026",
     "fii_cash_net_cr": -1148.7,
     "dii_cash_net_cr": 3201.2,
@@ -467,22 +467,20 @@
     "research_tag": "AI QUANT EXECUTIVE RESEARCH SYNTHESIS"
   },
   "data_quality": {
-    "is_valid": false,
+    "is_valid": true,
     "data_type": "LIVE_DATA",
-    "is_stale": true,
-    "stale_minutes": 1441.1,
-    "anomalies": [
-      "Data is stale (1441.1m old > 15m threshold)"
-    ],
+    "is_stale": false,
+    "stale_minutes": 1456.1,
+    "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "STALE_WARNING (LIVE_DATA | Freshness: 1441.1m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 1456.1m)"
   },
   "backtest_metrics": {
     "cagr_pct": 3.0,
     "sharpe_ratio": -1.65,
     "max_drawdown_pct": -1.0,
     "profit_factor": 1.31,
-    "win_rate_pct": 54.8,
+    "win_rate_pct": 55.6,
     "total_backtest_trades": 124,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
     "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
@@ -491,10 +489,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 525000.0,
+    "allocated_margin": 522000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 350,
+    "total_trades": 348,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -1373,12 +1371,10 @@
       "summary_str": "\u00b1250.1 pts (\u20b922639 - \u20b923139)"
     },
     "no_trade_eval": {
-      "is_no_trade": true,
-      "trade_status": "NO TRADE (CAPITAL PROTECTION ACTIVE)",
-      "reasons": [
-        "STALE DATA: "
-      ],
-      "summary": "STALE DATA: "
+      "is_no_trade": false,
+      "trade_status": "ACTIVE QUANT SIGNALS",
+      "reasons": [],
+      "summary": "Market Conditions Optimal for Execution"
     },
     "pattern": "\ud83d\udfe2 Bullish Engulfing (Reversal Setup)",
     "pcr": 1.05,
@@ -1523,12 +1519,10 @@
       "summary_str": "\u00b1606.4 pts (\u20b954882 - \u20b956094)"
     },
     "no_trade_eval": {
-      "is_no_trade": true,
-      "trade_status": "NO TRADE (CAPITAL PROTECTION ACTIVE)",
-      "reasons": [
-        "STALE DATA: "
-      ],
-      "summary": "STALE DATA: "
+      "is_no_trade": false,
+      "trade_status": "ACTIVE QUANT SIGNALS",
+      "reasons": [],
+      "summary": "Market Conditions Optimal for Execution"
     },
     "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)",
     "pcr": 0.98,
