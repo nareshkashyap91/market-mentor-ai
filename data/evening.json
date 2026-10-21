@@ -3,9 +3,9 @@
   "momentum_stocks": [
     {
       "symbol": "ANANDRATHI",
-      "close": 2180.8,
-      "turnover": 122.82,
-      "vol_expansion": 1.03,
+      "close": 2180.7,
+      "turnover": 123.78,
+      "vol_expansion": 1.04,
       "why": "Outperforming market (RSI: 57.0, 1Y CAR: +38.7%), closed 0.3% above VWAP with sustaining above all key DMAs (20, 50, 100, 200) and 1.0x volume expansion.",
       "dma20": 2129.62,
       "dma50": 2165.07,
@@ -16,7 +16,7 @@
       "rsi": 57.0,
       "momentum_intelligence": {
         "symbol": "ANANDRATHI",
-        "close": 2180.8,
+        "close": 2180.7,
         "direction": "LONG",
         "setup_name": "52-Week High Breakout",
         "momentum_quality_score": 81.0,
@@ -72,19 +72,19 @@
           "regime_action": "FAVOR LONG MOMENTUM SETUPS"
         },
         "entry_plan": {
-          "entry_zone_str": "\u20b92180.80 - \u20b92215.69",
-          "entry_min": 2180.8,
-          "entry_max": 2215.69,
-          "confirmation_condition": "15-minute candle closes above \u20b92202.61 with RVOL > 1.5 and sustained VWAP support.",
-          "invalidation_level": 2137.18
+          "entry_zone_str": "\u20b92180.70 - \u20b92215.59",
+          "entry_min": 2180.7,
+          "entry_max": 2215.59,
+          "confirmation_condition": "15-minute candle closes above \u20b92202.51 with RVOL > 1.5 and sustained VWAP support.",
+          "invalidation_level": 2137.09
         },
         "risk_plan": {
-          "entry_price": 2180.8,
-          "stop_loss": 2137.18,
-          "target1": 2246.23,
-          "target2": 2289.85,
-          "target3": 2355.28,
-          "risk_per_share": 43.62,
+          "entry_price": 2180.7,
+          "stop_loss": 2137.09,
+          "target1": 2246.11,
+          "target2": 2289.72,
+          "target3": 2355.14,
+          "risk_per_share": 43.61,
           "rrr_t1": 1.5,
           "rrr_t2": 2.5,
           "rrr_acceptable": true
@@ -93,17 +93,17 @@
           "trading_capital": 100000.0,
           "risk_pct": 1.0,
           "max_risk_amount": 1000.0,
-          "risk_per_share": 43.62,
+          "risk_per_share": 43.61,
           "quantity": 22,
-          "capital_required": 47977.6,
-          "max_loss": 959.64
+          "capital_required": 47975.4,
+          "max_loss": 959.42
         },
         "scenarios": {
-          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b92254.95, CHASE TRADE - AVOID. Wait for pullback to \u20b92202.61 and 15m VWAP reclaim.",
-          "scenario_flat": "FLAT OPEN: Look for entry between \u20b92180.80 - \u20b92202.61 on 15m candle close above \u20b92202.61 with RVOL > 1.5.",
-          "scenario_gap_down": "GAP DOWN: If opens below \u20b92137.18, SETUP INVALIDATED. No Trade.",
-          "chase_avoid_level": 2254.95,
-          "invalidation_level": 2137.18
+          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b92254.84, CHASE TRADE - AVOID. Wait for pullback to \u20b92202.51 and 15m VWAP reclaim.",
+          "scenario_flat": "FLAT OPEN: Look for entry between \u20b92180.70 - \u20b92202.51 on 15m candle close above \u20b92202.51 with RVOL > 1.5.",
+          "scenario_gap_down": "GAP DOWN: If opens below \u20b92137.09, SETUP INVALIDATED. No Trade.",
+          "chase_avoid_level": 2254.84,
+          "invalidation_level": 2137.09
         },
         "event_risk_info": {
           "event_risk_level": "LOW",
