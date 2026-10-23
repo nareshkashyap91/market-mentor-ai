@@ -1,5 +1,5 @@
 {
-  "timestamp": "23-Oct-2026 03:45 PM",
+  "timestamp": "23-Oct-2026 04:01 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "23-Oct-2026 03:45 PM",
+      "timestamp": "23-Oct-2026 04:01 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "23-Oct-2026 10:15 AM",
+    "timestamp": "23-Oct-2026 10:31 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "23-Oct-2026 03:45 PM",
+      "timestamp": "23-Oct-2026 04:01 PM",
       "net_gex_crores": 8021.8,
       "total_call_gex_crores": 52139.7,
       "total_put_gex_crores": 44117.9,
@@ -187,12 +187,12 @@
       "zero_gamma_flip_level": 23075.0,
       "max_gex_strike": 23000.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "45% (heuristic: spot \u20b922,600 vs pin \u20b923,000, 4d to expiry, exp. move \u00b1\u20b9339)",
+      "pinning_probability": "45% (heuristic: spot \u20b922,600 vs pin \u20b923,000, 4d to expiry, exp. move \u00b1\u20b9340)",
       "spot": 22600.0,
       "expiry_date": "2026-10-27",
       "days_to_expiry": 4,
-      "atm_iv": 14.33,
-      "expected_move_till_expiry": 339.0,
+      "atm_iv": 14.35,
+      "expected_move_till_expiry": 339.5,
       "total_call_oi": 4153293,
       "total_put_oi": 3070076,
       "pcr": 0.74,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "23-Oct-2026 03:45 PM",
+    "timestamp": "23-Oct-2026 04:01 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "23-Oct-2026 03:45 PM",
+    "timestamp": "23-Oct-2026 04:01 PM",
     "as_of_date": "22-Oct-2026",
     "fii_cash_net_cr": -3458.7,
     "dii_cash_net_cr": 2891.4,
@@ -470,17 +470,17 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 30.8,
+    "stale_minutes": 46.1,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.8m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 46.1m)"
   },
   "backtest_metrics": {
     "cagr_pct": -2.5,
     "sharpe_ratio": -3.11,
     "max_drawdown_pct": -2.6,
     "profit_factor": 0.85,
-    "win_rate_pct": 49.2,
+    "win_rate_pct": 50.0,
     "total_backtest_trades": 124,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
     "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
@@ -489,10 +489,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 522000.0,
+    "allocated_margin": 519000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 348,
+    "total_trades": 346,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -879,7 +879,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1420.5,
-      "current_price": 1384.2,
+      "current_price": 1400.5,
       "sl_price": 1431.86,
       "target1_price": 1406.86,
       "target2_price": 1397.77,
@@ -1103,7 +1103,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1057.9,
-      "current_price": 923.0,
+      "current_price": 1057.6,
       "sl_price": 1066.36,
       "target1_price": 1047.74,
       "target2_price": 1040.97,
@@ -1645,33 +1645,6 @@
   },
   "intraday_stocks": {
     "long_setups": [],
-    "short_setups": [
-      {
-        "symbol": "BAJFINANCE",
-        "action": "SHORT SELL",
-        "close": 923.0,
-        "vwap": 927.84,
-        "orb_low": 935.35,
-        "sl": 935.35,
-        "t1": 908.18,
-        "t2": 898.3,
-        "rsi": 46.4,
-        "vol_exp": 2.6,
-        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
-      },
-      {
-        "symbol": "ICICIBANK",
-        "action": "SHORT SELL",
-        "close": 1384.2,
-        "vwap": 1388.38,
-        "orb_low": 1394.3,
-        "sl": 1395.27,
-        "t1": 1370.91,
-        "t2": 1362.05,
-        "rsi": 45.9,
-        "vol_exp": 2.1,
-        "pattern": "\ud83d\udfe2 Bullish Engulfing (Reversal Setup)"
-      }
-    ]
+    "short_setups": []
   }
 }
