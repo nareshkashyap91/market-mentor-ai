@@ -65,13 +65,41 @@ function esc(v) {
         .replace(/'/g, "&#39;");
 }
 
-// Fetch JSON with HTTP status validation — a 404/500 HTML error page is not data.
+// Fetch JSON with robust dual-origin fallback:
+// Primary: Local relative path (./data/xxx.json)
+// Secondary: Direct GitHub Raw CDN (guarantees fresh data even if host static builds are delayed)
+const RAW_GITHUB_BASE = "https://raw.githubusercontent.com/nareshkashyap91/market-mentor-ai/main/data/";
+
 async function fetchJson(path) {
-    const res = await fetch(path);
-    if (!res.ok) throw new Error(`HTTP ${res.status} for ${path}`);
-    const data = await res.json();
-    if (!data || typeof data !== "object") throw new Error(`Invalid payload for ${path}`);
-    return data;
+    try {
+        const res = await fetch(path);
+        if (res.ok) {
+            const data = await res.json();
+            if (data && typeof data === "object") return data;
+        }
+    } catch (err) {
+        console.warn(`Local fetch failed for ${path}, falling back to Raw GitHub...`, err);
+    }
+
+    // Seamless fallback to Raw GitHub for data files
+    if (path.includes("/data/")) {
+        const filename = path.split("/data/")[1]?.split("?")[0];
+        if (filename) {
+            try {
+                const ts = Date.now();
+                const rawUrl = `${RAW_GITHUB_BASE}${filename}?t=${ts}`;
+                const fallbackRes = await fetch(rawUrl);
+                if (fallbackRes.ok) {
+                    const fbData = await fallbackRes.json();
+                    if (fbData && typeof fbData === "object") return fbData;
+                }
+            } catch (fbErr) {
+                console.error(`Raw GitHub fallback failed for ${filename}:`, fbErr);
+            }
+        }
+    }
+
+    throw new Error(`Failed to load ${path}`);
 }
 
 // Best-effort extraction of the pipeline generation timestamp from a payload.
