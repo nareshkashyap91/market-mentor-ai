@@ -1,5 +1,6 @@
 import os
 import json
+from atomic_io import atomic_write_json
 import math
 import yfinance as yf
 import pandas as pd
@@ -348,8 +349,7 @@ class InvestingProEngine:
         }
 
         os.makedirs("data", exist_ok=True)
-        with open(cls.JSON_PATH, "w", encoding="utf-8") as f:
-            json.dump(payload, f, indent=2)
+        atomic_write_json(cls.JSON_PATH, payload)
 
         print(f"[INFO] Saved InvestingPro payload to {cls.JSON_PATH}")
         return payload

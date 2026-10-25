@@ -1,6 +1,7 @@
 import io
 import os
 import sys
+from atomic_io import atomic_write_json
 import json
 import requests
 import numpy as np
@@ -527,8 +528,7 @@ def screen_stocks(symbols):
             "total_candidates": len(enriched_candidates),
             "candidates": enriched_candidates
         })
-        with open(m_path, "w") as f:
-            json.dump(payload, f, indent=2, cls=NumpyEncoder)
+        atomic_write_json(m_path, payload, cls=NumpyEncoder)
         print(f"[INFO] Saved Next-Day Momentum Intelligence payload to {m_path}")
     except Exception as e:
         print(f"Warning saving momentum_intelligence.json: {e}")
@@ -569,7 +569,7 @@ def generate_report(stock_data):
 def send_to_telegram(report, token, chat_id):
     """Sends the formatted report to a Telegram chat/channel using central telegram_config logic."""
     from telegram_config import send_deduplicated_telegram_alert
-    return send_deduplicated_telegram_alert(report, bot_token=token, chat_id=chat_id)
+    return send_deduplicated_telegram_alert(report, bot_token=token, chat_id=chat_id, segment="EOD")
 
 def send_to_whatsapp_callmebot(report, phone, apikey):
     """Fallback notification via CallMeBot API."""
@@ -607,8 +607,7 @@ def main():
         "momentum_stocks": stock_results
     })
     try:
-        with open("data/evening.json", "w") as jf:
-            json.dump(evening_data, jf, indent=2, cls=NumpyEncoder)
+        atomic_write_json("data/evening.json", evening_data, cls=NumpyEncoder)
         print("[INFO] Successfully saved evening results to data/evening.json")
     except Exception as e:
         print(f"[ERROR] Failed to save evening.json: {e}")

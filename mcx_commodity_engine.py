@@ -1,5 +1,6 @@
 import os
 import json
+from atomic_io import atomic_write_json
 import numpy as np
 import pandas as pd
 import yfinance as yf
@@ -144,8 +145,7 @@ if __name__ == "__main__":
     analysis = MCXCommodityEngine.generate_mcx_options_strategies()
     os.makedirs("data", exist_ok=True)
     out_path = os.path.join("data", "mcx_commodities.json")
-    with open(out_path, "w") as f:
-        json.dump(analysis, f, indent=2)
+    atomic_write_json(out_path, analysis)
     print(f"[INFO] Exported MCX Commodity analysis payload to {out_path}")
     if analysis.get("is_simulated"):
         print(f"[WARN] MCX payload contains SIMULATED components: {', '.join(analysis['simulated_components'])}")

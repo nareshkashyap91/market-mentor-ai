@@ -109,9 +109,10 @@ def check_market_hours():
     return market_start <= current_time <= market_end
 
 from telegram_config import send_deduplicated_telegram_alert
+from atomic_io import atomic_write_json
 
-def send_to_telegram(message, bot_token, chat_id):
-    return send_deduplicated_telegram_alert(message, bot_token, chat_id)
+def send_to_telegram(message, bot_token=None, chat_id=None):
+    return send_deduplicated_telegram_alert(message, bot_token, chat_id, segment='EQ')
 
 def fetch_dhan_data(symbol, client_id, access_token):
     """Fetches 15m intraday data (Dhan API disabled; uses YFinance free feeds)."""
@@ -318,8 +319,7 @@ def save_intraday_json(new_signals, nifty_trend):
     }
     
     try:
-        with open(json_path, "w") as f:
-            json.dump(output_data, f, indent=2)
+        atomic_write_json(json_path, output_data)
         print(f"[INFO] Saved intraday data to {json_path}")
     except Exception as e:
         print(f"[ERROR] Failed to write intraday.json: {e}")

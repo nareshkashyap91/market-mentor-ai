@@ -1,5 +1,6 @@
 import os
 import json
+from atomic_io import atomic_write_json
 import numpy as np
 from datetime import datetime, timezone, timedelta
 
@@ -105,8 +106,7 @@ class PortfolioRebalancerEngine:
             "portfolio_summary": res
         }
 
-        with open(target_file, "w", encoding="utf-8") as f:
-            json.dump(payload, f, indent=2)
+        atomic_write_json(target_file, payload)
 
         print(f"[INFO] Exported Portfolio Rebalancing payload to {target_file}")
         return payload

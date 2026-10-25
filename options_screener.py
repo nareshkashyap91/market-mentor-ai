@@ -38,9 +38,10 @@ def check_market_hours():
     return market_start <= current_time <= market_end
 
 from telegram_config import send_deduplicated_telegram_alert
+from atomic_io import atomic_write_json
 
-def send_to_telegram(message, bot_token, chat_id):
-    return send_deduplicated_telegram_alert(message, bot_token, chat_id)
+def send_to_telegram(message, bot_token=None, chat_id=None):
+    return send_deduplicated_telegram_alert(message, bot_token, chat_id, segment='EQ')
 
 def fetch_index_15m(ticker):
     """Fetches 15-minute intraday candle data for index symbols."""
@@ -234,8 +235,7 @@ def save_options_json(pulse_data):
     json_path = os.path.join("data", "options.json")
     
     try:
-        with open(json_path, "w") as f:
-            json.dump(pulse_data, f, indent=2)
+        atomic_write_json(json_path, pulse_data)
         print(f"[INFO] Saved options & market pulse to {json_path}")
     except Exception as e:
         print(f"[ERROR] Failed to save options.json: {e}")

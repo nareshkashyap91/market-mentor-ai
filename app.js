@@ -38,6 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
             else if (targetTab === "investing-pro") {
                 headerTitle.textContent = "InvestingPro Intrinsic Valuation & ProPicks";
             }
+            else if (targetTab === "legendary-traders") {
+                headerTitle.textContent = "Wall Street Legendary Traders Strategy Studio";
+            }
         });
     });
 
@@ -156,7 +159,7 @@ async function refreshDashboard() {
     try {
         // Fetch JSON data concurrently with cache-busting timestamp
         const ts = Date.now();
-        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes, iproRes] = await Promise.allSettled([
+        const [morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes, iproRes, legendaryRes] = await Promise.allSettled([
             fetchJson(`./data/morning.json?t=${ts}`),
             fetchJson(`./data/evening.json?t=${ts}`),
             fetchJson(`./data/intraday.json?t=${ts}`),
@@ -169,7 +172,8 @@ async function refreshDashboard() {
             fetchJson(`./data/ml_target_sl_optimized.json?t=${ts}`),
             fetchJson(`./data/portfolio_rebalancing.json?t=${ts}`),
             fetchJson(`./data/smc_market_structure.json?t=${ts}`),
-            fetchJson(`./data/investing_pro.json?t=${ts}`)
+            fetchJson(`./data/investing_pro.json?t=${ts}`),
+            fetchJson(`./data/legendary_traders.json?t=${ts}`)
         ]);
 
         const morningData = morningRes.status === "fulfilled" ? morningRes.value : null;
@@ -185,9 +189,10 @@ async function refreshDashboard() {
         const portfolioData = portfolioRes.status === "fulfilled" ? portfolioRes.value : null;
         const smcData = smcRes.status === "fulfilled" ? smcRes.value : null;
         const iproData = iproRes.status === "fulfilled" ? iproRes.value : null;
+        const legendaryData = legendaryRes.status === "fulfilled" ? legendaryRes.value : null;
 
         // Reflect feed health (failed fetches / stale / simulated data) in the UI
-        updateSyncStatus([morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes, iproRes]);
+        updateSyncStatus([morningRes, eveningRes, intradayRes, optionsRes, mfRes, quantRes, momIntelRes, journalRes, sectorRes, mlOptRes, portfolioRes, smcRes, iproRes, legendaryRes]);
 
         // Update dashboard elements
         updateHeaderAndOverview(morningData, eveningData, intradayData, momIntelData);
@@ -203,6 +208,7 @@ async function refreshDashboard() {
         if (portfolioData) renderPortfolioRebalancer(portfolioData);
         if (smcData) renderSMCRadar(smcData);
         if (iproData) renderInvestingPro(iproData);
+        if (legendaryData) renderLegendaryTraders(legendaryData);
 
     } catch (error) {
         console.error("[ERROR] Failed to fetch or render dashboard data: ", error);
@@ -1410,3 +1416,201 @@ function renderInvestingPro(data) {
     }).join("");
 }
 
+
+
+// -------------------------------------------------------------
+// LEGENDARY TRADERS STRATEGY STUDIO (Minervini, Simons, Turtle)
+// -------------------------------------------------------------
+function renderLegendaryTraders(data) {
+    if (!data) return;
+
+    // Overview stats
+    const summary = data.summary || {};
+    const scannedEl = document.getElementById("legendary-scanned-count");
+    const vcpEl = document.getElementById("legendary-vcp-count");
+    const simonsEl = document.getElementById("legendary-simons-count");
+    const turtleEl = document.getElementById("legendary-turtle-count");
+
+    if (scannedEl) scannedEl.textContent = summary.total_scanned || 0;
+    if (vcpEl) vcpEl.textContent = summary.vcp_setups_found || 0;
+    if (simonsEl) simonsEl.textContent = summary.simons_extreme_reversions || 0;
+    if (turtleEl) turtleEl.textContent = summary.turtle_breakouts || 0;
+
+    // 1. Mark Minervini VCP Render
+    const vcpContainer = document.getElementById("minervini-vcp-container");
+    if (vcpContainer && Array.isArray(data.minervini_vcp)) {
+        if (data.minervini_vcp.length === 0) {
+            vcpContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently in strict Minervini VCP contraction.</p></div>`;
+        } else {
+            vcpContainer.innerHTML = data.minervini_vcp.map(item => {
+                const isReady = item.vcp_status === "VCP_READY_BREAKOUT";
+                const badgeColor = isReady ? "#10b981" : "#f59e0b";
+                const badgeBg = isReady ? "rgba(16, 185, 129, 0.15)" : "rgba(245, 158, 11, 0.15)";
+                const contractionsStr = (item.contractions || []).map(c => `${c}%`).join(" &rarr; ");
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${badgeBg}; color: ${badgeColor}; border: 1px solid ${badgeColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.vcp_status)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Trend Template:</span>
+                            <span style="font-weight: 600; color: ${item.trend_template_score >= 80 ? '#34d399' : '#f59e0b'};">${esc(item.trend_template_score)}/100</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Contraction Waves:</span>
+                            <span style="font-weight: 600; color: #60a5fa;">${contractionsStr}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">From 52W High:</span>
+                            <span style="font-weight: 600; color: #94a3b8;">-${esc(item.pct_from_52w_high)}%</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(16, 185, 129, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #10b981;">
+                            <div style="color: #6ee7b7; font-size: 0.7rem; text-transform: uppercase;">Pivot Buy Point</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.pivot_buy_point?.toFixed(2))}</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Stop Loss (${esc(item.risk_pct)}%)</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.stop_loss?.toFixed(2))}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Target 1: <strong style="color: #fff;">₹${esc(item.target_1?.toFixed(2))}</strong></span>
+                        <span>Target 2: <strong style="color: #fff;">₹${esc(item.target_2?.toFixed(2))}</strong></span>
+                        <span style="color: #fbbf24; font-weight: 600;">R:R ${esc(item.risk_reward_ratio)}</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 2. Jim Simons Renaissance Mean Reversion Render
+    const simonsContainer = document.getElementById("simons-reversion-container");
+    if (simonsContainer && Array.isArray(data.jim_simons_reversion)) {
+        if (data.jim_simons_reversion.length === 0) {
+            simonsContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No mean reversion extremes detected.</p></div>`;
+        } else {
+            simonsContainer.innerHTML = data.jim_simons_reversion.map(item => {
+                const isOversold = item.mean_reversion_signal === "EXTREME_OVERSOLD_LONG";
+                const isOverbought = item.mean_reversion_signal === "EXTREME_OVERBOUGHT_SHORT";
+                const sigColor = isOversold ? "#10b981" : isOverbought ? "#ef4444" : "#94a3b8";
+                const sigBg = isOversold ? "rgba(16, 185, 129, 0.15)" : isOverbought ? "rgba(239, 68, 68, 0.15)" : "rgba(148, 163, 184, 0.1)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.mean_reversion_signal)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Gaussian Z-Score:</span>
+                            <span style="font-weight: 700; color: ${Math.abs(item.z_score) >= 1.8 ? '#f59e0b' : '#94a3b8'};">${esc(item.z_score > 0 ? '+' : '')}${esc(item.z_score?.toFixed(2))}&sigma;</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">14-Day RSI:</span>
+                            <span style="font-weight: 600; color: #60a5fa;">${esc(item.rsi_14?.toFixed(1))}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">20-Day Mean (&mu;):</span>
+                            <span style="font-weight: 600; color: #94a3b8;">₹${esc(item.rolling_mean_20?.toFixed(2))}</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(168, 85, 247, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #a855f7;">
+                            <div style="color: #d8b4fe; font-size: 0.7rem; text-transform: uppercase;">Snapback Target</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.snapback_target?.toFixed(2))}</div>
+                        </div>
+                        <div style="background: rgba(59, 130, 246, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #3b82f6;">
+                            <div style="color: #93c5fd; font-size: 0.7rem; text-transform: uppercase;">Expected Edge</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${esc(item.expected_reversion_pct > 0 ? '+' : '')}${esc(item.expected_reversion_pct?.toFixed(2))}%</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Rolling &sigma;: ₹${esc(item.rolling_std_20?.toFixed(2))}</span>
+                        <span style="color: #c084fc; font-weight: 600;">Confidence: ${esc((item.confidence_score * 100).toFixed(0))}%</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 3. Richard Dennis Turtle Trend Trading Render
+    const turtleContainer = document.getElementById("turtle-trend-container");
+    if (turtleContainer && Array.isArray(data.richard_dennis_turtle)) {
+        if (data.richard_dennis_turtle.length === 0) {
+            turtleContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently in Turtle breakout state.</p></div>`;
+        } else {
+            turtleContainer.innerHTML = data.richard_dennis_turtle.map(item => {
+                const isLong = item.turtle_signal === "TURTLE_SYSTEM_1_LONG";
+                const isShort = item.turtle_signal === "TURTLE_SYSTEM_1_SHORT";
+                const sigColor = isLong ? "#10b981" : isShort ? "#ef4444" : "#94a3b8";
+                const sigBg = isLong ? "rgba(16, 185, 129, 0.15)" : isShort ? "rgba(239, 68, 68, 0.15)" : "rgba(148, 163, 184, 0.1)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.turtle_signal)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">20-Day Donchian High:</span>
+                            <span style="font-weight: 600; color: #34d399;">₹${esc(item.donchian_upper_20?.toFixed(2))}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">20-Day Donchian Low:</span>
+                            <span style="font-weight: 600; color: #f87171;">₹${esc(item.donchian_lower_20?.toFixed(2))}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">10-Day Channel Exit:</span>
+                            <span style="font-weight: 600; color: #94a3b8;">₹${esc(item.donchian_exit_10?.toFixed(2))}</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Trailing Stop (2x ATR)</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.trailing_stop_2atr?.toFixed(2))}</div>
+                        </div>
+                        <div style="background: rgba(16, 185, 129, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #10b981;">
+                            <div style="color: #6ee7b7; font-size: 0.7rem; text-transform: uppercase;">Breakout Distance</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${esc(item.breakout_distance_pct > 0 ? '+' : '')}${esc(item.breakout_distance_pct?.toFixed(2))}%</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>20-Day ATR: ₹${esc(item.atr_20?.toFixed(2))}</span>
+                        <span style="color: #34d399; font-weight: 600;">System 1 Model</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+}

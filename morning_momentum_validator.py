@@ -1,5 +1,6 @@
 import os
 import json
+from atomic_io import atomic_write_json
 import yfinance as yf
 import pandas as pd
 import numpy as np
@@ -207,8 +208,7 @@ class MorningMomentumValidatorEngine:
             "high_conviction_setups": setups
         }
 
-        with open(target_file, "w", encoding="utf-8") as f:
-            json.dump(payload, f, indent=2)
+        atomic_write_json(target_file, payload)
 
         print(f"[INFO] Saved Morning Momentum Validated payload to {target_file}")
 
@@ -251,7 +251,7 @@ class MorningMomentumValidatorEngine:
             msg += "⚠️ *Disclaimer: Generated automatically by Market Mentor AI V5.5 for educational purposes. Manage risk strictly.*"
 
             bot_token, chat_id = get_telegram_credentials()
-            send_deduplicated_telegram_alert(msg, bot_token, chat_id)
+            send_deduplicated_telegram_alert(msg, bot_token, chat_id, segment="EQ")
 
         return payload
 

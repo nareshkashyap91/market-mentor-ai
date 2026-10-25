@@ -2,6 +2,7 @@ import os
 import json
 import requests
 from datetime import datetime, timezone, timedelta
+from atomic_io import atomic_write_json
 
 class MorningBreakoutValidatorEngine:
     """Morning Live Breakout Validator Engine.
@@ -148,8 +149,7 @@ class MorningBreakoutValidatorEngine:
         # Save to data/morning_confirmed.json
         out_path = os.path.join("data", "morning_confirmed.json")
         try:
-            with open(out_path, "w") as f:
-                json.dump(res, f, indent=2)
+            atomic_write_json(out_path, res)
             print(f"[INFO] Saved Morning Validation payload to {out_path}")
         except Exception as e:
             print(f"[ERROR] Failed to write {out_path}: {e}")

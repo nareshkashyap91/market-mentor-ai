@@ -38,9 +38,10 @@ def check_market_hours():
     return market_start <= current_time <= market_end
 
 from telegram_config import send_deduplicated_telegram_alert
+from atomic_io import atomic_write_json
 
-def send_to_telegram(message, bot_token, chat_id):
-    return send_deduplicated_telegram_alert(message, bot_token, chat_id)
+def send_to_telegram(message, bot_token=None, chat_id=None):
+    return send_deduplicated_telegram_alert(message, bot_token, chat_id, segment='EQ')
 
 def detect_chart_patterns(df):
     """Automated Chart Pattern Recognition engine on 15m intraday candle data."""
@@ -649,8 +650,7 @@ def main():
     
     os.makedirs("data", exist_ok=True)
     json_path = os.path.join("data", "ai_quant.json")
-    with open(json_path, "w") as f:
-        json.dump(payload, f, indent=2)
+    atomic_write_json(json_path, payload)
     print(f"[INFO] Saved AI Quant payload to {json_path}")
 
     # Trigger V4.0 Pro Engines (Trade Journal, Sector Rotation, Max Pain)

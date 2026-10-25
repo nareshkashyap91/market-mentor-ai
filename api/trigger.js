@@ -1,24 +1,55 @@
+const crypto = require('crypto');
+
 module.exports = async function handler(req, res) {
   // CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-cron-secret, x-force');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
+  // Security Rule 1: POST only (reject GET or other methods)
+  if (req.method !== 'POST') {
+    return res.status(405).json({
+      success: false,
+      error: "Method Not Allowed. Only POST requests are permitted."
+    });
+  }
+
+  // Security Rule 2: Constant-time secret comparison with timingSafeEqual on fixed SHA-256 digest
+  const expectedSecret = process.env.CRON_SECRET;
+  const providedSecret = req.headers['x-cron-secret'];
+
+  if (!expectedSecret || !providedSecret) {
+    return res.status(401).json({
+      success: false,
+      error: "Unauthorized: Missing CRON_SECRET in environment or x-cron-secret header in request."
+    });
+  }
+
+  // Hashing both secrets to 32-byte digests prevents secret length disclosure and guarantees timingSafeEqual buffer match
+  const hExpected = crypto.createHash('sha256').update(String(expectedSecret)).digest();
+  const hProvided = crypto.createHash('sha256').update(String(providedSecret)).digest();
+
+  if (!crypto.timingSafeEqual(hExpected, hProvided)) {
+    return res.status(401).json({
+      success: false,
+      error: "Unauthorized: Invalid secret."
+    });
+  }
+
+  // Security Rule 3: Server-side fine-grained PAT only (no token in query string)
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_PAT;
   const REPO = "nareshkashyap91/market-mentor-ai";
   const WORKFLOW_ID = "master_pulse.yml";
 
-  // If token is set in environment or provided via query param ?token=xxx
-  const tokenToUse = (req.query && req.query.token) || GITHUB_TOKEN;
-
-  if (!tokenToUse) {
-    return res.status(400).json({
+  if (!GITHUB_TOKEN) {
+    return res.status(500).json({
       success: false,
-      error: "Missing GitHub Personal Access Token (GITHUB_TOKEN). Please add GITHUB_TOKEN in Vercel Environment Variables or pass ?token=YOUR_PAT",
-      instructions: "Generate a Personal Access Token with 'Actions: Write' permission at https://github.com/settings/tokens"
+      error: "Missing GitHub Personal Access Token (GITHUB_TOKEN) in server environment.",
+      instructions: "Generate a Fine-Grained Personal Access Token (PAT) with 'Actions: Write' permission limited to repository 'nareshkashyap91/market-mentor-ai' and configure GITHUB_TOKEN in Vercel Environment Variables."
     });
   }
 
@@ -32,9 +63,9 @@ module.exports = async function handler(req, res) {
   const istDecimal = istHours + istMinutes / 60;
 
   const isWeekend = istDay === 0 || istDay === 6;
-  // Active window: 8:45 AM (8.75) to 6:00 PM (18.0) IST covers live trading + 5:00 PM Momentum Wrap
-  const isOffHours = istDecimal < 8.75 || istDecimal > 18.0;
-  const isForced = req.query && (req.query.force === 'true' || req.query.force === '1');
+  // Active window: 8:45 AM (8.75) to 6:30 PM (18.5) IST covers live trading + 5:00 PM Momentum Wrap
+  const isOffHours = istDecimal < 8.75 || istDecimal > 18.5;
+  const isForced = req.headers['x-force'] === 'true' || req.headers['x-force'] === '1';
 
   if (!isForced && (isWeekend || isOffHours)) {
     return res.status(200).json({
@@ -50,7 +81,7 @@ module.exports = async function handler(req, res) {
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${tokenToUse}`,
+          "Authorization": `Bearer ${GITHUB_TOKEN}`,
           "Accept": "application/vnd.github.v3+json",
           "User-Agent": "MarketMentor-Vercel-Cron-Trigger"
         },

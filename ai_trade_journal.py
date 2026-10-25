@@ -204,8 +204,7 @@ class AITradeJournalEngine:
         }
 
         os.makedirs("data", exist_ok=True)
-        with open(cls.JSON_PATH, "w") as f:
-            json.dump(payload, f, indent=2)
+        atomic_write_json(cls.JSON_PATH, payload)
 
         print(f"[INFO] Exported AI Trade Journal payload to {cls.JSON_PATH}")
         return payload

@@ -1,5 +1,6 @@
 import os
 import json
+from atomic_io import atomic_write_json
 import numpy as np
 import pandas as pd
 from datetime import datetime, timezone, timedelta
@@ -143,8 +144,7 @@ class MLTargetSLOptimizer:
             "candidates": optimized_results
         }
 
-        with open(target_file, "w", encoding="utf-8") as f:
-            json.dump(payload, f, indent=2)
+        atomic_write_json(target_file, payload)
 
         print(f"[INFO] Exported ML Target/SL Optimizer payload to {target_file}")
         return payload

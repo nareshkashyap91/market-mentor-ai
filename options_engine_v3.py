@@ -125,6 +125,7 @@ class OptionsEngineV3:
     def export_max_pain_json(cls, spot=24580.25):
         import os, json
         from datetime import datetime
+        from atomic_io import atomic_write_json
         max_pain = cls.calculate_max_pain(spot)
         squeeze_data = cls.detect_gamma_squeeze(spot=spot)
 
@@ -137,8 +138,7 @@ class OptionsEngineV3:
 
         os.makedirs("data", exist_ok=True)
         path = os.path.join("data", "options_max_pain.json")
-        with open(path, "w") as f:
-            json.dump(payload, f, indent=2)
+        atomic_write_json(path, payload)
 
         print(f"[INFO] Exported Options Max Pain payload to {path}")
         return payload
@@ -146,4 +146,3 @@ class OptionsEngineV3:
 # Helper function
 def get_options_v3(spot=24580.25, delta_band="MODERATE", regime="TRENDING_BULLISH"):
     return OptionsEngineV3.select_delta_strikes(spot, delta_band, regime)
-

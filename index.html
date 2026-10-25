@@ -69,6 +69,9 @@
                 <a href="#" class="nav-item" data-tab="investing-pro">
                     <i class="fa-solid fa-gem"></i> InvestingPro Fair Value
                 </a>
+                <a href="#" class="nav-item" data-tab="legendary-traders">
+                    <i class="fa-solid fa-crown" style="color: #fbbf24;"></i> Legendary Trader Studio
+                </a>
             </nav>
             
             <div class="connection-status">
@@ -647,6 +650,115 @@
 
                     <div id="ipro-stocks-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
                         <!-- Dynamic Stock Cards Rendered Here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Legendary Trader Strategy Studio (Minervini, Simons, Turtles) -->
+            <div class="tab-panel" id="tab-legendary-traders">
+                <!-- Header Banner -->
+                <div class="glass-card panel-card" style="margin-bottom: 24px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(16, 185, 129, 0.05) 100%); border-left: 4px solid #f59e0b;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <h2 style="font-size: 1.35rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-crown" style="color: #f59e0b;"></i> Wall Street Legendary Traders Strategy Studio
+                            </h2>
+                            <p style="color: #94a3b8; font-size: 0.88rem; margin-top: 4px;">
+                                Institutional quantitative models replicating <strong>Mark Minervini</strong> (VCP &amp; Trend Template), 
+                                <strong>Jim Simons</strong> (Renaissance Z-Score Mean Reversion), and <strong>Richard Dennis</strong> (Turtle Trend Donchian System).
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">
+                                <i class="fa-solid fa-shield-check"></i> Math &amp; Rule Provenance
+                            </span>
+                            <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">
+                                <i class="fa-solid fa-bolt"></i> 100% Free Live Feed
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overview Metrics Grid -->
+                <div class="overview-grid" style="margin-bottom: 24px;">
+                    <div class="glass-card overview-card">
+                        <div class="card-icon blue"><i class="fa-solid fa-layer-group"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Universe Scanned</span>
+                            <h3 class="stat-value" id="legendary-scanned-count">0</h3>
+                            <span class="stat-sub">High-Cap Nifty / F&amp;O</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon yellow" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;"><i class="fa-solid fa-compress"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Minervini VCP Setups</span>
+                            <h3 class="stat-value" id="legendary-vcp-count">0</h3>
+                            <span class="stat-sub">Contraction Breakouts</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon purple"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Simons &plusmn;1.8&sigma; Reversions</span>
+                            <h3 class="stat-value" id="legendary-simons-count">0</h3>
+                            <span class="stat-sub">Statistical Snapbacks</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon green"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Turtle Trend Breakouts</span>
+                            <h3 class="stat-value" id="legendary-turtle-count">0</h3>
+                            <span class="stat-sub">20-Day Donchian &amp; 2x ATR</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategy 1: Mark Minervini VCP Grid -->
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">
+                                <i class="fa-solid fa-fire" style="color: #f59e0b;"></i> Mark Minervini — Volatility Contraction Pattern (VCP)
+                            </h2>
+                            <span style="font-size: 0.8rem; color: #94a3b8;">U.S. Investing Championship Winning Strategy &bull; Trend Template &ge; 80% &bull; Progressively tighter contractions</span>
+                        </div>
+                        <span class="badge badge-pulse">Institutional Breakout</span>
+                    </div>
+                    <div id="minervini-vcp-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Minervini VCP cards injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Strategy 2: Jim Simons Renaissance Z-Score Mean Reversion Grid -->
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">
+                                <i class="fa-solid fa-atom" style="color: #a855f7;"></i> Jim Simons (Renaissance Technologies) — Quant Mean Reversion
+                            </h2>
+                            <span style="font-size: 0.8rem; color: #94a3b8;">Rolling 20-day Gaussian Z-Scores &bull; Extreme statistical overextension (|Z| &ge; 1.8&sigma;) &bull; Mean snapback expectation</span>
+                        </div>
+                        <span class="badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3);">Statistical Edge</span>
+                    </div>
+                    <div id="simons-reversion-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Simons Mean Reversion cards injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Strategy 3: Richard Dennis Turtle Trend Trading Grid -->
+                <div class="glass-card panel-card">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">
+                                <i class="fa-solid fa-arrow-trend-up" style="color: #10b981;"></i> Richard Dennis &amp; William Eckhardt — The Turtle Traders
+                            </h2>
+                            <span style="font-size: 0.8rem; color: #94a3b8;">20-Day Donchian Channel High/Low Breakouts &bull; 2x ATR Volatility Stops &bull; 10-Day Channel Exit Rules</span>
+                        </div>
+                        <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">Trend Following</span>
+                    </div>
+                    <div id="turtle-trend-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Turtle Trend cards injected dynamically -->
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import requests
 import pandas as pd
 from datetime import datetime, timezone, timedelta
 from mftool import Mftool
+from atomic_io import atomic_write_json
 
 # Ensure terminal outputs emojis correctly on Windows
 sys.stdout.reconfigure(encoding='utf-8')
@@ -156,8 +157,7 @@ def main():
         "mutual_funds": mf_results
     }
     
-    with open(json_path, "w") as f:
-        json.dump(payload, f, indent=2)
+    atomic_write_json(json_path, payload)
     print(f"[INFO] Saved mutual fund data to {json_path}")
 
     # Build Telegram Report Message

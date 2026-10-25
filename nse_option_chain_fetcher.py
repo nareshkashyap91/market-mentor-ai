@@ -185,8 +185,7 @@ class NSEOptionChainFetcher:
 
         os.makedirs("data", exist_ok=True)
         path = os.path.join("data", "option_chain_live.json")
-        with open(path, "w") as f:
-            json.dump(payload, f, indent=2)
+        atomic_write_json(path, payload)
 
         print(f"[INFO] Exported Live NSE Option Chain payload to {path}")
         return payload

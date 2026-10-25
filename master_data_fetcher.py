@@ -26,7 +26,7 @@ class MasterDataFetcher:
         `if: always()`, so whatever payloads DID refresh still get pushed to the dashboard.
     """
 
-    TOTAL_STEPS = 12
+    TOTAL_STEPS = 13
 
     @classmethod
     def run_master_pipeline(cls, auto_git_push=False):
@@ -149,6 +149,15 @@ class MasterDataFetcher:
         except Exception as e:
             failures.append(f"InvestingPro Engine (import failed: {e})")
             print(f"[FAIL] InvestingPro Engine step: {e}")
+
+                # 13. Legendary Traders Strategy Studio (Minervini VCP, Simons Mean Reversion, Turtle Breakout)
+        print(f"\n[13/{cls.TOTAL_STEPS}] Executing Legendary Traders Strategy Studio...")
+        try:
+            from legendary_trader_engine import LegendaryTraderEngine
+            run_imported("Legendary Traders Strategy Studio", LegendaryTraderEngine.run_legendary_scanner)
+        except Exception as e:
+            failures.append(f"Legendary Traders Engine (import failed: {e})")
+            print(f"[FAIL] Legendary Traders Engine step: {e}")
 
         # ---------------- Honest pipeline summary ----------------
         print("\n==========================================================================")

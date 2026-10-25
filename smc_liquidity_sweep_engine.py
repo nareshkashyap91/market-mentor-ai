@@ -1,5 +1,6 @@
 import os
 import json
+from atomic_io import atomic_write_json
 import numpy as np
 import pandas as pd
 from datetime import datetime
@@ -160,8 +161,7 @@ class SMCLiquiditySweepEngine:
         }
 
         os.makedirs("data", exist_ok=True)
-        with open(cls.JSON_PATH, "w", encoding="utf-8") as f:
-            json.dump(payload, f, indent=2)
+        atomic_write_json(cls.JSON_PATH, payload)
 
         print(f"[INFO] Exported MTF SMC Market Structure payload to {cls.JSON_PATH}")
         return payload

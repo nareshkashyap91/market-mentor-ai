@@ -6,6 +6,7 @@ import requests
 import pandas as pd
 import yfinance as yf
 from datetime import datetime
+from atomic_io import atomic_write_json
 
 # Ensure terminal outputs emojis correctly on Windows
 sys.stdout.reconfigure(encoding='utf-8')
@@ -316,8 +317,7 @@ def main():
     }
     
     try:
-        with open("data/morning.json", "w") as jf:
-            json.dump(morning_data, jf, indent=2)
+        atomic_write_json("data/morning.json", morning_data)
         print("[INFO] Successfully saved morning pre-market clues to data/morning.json")
     except Exception as e:
         print(f"[ERROR] Failed to save morning.json: {e}")
