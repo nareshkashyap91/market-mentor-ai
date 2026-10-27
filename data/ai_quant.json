@@ -1,5 +1,5 @@
 {
-  "timestamp": "27-Oct-2026 03:45 PM",
+  "timestamp": "27-Oct-2026 04:01 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "27-Oct-2026 03:46 PM",
+      "timestamp": "27-Oct-2026 04:01 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "27-Oct-2026 10:16 AM",
+    "timestamp": "27-Oct-2026 10:31 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "27-Oct-2026 03:46 PM",
+      "timestamp": "27-Oct-2026 04:01 PM",
       "net_gex_crores": -5005258.9,
       "total_call_gex_crores": 5944130.7,
       "total_put_gex_crores": 10949389.6,
@@ -373,7 +373,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "27-Oct-2026 03:46 PM",
+    "timestamp": "27-Oct-2026 04:01 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -391,7 +391,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "27-Oct-2026 03:45 PM",
+    "timestamp": "27-Oct-2026 04:01 PM",
     "as_of_date": "26-Oct-2026",
     "fii_cash_net_cr": -1462.5,
     "dii_cash_net_cr": 2609.6,
@@ -471,10 +471,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 30.9,
+    "stale_minutes": 46.0,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.9m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 46.0m)"
   },
   "backtest_metrics": {
     "cagr_pct": -2.3,
@@ -490,10 +490,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 522000.0,
+    "allocated_margin": 532500.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 348,
+    "total_trades": 355,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -680,7 +680,7 @@
       "grade": "A+"
     }
   ],
-  "active_positions_count": 33,
+  "active_positions_count": 37,
   "active_positions": [
     {
       "id": "STK_LONG_INFY",
@@ -736,7 +736,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1923.8,
-      "current_price": 1760.9,
+      "current_price": 1923.1,
       "sl_price": 1908.41,
       "target1_price": 1942.27,
       "target2_price": 1954.58,
@@ -848,7 +848,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 332.1,
-      "current_price": 305.35,
+      "current_price": 332.85,
       "sl_price": 329.44,
       "target1_price": 335.29,
       "target2_price": 337.41,
@@ -902,6 +902,70 @@
       "target2_price": 261.35,
       "status": "ACTIVE_POSITION",
       "entry_time": "28-Aug-2026 01:19 PM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_LONG_TITAN",
+      "symbol": "TITAN",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 4365.9,
+      "current_price": 4365.9,
+      "sl_price": 4325.1,
+      "target1_price": 4414.86,
+      "target2_price": 4447.5,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "27-Oct-2026 04:01 PM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_LONG_ULTRACEMCO",
+      "symbol": "ULTRACEMCO",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 11150.0,
+      "current_price": 11150.0,
+      "sl_price": 11060.8,
+      "target1_price": 11257.04,
+      "target2_price": 11328.4,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "27-Oct-2026 04:01 PM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_SHORT_SBIN",
+      "symbol": "SBIN",
+      "strategy_name": "Intraday Short",
+      "action": "SELL",
+      "entry_price": 945.1,
+      "current_price": 945.1,
+      "sl_price": 956.7,
+      "target1_price": 931.18,
+      "target2_price": 921.9,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "27-Oct-2026 04:01 PM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_SHORT_HDFCBANK",
+      "symbol": "HDFCBANK",
+      "strategy_name": "Intraday Short",
+      "action": "SELL",
+      "entry_price": 680.2,
+      "current_price": 680.2,
+      "sl_price": 685.64,
+      "target1_price": 673.67,
+      "target2_price": 669.32,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "27-Oct-2026 04:01 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -976,7 +1040,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 392.4,
-      "current_price": 392.4,
+      "current_price": 442.5,
       "sl_price": 389.26,
       "target1_price": 396.17,
       "target2_price": 398.68,
@@ -1072,7 +1136,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1264.2,
-      "current_price": 1264.2,
+      "current_price": 1205.7,
       "sl_price": 1274.31,
       "target1_price": 1252.06,
       "target2_price": 1243.97,
@@ -1088,7 +1152,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 12825.0,
-      "current_price": 12824.0,
+      "current_price": 11450.0,
       "sl_price": 12698.0,
       "target1_price": 12977.4,
       "target2_price": 13079.0,
@@ -1104,7 +1168,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1057.9,
-      "current_price": 1057.6,
+      "current_price": 912.0,
       "sl_price": 1066.36,
       "target1_price": 1047.74,
       "target2_price": 1040.97,
@@ -1200,7 +1264,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 3693.4,
-      "current_price": 3693.4,
+      "current_price": 3665.1,
       "sl_price": 3722.95,
       "target1_price": 3657.94,
       "target2_price": 3634.31,
@@ -1212,6 +1276,42 @@
     }
   ],
   "signal_audit_log": [
+    {
+      "id": 37,
+      "signal_id": "STK_SHORT_HDFCBANK",
+      "timestamp": "27-Oct-2026 04:01 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 680.2,
+      "notes": "Position initialized at \u20b9680.20"
+    },
+    {
+      "id": 36,
+      "signal_id": "STK_SHORT_SBIN",
+      "timestamp": "27-Oct-2026 04:01 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 945.1,
+      "notes": "Position initialized at \u20b9945.10"
+    },
+    {
+      "id": 35,
+      "signal_id": "STK_LONG_ULTRACEMCO",
+      "timestamp": "27-Oct-2026 04:01 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 11150.0,
+      "notes": "Position initialized at \u20b911150.00"
+    },
+    {
+      "id": 34,
+      "signal_id": "STK_LONG_TITAN",
+      "timestamp": "27-Oct-2026 04:01 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 4365.9,
+      "notes": "Position initialized at \u20b94365.90"
+    },
     {
       "id": 33,
       "signal_id": "STK_SHORT_LT",
@@ -1310,42 +1410,6 @@
       "new_status": "ACTIVE_POSITION",
       "spot_price": 12825.0,
       "notes": "Position initialized at \u20b912825.00"
-    },
-    {
-      "id": 22,
-      "signal_id": "STK_SHORT_ULTRACEMCO",
-      "timestamp": "07-Sep-2026 12:35 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 11235.0,
-      "notes": "Position initialized at \u20b911235.00"
-    },
-    {
-      "id": 21,
-      "signal_id": "STK_LONG_POWERGRID",
-      "timestamp": "07-Sep-2026 12:33 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 267.7,
-      "notes": "Position initialized at \u20b9267.70"
-    },
-    {
-      "id": 20,
-      "signal_id": "STK_SHORT_BHARTIARTL",
-      "timestamp": "05-Sep-2026 04:41 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 1840.0,
-      "notes": "Position initialized at \u20b91840.00"
-    },
-    {
-      "id": 19,
-      "signal_id": "STK_LONG_INFY",
-      "timestamp": "28-Aug-2026 03:17 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 1143.0,
-      "notes": "Position initialized at \u20b91143.00"
     }
   ],
   "nifty": {
@@ -1647,32 +1711,124 @@
   "intraday_stocks": {
     "long_setups": [
       {
-        "symbol": "SUNPHARMA",
+        "symbol": "TITAN",
         "action": "BUY (LONG)",
-        "close": 1760.9,
-        "vwap": 1760.1,
-        "orb_high": 1754.2,
-        "sl": 1746.81,
-        "t1": 1777.8,
-        "t2": 1789.07,
-        "rsi": 56.4,
-        "vol_exp": 2.4,
-        "pattern": "\ud83d\udd34 Double Top (M Pattern Breakdown)"
+        "close": 4365.9,
+        "vwap": 4351.14,
+        "orb_high": 4325.1,
+        "sl": 4325.1,
+        "t1": 4414.86,
+        "t2": 4447.5,
+        "rsi": 60.3,
+        "vol_exp": 1.7,
+        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
       },
       {
-        "symbol": "NTPC",
+        "symbol": "ULTRACEMCO",
         "action": "BUY (LONG)",
-        "close": 305.35,
-        "vwap": 304.04,
-        "orb_high": 302.25,
-        "sl": 302.25,
-        "t1": 309.07,
-        "t2": 311.55,
-        "rsi": 60.4,
-        "vol_exp": 1.9,
+        "close": 11150.0,
+        "vwap": 11121.59,
+        "orb_high": 11120.0,
+        "sl": 11060.8,
+        "t1": 11257.04,
+        "t2": 11328.4,
+        "rsi": 54.6,
+        "vol_exp": 1.7,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "MARUTI",
+        "action": "BUY (LONG)",
+        "close": 11450.0,
+        "vwap": 11373.5,
+        "orb_high": 11333.0,
+        "sl": 11333.0,
+        "t1": 11590.4,
+        "t2": 11684.0,
+        "rsi": 58.6,
+        "vol_exp": 1.4,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "KOTAKBANK",
+        "action": "BUY (LONG)",
+        "close": 442.5,
+        "vwap": 442.36,
+        "orb_high": 442.2,
+        "sl": 438.96,
+        "t1": 446.75,
+        "t2": 449.58,
+        "rsi": 54.2,
+        "vol_exp": 1.2,
+        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
       }
     ],
-    "short_setups": []
+    "short_setups": [
+      {
+        "symbol": "BAJFINANCE",
+        "action": "SHORT SELL",
+        "close": 912.0,
+        "vwap": 914.96,
+        "orb_low": 915.2,
+        "sl": 919.3,
+        "t1": 903.24,
+        "t2": 897.41,
+        "rsi": 37.6,
+        "vol_exp": 2.4,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "LT",
+        "action": "SHORT SELL",
+        "close": 3665.1,
+        "vwap": 3683.53,
+        "orb_low": 3671.5,
+        "sl": 3694.42,
+        "t1": 3629.92,
+        "t2": 3606.46,
+        "rsi": 37.6,
+        "vol_exp": 2.3,
+        "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)"
+      },
+      {
+        "symbol": "AXISBANK",
+        "action": "SHORT SELL",
+        "close": 1205.7,
+        "vwap": 1218.03,
+        "orb_low": 1216.6,
+        "sl": 1216.6,
+        "t1": 1192.62,
+        "t2": 1183.9,
+        "rsi": 26.1,
+        "vol_exp": 2.3,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "SBIN",
+        "action": "SHORT SELL",
+        "close": 945.1,
+        "vwap": 954.89,
+        "orb_low": 956.7,
+        "sl": 956.7,
+        "t1": 931.18,
+        "t2": 921.9,
+        "rsi": 23.4,
+        "vol_exp": 2.1,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "HDFCBANK",
+        "action": "SHORT SELL",
+        "close": 680.2,
+        "vwap": 683.51,
+        "orb_low": 683.85,
+        "sl": 685.64,
+        "t1": 673.67,
+        "t2": 669.32,
+        "rsi": 29.5,
+        "vol_exp": 1.7,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      }
+    ]
   }
 }
