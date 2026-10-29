@@ -1,5 +1,5 @@
 {
-  "timestamp": "29-Oct-2026 03:45 PM",
+  "timestamp": "29-Oct-2026 04:00 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "29-Oct-2026 03:45 PM",
+      "timestamp": "29-Oct-2026 04:00 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "29-Oct-2026 10:15 AM",
+    "timestamp": "29-Oct-2026 10:30 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "29-Oct-2026 03:45 PM",
+      "timestamp": "29-Oct-2026 04:00 PM",
       "net_gex_crores": 844.6,
       "total_call_gex_crores": 34762.5,
       "total_put_gex_crores": 33917.9,
@@ -187,12 +187,12 @@
       "zero_gamma_flip_level": 23775.0,
       "max_gex_strike": 23200.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "49% (heuristic: spot \u20b922,937 vs pin \u20b923,200, 5d to expiry, exp. move \u00b1\u20b9347)",
+      "pinning_probability": "49% (heuristic: spot \u20b922,937 vs pin \u20b923,200, 5d to expiry, exp. move \u00b1\u20b9348)",
       "spot": 22936.75,
       "expiry_date": "2026-11-03",
       "days_to_expiry": 5,
-      "atm_iv": 12.94,
-      "expected_move_till_expiry": 347.4,
+      "atm_iv": 12.95,
+      "expected_move_till_expiry": 347.6,
       "total_call_oi": 2045123,
       "total_put_oi": 2959113,
       "pcr": 1.45,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "29-Oct-2026 03:45 PM",
+    "timestamp": "29-Oct-2026 04:00 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "29-Oct-2026 03:45 PM",
+    "timestamp": "29-Oct-2026 04:00 PM",
     "as_of_date": "28-Oct-2026",
     "fii_cash_net_cr": 871.9,
     "dii_cash_net_cr": 643.4,
@@ -470,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 30.9,
+    "stale_minutes": 45.8,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.9m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 45.8m)"
   },
   "backtest_metrics": {
     "cagr_pct": 1.5,
@@ -679,52 +679,20 @@
       "grade": "A+"
     }
   ],
-  "active_positions_count": 36,
+  "active_positions_count": 34,
   "active_positions": [
-    {
-      "id": "STK_LONG_TITAN",
-      "symbol": "TITAN",
-      "strategy_name": "Intraday Long",
-      "action": "BUY",
-      "entry_price": 4437.6,
-      "current_price": 4437.6,
-      "sl_price": 4381.1,
-      "target1_price": 4505.4,
-      "target2_price": 4550.6,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "29-Oct-2026 03:45 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
     {
       "id": "STK_LONG_ULTRACEMCO",
       "symbol": "ULTRACEMCO",
       "strategy_name": "Intraday Long",
       "action": "BUY",
-      "entry_price": 11190.0,
-      "current_price": 11190.0,
-      "sl_price": 11100.48,
-      "target1_price": 11297.42,
-      "target2_price": 11369.04,
+      "entry_price": 11175.0,
+      "current_price": 11175.0,
+      "sl_price": 11085.6,
+      "target1_price": 11282.28,
+      "target2_price": 11353.8,
       "status": "ACTIVE_POSITION",
-      "entry_time": "29-Oct-2026 03:45 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
-    {
-      "id": "STK_LONG_TATASTEEL",
-      "symbol": "TATASTEEL",
-      "strategy_name": "Intraday Long",
-      "action": "BUY",
-      "entry_price": 169.0,
-      "current_price": 169.0,
-      "sl_price": 167.65,
-      "target1_price": 170.62,
-      "target2_price": 171.7,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "29-Oct-2026 03:45 PM",
+      "entry_time": "29-Oct-2026 04:00 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -767,7 +735,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 3343.3,
-      "current_price": 3343.3,
+      "current_price": 2890.0,
       "sl_price": 3316.55,
       "target1_price": 3375.4,
       "target2_price": 3396.79,
@@ -799,7 +767,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1047.5,
-      "current_price": 969.5,
+      "current_price": 971.9,
       "sl_price": 1039.12,
       "target1_price": 1057.56,
       "target2_price": 1064.26,
@@ -815,7 +783,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1263.2,
-      "current_price": 1257.0,
+      "current_price": 1225.0,
       "sl_price": 1253.09,
       "target1_price": 1275.33,
       "target2_price": 1283.41,
@@ -1260,31 +1228,13 @@
   ],
   "signal_audit_log": [
     {
-      "id": 36,
-      "signal_id": "STK_LONG_TATASTEEL",
-      "timestamp": "29-Oct-2026 03:45 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 169.0,
-      "notes": "Position initialized at \u20b9169.00"
-    },
-    {
-      "id": 35,
-      "signal_id": "STK_LONG_ULTRACEMCO",
-      "timestamp": "29-Oct-2026 03:45 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 11190.0,
-      "notes": "Position initialized at \u20b911190.00"
-    },
-    {
       "id": 34,
-      "signal_id": "STK_LONG_TITAN",
-      "timestamp": "29-Oct-2026 03:45 PM",
+      "signal_id": "STK_LONG_ULTRACEMCO",
+      "timestamp": "29-Oct-2026 04:00 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
-      "spot_price": 4437.6,
-      "notes": "Position initialized at \u20b94437.60"
+      "spot_price": 11175.0,
+      "notes": "Position initialized at \u20b911175.00"
     },
     {
       "id": 33,
@@ -1393,6 +1343,24 @@
       "new_status": "ACTIVE_POSITION",
       "spot_price": 11235.0,
       "notes": "Position initialized at \u20b911235.00"
+    },
+    {
+      "id": 21,
+      "signal_id": "STK_LONG_POWERGRID",
+      "timestamp": "07-Sep-2026 12:33 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 267.7,
+      "notes": "Position initialized at \u20b9267.70"
+    },
+    {
+      "id": 20,
+      "signal_id": "STK_SHORT_BHARTIARTL",
+      "timestamp": "05-Sep-2026 04:41 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 1840.0,
+      "notes": "Position initialized at \u20b91840.00"
     }
   ],
   "nifty": {
@@ -1694,56 +1662,56 @@
   "intraday_stocks": {
     "long_setups": [
       {
-        "symbol": "SBIN",
+        "symbol": "AXISBANK",
         "action": "BUY (LONG)",
-        "close": 969.5,
-        "vwap": 964.17,
-        "orb_high": 961.5,
-        "sl": 961.5,
-        "t1": 979.1,
-        "t2": 985.5,
-        "rsi": 79.2,
-        "vol_exp": 2.4,
+        "close": 1225.0,
+        "vwap": 1223.01,
+        "orb_high": 1221.9,
+        "sl": 1215.2,
+        "t1": 1236.76,
+        "t2": 1244.6,
+        "rsi": 61.7,
+        "vol_exp": 1.7,
         "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)"
-      },
-      {
-        "symbol": "TITAN",
-        "action": "BUY (LONG)",
-        "close": 4437.6,
-        "vwap": 4417.61,
-        "orb_high": 4381.1,
-        "sl": 4381.1,
-        "t1": 4505.4,
-        "t2": 4550.6,
-        "rsi": 72.9,
-        "vol_exp": 1.9,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       },
       {
         "symbol": "ULTRACEMCO",
         "action": "BUY (LONG)",
-        "close": 11190.0,
-        "vwap": 11149.04,
+        "close": 11175.0,
+        "vwap": 11151.14,
         "orb_high": 11146.0,
-        "sl": 11100.48,
-        "t1": 11297.42,
-        "t2": 11369.04,
-        "rsi": 80.2,
-        "vol_exp": 1.8,
-        "pattern": "\ud83d\udfe2 Bullish Engulfing (Reversal Setup)"
+        "sl": 11085.6,
+        "t1": 11282.28,
+        "t2": 11353.8,
+        "rsi": 68.5,
+        "vol_exp": 1.6,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       },
       {
-        "symbol": "TATASTEEL",
+        "symbol": "M&M",
         "action": "BUY (LONG)",
-        "close": 169.0,
-        "vwap": 168.72,
-        "orb_high": 168.98,
-        "sl": 167.65,
-        "t1": 170.62,
-        "t2": 171.7,
-        "rsi": 59.5,
-        "vol_exp": 1.7,
-        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
+        "close": 2890.0,
+        "vwap": 2887.69,
+        "orb_high": 2887.5,
+        "sl": 2866.88,
+        "t1": 2917.74,
+        "t2": 2936.24,
+        "rsi": 63.9,
+        "vol_exp": 1.3,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "SBIN",
+        "action": "BUY (LONG)",
+        "close": 971.9,
+        "vwap": 964.64,
+        "orb_high": 961.5,
+        "sl": 961.5,
+        "t1": 984.38,
+        "t2": 992.7,
+        "rsi": 81.4,
+        "vol_exp": 1.2,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ],
     "short_setups": []
