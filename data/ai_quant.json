@@ -1,5 +1,5 @@
 {
-  "timestamp": "30-Oct-2026 03:45 PM",
+  "timestamp": "30-Oct-2026 04:00 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "30-Oct-2026 03:45 PM",
+      "timestamp": "30-Oct-2026 04:00 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "30-Oct-2026 10:15 AM",
+    "timestamp": "30-Oct-2026 10:30 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "30-Oct-2026 03:45 PM",
+      "timestamp": "30-Oct-2026 04:00 PM",
       "net_gex_crores": -7804.5,
       "total_call_gex_crores": 43600.3,
       "total_put_gex_crores": 51404.8,
@@ -191,8 +191,8 @@
       "spot": 23053.1,
       "expiry_date": "2026-11-03",
       "days_to_expiry": 4,
-      "atm_iv": 11.98,
-      "expected_move_till_expiry": 289.1,
+      "atm_iv": 11.99,
+      "expected_move_till_expiry": 289.4,
       "total_call_oi": 2217926,
       "total_put_oi": 3545367,
       "pcr": 1.6,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "30-Oct-2026 03:45 PM",
+    "timestamp": "30-Oct-2026 04:00 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "30-Oct-2026 03:45 PM",
+    "timestamp": "30-Oct-2026 04:00 PM",
     "as_of_date": "29-Oct-2026",
     "fii_cash_net_cr": -943.6,
     "dii_cash_net_cr": 1924.5,
@@ -470,17 +470,17 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 30.8,
+    "stale_minutes": 45.9,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.8m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 45.9m)"
   },
   "backtest_metrics": {
     "cagr_pct": 4.2,
     "sharpe_ratio": -1.18,
     "max_drawdown_pct": -1.1,
-    "profit_factor": 1.5,
-    "win_rate_pct": 58.1,
+    "profit_factor": 1.51,
+    "win_rate_pct": 57.3,
     "total_backtest_trades": 124,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
     "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
@@ -489,10 +489,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 522000.0,
+    "allocated_margin": 529500.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 348,
+    "total_trades": 353,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -682,17 +682,17 @@
   "active_positions_count": 34,
   "active_positions": [
     {
-      "id": "STK_LONG_TITAN",
-      "symbol": "TITAN",
-      "strategy_name": "Intraday Long",
-      "action": "BUY",
-      "entry_price": 4471.0,
-      "current_price": 4471.0,
-      "sl_price": 4435.23,
-      "target1_price": 4513.92,
-      "target2_price": 4542.54,
+      "id": "STK_SHORT_SBIN",
+      "symbol": "SBIN",
+      "strategy_name": "Intraday Short",
+      "action": "SELL",
+      "entry_price": 961.85,
+      "current_price": 961.85,
+      "sl_price": 969.54,
+      "target1_price": 952.62,
+      "target2_price": 946.46,
       "status": "ACTIVE_POSITION",
-      "entry_time": "30-Oct-2026 03:45 PM",
+      "entry_time": "30-Oct-2026 04:00 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -703,7 +703,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1143.0,
-      "current_price": 1035.0,
+      "current_price": 1185.0,
       "sl_price": 1133.86,
       "target1_price": 1153.97,
       "target2_price": 1161.29,
@@ -815,7 +815,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1322.7,
-      "current_price": 1302.4,
+      "current_price": 1246.0,
       "sl_price": 1333.5,
       "target1_price": 1309.74,
       "target2_price": 1301.1,
@@ -975,7 +975,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 4070.7,
-      "current_price": 3999.0,
+      "current_price": 3871.7,
       "sl_price": 4025.6,
       "target1_price": 4124.82,
       "target2_price": 4160.9,
@@ -991,7 +991,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 392.4,
-      "current_price": 392.4,
+      "current_price": 461.6,
       "sl_price": 389.26,
       "target1_price": 396.17,
       "target2_price": 398.68,
@@ -1087,7 +1087,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1264.2,
-      "current_price": 1264.2,
+      "current_price": 1217.0,
       "sl_price": 1274.31,
       "target1_price": 1252.06,
       "target2_price": 1243.97,
@@ -1229,12 +1229,12 @@
   "signal_audit_log": [
     {
       "id": 34,
-      "signal_id": "STK_LONG_TITAN",
-      "timestamp": "30-Oct-2026 03:45 PM",
+      "signal_id": "STK_SHORT_SBIN",
+      "timestamp": "30-Oct-2026 04:00 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
-      "spot_price": 4471.0,
-      "notes": "Position initialized at \u20b94471.00"
+      "spot_price": 961.85,
+      "notes": "Position initialized at \u20b9961.85"
     },
     {
       "id": 33,
@@ -1662,20 +1662,59 @@
   "intraday_stocks": {
     "long_setups": [
       {
-        "symbol": "TITAN",
+        "symbol": "INFY",
         "action": "BUY (LONG)",
-        "close": 4471.0,
-        "vwap": 4454.32,
-        "orb_high": 4446.4,
-        "sl": 4435.23,
-        "t1": 4513.92,
-        "t2": 4542.54,
-        "rsi": 71.7,
-        "vol_exp": 1.8,
+        "close": 1185.0,
+        "vwap": 1174.16,
+        "orb_high": 1169.6,
+        "sl": 1169.6,
+        "t1": 1203.48,
+        "t2": 1215.8,
+        "rsi": 65.0,
+        "vol_exp": 1.9,
+        "pattern": "\ud83d\udfe2 Bullish Engulfing (Reversal Setup)"
+      },
+      {
+        "symbol": "LT",
+        "action": "BUY (LONG)",
+        "close": 3871.7,
+        "vwap": 3846.88,
+        "orb_high": 3840.5,
+        "sl": 3840.5,
+        "t1": 3909.14,
+        "t2": 3934.1,
+        "rsi": 53.9,
+        "vol_exp": 1.9,
+        "pattern": "\u26a1 Volatility Contraction (VCP) Momentum Expansion"
+      },
+      {
+        "symbol": "KOTAKBANK",
+        "action": "BUY (LONG)",
+        "close": 461.6,
+        "vwap": 460.68,
+        "orb_high": 460.8,
+        "sl": 457.91,
+        "t1": 466.03,
+        "t2": 468.99,
+        "rsi": 52.7,
+        "vol_exp": 1.5,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ],
     "short_setups": [
+      {
+        "symbol": "AXISBANK",
+        "action": "SHORT SELL",
+        "close": 1217.0,
+        "vwap": 1219.47,
+        "orb_low": 1218.6,
+        "sl": 1226.74,
+        "t1": 1205.32,
+        "t2": 1197.53,
+        "rsi": 31.6,
+        "vol_exp": 3.5,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
       {
         "symbol": "MARUTI",
         "action": "SHORT SELL",
@@ -1688,6 +1727,32 @@
         "rsi": 43.6,
         "vol_exp": 3.4,
         "pattern": "\ud83d\udd34 Shooting Star (Supply Reversal at Resistance)"
+      },
+      {
+        "symbol": "JSWSTEEL",
+        "action": "SHORT SELL",
+        "close": 1246.0,
+        "vwap": 1252.63,
+        "orb_low": 1247.2,
+        "sl": 1255.97,
+        "t1": 1234.04,
+        "t2": 1226.06,
+        "rsi": 27.7,
+        "vol_exp": 1.9,
+        "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)"
+      },
+      {
+        "symbol": "SBIN",
+        "action": "SHORT SELL",
+        "close": 961.85,
+        "vwap": 963.92,
+        "orb_low": 964.25,
+        "sl": 969.54,
+        "t1": 952.62,
+        "t2": 946.46,
+        "rsi": 29.8,
+        "vol_exp": 1.3,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ]
   }
