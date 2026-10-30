@@ -1,5 +1,5 @@
 {
-  "timestamp": "30-Oct-2026 03:31 PM",
+  "timestamp": "30-Oct-2026 03:45 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "30-Oct-2026 03:31 PM",
+      "timestamp": "30-Oct-2026 03:45 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "30-Oct-2026 10:01 AM",
+    "timestamp": "30-Oct-2026 10:15 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,23 +179,23 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "30-Oct-2026 03:31 PM",
-      "net_gex_crores": -5647.3,
-      "total_call_gex_crores": 47630.8,
-      "total_put_gex_crores": 53278.1,
+      "timestamp": "30-Oct-2026 03:45 PM",
+      "net_gex_crores": -7804.5,
+      "total_call_gex_crores": 43600.3,
+      "total_put_gex_crores": 51404.8,
       "gex_regime": "\ud83d\udd34 NEGATIVE GAMMA (VOLATILITY SPIKE RISK)",
       "zero_gamma_flip_level": null,
       "max_gex_strike": 23200.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "54% (heuristic: spot \u20b923,053 vs pin \u20b923,200, 4d to expiry, exp. move \u00b1\u20b9289)",
+      "pinning_probability": "53% (heuristic: spot \u20b923,053 vs pin \u20b923,200, 4d to expiry, exp. move \u00b1\u20b9289)",
       "spot": 23053.1,
       "expiry_date": "2026-11-03",
       "days_to_expiry": 4,
       "atm_iv": 11.98,
       "expected_move_till_expiry": 289.1,
-      "total_call_oi": 2328959,
-      "total_put_oi": 3548011,
-      "pcr": 1.52,
+      "total_call_oi": 2217926,
+      "total_put_oi": 3545367,
+      "pcr": 1.6,
       "is_simulated": false,
       "simulated_components": [],
       "modeled_components": [
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "30-Oct-2026 03:31 PM",
+    "timestamp": "30-Oct-2026 03:45 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "30-Oct-2026 03:31 PM",
+    "timestamp": "30-Oct-2026 03:45 PM",
     "as_of_date": "29-Oct-2026",
     "fii_cash_net_cr": -943.6,
     "dii_cash_net_cr": 1924.5,
@@ -470,17 +470,17 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 16.1,
+    "stale_minutes": 30.8,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 16.1m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.8m)"
   },
   "backtest_metrics": {
     "cagr_pct": 4.2,
     "sharpe_ratio": -1.18,
     "max_drawdown_pct": -1.1,
-    "profit_factor": 1.51,
-    "win_rate_pct": 57.3,
+    "profit_factor": 1.5,
+    "win_rate_pct": 58.1,
     "total_backtest_trades": 124,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
     "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
@@ -692,7 +692,7 @@
       "target1_price": 4513.92,
       "target2_price": 4542.54,
       "status": "ACTIVE_POSITION",
-      "entry_time": "30-Oct-2026 03:31 PM",
+      "entry_time": "30-Oct-2026 03:45 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1230,7 +1230,7 @@
     {
       "id": 34,
       "signal_id": "STK_LONG_TITAN",
-      "timestamp": "30-Oct-2026 03:31 PM",
+      "timestamp": "30-Oct-2026 03:45 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 4471.0,
@@ -1665,7 +1665,7 @@
         "symbol": "TITAN",
         "action": "BUY (LONG)",
         "close": 4471.0,
-        "vwap": 4453.94,
+        "vwap": 4454.32,
         "orb_high": 4446.4,
         "sl": 4435.23,
         "t1": 4513.92,
@@ -1680,7 +1680,7 @@
         "symbol": "MARUTI",
         "action": "SHORT SELL",
         "close": 11361.0,
-        "vwap": 11396.52,
+        "vwap": 11395.88,
         "orb_low": 11394.0,
         "sl": 11451.89,
         "t1": 11251.93,
