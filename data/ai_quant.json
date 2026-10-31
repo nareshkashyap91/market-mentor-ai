@@ -1,5 +1,5 @@
 {
-  "timestamp": "31-Oct-2026 11:16 PM",
+  "timestamp": "31-Oct-2026 11:31 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "31-Oct-2026 11:16 PM",
+      "timestamp": "31-Oct-2026 11:31 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "31-Oct-2026 05:46 PM",
+    "timestamp": "31-Oct-2026 06:01 PM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -167,7 +167,8 @@
       "Nifty FMCG",
       "Nifty Energy",
       "Nifty Realty",
-      "Nifty Infra"
+      "Nifty Infra",
+      "gamma_exposure_analytics (Groww chain unreachable)"
     ],
     "market_breadth": {
       "advances": 5,
@@ -179,29 +180,18 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "31-Oct-2026 11:16 PM",
-      "net_gex_crores": -8200.1,
-      "total_call_gex_crores": 42056.4,
-      "total_put_gex_crores": 50256.4,
+      "timestamp": "31-Oct-2026 11:31 PM",
+      "net_gex_crores": -1850.0,
       "gex_regime": "\ud83d\udd34 NEGATIVE GAMMA (VOLATILITY SPIKE RISK)",
       "zero_gamma_flip_level": null,
-      "max_gex_strike": 22800.0,
-      "max_gex_strike_side": "PUT",
-      "pinning_probability": "45% (heuristic: spot \u20b923,053 vs pin \u20b922,800, 3d to expiry, exp. move \u00b1\u20b9251)",
-      "spot": 23053.1,
-      "expiry_date": "2026-11-03",
-      "days_to_expiry": 3,
-      "atm_iv": 11.99,
-      "expected_move_till_expiry": 250.6,
-      "total_call_oi": 2149559,
-      "total_put_oi": 3490521,
-      "pcr": 1.62,
-      "is_simulated": false,
-      "simulated_components": [],
-      "modeled_components": [
-        "pinning_probability (heuristic from live IV/GEX/DTE \u2014 not market-sourced)"
+      "max_gex_strike": null,
+      "pinning_probability": "N/A (live chain unavailable)",
+      "is_simulated": true,
+      "simulated_components": [
+        "gamma_exposure_analytics (Groww chain unreachable \u2014 illustrative values)"
       ],
-      "data_source": "GROWW_LIVE (server-rendered NIFTY chain, nearest expiry 2026-11-03, lot 65)"
+      "modeled_components": [],
+      "data_source": "ANALYTICAL_MODEL_PLACEHOLDER (Groww chain unreachable \u2014 values are illustrative, not live dealer positioning)"
     },
     "sectors": [
       {
@@ -372,7 +362,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "31-Oct-2026 11:16 PM",
+    "timestamp": "31-Oct-2026 11:31 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +380,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "31-Oct-2026 11:16 PM",
+    "timestamp": "31-Oct-2026 11:31 PM",
     "as_of_date": "30-Oct-2026",
     "fii_cash_net_cr": 3598.6,
     "dii_cash_net_cr": -817.6,
@@ -470,10 +460,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 1921.2,
+    "stale_minutes": 1936.3,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 1921.2m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 1936.3m)"
   },
   "backtest_metrics": {
     "cagr_pct": 4.2,
@@ -692,7 +682,7 @@
       "target1_price": 2791.94,
       "target2_price": 2759.7,
       "status": "ACTIVE_POSITION",
-      "entry_time": "31-Oct-2026 11:16 PM",
+      "entry_time": "31-Oct-2026 11:31 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -708,7 +698,7 @@
       "target1_price": 952.62,
       "target2_price": 946.46,
       "status": "ACTIVE_POSITION",
-      "entry_time": "31-Oct-2026 11:16 PM",
+      "entry_time": "31-Oct-2026 11:31 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1246,7 +1236,7 @@
     {
       "id": 35,
       "signal_id": "STK_SHORT_SBIN",
-      "timestamp": "31-Oct-2026 11:16 PM",
+      "timestamp": "31-Oct-2026 11:31 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 961.85,
@@ -1255,7 +1245,7 @@
     {
       "id": 34,
       "signal_id": "STK_SHORT_M&M",
-      "timestamp": "31-Oct-2026 11:16 PM",
+      "timestamp": "31-Oct-2026 11:31 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 2840.3,
