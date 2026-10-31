@@ -1,7 +1,7 @@
 {
   "_meta": {
     "source": "Yahoo Finance Free Feed",
-    "as_of": "31-Oct-2026 02:01 PM IST",
+    "as_of": "31-Oct-2026 02:16 PM IST",
     "engine": "LegendaryTraderEngine V1.0",
     "is_stale": false,
     "confidence": 0.95
@@ -336,6 +336,29 @@
       "badge_color": "amber"
     },
     {
+      "symbol": "M&M",
+      "strategy": "Minervini VCP",
+      "current_price": 2840.3,
+      "trend_template_score": 0,
+      "is_above_50_150_dma": false,
+      "pct_from_52w_high": 25.3,
+      "contractions": [
+        16.7,
+        6.8,
+        3.4
+      ],
+      "is_volatility_contracting": true,
+      "volume_dry_up": true,
+      "pivot_buy_point": 2938.6,
+      "stop_loss": 2838.1,
+      "target_1": 3106.1,
+      "target_2": 3206.6,
+      "risk_reward_ratio": "1:2.6",
+      "risk_pct": 3.42,
+      "vcp_status": "WATCHLIST",
+      "badge_color": "amber"
+    },
+    {
       "symbol": "ONGC",
       "strategy": "Minervini VCP",
       "current_price": 225.39,
@@ -424,29 +447,6 @@
       "target_2": 12724.29,
       "risk_reward_ratio": "1:2.6",
       "risk_pct": 3.28,
-      "vcp_status": "WATCHLIST",
-      "badge_color": "amber"
-    },
-    {
-      "symbol": "M&M",
-      "strategy": "Minervini VCP",
-      "current_price": NaN,
-      "trend_template_score": 0,
-      "is_above_50_150_dma": false,
-      "pct_from_52w_high": NaN,
-      "contractions": [
-        16.7,
-        6.8,
-        NaN
-      ],
-      "is_volatility_contracting": false,
-      "volume_dry_up": true,
-      "pivot_buy_point": NaN,
-      "stop_loss": NaN,
-      "target_1": NaN,
-      "target_2": NaN,
-      "risk_reward_ratio": "1:2.6",
-      "risk_pct": NaN,
       "vcp_status": "WATCHLIST",
       "badge_color": "amber"
     }
@@ -725,6 +725,22 @@
       "badge_color": "slate"
     },
     {
+      "symbol": "M&M",
+      "strategy": "Simons Z-Score Mean Reversion",
+      "current_price": 2840.3,
+      "mean_20d": 2850.33,
+      "std_dev": 41.37,
+      "z_score": -0.24,
+      "rsi_14": 55.2,
+      "signal": "NEUTRAL_RANGE",
+      "bias": "EQUILIBRIUM",
+      "expected_reversion_target": 2850.33,
+      "stop_loss": 2773.3,
+      "deviation_from_mean_pct": 0.35,
+      "statistical_confidence": "MODERATE",
+      "badge_color": "slate"
+    },
+    {
       "symbol": "MARUTI",
       "strategy": "Simons Z-Score Mean Reversion",
       "current_price": 11397.0,
@@ -737,22 +753,6 @@
       "expected_reversion_target": 11373.0,
       "stop_loss": 11141.43,
       "deviation_from_mean_pct": -0.21,
-      "statistical_confidence": "MODERATE",
-      "badge_color": "slate"
-    },
-    {
-      "symbol": "M&M",
-      "strategy": "Simons Z-Score Mean Reversion",
-      "current_price": NaN,
-      "mean_20d": NaN,
-      "std_dev": 1.0,
-      "z_score": NaN,
-      "rsi_14": 62.6,
-      "signal": "NEUTRAL_RANGE",
-      "bias": "EQUILIBRIUM",
-      "expected_reversion_target": NaN,
-      "stop_loss": NaN,
-      "deviation_from_mean_pct": NaN,
       "statistical_confidence": "MODERATE",
       "badge_color": "slate"
     }
@@ -977,12 +977,12 @@
     {
       "symbol": "M&M",
       "strategy": "Turtle 20D Donchian",
-      "current_price": NaN,
+      "current_price": 2840.3,
       "donchian_high_20d": 2986.0,
       "donchian_low_20d": 2744.3,
       "turtle_action": "TREND_HOLDING",
-      "atr_20": NaN,
-      "trailing_stop_loss": NaN,
+      "atr_20": 67.12,
+      "trailing_stop_loss": 2706.05,
       "trail_exit_10d": 2798.4,
       "badge_color": "amber"
     }
