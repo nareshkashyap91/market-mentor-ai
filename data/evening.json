@@ -3,20 +3,20 @@
   "momentum_stocks": [
     {
       "symbol": "SHYAMMETL",
-      "close": 1204.0,
-      "turnover": 114.63,
-      "vol_expansion": 2.28,
-      "why": "Outperforming market (RSI: 63.9, 1Y CAR: +34.8%), closed 0.2% above VWAP with bullish DMA alignment (20>50>100>200) and 2.3x volume expansion.",
-      "dma20": 1131.91,
+      "close": 1204.2,
+      "turnover": 115.97,
+      "vol_expansion": 2.3,
+      "why": "Outperforming market (RSI: 64.0, 1Y CAR: +34.8%), closed 0.2% above VWAP with bullish DMA alignment (20>50>100>200) and 2.3x volume expansion.",
+      "dma20": 1131.92,
       "dma50": 1092.13,
-      "dma100": 1041.14,
+      "dma100": 1041.15,
       "dma200": 946.55,
       "dma_aligned": true,
       "car_1y": 34.8,
-      "rsi": 63.9,
+      "rsi": 64.0,
       "momentum_intelligence": {
         "symbol": "SHYAMMETL",
-        "close": 1204.0,
+        "close": 1204.2,
         "direction": "LONG",
         "setup_name": "52-Week High Breakout",
         "momentum_quality_score": 91.0,
@@ -30,7 +30,7 @@
           "above_all_dmas": true,
           "below_all_dmas": false,
           "dma_compression": false,
-          "dma_spread_pct": 15.4
+          "dma_spread_pct": 15.39
         },
         "momentum_info": {
           "momentum_classification": "VERY STRONG",
@@ -62,7 +62,7 @@
           "extension_status": "HIGHLY EXTENDED",
           "penalty": 25,
           "recommendation": "WATCHLIST (WAIT FOR PULLBACK TO EMA/VWAP)",
-          "dist_ema20_atr": 2.99,
+          "dist_ema20_atr": 3.0,
           "dist_vwap_pct": 0.0
         },
         "market_regime_info": {
@@ -72,18 +72,18 @@
           "regime_action": "FAVOR LONG MOMENTUM SETUPS"
         },
         "entry_plan": {
-          "entry_zone_str": "\u20b91204.00 - \u20b91223.26",
-          "entry_min": 1204.0,
-          "entry_max": 1223.26,
-          "confirmation_condition": "15-minute candle closes above \u20b91216.04 with RVOL > 1.5 and sustained VWAP support.",
-          "invalidation_level": 1179.92
+          "entry_zone_str": "\u20b91204.20 - \u20b91223.47",
+          "entry_min": 1204.2,
+          "entry_max": 1223.47,
+          "confirmation_condition": "15-minute candle closes above \u20b91216.24 with RVOL > 1.5 and sustained VWAP support.",
+          "invalidation_level": 1180.12
         },
         "risk_plan": {
-          "entry_price": 1204.0,
-          "stop_loss": 1179.92,
-          "target1": 1240.12,
-          "target2": 1264.2,
-          "target3": 1300.32,
+          "entry_price": 1204.2,
+          "stop_loss": 1180.12,
+          "target1": 1240.32,
+          "target2": 1264.4,
+          "target3": 1300.52,
           "risk_per_share": 24.08,
           "rrr_t1": 1.5,
           "rrr_t2": 2.5,
@@ -95,15 +95,15 @@
           "max_risk_amount": 1000.0,
           "risk_per_share": 24.08,
           "quantity": 41,
-          "capital_required": 49364.0,
+          "capital_required": 49372.2,
           "max_loss": 987.28
         },
         "scenarios": {
-          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b91244.94, CHASE TRADE - AVOID. Wait for pullback to \u20b91216.04 and 15m VWAP reclaim.",
-          "scenario_flat": "FLAT OPEN: Look for entry between \u20b91204.00 - \u20b91216.04 on 15m candle close above \u20b91216.04 with RVOL > 1.5.",
-          "scenario_gap_down": "GAP DOWN: If opens below \u20b91179.92, SETUP INVALIDATED. No Trade.",
-          "chase_avoid_level": 1244.94,
-          "invalidation_level": 1179.92
+          "scenario_gap_up": "GAP UP > 2%: If opens above \u20b91245.14, CHASE TRADE - AVOID. Wait for pullback to \u20b91216.24 and 15m VWAP reclaim.",
+          "scenario_flat": "FLAT OPEN: Look for entry between \u20b91204.20 - \u20b91216.24 on 15m candle close above \u20b91216.24 with RVOL > 1.5.",
+          "scenario_gap_down": "GAP DOWN: If opens below \u20b91180.12, SETUP INVALIDATED. No Trade.",
+          "chase_avoid_level": 1245.14,
+          "invalidation_level": 1180.12
         },
         "event_risk_info": {
           "event_risk_level": "LOW",
