@@ -1,5 +1,5 @@
 {
-  "timestamp": "04-Nov-2026 03:45 PM",
+  "timestamp": "04-Nov-2026 04:04 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "04-Nov-2026 03:45 PM",
+      "timestamp": "04-Nov-2026 04:04 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "04-Nov-2026 10:15 AM",
+    "timestamp": "04-Nov-2026 10:34 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "04-Nov-2026 03:45 PM",
+      "timestamp": "04-Nov-2026 04:04 PM",
       "net_gex_crores": 9533.9,
       "total_call_gex_crores": 37517.3,
       "total_put_gex_crores": 27983.4,
@@ -187,12 +187,12 @@
       "zero_gamma_flip_level": 24275.0,
       "max_gex_strike": 24000.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "56% (heuristic: spot \u20b923,961 vs pin \u20b924,000, 5d to expiry, exp. move \u00b1\u20b9416)",
+      "pinning_probability": "56% (heuristic: spot \u20b923,961 vs pin \u20b924,000, 5d to expiry, exp. move \u00b1\u20b9417)",
       "spot": 23960.6,
       "expiry_date": "2026-11-09",
       "days_to_expiry": 5,
-      "atm_iv": 14.85,
-      "expected_move_till_expiry": 416.4,
+      "atm_iv": 14.87,
+      "expected_move_till_expiry": 417.0,
       "total_call_oi": 2202325,
       "total_put_oi": 2368084,
       "pcr": 1.08,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "04-Nov-2026 03:45 PM",
+    "timestamp": "04-Nov-2026 04:04 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "04-Nov-2026 03:45 PM",
+    "timestamp": "04-Nov-2026 04:04 PM",
     "as_of_date": "03-Nov-2026",
     "fii_cash_net_cr": 6836.9,
     "dii_cash_net_cr": -3678.9,
@@ -470,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 30.7,
+    "stale_minutes": 49.1,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.7m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 49.1m)"
   },
   "backtest_metrics": {
     "cagr_pct": 8.9,
@@ -489,10 +489,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 522000.0,
+    "allocated_margin": 525000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 348,
+    "total_trades": 350,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -679,7 +679,7 @@
       "grade": "A+"
     }
   ],
-  "active_positions_count": 33,
+  "active_positions_count": 34,
   "active_positions": [
     {
       "id": "STK_LONG_INFY",
@@ -1135,7 +1135,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 267.7,
-      "current_price": 270.3,
+      "current_price": 262.05,
       "sl_price": 265.56,
       "target1_price": 270.27,
       "target2_price": 271.98,
@@ -1208,9 +1208,34 @@
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
+    },
+    {
+      "id": "STK_LONG_TATASTEEL",
+      "symbol": "TATASTEEL",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 179.93,
+      "current_price": 179.93,
+      "sl_price": 176.1,
+      "target1_price": 184.53,
+      "target2_price": 187.59,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "04-Nov-2026 04:04 PM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
     }
   ],
   "signal_audit_log": [
+    {
+      "id": 34,
+      "signal_id": "STK_LONG_TATASTEEL",
+      "timestamp": "04-Nov-2026 04:04 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 179.93,
+      "notes": "Position initialized at \u20b9179.93"
+    },
     {
       "id": 33,
       "signal_id": "STK_SHORT_LT",
@@ -1336,15 +1361,6 @@
       "new_status": "ACTIVE_POSITION",
       "spot_price": 1840.0,
       "notes": "Position initialized at \u20b91840.00"
-    },
-    {
-      "id": 19,
-      "signal_id": "STK_LONG_INFY",
-      "timestamp": "28-Aug-2026 03:17 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 1143.0,
-      "notes": "Position initialized at \u20b91143.00"
     }
   ],
   "nifty": {
@@ -1656,6 +1672,32 @@
         "t2": 1013.4,
         "rsi": 69.9,
         "vol_exp": 2.7,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "POWERGRID",
+        "action": "BUY (LONG)",
+        "close": 262.05,
+        "vwap": 259.87,
+        "orb_high": 260.0,
+        "sl": 259.95,
+        "t1": 264.57,
+        "t2": 266.24,
+        "rsi": 68.4,
+        "vol_exp": 2.2,
+        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
+      },
+      {
+        "symbol": "TATASTEEL",
+        "action": "BUY (LONG)",
+        "close": 179.93,
+        "vwap": 177.43,
+        "orb_high": 176.1,
+        "sl": 176.1,
+        "t1": 184.53,
+        "t2": 187.59,
+        "rsi": 94.0,
+        "vol_exp": 1.5,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ],
