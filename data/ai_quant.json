@@ -1,5 +1,5 @@
 {
-  "timestamp": "05-Nov-2026 06:00 AM",
+  "timestamp": "05-Nov-2026 06:15 AM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "05-Nov-2026 06:00 AM",
+      "timestamp": "05-Nov-2026 06:16 AM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "05-Nov-2026 12:30 AM",
+    "timestamp": "05-Nov-2026 12:46 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "05-Nov-2026 06:00 AM",
+      "timestamp": "05-Nov-2026 06:16 AM",
       "net_gex_crores": 9475.5,
       "total_call_gex_crores": 37132.8,
       "total_put_gex_crores": 27657.3,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "05-Nov-2026 06:00 AM",
+    "timestamp": "05-Nov-2026 06:16 AM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "05-Nov-2026 06:00 AM",
+    "timestamp": "05-Nov-2026 06:15 AM",
     "as_of_date": "04-Nov-2026",
     "fii_cash_net_cr": 7284.1,
     "dii_cash_net_cr": -3712.3,
@@ -470,17 +470,17 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 885.8,
+    "stale_minutes": 901.0,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 885.8m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 901.0m)"
   },
   "backtest_metrics": {
     "cagr_pct": 8.9,
     "sharpe_ratio": 1.02,
     "max_drawdown_pct": -0.6,
-    "profit_factor": 2.46,
-    "win_rate_pct": 63.7,
+    "profit_factor": 2.45,
+    "win_rate_pct": 64.5,
     "total_backtest_trades": 124,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
     "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
@@ -489,10 +489,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 522000.0,
+    "allocated_margin": 526500.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 348,
+    "total_trades": 351,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -679,7 +679,7 @@
       "grade": "A+"
     }
   ],
-  "active_positions_count": 34,
+  "active_positions_count": 35,
   "active_positions": [
     {
       "id": "STK_LONG_INFY",
@@ -1087,7 +1087,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 12825.0,
-      "current_price": 12824.0,
+      "current_price": 11995.0,
       "sl_price": 12698.0,
       "target1_price": 12977.4,
       "target2_price": 13079.0,
@@ -1151,7 +1151,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1854.0,
-      "current_price": 1893.3,
+      "current_price": 2067.6,
       "sl_price": 1839.17,
       "target1_price": 1871.8,
       "target2_price": 1883.66,
@@ -1194,6 +1194,22 @@
       "realized_pnl": 0.0
     },
     {
+      "id": "STK_LONG_JSWSTEEL",
+      "symbol": "JSWSTEEL",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 1343.0,
+      "current_price": 1343.0,
+      "sl_price": 1325.9,
+      "target1_price": 1363.52,
+      "target2_price": 1377.2,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "05-Nov-2026 06:15 AM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
       "id": "STK_LONG_TATASTEEL",
       "symbol": "TATASTEEL",
       "strategy_name": "Intraday Long",
@@ -1204,7 +1220,7 @@
       "target1_price": 184.53,
       "target2_price": 187.59,
       "status": "ACTIVE_POSITION",
-      "entry_time": "05-Nov-2026 06:00 AM",
+      "entry_time": "05-Nov-2026 06:15 AM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1228,13 +1244,22 @@
   ],
   "signal_audit_log": [
     {
-      "id": 34,
+      "id": 35,
       "signal_id": "STK_LONG_TATASTEEL",
-      "timestamp": "05-Nov-2026 06:00 AM",
+      "timestamp": "05-Nov-2026 06:15 AM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 179.93,
       "notes": "Position initialized at \u20b9179.93"
+    },
+    {
+      "id": 34,
+      "signal_id": "STK_LONG_JSWSTEEL",
+      "timestamp": "05-Nov-2026 06:15 AM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 1343.0,
+      "notes": "Position initialized at \u20b91343.00"
     },
     {
       "id": 33,
@@ -1352,15 +1377,6 @@
       "new_status": "ACTIVE_POSITION",
       "spot_price": 267.7,
       "notes": "Position initialized at \u20b9267.70"
-    },
-    {
-      "id": 20,
-      "signal_id": "STK_SHORT_BHARTIARTL",
-      "timestamp": "05-Sep-2026 04:41 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 1840.0,
-      "notes": "Position initialized at \u20b91840.00"
     }
   ],
   "nifty": {
@@ -1673,6 +1689,45 @@
         "rsi": 68.4,
         "vol_exp": 2.2,
         "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
+      },
+      {
+        "symbol": "JSWSTEEL",
+        "action": "BUY (LONG)",
+        "close": 1343.0,
+        "vwap": 1331.01,
+        "orb_high": 1325.9,
+        "sl": 1325.9,
+        "t1": 1363.52,
+        "t2": 1377.2,
+        "rsi": 82.4,
+        "vol_exp": 2.1,
+        "pattern": "\u26a1 Volatility Contraction (VCP) Momentum Expansion"
+      },
+      {
+        "symbol": "MARUTI",
+        "action": "BUY (LONG)",
+        "close": 11995.0,
+        "vwap": 11901.65,
+        "orb_high": 11898.0,
+        "sl": 11898.0,
+        "t1": 12111.4,
+        "t2": 12189.0,
+        "rsi": 75.7,
+        "vol_exp": 1.6,
+        "pattern": "\u26a1 Volatility Contraction (VCP) Momentum Expansion"
+      },
+      {
+        "symbol": "BHARTIARTL",
+        "action": "BUY (LONG)",
+        "close": 2067.6,
+        "vwap": 2055.63,
+        "orb_high": 2067.1,
+        "sl": 2051.06,
+        "t1": 2087.45,
+        "t2": 2100.68,
+        "rsi": 79.7,
+        "vol_exp": 1.5,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       },
       {
         "symbol": "TATASTEEL",
