@@ -1,7 +1,7 @@
 {
   "_meta": {
     "source": "Yahoo Finance Free Feed",
-    "as_of": "06-Nov-2026 07:46 AM IST",
+    "as_of": "06-Nov-2026 08:01 AM IST",
     "engine": "LegendaryTraderEngine V1.0",
     "is_stale": false,
     "confidence": 0.95
@@ -9,10 +9,79 @@
   "summary": {
     "total_scanned": 20,
     "vcp_setups_found": 0,
-    "simons_extreme_reversions": 0,
-    "turtle_breakouts": 0
+    "simons_extreme_reversions": 2,
+    "turtle_breakouts": 2
   },
   "minervini_vcp": [
+    {
+      "symbol": "JSWSTEEL",
+      "strategy": "Minervini VCP",
+      "current_price": 1355.6,
+      "trend_template_score": 100,
+      "is_above_50_150_dma": true,
+      "pct_from_52w_high": 1.1,
+      "contractions": [
+        9.4,
+        9.0,
+        9.5
+      ],
+      "is_volatility_contracting": false,
+      "volume_dry_up": false,
+      "pivot_buy_point": 1370.0,
+      "stop_loss": 1315.57,
+      "target_1": 1460.71,
+      "target_2": 1515.14,
+      "risk_reward_ratio": "1:2.6",
+      "risk_pct": 3.97,
+      "vcp_status": "VCP_FORMING",
+      "badge_color": "amber"
+    },
+    {
+      "symbol": "BAJFINANCE",
+      "strategy": "Minervini VCP",
+      "current_price": 1070.0,
+      "trend_template_score": 100,
+      "is_above_50_150_dma": true,
+      "pct_from_52w_high": 9.0,
+      "contractions": [
+        13.1,
+        9.2,
+        14.6
+      ],
+      "is_volatility_contracting": false,
+      "volume_dry_up": false,
+      "pivot_buy_point": 1074.85,
+      "stop_loss": 1027.69,
+      "target_1": 1153.45,
+      "target_2": 1200.61,
+      "risk_reward_ratio": "1:2.6",
+      "risk_pct": 4.39,
+      "vcp_status": "VCP_FORMING",
+      "badge_color": "amber"
+    },
+    {
+      "symbol": "INFY",
+      "strategy": "Minervini VCP",
+      "current_price": 1167.4,
+      "trend_template_score": 50,
+      "is_above_50_150_dma": false,
+      "pct_from_52w_high": 29.4,
+      "contractions": [
+        16.7,
+        18.4,
+        5.2
+      ],
+      "is_volatility_contracting": false,
+      "volume_dry_up": true,
+      "pivot_buy_point": 1172.5,
+      "stop_loss": 1099.68,
+      "target_1": 1293.87,
+      "target_2": 1366.7,
+      "risk_reward_ratio": "1:2.6",
+      "risk_pct": 6.21,
+      "vcp_status": "WATCHLIST",
+      "badge_color": "amber"
+    },
     {
       "symbol": "RELIANCE",
       "strategy": "Minervini VCP",
@@ -46,29 +115,6 @@
       "contractions": [
         15.7,
         24.2,
-        NaN
-      ],
-      "is_volatility_contracting": false,
-      "volume_dry_up": true,
-      "pivot_buy_point": NaN,
-      "stop_loss": NaN,
-      "target_1": NaN,
-      "target_2": NaN,
-      "risk_reward_ratio": "1:2.6",
-      "risk_pct": NaN,
-      "vcp_status": "WATCHLIST",
-      "badge_color": "amber"
-    },
-    {
-      "symbol": "INFY",
-      "strategy": "Minervini VCP",
-      "current_price": NaN,
-      "trend_template_score": 0,
-      "is_above_50_150_dma": false,
-      "pct_from_52w_high": NaN,
-      "contractions": [
-        16.7,
-        18.4,
         NaN
       ],
       "is_volatility_contracting": false,
@@ -198,29 +244,6 @@
       "badge_color": "amber"
     },
     {
-      "symbol": "BAJFINANCE",
-      "strategy": "Minervini VCP",
-      "current_price": NaN,
-      "trend_template_score": 0,
-      "is_above_50_150_dma": false,
-      "pct_from_52w_high": NaN,
-      "contractions": [
-        13.1,
-        9.2,
-        NaN
-      ],
-      "is_volatility_contracting": false,
-      "volume_dry_up": false,
-      "pivot_buy_point": NaN,
-      "stop_loss": NaN,
-      "target_1": NaN,
-      "target_2": NaN,
-      "risk_reward_ratio": "1:2.6",
-      "risk_pct": NaN,
-      "vcp_status": "WATCHLIST",
-      "badge_color": "amber"
-    },
-    {
       "symbol": "MARUTI",
       "strategy": "Minervini VCP",
       "current_price": NaN,
@@ -315,23 +338,23 @@
     {
       "symbol": "NTPC",
       "strategy": "Minervini VCP",
-      "current_price": NaN,
+      "current_price": 313.7,
       "trend_template_score": 0,
       "is_above_50_150_dma": false,
-      "pct_from_52w_high": NaN,
+      "pct_from_52w_high": 22.8,
       "contractions": [
         7.5,
         8.4,
-        NaN
+        6.2
       ],
       "is_volatility_contracting": false,
       "volume_dry_up": false,
-      "pivot_buy_point": NaN,
-      "stop_loss": NaN,
-      "target_1": NaN,
-      "target_2": NaN,
+      "pivot_buy_point": 324.89,
+      "stop_loss": 312.85,
+      "target_1": 344.96,
+      "target_2": 357.0,
       "risk_reward_ratio": "1:2.6",
-      "risk_pct": NaN,
+      "risk_pct": 3.71,
       "vcp_status": "WATCHLIST",
       "badge_color": "amber"
     },
@@ -368,29 +391,6 @@
       "contractions": [
         14.0,
         12.0,
-        NaN
-      ],
-      "is_volatility_contracting": false,
-      "volume_dry_up": false,
-      "pivot_buy_point": NaN,
-      "stop_loss": NaN,
-      "target_1": NaN,
-      "target_2": NaN,
-      "risk_reward_ratio": "1:2.6",
-      "risk_pct": NaN,
-      "vcp_status": "WATCHLIST",
-      "badge_color": "amber"
-    },
-    {
-      "symbol": "JSWSTEEL",
-      "strategy": "Minervini VCP",
-      "current_price": NaN,
-      "trend_template_score": 0,
-      "is_above_50_150_dma": false,
-      "pct_from_52w_high": NaN,
-      "contractions": [
-        9.4,
-        9.0,
         NaN
       ],
       "is_volatility_contracting": false,
@@ -487,16 +487,16 @@
     {
       "symbol": "INFY",
       "strategy": "Simons Z-Score Mean Reversion",
-      "current_price": NaN,
-      "mean_20d": NaN,
-      "std_dev": 1.0,
-      "z_score": NaN,
-      "rsi_14": 57.1,
+      "current_price": 1167.4,
+      "mean_20d": 1101.51,
+      "std_dev": 57.0,
+      "z_score": 1.16,
+      "rsi_14": 62.1,
       "signal": "NEUTRAL_RANGE",
       "bias": "EQUILIBRIUM",
-      "expected_reversion_target": NaN,
-      "stop_loss": NaN,
-      "deviation_from_mean_pct": NaN,
+      "expected_reversion_target": 1101.51,
+      "stop_loss": 1118.85,
+      "deviation_from_mean_pct": -5.64,
       "statistical_confidence": "MODERATE",
       "badge_color": "slate"
     },
@@ -583,18 +583,18 @@
     {
       "symbol": "BAJFINANCE",
       "strategy": "Simons Z-Score Mean Reversion",
-      "current_price": NaN,
-      "mean_20d": NaN,
-      "std_dev": 1.0,
-      "z_score": NaN,
-      "rsi_14": 57.1,
-      "signal": "NEUTRAL_RANGE",
-      "bias": "EQUILIBRIUM",
-      "expected_reversion_target": NaN,
-      "stop_loss": NaN,
-      "deviation_from_mean_pct": NaN,
-      "statistical_confidence": "MODERATE",
-      "badge_color": "slate"
+      "current_price": 1070.0,
+      "mean_20d": 956.7,
+      "std_dev": 35.07,
+      "z_score": 3.23,
+      "rsi_14": 68.9,
+      "signal": "STAT_OVERBOUGHT_EXHAUSTION",
+      "bias": "BEARISH_MEAN_REVERSION",
+      "expected_reversion_target": 956.7,
+      "stop_loss": 1107.73,
+      "deviation_from_mean_pct": -10.59,
+      "statistical_confidence": "HIGH (Z-Score > 2.0\u03c3)",
+      "badge_color": "rose"
     },
     {
       "symbol": "MARUTI",
@@ -663,16 +663,16 @@
     {
       "symbol": "NTPC",
       "strategy": "Simons Z-Score Mean Reversion",
-      "current_price": NaN,
-      "mean_20d": NaN,
-      "std_dev": 1.0,
-      "z_score": NaN,
-      "rsi_14": 58.2,
+      "current_price": 313.7,
+      "mean_20d": 307.77,
+      "std_dev": 7.33,
+      "z_score": 0.81,
+      "rsi_14": 52.1,
       "signal": "NEUTRAL_RANGE",
       "bias": "EQUILIBRIUM",
-      "expected_reversion_target": NaN,
-      "stop_loss": NaN,
-      "deviation_from_mean_pct": NaN,
+      "expected_reversion_target": 307.77,
+      "stop_loss": 305.67,
+      "deviation_from_mean_pct": -1.89,
       "statistical_confidence": "MODERATE",
       "badge_color": "slate"
     },
@@ -711,18 +711,18 @@
     {
       "symbol": "JSWSTEEL",
       "strategy": "Simons Z-Score Mean Reversion",
-      "current_price": NaN,
-      "mean_20d": NaN,
-      "std_dev": 1.0,
-      "z_score": NaN,
-      "rsi_14": 73.0,
-      "signal": "NEUTRAL_RANGE",
-      "bias": "EQUILIBRIUM",
-      "expected_reversion_target": NaN,
-      "stop_loss": NaN,
-      "deviation_from_mean_pct": NaN,
-      "statistical_confidence": "MODERATE",
-      "badge_color": "slate"
+      "current_price": 1355.6,
+      "mean_20d": 1236.96,
+      "std_dev": 57.89,
+      "z_score": 2.05,
+      "rsi_14": 74.0,
+      "signal": "STAT_OVERBOUGHT_EXHAUSTION",
+      "bias": "BEARISH_MEAN_REVERSION",
+      "expected_reversion_target": 1236.96,
+      "stop_loss": 1399.14,
+      "deviation_from_mean_pct": -8.75,
+      "statistical_confidence": "HIGH (Z-Score > 2.0\u03c3)",
+      "badge_color": "rose"
     },
     {
       "symbol": "POWERGRID",
@@ -785,12 +785,12 @@
     {
       "symbol": "INFY",
       "strategy": "Turtle 20D Donchian",
-      "current_price": NaN,
+      "current_price": 1167.4,
       "donchian_high_20d": 1170.98,
       "donchian_low_20d": 967.93,
       "turtle_action": "TREND_HOLDING",
-      "atr_20": NaN,
-      "trailing_stop_loss": NaN,
+      "atr_20": 43.55,
+      "trailing_stop_loss": 1080.3,
       "trail_exit_10d": 1014.8,
       "badge_color": "amber"
     },
@@ -857,14 +857,14 @@
     {
       "symbol": "BAJFINANCE",
       "strategy": "Turtle 20D Donchian",
-      "current_price": NaN,
+      "current_price": 1070.0,
       "donchian_high_20d": 994.0,
       "donchian_low_20d": 899.15,
-      "turtle_action": "TREND_HOLDING",
-      "atr_20": NaN,
-      "trailing_stop_loss": NaN,
+      "turtle_action": "SYSTEM_1_BUY_BREAKOUT",
+      "atr_20": 29.47,
+      "trailing_stop_loss": 1011.07,
       "trail_exit_10d": 899.15,
-      "badge_color": "amber"
+      "badge_color": "emerald"
     },
     {
       "symbol": "MARUTI",
@@ -917,13 +917,13 @@
     {
       "symbol": "NTPC",
       "strategy": "Turtle 20D Donchian",
-      "current_price": NaN,
-      "donchian_high_20d": 328.0,
-      "donchian_low_20d": 292.05,
+      "current_price": 313.7,
+      "donchian_high_20d": 324.89,
+      "donchian_low_20d": 289.28,
       "turtle_action": "TREND_HOLDING",
-      "atr_20": NaN,
-      "trailing_stop_loss": NaN,
-      "trail_exit_10d": 292.05,
+      "atr_20": 7.59,
+      "trailing_stop_loss": 298.53,
+      "trail_exit_10d": 289.28,
       "badge_color": "amber"
     },
     {
@@ -953,14 +953,14 @@
     {
       "symbol": "JSWSTEEL",
       "strategy": "Turtle 20D Donchian",
-      "current_price": NaN,
+      "current_price": 1355.6,
       "donchian_high_20d": 1343.0,
       "donchian_low_20d": 1158.0,
-      "turtle_action": "TREND_HOLDING",
-      "atr_20": NaN,
-      "trailing_stop_loss": NaN,
+      "turtle_action": "SYSTEM_1_BUY_BREAKOUT",
+      "atr_20": 35.02,
+      "trailing_stop_loss": 1285.56,
       "trail_exit_10d": 1181.9,
-      "badge_color": "amber"
+      "badge_color": "emerald"
     },
     {
       "symbol": "POWERGRID",
