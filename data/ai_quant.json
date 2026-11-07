@@ -1,5 +1,5 @@
 {
-  "timestamp": "07-Nov-2026 11:45 PM",
+  "timestamp": "08-Nov-2026 12:01 AM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "07-Nov-2026 11:45 PM",
+      "timestamp": "08-Nov-2026 12:01 AM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -140,7 +140,7 @@
     "journal_summary_formatted": "REALIZED P&L: +\u20b926,500 | WIN RATE: 75.0%"
   },
   "premarket_cues_analytics": {
-    "timestamp": "07-Nov-2026 08:30 AM",
+    "timestamp": "08-Nov-2026 08:30 AM",
     "gift_nifty_pts": 85.0,
     "nasdaq_fut_pct": 0.92,
     "dow_fut_pct": 0.45,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "07-Nov-2026 06:15 PM",
+    "timestamp": "07-Nov-2026 06:31 PM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "07-Nov-2026 11:45 PM",
+      "timestamp": "08-Nov-2026 12:01 AM",
       "net_gex_crores": 5732.2,
       "total_call_gex_crores": 41123.7,
       "total_put_gex_crores": 35391.5,
@@ -187,12 +187,12 @@
       "zero_gamma_flip_level": 25475.0,
       "max_gex_strike": 25000.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "68% (heuristic: spot \u20b925,030 vs pin \u20b925,000, 2d to expiry, exp. move \u00b1\u20b9364)",
+      "pinning_probability": "75% (heuristic: spot \u20b925,030 vs pin \u20b925,000, 1d to expiry, exp. move \u00b1\u20b9257)",
       "spot": 25030.35,
       "expiry_date": "2026-11-09",
-      "days_to_expiry": 2,
+      "days_to_expiry": 1,
       "atm_iv": 19.62,
-      "expected_move_till_expiry": 363.5,
+      "expected_move_till_expiry": 257.1,
       "total_call_oi": 2235868,
       "total_put_oi": 3695436,
       "pcr": 1.65,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "07-Nov-2026 11:45 PM",
+    "timestamp": "08-Nov-2026 12:01 AM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "07-Nov-2026 11:45 PM",
+    "timestamp": "08-Nov-2026 12:01 AM",
     "as_of_date": "06-Nov-2026",
     "fii_cash_net_cr": 13749.9,
     "dii_cash_net_cr": -5968.7,
@@ -470,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 1950.8,
+    "stale_minutes": 1966.0,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 1950.8m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 1966.0m)"
   },
   "backtest_metrics": {
     "cagr_pct": 12.6,
@@ -1034,6 +1034,22 @@
       "realized_pnl": 0.0
     },
     {
+      "id": "STK_LONG_RELIANCE",
+      "symbol": "RELIANCE",
+      "strategy_name": "Intraday Long",
+      "action": "BUY",
+      "entry_price": 1320.0,
+      "current_price": 1320.0,
+      "sl_price": 1306.0,
+      "target1_price": 1336.8,
+      "target2_price": 1348.0,
+      "status": "ACTIVE_POSITION",
+      "entry_time": "08-Nov-2026 12:01 AM",
+      "exit_time": null,
+      "unrealized_pnl": 0.0,
+      "realized_pnl": 0.0
+    },
+    {
       "id": "STK_SHORT_INFY",
       "symbol": "INFY",
       "strategy_name": "Intraday Short",
@@ -1178,22 +1194,6 @@
       "realized_pnl": 0.0
     },
     {
-      "id": "STK_LONG_RELIANCE",
-      "symbol": "RELIANCE",
-      "strategy_name": "Intraday Long",
-      "action": "BUY",
-      "entry_price": 1320.0,
-      "current_price": 1320.0,
-      "sl_price": 1306.0,
-      "target1_price": 1336.8,
-      "target2_price": 1348.0,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "07-Nov-2026 11:45 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
-    {
       "id": "STK_SHORT_BHARTIARTL",
       "symbol": "BHARTIARTL",
       "strategy_name": "Intraday Short",
@@ -1230,7 +1230,7 @@
     {
       "id": 34,
       "signal_id": "STK_LONG_RELIANCE",
-      "timestamp": "07-Nov-2026 11:45 PM",
+      "timestamp": "08-Nov-2026 12:01 AM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 1320.0,
@@ -1372,19 +1372,19 @@
     "volatility_percentile": 50.5,
     "confidence_score": 75.0,
     "expected_move": {
-      "dte_days": 5.0,
-      "em_1sigma_pts": 515.02,
-      "em_2sigma_pts": 1030.04,
-      "em_pct": 2.06,
+      "dte_days": 4.0,
+      "em_1sigma_pts": 460.65,
+      "em_2sigma_pts": 921.3,
+      "em_pct": 1.84,
       "range_1sigma": [
-        24515.33,
-        25545.37
+        24569.7,
+        25491.0
       ],
       "range_2sigma": [
-        24000.31,
-        26060.39
+        24109.05,
+        25951.65
       ],
-      "summary_str": "\u00b1515.0 pts (\u20b924515 - \u20b925545)"
+      "summary_str": "\u00b1460.6 pts (\u20b924570 - \u20b925491)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -1520,19 +1520,19 @@
     "volatility_percentile": 50.5,
     "confidence_score": 75.0,
     "expected_move": {
-      "dte_days": 5.0,
-      "em_1sigma_pts": 1215.74,
-      "em_2sigma_pts": 2431.49,
-      "em_pct": 2.06,
+      "dte_days": 4.0,
+      "em_1sigma_pts": 1087.39,
+      "em_2sigma_pts": 2174.79,
+      "em_pct": 1.84,
       "range_1sigma": [
-        57870.26,
-        60301.74
+        57998.61,
+        60173.39
       ],
       "range_2sigma": [
-        56654.51,
-        61517.49
+        56911.21,
+        61260.79
       ],
-      "summary_str": "\u00b11215.7 pts (\u20b957870 - \u20b960302)"
+      "summary_str": "\u00b11087.4 pts (\u20b957999 - \u20b960173)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
