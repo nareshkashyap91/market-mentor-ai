@@ -1,5 +1,5 @@
 {
-  "timestamp": "08-Nov-2026 03:31 PM",
+  "timestamp": "08-Nov-2026 03:45 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -46,7 +46,7 @@
     "adaptive_risk_pct": 1.0,
     "risk_mode": "STANDARD ALLOCATION MODE (1.0% RISK PER TRADE)",
     "regime_confidence": 75.0,
-    "vix_val": 18.5,
+    "vix_val": 18.43000030517578,
     "reason": "Normal Market Conditions"
   },
   "portfolio_greeks_hedging": {
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "08-Nov-2026 03:31 PM",
+      "timestamp": "08-Nov-2026 03:45 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "08-Nov-2026 10:01 AM",
+    "timestamp": "08-Nov-2026 10:15 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,22 +179,22 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "08-Nov-2026 03:31 PM",
-      "net_gex_crores": 6440.1,
-      "total_call_gex_crores": 53517.1,
-      "total_put_gex_crores": 47077.1,
+      "timestamp": "08-Nov-2026 03:45 PM",
+      "net_gex_crores": 8246.5,
+      "total_call_gex_crores": 51485.1,
+      "total_put_gex_crores": 43238.5,
       "gex_regime": "\ud83d\udfe2 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE) | FLIP \u20b925,475",
       "zero_gamma_flip_level": 25475.0,
       "max_gex_strike": 25100.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "68% (heuristic: spot \u20b924,986 vs pin \u20b925,100, 1d to expiry, exp. move \u00b1\u20b9336)",
+      "pinning_probability": "67% (heuristic: spot \u20b924,986 vs pin \u20b925,100, 1d to expiry, exp. move \u00b1\u20b9348)",
       "spot": 24986.4,
       "expiry_date": "2026-11-09",
       "days_to_expiry": 1,
-      "atm_iv": 25.68,
-      "expected_move_till_expiry": 335.9,
-      "total_call_oi": 2931587,
-      "total_put_oi": 3761157,
+      "atm_iv": 26.6,
+      "expected_move_till_expiry": 347.9,
+      "total_call_oi": 2912067,
+      "total_put_oi": 3733047,
       "pcr": 1.28,
       "is_simulated": false,
       "simulated_components": [],
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "08-Nov-2026 03:31 PM",
+    "timestamp": "08-Nov-2026 03:45 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "08-Nov-2026 03:31 PM",
+    "timestamp": "08-Nov-2026 03:45 PM",
     "as_of_date": "06-Nov-2026",
     "fii_cash_net_cr": 13749.9,
     "dii_cash_net_cr": -5968.7,
@@ -470,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 1.1,
+    "stale_minutes": 15.8,
     "anomalies": [],
     "clean_rows": 126,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 1.1m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 15.8m)"
   },
   "backtest_metrics": {
     "cagr_pct": 12.2,
@@ -1044,7 +1044,7 @@
       "target1_price": 1336.8,
       "target2_price": 1348.0,
       "status": "ACTIVE_POSITION",
-      "entry_time": "08-Nov-2026 03:31 PM",
+      "entry_time": "08-Nov-2026 03:45 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1230,7 +1230,7 @@
     {
       "id": 34,
       "signal_id": "STK_LONG_RELIANCE",
-      "timestamp": "08-Nov-2026 03:31 PM",
+      "timestamp": "08-Nov-2026 03:45 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 1320.0,
@@ -1369,22 +1369,22 @@
     "regime": "\u26a1 VOLATILITY_EXPANSION",
     "adx": 56.2,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 56.7,
+    "volatility_percentile": 56.2,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 4.0,
-      "em_1sigma_pts": 483.9,
-      "em_2sigma_pts": 967.81,
-      "em_pct": 1.94,
+      "em_1sigma_pts": 482.07,
+      "em_2sigma_pts": 964.15,
+      "em_pct": 1.93,
       "range_1sigma": [
-        24502.5,
-        25470.3
+        24504.33,
+        25468.47
       ],
       "range_2sigma": [
-        24018.59,
-        25954.21
+        24022.25,
+        25950.55
       ],
-      "summary_str": "\u00b1483.9 pts (\u20b924502 - \u20b925470)"
+      "summary_str": "\u00b1482.1 pts (\u20b924504 - \u20b925468)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -1411,11 +1411,11 @@
         "rationale": "Hedged downside strategy mitigating volatility crush.",
         "win_score": 72.0,
         "greeks": {
-          "net_delta": -0.092,
-          "net_gamma": 2e-05,
+          "net_delta": -0.093,
+          "net_gamma": 3e-05,
           "net_theta": -0.24,
           "net_vega": 0.5,
-          "implied_volatility_pct": 18.5
+          "implied_volatility_pct": 18.4
         },
         "margin_info": {
           "index_name": "NIFTY",
@@ -1446,10 +1446,10 @@
         "win_score": 65.0,
         "greeks": {
           "net_delta": -0.484,
-          "net_gamma": 0.00062,
-          "net_theta": -16.03,
+          "net_gamma": 0.00063,
+          "net_theta": -15.96,
           "net_vega": 13.79,
-          "implied_volatility_pct": 18.5
+          "implied_volatility_pct": 18.4
         },
         "margin_info": {
           "index_name": "NIFTY",
@@ -1472,22 +1472,22 @@
     "regime": "\u26a1 VOLATILITY_EXPANSION",
     "adx": 64.8,
     "trend_intensity": "STRONG TREND",
-    "volatility_percentile": 56.7,
+    "volatility_percentile": 56.2,
     "confidence_score": 75.0,
     "expected_move": {
       "dte_days": 4.0,
-      "em_1sigma_pts": 1139.74,
-      "em_2sigma_pts": 2279.48,
-      "em_pct": 1.94,
+      "em_1sigma_pts": 1135.43,
+      "em_2sigma_pts": 2270.86,
+      "em_pct": 1.93,
       "range_1sigma": [
-        57710.91,
-        59990.39
+        57715.22,
+        59986.08
       ],
       "range_2sigma": [
-        56571.16,
-        61130.13
+        56579.79,
+        61121.51
       ],
-      "summary_str": "\u00b11139.7 pts (\u20b957711 - \u20b959990)"
+      "summary_str": "\u00b11135.4 pts (\u20b957715 - \u20b959986)"
     },
     "no_trade_eval": {
       "is_no_trade": false,
@@ -1514,11 +1514,11 @@
         "rationale": "Hedged downside strategy mitigating volatility crush.",
         "win_score": 72.0,
         "greeks": {
-          "net_delta": -0.079,
-          "net_gamma": 0.0,
-          "net_theta": -0.23,
-          "net_vega": 0.82,
-          "implied_volatility_pct": 18.5
+          "net_delta": -0.08,
+          "net_gamma": 1e-05,
+          "net_theta": -0.24,
+          "net_vega": 0.83,
+          "implied_volatility_pct": 18.4
         },
         "margin_info": {
           "index_name": "BANKNIFTY",
@@ -1549,10 +1549,10 @@
         "win_score": 65.0,
         "greeks": {
           "net_delta": -0.489,
-          "net_gamma": 0.00026,
-          "net_theta": -37.72,
+          "net_gamma": 0.00027,
+          "net_theta": -37.56,
           "net_vega": 32.5,
-          "implied_volatility_pct": 18.5
+          "implied_volatility_pct": 18.4
         },
         "margin_info": {
           "index_name": "BANKNIFTY",
