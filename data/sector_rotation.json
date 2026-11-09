@@ -1,5 +1,5 @@
 {
-  "timestamp": "09-Nov-2026 02:31 PM",
+  "timestamp": "09-Nov-2026 02:46 PM",
   "top_sector": "Nifty IT",
   "lagging_sector": "Nifty Infra",
   "is_simulated": true,
@@ -26,30 +26,29 @@
     "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
   },
   "gamma_exposure_analytics": {
-    "timestamp": "09-Nov-2026 08:01 PM",
-    "net_gex_crores": 131247.5,
-    "total_call_gex_crores": 284103.7,
-    "total_put_gex_crores": 152856.2,
-    "gex_regime": "\ud83d\udfe2 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE) | FLIP \u20b925,025",
-    "zero_gamma_flip_level": 25025.0,
-    "max_gex_strike": 25050.0,
+    "timestamp": "09-Nov-2026 08:16 PM",
+    "net_gex_crores": 2671.4,
+    "total_call_gex_crores": 16080.8,
+    "total_put_gex_crores": 13409.5,
+    "gex_regime": "\ud83d\udfe2 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE) | FLIP \u20b925,775",
+    "zero_gamma_flip_level": 25775.0,
+    "max_gex_strike": 25500.0,
     "max_gex_strike_side": "CALL",
-    "pinning_probability": "82% (heuristic: spot \u20b925,045 vs pin \u20b925,050, 0d to expiry, exp. move \u00b1\u20b982)",
+    "pinning_probability": "48% (heuristic: spot \u20b925,045 vs pin \u20b925,500, 8d to expiry, exp. move \u00b1\u20b9611)",
     "spot": 25044.65,
-    "expiry_date": "2026-11-09",
-    "days_to_expiry": 0,
-    "atm_iv": 8.8,
-    "expected_move_till_expiry": 81.6,
-    "total_call_oi": 3106241,
-    "total_put_oi": 3321399,
-    "pcr": 1.07,
+    "expiry_date": "2026-11-17",
+    "days_to_expiry": 8,
+    "atm_iv": 16.49,
+    "expected_move_till_expiry": 611.4,
+    "total_call_oi": 1277759,
+    "total_put_oi": 1444878,
+    "pcr": 1.13,
     "is_simulated": false,
     "simulated_components": [],
     "modeled_components": [
-      "pinning_probability (heuristic from live IV/GEX/DTE \u2014 not market-sourced)",
-      "per-strike gamma (Black-Scholes approximation \u2014 Groww greeks missing on some strikes)"
+      "pinning_probability (heuristic from live IV/GEX/DTE \u2014 not market-sourced)"
     ],
-    "data_source": "GROWW_LIVE (server-rendered NIFTY chain, nearest expiry 2026-11-09, lot 65)"
+    "data_source": "GROWW_LIVE (server-rendered NIFTY chain, nearest expiry 2026-11-17, lot 65)"
   },
   "sectors": [
     {
