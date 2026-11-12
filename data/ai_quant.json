@@ -1,5 +1,5 @@
 {
-  "timestamp": "12-Nov-2026 03:45 PM",
+  "timestamp": "12-Nov-2026 04:01 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "12-Nov-2026 03:45 PM",
+      "timestamp": "12-Nov-2026 04:01 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "12-Nov-2026 10:15 AM",
+    "timestamp": "12-Nov-2026 10:31 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "12-Nov-2026 03:45 PM",
+      "timestamp": "12-Nov-2026 04:01 PM",
       "net_gex_crores": 12731.8,
       "total_call_gex_crores": 40720.4,
       "total_put_gex_crores": 27988.6,
@@ -187,12 +187,12 @@
       "zero_gamma_flip_level": 25625.0,
       "max_gex_strike": 25500.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "52% (heuristic: spot \u20b925,299 vs pin \u20b925,500, 5d to expiry, exp. move \u00b1\u20b9458)",
+      "pinning_probability": "52% (heuristic: spot \u20b925,299 vs pin \u20b925,500, 5d to expiry, exp. move \u00b1\u20b9459)",
       "spot": 25299.35,
       "expiry_date": "2026-11-17",
       "days_to_expiry": 5,
-      "atm_iv": 15.48,
-      "expected_move_till_expiry": 458.4,
+      "atm_iv": 15.5,
+      "expected_move_till_expiry": 459.0,
       "total_call_oi": 2777882,
       "total_put_oi": 2368081,
       "pcr": 0.85,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "12-Nov-2026 03:45 PM",
+    "timestamp": "12-Nov-2026 04:01 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "12-Nov-2026 03:45 PM",
+    "timestamp": "12-Nov-2026 04:01 PM",
     "as_of_date": "11-Nov-2026",
     "fii_cash_net_cr": 12563.4,
     "dii_cash_net_cr": -8434.6,
@@ -470,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 30.8,
+    "stale_minutes": 46.1,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.8m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 46.1m)"
   },
   "backtest_metrics": {
     "cagr_pct": 6.4,
@@ -489,10 +489,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 520500.0,
+    "allocated_margin": 522000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 347,
+    "total_trades": 348,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -687,7 +687,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1143.0,
-      "current_price": 1035.0,
+      "current_price": 1151.2,
       "sl_price": 1133.86,
       "target1_price": 1153.97,
       "target2_price": 1161.29,
@@ -1644,7 +1644,21 @@
     ]
   },
   "intraday_stocks": {
-    "long_setups": [],
+    "long_setups": [
+      {
+        "symbol": "INFY",
+        "action": "BUY (LONG)",
+        "close": 1151.2,
+        "vwap": 1146.23,
+        "orb_high": 1149.8,
+        "sl": 1141.99,
+        "t1": 1162.25,
+        "t2": 1169.62,
+        "rsi": 72.3,
+        "vol_exp": 1.4,
+        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
+      }
+    ],
     "short_setups": [
       {
         "symbol": "POWERGRID",
