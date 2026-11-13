@@ -1,5 +1,5 @@
 {
-  "timestamp": "13-Nov-2026 03:45 PM",
+  "timestamp": "13-Nov-2026 04:01 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "13-Nov-2026 03:46 PM",
+      "timestamp": "13-Nov-2026 04:01 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "13-Nov-2026 10:16 AM",
+    "timestamp": "13-Nov-2026 10:31 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "13-Nov-2026 03:46 PM",
+      "timestamp": "13-Nov-2026 04:01 PM",
       "net_gex_crores": 9895.3,
       "total_call_gex_crores": 50729.8,
       "total_put_gex_crores": 40834.5,
@@ -187,12 +187,12 @@
       "zero_gamma_flip_level": 25575.0,
       "max_gex_strike": 25400.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "49% (heuristic: spot \u20b925,144 vs pin \u20b925,400, 4d to expiry, exp. move \u00b1\u20b9342)",
+      "pinning_probability": "49% (heuristic: spot \u20b925,144 vs pin \u20b925,400, 4d to expiry, exp. move \u00b1\u20b9343)",
       "spot": 25144.3,
       "expiry_date": "2026-11-17",
       "days_to_expiry": 4,
-      "atm_iv": 13.0,
-      "expected_move_till_expiry": 342.2,
+      "atm_iv": 13.02,
+      "expected_move_till_expiry": 342.7,
       "total_call_oi": 3115652,
       "total_put_oi": 2587527,
       "pcr": 0.83,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "13-Nov-2026 03:46 PM",
+    "timestamp": "13-Nov-2026 04:01 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "13-Nov-2026 03:45 PM",
+    "timestamp": "13-Nov-2026 04:01 PM",
     "as_of_date": "12-Nov-2026",
     "fii_cash_net_cr": 7830.6,
     "dii_cash_net_cr": -6331.2,
@@ -470,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 30.9,
+    "stale_minutes": 46.1,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.9m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 46.1m)"
   },
   "backtest_metrics": {
     "cagr_pct": 4.3,
@@ -679,7 +679,7 @@
       "grade": "A+"
     }
   ],
-  "active_positions_count": 35,
+  "active_positions_count": 33,
   "active_positions": [
     {
       "id": "STK_LONG_INFY",
@@ -991,7 +991,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1932.0,
-      "current_price": 1837.3,
+      "current_price": 1880.0,
       "sl_price": 1947.46,
       "target1_price": 1913.45,
       "target2_price": 1901.09,
@@ -1018,44 +1018,12 @@
       "realized_pnl": 0.0
     },
     {
-      "id": "STK_LONG_ITC",
-      "symbol": "ITC",
-      "strategy_name": "Intraday Long",
-      "action": "BUY",
-      "entry_price": 284.45,
-      "current_price": 284.45,
-      "sl_price": 282.17,
-      "target1_price": 287.18,
-      "target2_price": 289.0,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "13-Nov-2026 03:45 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
-    {
-      "id": "STK_SHORT_ADANIENT",
-      "symbol": "ADANIENT",
-      "strategy_name": "Intraday Short",
-      "action": "SELL",
-      "entry_price": 2688.0,
-      "current_price": 2688.0,
-      "sl_price": 2720.3,
-      "target1_price": 2649.24,
-      "target2_price": 2623.4,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "13-Nov-2026 03:45 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
-    {
       "id": "STK_LONG_ICICIBANK",
       "symbol": "ICICIBANK",
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1400.4,
-      "current_price": 1400.4,
+      "current_price": 1583.6,
       "sl_price": 1389.2,
       "target1_price": 1413.84,
       "target2_price": 1422.81,
@@ -1244,24 +1212,6 @@
   ],
   "signal_audit_log": [
     {
-      "id": 35,
-      "signal_id": "STK_SHORT_ADANIENT",
-      "timestamp": "13-Nov-2026 03:45 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 2688.0,
-      "notes": "Position initialized at \u20b92688.00"
-    },
-    {
-      "id": 34,
-      "signal_id": "STK_LONG_ITC",
-      "timestamp": "13-Nov-2026 03:45 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 284.45,
-      "notes": "Position initialized at \u20b9284.45"
-    },
-    {
       "id": 33,
       "signal_id": "STK_SHORT_LT",
       "timestamp": "04-Oct-2026 01:04 PM",
@@ -1377,6 +1327,24 @@
       "new_status": "ACTIVE_POSITION",
       "spot_price": 267.7,
       "notes": "Position initialized at \u20b9267.70"
+    },
+    {
+      "id": 20,
+      "signal_id": "STK_SHORT_BHARTIARTL",
+      "timestamp": "05-Sep-2026 04:41 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 1840.0,
+      "notes": "Position initialized at \u20b91840.00"
+    },
+    {
+      "id": 19,
+      "signal_id": "STK_LONG_INFY",
+      "timestamp": "28-Aug-2026 03:17 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 1143.0,
+      "notes": "Position initialized at \u20b91143.00"
     }
   ],
   "nifty": {
@@ -1716,32 +1684,32 @@
   "intraday_stocks": {
     "long_setups": [
       {
-        "symbol": "ITC",
+        "symbol": "ICICIBANK",
         "action": "BUY (LONG)",
-        "close": 284.45,
-        "vwap": 283.87,
-        "orb_high": 283.65,
-        "sl": 282.17,
-        "t1": 287.18,
-        "t2": 289.0,
-        "rsi": 70.8,
-        "vol_exp": 2.0,
-        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+        "close": 1583.6,
+        "vwap": 1574.45,
+        "orb_high": 1583.1,
+        "sl": 1570.93,
+        "t1": 1598.8,
+        "t2": 1608.94,
+        "rsi": 65.2,
+        "vol_exp": 2.2,
+        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
       }
     ],
     "short_setups": [
       {
-        "symbol": "ADANIENT",
+        "symbol": "SUNPHARMA",
         "action": "SHORT SELL",
-        "close": 2688.0,
-        "vwap": 2704.91,
-        "orb_low": 2720.3,
-        "sl": 2720.3,
-        "t1": 2649.24,
-        "t2": 2623.4,
-        "rsi": 25.9,
-        "vol_exp": 3.1,
-        "pattern": "\ud83d\udfe2 Hammer Pattern (Demand Reversal at Support)"
+        "close": 1880.0,
+        "vwap": 1888.75,
+        "orb_low": 1891.3,
+        "sl": 1895.04,
+        "t1": 1861.95,
+        "t2": 1849.92,
+        "rsi": 35.3,
+        "vol_exp": 3.3,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ]
   }
