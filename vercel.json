@@ -1,5 +1,6 @@
 {
   "cleanUrls": true,
+  "ignoreCommand": "if git log -1 --pretty=%B | grep -qi \"skip\"; then exit 0; fi; if git diff HEAD^ HEAD --quiet index.html app.js style.css package.json vercel.json api/; then exit 0; else exit 1; fi",
   "headers": [
     {
       "source": "/data/(.*).json",
