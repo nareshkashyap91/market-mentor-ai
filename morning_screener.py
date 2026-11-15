@@ -78,26 +78,9 @@ def fetch_yfinance_quote(ticker):
     return None, None
 
 def send_to_telegram(report, bot_token, chat_id):
-    """Sends the formatted morning report to Telegram, splitting if necessary."""
-    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-    
-    # Telegram limit is 4096. We split at 4000 for safety.
-    if len(report) <= 4000:
-        payload = {
-            "chat_id": chat_id,
-            "text": report,
-            "parse_mode": "Markdown"
-        }
-        try:
-            response = requests.post(url, json=payload, timeout=15)
-            if response.status_code == 200:
-                print("[INFO] Successfully sent report to Telegram!")
-            else:
-                print(f"[ERROR] Telegram sending failed: {response.text}")
-        except Exception as e:
-            print(f"[ERROR] Exception sending to Telegram: {e}")
-    else:
-        # Split logic
+    """Sends the formatted morning report to Telegram with market-holiday protection."""
+    from telegram_config import send_deduplicated_telegram_alert
+    return send_deduplicated_telegram_alert(report, bot_token=bot_token, chat_id=chat_id, segment="EQ", alert_type="MORNING_REPORT")
         lines = report.split("\n")
         chunks = []
         current_chunk = []
