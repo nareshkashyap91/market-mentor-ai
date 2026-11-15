@@ -1460,6 +1460,9 @@ function renderLegendaryTraders(data) {
     const turtleEl = document.getElementById("legendary-turtle-count");
     const connorsEl = document.getElementById("legendary-connors-count");
     const clenowEl = document.getElementById("legendary-clenow-count");
+    const smcEl = document.getElementById("legendary-smc-count");
+    const rsEl = document.getElementById("legendary-rs-count");
+    const strangleEl = document.getElementById("legendary-strangle-count");
 
     if (scannedEl) scannedEl.textContent = summary.total_scanned || 0;
     if (vcpEl) vcpEl.textContent = summary.vcp_setups_found || 0;
@@ -1467,6 +1470,9 @@ function renderLegendaryTraders(data) {
     if (turtleEl) turtleEl.textContent = summary.turtle_breakouts || 0;
     if (connorsEl) connorsEl.textContent = summary.connors_dip_buys || 0;
     if (clenowEl) clenowEl.textContent = summary.clenow_leaders || 0;
+    if (smcEl) smcEl.textContent = summary.smc_liquidity_sweeps || 0;
+    if (rsEl) rsEl.textContent = summary.rs_momentum_leaders || 0;
+    if (strangleEl) strangleEl.textContent = summary.delta_neutral_strangles || 0;
 
     // 1. Mark Minervini VCP Render
     const vcpContainer = document.getElementById("minervini-vcp-container");
@@ -1761,6 +1767,176 @@ function renderLegendaryTraders(data) {
                     <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
                         <span>20D ATR: ₹${esc(item.atr_20?.toFixed(2))}</span>
                         <span style="color: #38bdf8; font-weight: 600;">100 SMA: ₹${esc(item.sma_100?.toFixed(2))}</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 6. Smart Money Concepts (SMC) Liquidity Sweep Render
+    const smcContainer = document.getElementById("smc-sweep-container");
+    if (smcContainer && Array.isArray(data.smc_liquidity_sweep)) {
+        if (data.smc_liquidity_sweep.length === 0) {
+            smcContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently in active SMC liquidity sweep.</p></div>`;
+        } else {
+            smcContainer.innerHTML = data.smc_liquidity_sweep.map(item => {
+                const isConfirmed = item.smc_state === "BULLISH_SWEEP_CONFIRMED";
+                const sigColor = isConfirmed ? "#10b981" : item.badge_color === "blue" ? "#60a5fa" : "#fbbf24";
+                const sigBg = isConfirmed ? "rgba(16, 185, 129, 0.15)" : "rgba(168, 85, 247, 0.15)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.smc_state)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Demand Order Block:</span>
+                            <span style="font-weight: 700; color: #34d399;">${esc(item.demand_order_block)}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Swept 20D Low:</span>
+                            <span style="font-weight: 600; color: #f87171;">₹${esc(item.swing_low_20d?.toFixed(2))}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">Rejection Wick / Volume:</span>
+                            <span style="font-weight: 600; color: #c084fc;">${esc(item.rejection_wick_pct)}% (${esc(item.volume_expansion)}x Vol)</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(16, 185, 129, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #10b981;">
+                            <div style="color: #6ee7b7; font-size: 0.7rem; text-transform: uppercase;">Entry / Target 1</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.entry_trigger)} &rarr; ₹${esc(item.target_1)}</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Stop-Loss (SL)</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.stop_loss)}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Target 2: <strong style="color: #38bdf8;">₹${esc(item.target_2)}</strong></span>
+                        <span style="color: #10b981; font-weight: 700;">RRR: ${esc(item.rrr_ratio)}</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 7. Sector Relative Strength (RS) Leadership Render
+    const rsContainer = document.getElementById("sector-rs-container");
+    if (rsContainer && Array.isArray(data.sector_rs_leaders)) {
+        if (data.sector_rs_leaders.length === 0) {
+            rsContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently in Sector RS leadership ranking.</p></div>`;
+        } else {
+            rsContainer.innerHTML = data.sector_rs_leaders.map(item => {
+                const isLeader = item.rs_status === "DII_ACCUMULATION_LEADER";
+                const sigColor = isLeader ? "#fbbf24" : item.badge_color === "blue" ? "#60a5fa" : "#94a3b8";
+                const sigBg = isLeader ? "rgba(245, 158, 11, 0.15)" : "rgba(59, 130, 246, 0.15)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.rs_status)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">RS vs Nifty 50 (3M):</span>
+                            <span style="font-weight: 700; color: ${item.rs_score >= 8 ? '#34d399' : '#60a5fa'};">${esc(item.rs_score > 0 ? '+' : '')}${esc(item.rs_score?.toFixed(2))}%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Stock 3M / Nifty 3M:</span>
+                            <span style="font-weight: 600; color: #fff;">${esc(item.stock_3m_return_pct)}% vs ${esc(item.nifty_3m_return_pct)}%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">From 20D Pivot High:</span>
+                            <span style="font-weight: 600; color: #38bdf8;">${esc(item.pct_from_20d_high)}% away</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(245, 158, 11, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #f59e0b;">
+                            <div style="color: #fde68a; font-size: 0.7rem; text-transform: uppercase;">Breakout Entry</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.entry_trigger)}</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Stop-Loss (20 EMA)</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.stop_loss)}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Target 1: <strong style="color: #34d399;">₹${esc(item.target_1)}</strong></span>
+                        <span style="color: #fbbf24; font-weight: 600;">DII Model</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 8. Delta-Neutral Options Strangle Render
+    const strangleContainer = document.getElementById("delta-strangle-container");
+    if (strangleContainer && Array.isArray(data.delta_neutral_strangle)) {
+        if (data.delta_neutral_strangle.length === 0) {
+            strangleContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No active delta-neutral strangle setups.</p></div>`;
+        } else {
+            strangleContainer.innerHTML = data.delta_neutral_strangle.map(item => {
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.underlying)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">Spot: ₹${esc(item.spot_price?.toFixed(2))} &bull; IV: ${esc(item.iv_pct)}%</div>
+                        </div>
+                        <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #10b98140; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.regime_status)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Sell OTM Call Strike:</span>
+                            <span style="font-weight: 700; color: #f87171;">${esc(item.call_strike)} CE (Est. ₹${esc(item.est_call_premium)})</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Sell OTM Put Strike:</span>
+                            <span style="font-weight: 700; color: #34d399;">${esc(item.put_strike)} PE (Est. ₹${esc(item.est_put_premium)})</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">Combined Premium Inflow:</span>
+                            <span style="font-weight: 700; color: #fbbf24;">₹${esc(item.total_premium_collected)} Points</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(16, 185, 129, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #10b981;">
+                            <div style="color: #6ee7b7; font-size: 0.7rem; text-transform: uppercase;">Profit Target (55% Decay)</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${esc(item.profit_target_decay)}</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Stop-Loss Rule</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.85rem;">${esc(item.stop_loss_per_leg)}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Safe Weekly Range: <strong style="color: #38bdf8;">${esc(item.expected_weekly_range)}</strong></span>
+                        <span style="color: #34d399; font-weight: 700;">Win Rate: ${esc(item.historical_win_rate)}</span>
                     </div>
                 </div>`;
             }).join("");

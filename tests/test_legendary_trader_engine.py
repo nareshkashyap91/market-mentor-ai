@@ -62,3 +62,32 @@ def test_legendary_trader_math_calculations():
     assert "clenow_momentum_score" in clenow_res
     assert "risk_parity_shares" in clenow_res
     assert clenow_res["r_squared"] >= 0.0
+
+    # 6. Smart Money Concepts (SMC) Liquidity Sweep check
+    smc_res = LegendaryTraderEngine.evaluate_smc_liquidity_sweep("TEST_STOCK", df)
+    assert smc_res is not None
+    assert "swing_low_20d" in smc_res
+    assert "demand_order_block" in smc_res
+    assert "entry_trigger" in smc_res
+    assert "stop_loss" in smc_res
+    assert "target_1" in smc_res
+    assert "target_2" in smc_res
+    assert "conviction_score" in smc_res
+
+    # 7. Sector Relative Strength (RS) Leader check
+    rs_res = LegendaryTraderEngine.evaluate_sector_rs_leader("TEST_STOCK", df, nifty_3m_return=5.0)
+    assert rs_res is not None
+    assert "stock_3m_return_pct" in rs_res
+    assert "rs_score" in rs_res
+    assert "rs_status" in rs_res
+    assert "entry_trigger" in rs_res
+    assert "stop_loss" in rs_res
+
+    # 8. Delta-Neutral Options Strangle check
+    strangle_res = LegendaryTraderEngine.evaluate_delta_neutral_strangle("NIFTY 50", spot=23500.0, iv_pct=13.5, dte=3)
+    assert strangle_res is not None
+    assert strangle_res["call_strike"] > 23500.0
+    assert strangle_res["put_strike"] < 23500.0
+    assert "stop_loss_per_leg" in strangle_res
+    assert "profit_target_decay" in strangle_res
+    assert "total_premium_collected" in strangle_res
