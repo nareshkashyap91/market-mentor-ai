@@ -1458,11 +1458,15 @@ function renderLegendaryTraders(data) {
     const vcpEl = document.getElementById("legendary-vcp-count");
     const simonsEl = document.getElementById("legendary-simons-count");
     const turtleEl = document.getElementById("legendary-turtle-count");
+    const connorsEl = document.getElementById("legendary-connors-count");
+    const clenowEl = document.getElementById("legendary-clenow-count");
 
     if (scannedEl) scannedEl.textContent = summary.total_scanned || 0;
     if (vcpEl) vcpEl.textContent = summary.vcp_setups_found || 0;
     if (simonsEl) simonsEl.textContent = summary.simons_extreme_reversions || 0;
     if (turtleEl) turtleEl.textContent = summary.turtle_breakouts || 0;
+    if (connorsEl) connorsEl.textContent = summary.connors_dip_buys || 0;
+    if (clenowEl) clenowEl.textContent = summary.clenow_leaders || 0;
 
     // 1. Mark Minervini VCP Render
     const vcpContainer = document.getElementById("minervini-vcp-container");
@@ -1641,4 +1645,126 @@ function renderLegendaryTraders(data) {
             }).join("");
         }
     }
+
+    // 4. Larry Connors RSI(2) High Win-Rate Mean Reversion Render
+    const connorsContainer = document.getElementById("connors-rsi2-container");
+    if (connorsContainer && Array.isArray(data.connors_rsi2)) {
+        if (data.connors_rsi2.length === 0) {
+            connorsContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently in Connors RSI(2) pullback zone.</p></div>`;
+        } else {
+            connorsContainer.innerHTML = data.connors_rsi2.map(item => {
+                const isExtreme = item.signal === "CONNORS_EXTREME_OVERSOLD_BUY";
+                const isDip = item.signal === "CONNORS_DEEP_DIP_BUY";
+                const isWatch = item.signal === "CONNORS_PULLBACK_WATCH";
+                const sigColor = isExtreme ? "#10b981" : isDip ? "#34d399" : isWatch ? "#f59e0b" : "#94a3b8";
+                const sigBg = (isExtreme || isDip) ? "rgba(16, 185, 129, 0.15)" : isWatch ? "rgba(245, 158, 11, 0.15)" : "rgba(148, 163, 184, 0.1)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.status)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">2-Period RSI:</span>
+                            <span style="font-weight: 700; color: ${item.rsi_2 <= 10 ? '#34d399' : '#f59e0b'};">${esc(item.rsi_2?.toFixed(1))} ${item.rsi_2 <= 10 ? '⚡ (Extreme Dip)' : ''}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">200-Day SMA Trend:</span>
+                            <span style="font-weight: 600; color: ${item.is_above_200_sma ? '#34d399' : '#f87171'};">
+                                ${item.is_above_200_sma ? '✅ Bull Market (> 200 SMA)' : '❌ Below 200 SMA'}
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">Historical Edge:</span>
+                            <span style="font-weight: 600; color: #38bdf8;">${esc(item.historical_win_rate)}</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(16, 185, 129, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #10b981;">
+                            <div style="color: #6ee7b7; font-size: 0.7rem; text-transform: uppercase;">5-Day SMA Exit Target</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.exit_target_sma5?.toFixed(2))}</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Stop Loss (2x ATR)</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.stop_loss?.toFixed(2))}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Target Gain: <strong style="color: #34d399;">+${esc(item.expected_bounce_pct?.toFixed(2))}%</strong></span>
+                        <span style="color: #fbbf24; font-weight: 600;">Hold: ${esc(item.holding_period)}</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 5. Andreas Clenow 'Stocks on the Move' Institutional Momentum Render
+    const clenowContainer = document.getElementById("clenow-momentum-container");
+    if (clenowContainer && Array.isArray(data.clenow_momentum)) {
+        if (data.clenow_momentum.length === 0) {
+            clenowContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently in Clenow momentum ranking.</p></div>`;
+        } else {
+            clenowContainer.innerHTML = data.clenow_momentum.map(item => {
+                const isLeader = item.momentum_status === "INSTITUTIONAL_LEADER";
+                const isAcc = item.momentum_status === "MOMENTUM_ACCELERATING";
+                const sigColor = isLeader ? "#3b82f6" : isAcc ? "#60a5fa" : "#94a3b8";
+                const sigBg = isLeader ? "rgba(59, 130, 246, 0.15)" : isAcc ? "rgba(96, 165, 250, 0.15)" : "rgba(148, 163, 184, 0.1)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.momentum_status)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Clenow Momentum Score:</span>
+                            <span style="font-weight: 700; color: ${item.clenow_momentum_score >= 15 ? '#3b82f6' : '#94a3b8'};">${esc(item.clenow_momentum_score?.toFixed(2))}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Annualized Slope:</span>
+                            <span style="font-weight: 600; color: ${item.annualized_slope_pct > 0 ? '#34d399' : '#f87171'};">${esc(item.annualized_slope_pct > 0 ? '+' : '')}${esc(item.annualized_slope_pct?.toFixed(2))}%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">R² (Trend Smoothness):</span>
+                            <span style="font-weight: 600; color: #38bdf8;">${esc(item.r_squared?.toFixed(3))} / 1.000</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(59, 130, 246, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #3b82f6;">
+                            <div style="color: #93c5fd; font-size: 0.7rem; text-transform: uppercase;">Risk-Parity Shares</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${esc(item.risk_parity_shares)} Qty</div>
+                        </div>
+                        <div style="background: rgba(168, 85, 247, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #a855f7;">
+                            <div style="color: #d8b4fe; font-size: 0.7rem; text-transform: uppercase;">Capital Allocation</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.suggested_capital_allocation?.toLocaleString('en-IN'))}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>20D ATR: ₹${esc(item.atr_20?.toFixed(2))}</span>
+                        <span style="color: #38bdf8; font-weight: 600;">100 SMA: ₹${esc(item.sma_100?.toFixed(2))}</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
 }

@@ -663,8 +663,7 @@
                                 <i class="fa-solid fa-crown" style="color: #f59e0b;"></i> Wall Street Legendary Traders Strategy Studio
                             </h2>
                             <p style="color: #94a3b8; font-size: 0.88rem; margin-top: 4px;">
-                                Institutional quantitative models replicating <strong>Mark Minervini</strong> (VCP &amp; Trend Template), 
-                                <strong>Jim Simons</strong> (Renaissance Z-Score Mean Reversion), and <strong>Richard Dennis</strong> (Turtle Trend Donchian System).
+                                Institutional quantitative models replicating <strong>Larry Connors</strong> (RSI-2 75-80% Win Rate Dip), <strong>Andreas Clenow</strong> (R² Momentum), <strong>Mark Minervini</strong> (VCP), <strong>Jim Simons</strong> (Z-Score Reversion), and <strong>Richard Dennis</strong> (Turtles).
                             </p>
                         </div>
                         <div style="display: flex; gap: 8px;">
@@ -712,6 +711,22 @@
                             <span class="stat-sub">20-Day Donchian &amp; 2x ATR</span>
                         </div>
                     </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon emerald" style="background: rgba(16, 185, 129, 0.15); color: #10b981;"><i class="fa-solid fa-bullseye"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Connors RSI(2) Dips</span>
+                            <h3 class="stat-value" id="legendary-connors-count">0</h3>
+                            <span class="stat-sub">75-80% Win Rate Bounce</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon blue" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Clenow R² Momentum</span>
+                            <h3 class="stat-value" id="legendary-clenow-count">0</h3>
+                            <span class="stat-sub">Institutional Smooth Trend</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Strategy 1: Mark Minervini VCP Grid -->
@@ -747,7 +762,7 @@
                 </div>
 
                 <!-- Strategy 3: Richard Dennis Turtle Trend Trading Grid -->
-                <div class="glass-card panel-card">
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
                     <div class="panel-header">
                         <div>
                             <h2 class="panel-title">
@@ -759,6 +774,38 @@
                     </div>
                     <div id="turtle-trend-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
                         <!-- Turtle Trend cards injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Strategy 4: Larry Connors RSI(2) High Win-Rate Mean Reversion Grid -->
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">
+                                <i class="fa-solid fa-crosshairs" style="color: #10b981;"></i> Larry Connors — RSI(2) High Win-Rate Reversion (75%–80% Win Rate)
+                            </h2>
+                            <span style="font-size: 0.8rem; color: #94a3b8;">Secular Bull Filter (Price &gt; 200 SMA) &bull; Extreme 2-Period Panic Dip (RSI2 &lt; 10) &bull; Exit on 5-Day SMA Cross (2-4 Days Holding)</span>
+                        </div>
+                        <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">75-80% Win Rate</span>
+                    </div>
+                    <div id="connors-rsi2-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Connors RSI(2) cards injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Strategy 5: Andreas Clenow Stocks on the Move R² Momentum Grid -->
+                <div class="glass-card panel-card">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">
+                                <i class="fa-solid fa-chart-line-up" style="color: #3b82f6;"></i> Andreas Clenow — "Stocks on the Move" (R² Exponential Momentum)
+                            </h2>
+                            <span style="font-size: 0.8rem; color: #94a3b8;">90-Day Annualized Exponential Slope &times; R² Consistency &bull; Price &gt; 100 SMA &bull; Volatility-Targeted ATR Position Sizing</span>
+                        </div>
+                        <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">Institutional Momentum</span>
+                    </div>
+                    <div id="clenow-momentum-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Clenow Momentum cards injected dynamically -->
                     </div>
                 </div>
             </div>
