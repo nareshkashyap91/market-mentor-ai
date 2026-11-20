@@ -1,5 +1,5 @@
 {
-  "timestamp": "20-Nov-2026 05:45 AM",
+  "timestamp": "20-Nov-2026 06:00 AM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "20-Nov-2026 05:46 AM",
+      "timestamp": "20-Nov-2026 06:01 AM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "20-Nov-2026 12:16 AM",
+    "timestamp": "20-Nov-2026 12:31 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -167,8 +167,7 @@
       "Nifty FMCG",
       "Nifty Energy",
       "Nifty Realty",
-      "Nifty Infra",
-      "gamma_exposure_analytics (Groww chain unreachable)"
+      "Nifty Infra"
     ],
     "market_breadth": {
       "advances": 5,
@@ -180,18 +179,29 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "20-Nov-2026 05:46 AM",
-      "net_gex_crores": -1850.0,
+      "timestamp": "20-Nov-2026 06:01 AM",
+      "net_gex_crores": -978.0,
+      "total_call_gex_crores": 47608.0,
+      "total_put_gex_crores": 48586.0,
       "gex_regime": "\ud83d\udd34 NEGATIVE GAMMA (VOLATILITY SPIKE RISK)",
       "zero_gamma_flip_level": null,
-      "max_gex_strike": null,
-      "pinning_probability": "N/A (live chain unavailable)",
-      "is_simulated": true,
-      "simulated_components": [
-        "gamma_exposure_analytics (Groww chain unreachable \u2014 illustrative values)"
+      "max_gex_strike": 26000.0,
+      "max_gex_strike_side": "CALL",
+      "pinning_probability": "45% (heuristic: spot \u20b925,514 vs pin \u20b926,000, 3d to expiry, exp. move \u00b1\u20b9293)",
+      "spot": 25514.3,
+      "expiry_date": "2026-11-23",
+      "days_to_expiry": 3,
+      "atm_iv": 12.68,
+      "expected_move_till_expiry": 293.3,
+      "total_call_oi": 2427448,
+      "total_put_oi": 3576050,
+      "pcr": 1.47,
+      "is_simulated": false,
+      "simulated_components": [],
+      "modeled_components": [
+        "pinning_probability (heuristic from live IV/GEX/DTE \u2014 not market-sourced)"
       ],
-      "modeled_components": [],
-      "data_source": "ANALYTICAL_MODEL_PLACEHOLDER (Groww chain unreachable \u2014 values are illustrative, not live dealer positioning)"
+      "data_source": "GROWW_LIVE (server-rendered NIFTY chain, nearest expiry 2026-11-23, lot 65)"
     },
     "sectors": [
       {
@@ -362,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "20-Nov-2026 05:46 AM",
+    "timestamp": "20-Nov-2026 06:01 AM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -380,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "20-Nov-2026 05:45 AM",
+    "timestamp": "20-Nov-2026 06:00 AM",
     "as_of_date": "18-Nov-2026",
     "fii_cash_net_cr": 5866.8,
     "dii_cash_net_cr": -3159.9,
@@ -460,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 871.0,
+    "stale_minutes": 885.9,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 871.0m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 885.9m)"
   },
   "backtest_metrics": {
     "cagr_pct": 2.5,
@@ -938,7 +948,7 @@
       "target1_price": 4771.04,
       "target2_price": 4818.4,
       "status": "ACTIVE_POSITION",
-      "entry_time": "20-Nov-2026 05:45 AM",
+      "entry_time": "20-Nov-2026 06:00 AM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1220,7 +1230,7 @@
     {
       "id": 34,
       "signal_id": "STK_LONG_TITAN",
-      "timestamp": "20-Nov-2026 05:45 AM",
+      "timestamp": "20-Nov-2026 06:00 AM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 4700.0,
