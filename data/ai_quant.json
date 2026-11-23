@@ -1,5 +1,5 @@
 {
-  "timestamp": "23-Nov-2026 03:45 PM",
+  "timestamp": "23-Nov-2026 04:00 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "23-Nov-2026 03:45 PM",
+      "timestamp": "23-Nov-2026 04:00 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "23-Nov-2026 10:15 AM",
+    "timestamp": "23-Nov-2026 10:30 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "23-Nov-2026 03:45 PM",
+      "timestamp": "23-Nov-2026 04:00 PM",
       "net_gex_crores": -19828.5,
       "total_call_gex_crores": 199174.2,
       "total_put_gex_crores": 219002.6,
@@ -373,7 +373,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "23-Nov-2026 03:45 PM",
+    "timestamp": "23-Nov-2026 04:00 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -391,7 +391,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "23-Nov-2026 03:45 PM",
+    "timestamp": "23-Nov-2026 04:00 PM",
     "as_of_date": "20-Nov-2026",
     "fii_cash_net_cr": 10308.5,
     "dii_cash_net_cr": -4859.8,
@@ -471,17 +471,17 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 30.8,
+    "stale_minutes": 45.9,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 30.8m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 45.9m)"
   },
   "backtest_metrics": {
     "cagr_pct": 0.3,
-    "sharpe_ratio": -3.65,
-    "max_drawdown_pct": -1.3,
+    "sharpe_ratio": -3.64,
+    "max_drawdown_pct": -1.4,
     "profit_factor": 1.03,
-    "win_rate_pct": 57.3,
+    "win_rate_pct": 58.1,
     "total_backtest_trades": 124,
     "strategy_name": "AI Multi-Regime Options Quant Strategy",
     "walk_forward_status": "PASSED (Robust In-Sample & Out-of-Sample Alignment)"
@@ -490,10 +490,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 525000.0,
+    "allocated_margin": 528000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 350,
+    "total_trades": 352,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -680,7 +680,7 @@
       "grade": "A+"
     }
   ],
-  "active_positions_count": 36,
+  "active_positions_count": 35,
   "active_positions": [
     {
       "id": "STK_LONG_INFY",
@@ -911,45 +911,29 @@
       "symbol": "TITAN",
       "strategy_name": "Intraday Long",
       "action": "BUY",
-      "entry_price": 4683.0,
-      "current_price": 4683.0,
-      "sl_price": 4645.54,
-      "target1_price": 4727.96,
-      "target2_price": 4757.93,
+      "entry_price": 4680.0,
+      "current_price": 4680.0,
+      "sl_price": 4642.56,
+      "target1_price": 4724.93,
+      "target2_price": 4754.88,
       "status": "ACTIVE_POSITION",
-      "entry_time": "23-Nov-2026 03:45 PM",
+      "entry_time": "23-Nov-2026 04:00 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
     },
     {
-      "id": "STK_SHORT_ADANIENT",
-      "symbol": "ADANIENT",
+      "id": "STK_SHORT_KOTAKBANK",
+      "symbol": "KOTAKBANK",
       "strategy_name": "Intraday Short",
       "action": "SELL",
-      "entry_price": 2673.9,
-      "current_price": 2673.9,
-      "sl_price": 2711.2,
-      "target1_price": 2629.14,
-      "target2_price": 2599.3,
+      "entry_price": 502.85,
+      "current_price": 502.85,
+      "sl_price": 510.1,
+      "target1_price": 494.15,
+      "target2_price": 488.35,
       "status": "ACTIVE_POSITION",
-      "entry_time": "23-Nov-2026 03:45 PM",
-      "exit_time": null,
-      "unrealized_pnl": 0.0,
-      "realized_pnl": 0.0
-    },
-    {
-      "id": "STK_SHORT_M&M",
-      "symbol": "M&M",
-      "strategy_name": "Intraday Short",
-      "action": "SELL",
-      "entry_price": 3490.0,
-      "current_price": 3490.0,
-      "sl_price": 3530.8,
-      "target1_price": 3441.04,
-      "target2_price": 3408.4,
-      "status": "ACTIVE_POSITION",
-      "entry_time": "23-Nov-2026 03:45 PM",
+      "entry_time": "23-Nov-2026 04:00 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1040,7 +1024,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1932.0,
-      "current_price": 1837.3,
+      "current_price": 1860.0,
       "sl_price": 1947.46,
       "target1_price": 1913.45,
       "target2_price": 1901.09,
@@ -1088,7 +1072,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1087.8,
-      "current_price": 1087.4,
+      "current_price": 1103.4,
       "sl_price": 1100.9,
       "target1_price": 1072.08,
       "target2_price": 1061.6,
@@ -1152,7 +1136,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1057.9,
-      "current_price": 1095.0,
+      "current_price": 1095.5,
       "sl_price": 1066.36,
       "target1_price": 1047.74,
       "target2_price": 1040.97,
@@ -1232,7 +1216,7 @@
       "strategy_name": "Intraday Short",
       "action": "SELL",
       "entry_price": 1840.0,
-      "current_price": 1840.0,
+      "current_price": 2128.5,
       "sl_price": 1861.1,
       "target1_price": 1814.68,
       "target2_price": 1797.8,
@@ -1261,31 +1245,22 @@
   ],
   "signal_audit_log": [
     {
-      "id": 36,
-      "signal_id": "STK_SHORT_M&M",
-      "timestamp": "23-Nov-2026 03:45 PM",
-      "previous_status": "NEW_SIGNAL",
-      "new_status": "ACTIVE_POSITION",
-      "spot_price": 3490.0,
-      "notes": "Position initialized at \u20b93490.00"
-    },
-    {
       "id": 35,
-      "signal_id": "STK_SHORT_ADANIENT",
-      "timestamp": "23-Nov-2026 03:45 PM",
+      "signal_id": "STK_SHORT_KOTAKBANK",
+      "timestamp": "23-Nov-2026 04:00 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
-      "spot_price": 2673.9,
-      "notes": "Position initialized at \u20b92673.90"
+      "spot_price": 502.85,
+      "notes": "Position initialized at \u20b9502.85"
     },
     {
       "id": 34,
       "signal_id": "STK_LONG_TITAN",
-      "timestamp": "23-Nov-2026 03:45 PM",
+      "timestamp": "23-Nov-2026 04:00 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
-      "spot_price": 4683.0,
-      "notes": "Position initialized at \u20b94683.00"
+      "spot_price": 4680.0,
+      "notes": "Position initialized at \u20b94680.00"
     },
     {
       "id": 33,
@@ -1394,6 +1369,15 @@
       "new_status": "ACTIVE_POSITION",
       "spot_price": 11235.0,
       "notes": "Position initialized at \u20b911235.00"
+    },
+    {
+      "id": 21,
+      "signal_id": "STK_LONG_POWERGRID",
+      "timestamp": "07-Sep-2026 12:33 PM",
+      "previous_status": "NEW_SIGNAL",
+      "new_status": "ACTIVE_POSITION",
+      "spot_price": 267.7,
+      "notes": "Position initialized at \u20b9267.70"
     }
   ],
   "nifty": {
@@ -1697,55 +1681,81 @@
       {
         "symbol": "TITAN",
         "action": "BUY (LONG)",
-        "close": 4683.0,
-        "vwap": 4651.72,
+        "close": 4680.0,
+        "vwap": 4653.87,
         "orb_high": 4674.2,
-        "sl": 4645.54,
-        "t1": 4727.96,
-        "t2": 4757.93,
-        "rsi": 55.5,
-        "vol_exp": 2.5,
-        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
+        "sl": 4642.56,
+        "t1": 4724.93,
+        "t2": 4754.88,
+        "rsi": 64.9,
+        "vol_exp": 1.5,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ],
     "short_setups": [
       {
-        "symbol": "ADANIENT",
+        "symbol": "BHARTIARTL",
         "action": "SHORT SELL",
-        "close": 2673.9,
-        "vwap": 2705.23,
-        "orb_low": 2711.2,
-        "sl": 2711.2,
-        "t1": 2629.14,
-        "t2": 2599.3,
-        "rsi": 16.5,
-        "vol_exp": 2.8,
+        "close": 2128.5,
+        "vwap": 2134.57,
+        "orb_low": 2150.3,
+        "sl": 2150.3,
+        "t1": 2102.34,
+        "t2": 2084.9,
+        "rsi": 47.3,
+        "vol_exp": 2.9,
+        "pattern": "\ud83d\udd34 Bearish Engulfing (Reversal Setup)"
+      },
+      {
+        "symbol": "INFY",
+        "action": "SHORT SELL",
+        "close": 1103.4,
+        "vwap": 1113.47,
+        "orb_low": 1107.7,
+        "sl": 1112.23,
+        "t1": 1092.81,
+        "t2": 1085.75,
+        "rsi": 42.8,
+        "vol_exp": 2.7,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       },
       {
-        "symbol": "M&M",
+        "symbol": "SUNPHARMA",
         "action": "SHORT SELL",
-        "close": 3490.0,
-        "vwap": 3511.54,
-        "orb_low": 3530.8,
-        "sl": 3530.8,
-        "t1": 3441.04,
-        "t2": 3408.4,
-        "rsi": 17.2,
-        "vol_exp": 2.1,
-        "pattern": "\ud83d\udfe2 Hammer Pattern (Demand Reversal at Support)"
+        "close": 1860.0,
+        "vwap": 1871.43,
+        "orb_low": 1883.9,
+        "sl": 1883.9,
+        "t1": 1831.32,
+        "t2": 1812.2,
+        "rsi": 26.3,
+        "vol_exp": 2.7,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
+      },
+      {
+        "symbol": "KOTAKBANK",
+        "action": "SHORT SELL",
+        "close": 502.85,
+        "vwap": 506.93,
+        "orb_low": 510.1,
+        "sl": 510.1,
+        "t1": 494.15,
+        "t2": 488.35,
+        "rsi": 29.0,
+        "vol_exp": 2.6,
+        "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       },
       {
         "symbol": "BAJFINANCE",
         "action": "SHORT SELL",
-        "close": 1095.0,
-        "vwap": 1108.04,
+        "close": 1095.5,
+        "vwap": 1107.0,
         "orb_low": 1111.05,
         "sl": 1111.05,
-        "t1": 1075.74,
-        "t2": 1062.9,
-        "rsi": 23.3,
-        "vol_exp": 1.6,
+        "t1": 1076.84,
+        "t2": 1064.4,
+        "rsi": 24.5,
+        "vol_exp": 2.5,
         "pattern": "\ud83d\udcca Consolidating / Price Action Normal"
       }
     ]
