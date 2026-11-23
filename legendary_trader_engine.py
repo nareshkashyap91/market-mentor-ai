@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import numpy as np
 import pandas as pd
 import yfinance as yf
@@ -711,7 +712,140 @@ class LegendaryTraderEngine:
 
         atomic_write_json(cls.JSON_PATH, payload)
         print(f"[SUCCESS] Exported Legendary Trader Studio V3.0 payload to {cls.JSON_PATH}")
+
+        # Broadcast live high-conviction alerts to Telegram with market-hours & holiday protection
+        try:
+            cls.broadcast_legendary_setups(payload)
+        except Exception as e:
+            print(f"[WARN] Legendary Trader Telegram broadcast encountered error: {e}")
+
         return payload
+
+    @classmethod
+    def broadcast_legendary_setups(cls, payload):
+        """Dispatches high-conviction institutional & legendary strategy signals to Telegram."""
+        from telegram_config import send_deduplicated_telegram_alert, get_telegram_credentials, is_market_open, get_ist_now
+        
+        now = get_ist_now()
+        if not is_market_open("EQ", now):
+            print(f"[INFO] Market closed ({now.strftime('%I:%M %p')}). Skipping Legendary Traders Telegram alert.")
+            return
+
+        bot_token, chat_id = get_telegram_credentials()
+        if not bot_token or not chat_id:
+            print("[INFO] Telegram credentials not configured. Skipping broadcast.")
+            return
+
+        alerts_to_send = []
+
+        # 1. Minervini VCP Breakouts
+        for item in payload.get("minervini_vcp", []):
+            if item.get("vcp_status") == "VCP_READY_BREAKOUT":
+                msg = (
+                    f"👑 **WALL STREET LEGENDARY ALERT: MARK MINERVINI VCP** 👑\n\n"
+                    f"📈 **Stock**: NSE:{item['symbol']}\n"
+                    f"⚡ **Setup**: Volatility Contraction Pattern (Trend Score: {item['trend_template_score']}/100)\n"
+                    f"🕒 **Trigger Time**: {now.strftime('%I:%M %p IST')}\n\n"
+                    f"📥 **Pivot Buy Point**: `₹{item['pivot_buy_point']}`\n"
+                    f"🛡️ **Stop Loss (SL)**: `₹{item['stop_loss']}` (Risk: {item['risk_pct']}%)\n\n"
+                    f"🎯 **Target 1 (1:2 RRR)**: `₹{item['target_1']}`\n"
+                    f"🎯 **Target 2 (1:3 RRR)**: `₹{item['target_2']}`\n\n"
+                    f"📊 **VCP Architecture**:\n"
+                    f"- Progressive Contractions: {(' -> '.join([str(c) + '%' for c in item.get('contractions', [])]))}\n"
+                    f"- Within {item['pct_from_52w_high']}% of 52-Week High. Dry volume base.\n\n"
+                    f"⚠️ *Risk Rule: Keep maximum risk under 2% per trade. Trail SL to pivot once Target 1 is hit.*"
+                )
+                alerts_to_send.append(msg)
+
+        # 2. Larry Connors RSI(2) Extreme Oversold Dips (75-80% Win-Rate)
+        for item in payload.get("connors_rsi2", []):
+            if item.get("rsi_2", 100) <= 10.0 and item.get("is_above_200_sma"):
+                msg = (
+                    f"🎯 **HIGH WIN-RATE SWING ALERT: LARRY CONNORS RSI(2)** 🎯\n\n"
+                    f"📈 **Stock**: NSE:{item['symbol']}\n"
+                    f"⚡ **Setup**: 2-Period RSI Extreme Dip in Secular Bull Trend\n"
+                    f"🕒 **Trigger Time**: {now.strftime('%I:%M %p IST')}\n\n"
+                    f"📥 **Recommended Buy**: `₹{item['current_price']}`\n"
+                    f"🛡️ **Stop Loss (SL)**: `₹{item['stop_loss']}` (2x ATR)\n\n"
+                    f"🎯 **Exit Target (5-Day SMA)**: `₹{item['exit_target_sma5']}` (+{item['expected_bounce_pct']}%)\n"
+                    f"⏱️ **Holding Horizon**: {item['holding_period']}\n\n"
+                    f"📊 **Quant Edge**:\n"
+                    f"- 2-Day RSI is deeply oversold at `{item['rsi_2']}` (Extreme Panic Selling).\n"
+                    f"- Price is sustaining comfortably above 200 SMA (₹{item['sma_200']}).\n"
+                    f"- Historical Strategy Win-Rate: **{item['historical_win_rate']}**.\n\n"
+                    f"⚠️ *Rule: Exit automatically when price crosses above 5-Day SMA or after 4 trading sessions.*"
+                )
+                alerts_to_send.append(msg)
+
+        # 3. Smart Money Concepts (SMC) Liquidity Sweep
+        for item in payload.get("smc_liquidity_sweep", []):
+            if "SWEEP" in item.get("smc_state", "") and item.get("conviction_score", 0) >= 75:
+                msg = (
+                    f"🌊 **INSTITUTIONAL SMC ALERT: FII LIQUIDITY SWEEP** 🌊\n\n"
+                    f"📈 **Stock**: NSE:{item['symbol']}\n"
+                    f"⚡ **Setup**: Retail Stop-Hunt Reversal + Demand Order Block\n"
+                    f"🕒 **Trigger Time**: {now.strftime('%I:%M %p IST')}\n\n"
+                    f"📥 **Entry Trigger**: `₹{item['entry_trigger']}`\n"
+                    f"🛡️ **Stop Loss (SL)**: `₹{item['stop_loss']}` (Below Sweep Wick)\n\n"
+                    f"🎯 **Target 1**: `₹{item['target_1']}`\n"
+                    f"🎯 **Target 2 (Buy-Side Liquidity)**: `₹{item['target_2']}`\n"
+                    f"⚖️ **Risk-to-Reward Ratio (RRR)**: **{item['rrr_ratio']}**\n\n"
+                    f"📊 **Smart Money Footprint**:\n"
+                    f"- Swept 20-Day Low of ₹{item['swing_low_20d']} and closed back above.\n"
+                    f"- Rejection Wick: {item['rejection_wick_pct']}% with {item['volume_expansion']}x volume absorption.\n"
+                    f"- Demand Order Block Zone: `{item['demand_order_block']}`.\n\n"
+                    f"⚠️ *Strict Risk: Zero tolerance if price closes below Order Block low.*"
+                )
+                alerts_to_send.append(msg)
+
+        # 4. Sector Relative Strength (RS) Leadership
+        for item in payload.get("sector_rs_leaders", []):
+            if item.get("rs_status") == "DII_ACCUMULATION_LEADER":
+                msg = (
+                    f"🏛️ **DII ACCUMULATION ALERT: SECTOR RS LEADER** 🏛️\n\n"
+                    f"📈 **Stock**: NSE:{item['symbol']}\n"
+                    f"⚡ **Setup**: Institutional Relative Strength Breakout vs Nifty 50\n"
+                    f"🕒 **Trigger Time**: {now.strftime('%I:%M %p IST')}\n\n"
+                    f"📥 **Pivot Breakout Entry**: `₹{item['entry_trigger']}`\n"
+                    f"🛡️ **Stop Loss (SL)**: `₹{item['stop_loss']}` (20 EMA Support)\n\n"
+                    f"🎯 **Target 1**: `₹{item['target_1']}`\n"
+                    f"🎯 **Target 2**: `₹{item['target_2']}` (Multi-Week Trend)\n\n"
+                    f"📊 **Institutional Momentum**:\n"
+                    f"- 3-Month Outperformance vs Nifty 50: **+{item['rs_score']}%** ({item['stock_3m_return_pct']}% vs {item['nifty_3m_return_pct']}%).\n"
+                    f"- Consolidating just {item['pct_from_20d_high']}% from 20-Day High with EMA 20 > 50.\n\n"
+                    f"⚠️ *Strategy: Ideal for positional swing holding over 2 to 6 weeks.*"
+                )
+                alerts_to_send.append(msg)
+
+        # 5. Delta-Neutral Strangle (Weekly Morning Alert on Mon/Wed/Thu)
+        if now.weekday() in [0, 2, 3] and (now.hour == 9 or now.hour == 10):
+            strangle_list = payload.get("delta_neutral_strangle", [])
+            if strangle_list:
+                nifty_s = strangle_list[0]
+                msg = (
+                    f"⚖️ **INSTITUTIONAL OPTIONS ALERT: DELTA-NEUTRAL STRANGLE** ⚖️\n\n"
+                    f"📊 **Index**: {nifty_s['underlying']} (Spot: ₹{nifty_s['spot_price']})\n"
+                    f"⚡ **Strategy**: 15-Delta Weekly Theta Decay Arbitrage\n"
+                    f"🕒 **Validated Session**: {now.strftime('%I:%M %p IST')} (Days to Expiry: {nifty_s['days_to_expiry']})\n\n"
+                    f"🔴 **SELL OTM Call**: `{nifty_s['call_strike']} CE` (Est. ₹{nifty_s['est_call_premium']})\n"
+                    f"🟢 **SELL OTM Put**: `{nifty_s['put_strike']} PE` (Est. ₹{nifty_s['est_put_premium']})\n"
+                    f"💰 **Total Premium Collected**: `₹{nifty_s['total_premium_collected']}` Points\n\n"
+                    f"🛡️ **Stop Loss (SL)**: `25%` on each individual leg (Call SL: ₹{nifty_s['call_sl_price']}, Put SL: ₹{nifty_s['put_sl_price']})\n"
+                    f"🎯 **Target Profit (55% Decay)**: `{nifty_s['profit_target_decay']}`\n"
+                    f"📈 **Historical Win-Rate**: **{nifty_s['historical_win_rate']}**\n\n"
+                    f"⚠️ *Discipline: Do NOT hold without individual leg SL. Gamma hedge is mandatory.*"
+                )
+                alerts_to_send.append(msg)
+
+        # Dispatch top deduplicated alerts to Telegram
+        sent_count = 0
+        for alert_msg in alerts_to_send[:3]:
+            success = send_deduplicated_telegram_alert(alert_msg, bot_token, chat_id, segment="EQ")
+            if success:
+                sent_count += 1
+                time.sleep(1)
+
+        print(f"[INFO] Dispatched {sent_count} Legendary/Institutional strategy alert(s) to Telegram.")
 
 if __name__ == "__main__":
     LegendaryTraderEngine.run_legendary_scanner()
