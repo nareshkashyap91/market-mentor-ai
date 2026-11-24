@@ -1,5 +1,5 @@
 {
-  "timestamp": "24-Nov-2026 09:00 AM",
+  "timestamp": "24-Nov-2026 09:16 AM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "24-Nov-2026 09:00 AM",
+      "timestamp": "24-Nov-2026 09:16 AM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "24-Nov-2026 03:30 AM",
+    "timestamp": "24-Nov-2026 03:46 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,7 +179,7 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "24-Nov-2026 09:00 AM",
+      "timestamp": "24-Nov-2026 09:16 AM",
       "net_gex_crores": 3116.3,
       "total_call_gex_crores": 16728.5,
       "total_put_gex_crores": 13612.2,
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "24-Nov-2026 09:00 AM",
+    "timestamp": "24-Nov-2026 09:16 AM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "24-Nov-2026 09:00 AM",
+    "timestamp": "24-Nov-2026 09:16 AM",
     "as_of_date": "23-Nov-2026",
     "fii_cash_net_cr": 5673.0,
     "dii_cash_net_cr": -2760.2,
@@ -467,13 +467,15 @@
     "research_tag": "AI QUANT EXECUTIVE RESEARCH SYNTHESIS"
   },
   "data_quality": {
-    "is_valid": true,
+    "is_valid": false,
     "data_type": "LIVE_DATA",
-    "is_stale": false,
-    "stale_minutes": 1065.9,
-    "anomalies": [],
+    "is_stale": true,
+    "stale_minutes": 1081.0,
+    "anomalies": [
+      "Data is stale (1081.0m old > 15m threshold)"
+    ],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 1065.9m)"
+    "status_summary": "STALE_WARNING (LIVE_DATA | Freshness: 1081.0m)"
   },
   "backtest_metrics": {
     "cagr_pct": 0.3,
@@ -489,10 +491,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 528000.0,
+    "allocated_margin": 537000.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 352,
+    "total_trades": 358,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -916,7 +918,7 @@
       "target1_price": 4724.93,
       "target2_price": 4754.88,
       "status": "ACTIVE_POSITION",
-      "entry_time": "24-Nov-2026 09:00 AM",
+      "entry_time": "24-Nov-2026 09:15 AM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -932,7 +934,7 @@
       "target1_price": 494.15,
       "target2_price": 488.35,
       "status": "ACTIVE_POSITION",
-      "entry_time": "24-Nov-2026 09:00 AM",
+      "entry_time": "24-Nov-2026 09:15 AM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1246,7 +1248,7 @@
     {
       "id": 35,
       "signal_id": "STK_SHORT_KOTAKBANK",
-      "timestamp": "24-Nov-2026 09:00 AM",
+      "timestamp": "24-Nov-2026 09:15 AM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 502.85,
@@ -1255,7 +1257,7 @@
     {
       "id": 34,
       "signal_id": "STK_LONG_TITAN",
-      "timestamp": "24-Nov-2026 09:00 AM",
+      "timestamp": "24-Nov-2026 09:15 AM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 4680.0,
@@ -1403,10 +1405,12 @@
       "summary_str": "\u00b1330.4 pts (\u20b925036 - \u20b925697)"
     },
     "no_trade_eval": {
-      "is_no_trade": false,
-      "trade_status": "ACTIVE QUANT SIGNALS",
-      "reasons": [],
-      "summary": "Market Conditions Optimal for Execution"
+      "is_no_trade": true,
+      "trade_status": "NO TRADE (CAPITAL PROTECTION ACTIVE)",
+      "reasons": [
+        "STALE DATA: "
+      ],
+      "summary": "STALE DATA: "
     },
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 1.05,
@@ -1551,10 +1555,12 @@
       "summary_str": "\u00b1815.4 pts (\u20b961794 - \u20b963425)"
     },
     "no_trade_eval": {
-      "is_no_trade": false,
-      "trade_status": "ACTIVE QUANT SIGNALS",
-      "reasons": [],
-      "summary": "Market Conditions Optimal for Execution"
+      "is_no_trade": true,
+      "trade_status": "NO TRADE (CAPITAL PROTECTION ACTIVE)",
+      "reasons": [
+        "STALE DATA: "
+      ],
+      "summary": "STALE DATA: "
     },
     "pattern": "\ud83d\udcca Consolidating / Price Action Normal",
     "pcr": 0.98,
