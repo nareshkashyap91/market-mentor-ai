@@ -1,5 +1,5 @@
 {
-  "timestamp": "24-Nov-2026 07:31 PM",
+  "timestamp": "24-Nov-2026 07:45 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "24-Nov-2026 07:31 PM",
+      "timestamp": "24-Nov-2026 07:45 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "24-Nov-2026 02:01 PM",
+    "timestamp": "24-Nov-2026 02:15 PM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -167,8 +167,7 @@
       "Nifty FMCG",
       "Nifty Energy",
       "Nifty Realty",
-      "Nifty Infra",
-      "gamma_exposure_analytics (Groww chain unreachable)"
+      "Nifty Infra"
     ],
     "market_breadth": {
       "advances": 5,
@@ -180,18 +179,29 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "24-Nov-2026 07:31 PM",
-      "net_gex_crores": -1850.0,
-      "gex_regime": "\ud83d\udd34 NEGATIVE GAMMA (VOLATILITY SPIKE RISK)",
-      "zero_gamma_flip_level": null,
-      "max_gex_strike": null,
-      "pinning_probability": "N/A (live chain unavailable)",
-      "is_simulated": true,
-      "simulated_components": [
-        "gamma_exposure_analytics (Groww chain unreachable \u2014 illustrative values)"
+      "timestamp": "24-Nov-2026 07:45 PM",
+      "net_gex_crores": 3116.3,
+      "total_call_gex_crores": 16728.5,
+      "total_put_gex_crores": 13612.2,
+      "gex_regime": "\ud83d\udfe2 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE) | FLIP \u20b926,075",
+      "zero_gamma_flip_level": 26075.0,
+      "max_gex_strike": 26000.0,
+      "max_gex_strike_side": "CALL",
+      "pinning_probability": "45% (heuristic: spot \u20b925,350 vs pin \u20b926,000, 7d to expiry, exp. move \u00b1\u20b9583)",
+      "spot": 25349.65,
+      "expiry_date": "2026-12-01",
+      "days_to_expiry": 7,
+      "atm_iv": 16.61,
+      "expected_move_till_expiry": 583.1,
+      "total_call_oi": 1482410,
+      "total_put_oi": 1036881,
+      "pcr": 0.7,
+      "is_simulated": false,
+      "simulated_components": [],
+      "modeled_components": [
+        "pinning_probability (heuristic from live IV/GEX/DTE \u2014 not market-sourced)"
       ],
-      "modeled_components": [],
-      "data_source": "ANALYTICAL_MODEL_PLACEHOLDER (Groww chain unreachable \u2014 values are illustrative, not live dealer positioning)"
+      "data_source": "GROWW_LIVE (server-rendered NIFTY chain, nearest expiry 2026-12-01, lot 65)"
     },
     "sectors": [
       {
@@ -362,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "24-Nov-2026 07:31 PM",
+    "timestamp": "24-Nov-2026 07:45 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -380,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "24-Nov-2026 07:31 PM",
+    "timestamp": "24-Nov-2026 07:45 PM",
     "as_of_date": "23-Nov-2026",
     "fii_cash_net_cr": 5673.0,
     "dii_cash_net_cr": -2760.2,
@@ -460,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 1696.1,
+    "stale_minutes": 1710.8,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 1696.1m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 1710.8m)"
   },
   "backtest_metrics": {
     "cagr_pct": 0.3,
@@ -906,7 +916,7 @@
       "target1_price": 4724.93,
       "target2_price": 4754.88,
       "status": "ACTIVE_POSITION",
-      "entry_time": "24-Nov-2026 07:31 PM",
+      "entry_time": "24-Nov-2026 07:45 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -922,7 +932,7 @@
       "target1_price": 494.15,
       "target2_price": 488.35,
       "status": "ACTIVE_POSITION",
-      "entry_time": "24-Nov-2026 07:31 PM",
+      "entry_time": "24-Nov-2026 07:45 PM",
       "exit_time": null,
       "unrealized_pnl": 0.0,
       "realized_pnl": 0.0
@@ -1236,7 +1246,7 @@
     {
       "id": 35,
       "signal_id": "STK_SHORT_KOTAKBANK",
-      "timestamp": "24-Nov-2026 07:31 PM",
+      "timestamp": "24-Nov-2026 07:45 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 502.85,
@@ -1245,7 +1255,7 @@
     {
       "id": 34,
       "signal_id": "STK_LONG_TITAN",
-      "timestamp": "24-Nov-2026 07:31 PM",
+      "timestamp": "24-Nov-2026 07:45 PM",
       "previous_status": "NEW_SIGNAL",
       "new_status": "ACTIVE_POSITION",
       "spot_price": 4680.0,
