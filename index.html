@@ -751,6 +751,46 @@
                             <span class="stat-sub">Theta Decay Arbitrage</span>
                         </div>
                     </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon emerald" style="background: rgba(16, 185, 129, 0.15); color: #10b981;"><i class="fa-solid fa-cube"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Darvas Box Breakouts</span>
+                            <h3 class="stat-value" id="legendary-darvas-count">0</h3>
+                            <span class="stat-sub">52W High Ceiling Blast</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon blue" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;"><i class="fa-solid fa-compress-arrows-alt"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Crabel NR7 Squeezes</span>
+                            <h3 class="stat-value" id="legendary-crabel-count">0</h3>
+                            <span class="stat-sub">Narrow Range Blast</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon purple" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;"><i class="fa-solid fa-rocket"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Weinstein Stage 2</span>
+                            <h3 class="stat-value" id="legendary-weinstein-count">0</h3>
+                            <span class="stat-sub">30-Week Base Explosion</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon yellow" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;"><i class="fa-solid fa-arrows-to-dot"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Bollinger Squeezes</span>
+                            <h3 class="stat-value" id="legendary-bollinger-count">0</h3>
+                            <span class="stat-sub">Bandwidth Low Expansion</span>
+                        </div>
+                    </div>
+                    <div class="glass-card overview-card">
+                        <div class="card-icon green" style="background: rgba(16, 185, 129, 0.15); color: #34d399;"><i class="fa-solid fa-shield-virus"></i></div>
+                        <div class="card-stats">
+                            <span class="stat-label">Velez Elephant Bars</span>
+                            <h3 class="stat-value" id="legendary-velez-count">0</h3>
+                            <span class="stat-sub">20 EMA Institutional Push</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Strategy 1: Mark Minervini VCP Grid -->
@@ -866,7 +906,7 @@
                 </div>
 
                 <!-- Strategy 8: Delta-Neutral Options Strangle & Theta Decay Grid -->
-                <div class="glass-card panel-card">
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
                     <div class="panel-header">
                         <div>
                             <h2 class="panel-title">
@@ -878,6 +918,86 @@
                     </div>
                     <div id="delta-strangle-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
                         <!-- Delta-Neutral Strangle cards injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Strategy 9: Nicolas Darvas Box Theory Grid -->
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">
+                                <i class="fa-solid fa-cube" style="color: #10b981;"></i> Nicolas Darvas — Box Theory Breakout
+                            </h2>
+                            <span style="font-size: 0.8rem; color: #94a3b8;">52-Week High Proximity (&le; 15%) &bull; 20-Day Tight Box Consolidation &bull; &gt; 1.25x Volume Expansion Breakout</span>
+                        </div>
+                        <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">Box Breakout</span>
+                    </div>
+                    <div id="darvas-box-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Darvas Box cards injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Strategy 10: Toby Crabel NR7 & Inside Day Grid -->
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">
+                                <i class="fa-solid fa-compress-arrows-alt" style="color: #60a5fa;"></i> Toby Crabel — NR7 &amp; Inside Day Volatility Blast
+                            </h2>
+                            <span style="font-size: 0.8rem; color: #94a3b8;">Narrowest Range of 7 Days (NR7) &bull; Range Contraction Preceding Explosive Trend &bull; Breakout + 0.1 ATR Trigger</span>
+                        </div>
+                        <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">Volatility Blast</span>
+                    </div>
+                    <div id="crabel-nr7-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Crabel NR7 cards injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Strategy 11: Stan Weinstein Stage 2 Explosion Grid -->
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">
+                                <i class="fa-solid fa-rocket" style="color: #c084fc;"></i> Stan Weinstein — Stage 2 Momentum Explosion
+                            </h2>
+                            <span style="font-size: 0.8rem; color: #94a3b8;">30-Week (150-Day) Rising SMA &bull; 90-Day Base Resistance Clearance &bull; &gt; 1.5x Volume Institutional Breakout</span>
+                        </div>
+                        <span class="badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3);">Stage 2 Markup</span>
+                    </div>
+                    <div id="weinstein-stage2-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Weinstein Stage 2 cards injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Strategy 12: John Bollinger Band Squeeze Grid -->
+                <div class="glass-card panel-card" style="margin-bottom: 24px;">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">
+                                <i class="fa-solid fa-arrows-to-dot" style="color: #fbbf24;"></i> John Bollinger — Band Squeeze &amp; Volatility Expansion
+                            </h2>
+                            <span style="font-size: 0.8rem; color: #94a3b8;">120-Day Low Bandwidth Squeeze (&le; 7% or 120D Low) &bull; Upper Band Penetration &bull; &gt; 1.25x Volume Expansion</span>
+                        </div>
+                        <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">Band Expansion</span>
+                    </div>
+                    <div id="bollinger-squeeze-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Bollinger Squeeze cards injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Strategy 13: Oliver Velez 20 EMA Elephant Bar Grid -->
+                <div class="glass-card panel-card">
+                    <div class="panel-header">
+                        <div>
+                            <h2 class="panel-title">
+                                <i class="fa-solid fa-shield-virus" style="color: #34d399;"></i> Oliver Velez — 20 EMA Institutional Elephant Bar
+                            </h2>
+                            <span style="font-size: 0.8rem; color: #94a3b8;">Solid Candle Body (&ge; 68%) &bull; Range &ge; 1.75x 20D Average &bull; Clean Interaction / Ignition from Rising 20 EMA</span>
+                        </div>
+                        <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">Elephant Ignition</span>
+                    </div>
+                    <div id="velez-elephant-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <!-- Velez Elephant Bar cards injected dynamically -->
                     </div>
                 </div>
             </div>

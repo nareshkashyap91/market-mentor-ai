@@ -1463,6 +1463,11 @@ function renderLegendaryTraders(data) {
     const smcEl = document.getElementById("legendary-smc-count");
     const rsEl = document.getElementById("legendary-rs-count");
     const strangleEl = document.getElementById("legendary-strangle-count");
+    const darvasEl = document.getElementById("legendary-darvas-count");
+    const crabelEl = document.getElementById("legendary-crabel-count");
+    const weinsteinEl = document.getElementById("legendary-weinstein-count");
+    const bollingerEl = document.getElementById("legendary-bollinger-count");
+    const velezEl = document.getElementById("legendary-velez-count");
 
     if (scannedEl) scannedEl.textContent = summary.total_scanned || 0;
     if (vcpEl) vcpEl.textContent = summary.vcp_setups_found || 0;
@@ -1473,6 +1478,11 @@ function renderLegendaryTraders(data) {
     if (smcEl) smcEl.textContent = summary.smc_liquidity_sweeps || 0;
     if (rsEl) rsEl.textContent = summary.rs_momentum_leaders || 0;
     if (strangleEl) strangleEl.textContent = summary.delta_neutral_strangles || 0;
+    if (darvasEl) darvasEl.textContent = summary.darvas_breakouts || 0;
+    if (crabelEl) crabelEl.textContent = summary.crabel_nr7_squeezes || 0;
+    if (weinsteinEl) weinsteinEl.textContent = summary.weinstein_stage2_leaders || 0;
+    if (bollingerEl) bollingerEl.textContent = summary.bollinger_squeezes || 0;
+    if (velezEl) velezEl.textContent = summary.velez_elephant_bars || 0;
 
     // 1. Mark Minervini VCP Render
     const vcpContainer = document.getElementById("minervini-vcp-container");
@@ -1937,6 +1947,296 @@ function renderLegendaryTraders(data) {
                     <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
                         <span>Safe Weekly Range: <strong style="color: #38bdf8;">${esc(item.expected_weekly_range)}</strong></span>
                         <span style="color: #34d399; font-weight: 700;">Win Rate: ${esc(item.historical_win_rate)}</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 9. Nicolas Darvas Box Theory Render
+    const darvasContainer = document.getElementById("darvas-box-container");
+    if (darvasContainer && Array.isArray(data.darvas_box)) {
+        if (data.darvas_box.length === 0) {
+            darvasContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently in Darvas Box breakout or coiling phase.</p></div>`;
+        } else {
+            darvasContainer.innerHTML = data.darvas_box.map(item => {
+                const isBreakout = item.darvas_status === "DARVAS_BOX_BREAKOUT";
+                const sigColor = isBreakout ? "#10b981" : item.darvas_status === "DARVAS_BOX_COILING" ? "#60a5fa" : "#94a3b8";
+                const sigBg = isBreakout ? "rgba(16, 185, 129, 0.15)" : item.darvas_status === "DARVAS_BOX_COILING" ? "rgba(59, 130, 246, 0.15)" : "rgba(148, 163, 184, 0.1)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.darvas_status)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Box Ceiling (Top):</span>
+                            <span style="font-weight: 700; color: #34d399;">₹${esc(item.box_ceiling)}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Box Floor / Height:</span>
+                            <span style="font-weight: 600; color: #60a5fa;">₹${esc(item.box_floor)} (${esc(item.box_height_pct)}% wide)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">From 52W High / Vol:</span>
+                            <span style="font-weight: 600; color: #fbbf24;">-${esc(item.pct_from_52w_high)}% &bull; ${esc(item.volume_expansion)}x Vol</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(16, 185, 129, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #10b981;">
+                            <div style="color: #6ee7b7; font-size: 0.7rem; text-transform: uppercase;">Breakout Trigger</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.entry_trigger)}</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Stop-Loss (Floor)</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.stop_loss)}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Target 1: <strong style="color: #34d399;">₹${esc(item.target_1)}</strong> &bull; T2: <strong style="color: #38bdf8;">₹${esc(item.target_2)}</strong></span>
+                        <span style="color: #10b981; font-weight: 700;">RRR: ${esc(item.rrr_ratio)}</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 10. Toby Crabel NR7 Volatility Blast Render
+    const crabelContainer = document.getElementById("crabel-nr7-container");
+    if (crabelContainer && Array.isArray(data.crabel_nr7)) {
+        if (data.crabel_nr7.length === 0) {
+            crabelContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently in NR7 or Inside Day compression.</p></div>`;
+        } else {
+            crabelContainer.innerHTML = data.crabel_nr7.map(item => {
+                const isSuper = item.nr7_status === "ID_NR7_SUPER_SQUEEZE";
+                const sigColor = isSuper ? "#10b981" : item.is_nr7 ? "#60a5fa" : "#fbbf24";
+                const sigBg = isSuper ? "rgba(16, 185, 129, 0.15)" : item.is_nr7 ? "rgba(59, 130, 246, 0.15)" : "rgba(245, 158, 11, 0.15)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.nr7_status)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Today's Daily Range:</span>
+                            <span style="font-weight: 700; color: #60a5fa;">₹${esc(item.current_day_range)} (Min 6D: ₹${esc(item.lowest_prior_range_6d)})</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Patterns Detected:</span>
+                            <span style="font-weight: 600; color: #fff;">NR7: ${item.is_nr7 ? '✅ Yes' : '❌ No'} &bull; Inside Day: ${item.is_inside_day ? '✅ Yes' : '❌ No'}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">Blast Confidence:</span>
+                            <span style="font-weight: 700; color: #34d399;">${esc(item.confidence_score)}% Quantitative Score</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(59, 130, 246, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #3b82f6;">
+                            <div style="color: #93c5fd; font-size: 0.7rem; text-transform: uppercase;">Range Breakout Entry</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.entry_trigger)}</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Stop-Loss (Day Low)</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.stop_loss)}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Target 1: <strong style="color: #34d399;">₹${esc(item.target_1)}</strong> &bull; T2: <strong style="color: #38bdf8;">₹${esc(item.target_2)}</strong></span>
+                        <span style="color: #60a5fa; font-weight: 700;">RRR: ${esc(item.rrr_ratio)}</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 11. Stan Weinstein Stage 2 Explosion Render
+    const weinsteinContainer = document.getElementById("weinstein-stage2-container");
+    if (weinsteinContainer && Array.isArray(data.weinstein_stage2)) {
+        if (data.weinstein_stage2.length === 0) {
+            weinsteinContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently breaking out into Weinstein Stage 2.</p></div>`;
+        } else {
+            weinsteinContainer.innerHTML = data.weinstein_stage2.map(item => {
+                const isConfirmed = item.weinstein_stage === "STAGE_2_EXPLOSION_CONFIRMED";
+                const sigColor = isConfirmed ? "#c084fc" : item.weinstein_stage === "STAGE_2_EARLY_BREAKOUT" ? "#60a5fa" : "#fbbf24";
+                const sigBg = isConfirmed ? "rgba(168, 85, 247, 0.15)" : item.weinstein_stage === "STAGE_2_EARLY_BREAKOUT" ? "rgba(59, 130, 246, 0.15)" : "rgba(245, 158, 11, 0.15)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.weinstein_stage)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">150-Day (30W) SMA &amp; Slope:</span>
+                            <span style="font-weight: 700; color: #34d399;">₹${esc(item.sma_150)} (${esc(item.sma_150_slope)})</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Stage 1 Base Ceiling:</span>
+                            <span style="font-weight: 600; color: #fff;">₹${esc(item.base_resistance)}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">Breakout Volume Expansion:</span>
+                            <span style="font-weight: 700; color: #c084fc;">${esc(item.volume_expansion)}x vs 50D Average</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(168, 85, 247, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #a855f7;">
+                            <div style="color: #d8b4fe; font-size: 0.7rem; text-transform: uppercase;">Stage 2 Entry Point</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.entry_trigger)}</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Trailing Stop-Loss</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.stop_loss)}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Target 1: <strong style="color: #34d399;">₹${esc(item.target_1)}</strong> &bull; T2: <strong style="color: #38bdf8;">₹${esc(item.target_2)}</strong></span>
+                        <span style="color: #a855f7; font-weight: 700;">RRR: ${esc(item.rrr_ratio)}</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 12. John Bollinger Band Squeeze Render
+    const bollingerContainer = document.getElementById("bollinger-squeeze-container");
+    if (bollingerContainer && Array.isArray(data.bollinger_squeeze)) {
+        if (data.bollinger_squeeze.length === 0) {
+            bollingerContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently in Bollinger Band squeeze.</p></div>`;
+        } else {
+            bollingerContainer.innerHTML = data.bollinger_squeeze.map(item => {
+                const isBreakout = item.bollinger_status === "BOLLINGER_SQUEEZE_BREAKOUT";
+                const sigColor = isBreakout ? "#10b981" : item.bollinger_status === "COILING_IN_TIGHT_SQUEEZE" ? "#60a5fa" : "#fbbf24";
+                const sigBg = isBreakout ? "rgba(16, 185, 129, 0.15)" : item.bollinger_status === "COILING_IN_TIGHT_SQUEEZE" ? "rgba(59, 130, 246, 0.15)" : "rgba(245, 158, 11, 0.15)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.bollinger_status)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Bandwidth &amp; 120D Low:</span>
+                            <span style="font-weight: 700; color: #fbbf24;">${esc(item.bandwidth_pct)}% (120D Low: ${esc(item.bandwidth_120d_low)}%)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Bands (Upper / Lower):</span>
+                            <span style="font-weight: 600; color: #fff;">₹${esc(item.upper_band)} / ₹${esc(item.lower_band)}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">Volume Expansion:</span>
+                            <span style="font-weight: 700; color: #34d399;">${esc(item.volume_expansion)}x vs 20D Average</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(245, 158, 11, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #f59e0b;">
+                            <div style="color: #fde68a; font-size: 0.7rem; text-transform: uppercase;">Upper Band Trigger</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.entry_trigger)}</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Stop-Loss (Middle Band)</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.stop_loss)}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Target 1: <strong style="color: #34d399;">₹${esc(item.target_1)}</strong> &bull; T2: <strong style="color: #38bdf8;">₹${esc(item.target_2)}</strong></span>
+                        <span style="color: #fbbf24; font-weight: 700;">RRR: ${esc(item.rrr_ratio)}</span>
+                    </div>
+                </div>`;
+            }).join("");
+        }
+    }
+
+    // 13. Oliver Velez 20 EMA Elephant Bar Render
+    const velezContainer = document.getElementById("velez-elephant-container");
+    if (velezContainer && Array.isArray(data.velez_elephant_bar)) {
+        if (data.velez_elephant_bar.length === 0) {
+            velezContainer.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><p>No stocks currently exhibiting 20 EMA Elephant Bar setups.</p></div>`;
+        } else {
+            velezContainer.innerHTML = data.velez_elephant_bar.map(item => {
+                const isBuy = item.velez_status === "ELEPHANT_BAR_INSTITUTIONAL_BUY";
+                const sigColor = isBuy ? "#10b981" : item.velez_status === "ISOLATED_ELEPHANT_BAR" ? "#60a5fa" : "#94a3b8";
+                const sigBg = isBuy ? "rgba(16, 185, 129, 0.15)" : item.velez_status === "ISOLATED_ELEPHANT_BAR" ? "rgba(59, 130, 246, 0.15)" : "rgba(148, 163, 184, 0.1)";
+
+                return `
+                <div class="glass-card" style="padding: 18px; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 1.15rem; font-weight: 700; color: #fff;">${esc(item.symbol)}</span>
+                            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">LTP: ₹${esc(item.current_price?.toFixed(2))}</div>
+                        </div>
+                        <span class="badge" style="background: ${sigBg}; color: ${sigColor}; border: 1px solid ${sigColor}40; font-size: 0.72rem; font-weight: 600;">
+                            ${esc(item.velez_status)}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 0.8rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Candle Body Density:</span>
+                            <span style="font-weight: 700; color: #34d399;">${esc(item.candle_body_pct)}% Solid Bull Body</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="color: #94a3b8;">Size vs 20-Day Range:</span>
+                            <span style="font-weight: 700; color: #60a5fa;">${esc(item.range_vs_20d_avg)}x Average Bar</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">20 EMA / 200 SMA:</span>
+                            <span style="font-weight: 600; color: #fff;">₹${esc(item.ema_20)} / ₹${esc(item.sma_200)}</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                        <div style="background: rgba(16, 185, 129, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #10b981;">
+                            <div style="color: #6ee7b7; font-size: 0.7rem; text-transform: uppercase;">Elephant High Entry</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.entry_trigger)}</div>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.08); padding: 8px; border-radius: 6px; border-left: 2px solid #ef4444;">
+                            <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase;">Stop-Loss (Elephant Low)</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">₹${esc(item.stop_loss)}</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                        <span>Target 1: <strong style="color: #34d399;">₹${esc(item.target_1)}</strong> &bull; T2: <strong style="color: #38bdf8;">₹${esc(item.target_2)}</strong></span>
+                        <span style="color: #10b981; font-weight: 700;">RRR: ${esc(item.rrr_ratio)}</span>
                     </div>
                 </div>`;
             }).join("");

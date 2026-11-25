@@ -91,3 +91,40 @@ def test_legendary_trader_math_calculations():
     assert "stop_loss_per_leg" in strangle_res
     assert "profit_target_decay" in strangle_res
     assert "total_premium_collected" in strangle_res
+
+    # 9. Nicolas Darvas Box check
+    darvas_res = LegendaryTraderEngine.evaluate_darvas_box("TEST_STOCK", df)
+    assert darvas_res is not None
+    assert "box_ceiling" in darvas_res
+    assert "box_floor" in darvas_res
+    assert "darvas_status" in darvas_res
+    assert "entry_trigger" in darvas_res
+
+    # 10. Toby Crabel NR7 check
+    crabel_res = LegendaryTraderEngine.evaluate_crabel_nr7("TEST_STOCK", df)
+    assert crabel_res is not None
+    assert "current_day_range" in crabel_res
+    assert "is_nr7" in crabel_res
+    assert "nr7_status" in crabel_res
+
+    # 11. Stan Weinstein Stage 2 check
+    weinstein_res = LegendaryTraderEngine.evaluate_weinstein_stage2("TEST_STOCK", df)
+    assert weinstein_res is not None
+    assert "sma_150" in weinstein_res
+    assert "base_resistance" in weinstein_res
+    assert "weinstein_stage" in weinstein_res
+
+    # 12. John Bollinger Squeeze check
+    bollinger_res = LegendaryTraderEngine.evaluate_bollinger_squeeze("TEST_STOCK", df)
+    assert bollinger_res is not None
+    assert "upper_band" in bollinger_res
+    assert "middle_band_sma20" in bollinger_res
+    assert "bandwidth_pct" in bollinger_res
+    assert "bollinger_status" in bollinger_res
+
+    # 13. Oliver Velez Elephant Bar check
+    velez_res = LegendaryTraderEngine.evaluate_velez_elephant_bar("TEST_STOCK", df)
+    assert velez_res is not None
+    assert "candle_body_pct" in velez_res
+    assert "ema_20" in velez_res
+    assert "velez_status" in velez_res
