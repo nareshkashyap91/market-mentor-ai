@@ -1,5 +1,5 @@
 {
-  "timestamp": "25-Nov-2026 03:31 PM",
+  "timestamp": "25-Nov-2026 03:45 PM",
   "data_type": "LIVE_DATA",
   "relative_strength_vs_nifty": {
     "relative_strength_score": 1.7,
@@ -63,7 +63,7 @@
   },
   "trade_journal_ui_analytics": {
     "equity_curve": {
-      "timestamp": "25-Nov-2026 03:31 PM",
+      "timestamp": "25-Nov-2026 03:46 PM",
       "initial_capital": 100000.0,
       "current_balance": 126500.0,
       "total_net_pnl_inr": 26500.0,
@@ -152,7 +152,7 @@
     "premarket_summary": "GIFT NIFTY: +85 PTS | GAP EXPECTATION: GAP UP (+40 TO +100 PTS) | BIAS: MODERATELY BULLISH OPENING"
   },
   "sector_rotation_analytics": {
-    "timestamp": "25-Nov-2026 10:01 AM",
+    "timestamp": "25-Nov-2026 10:16 AM",
     "top_sector": "Nifty IT",
     "lagging_sector": "Nifty Infra",
     "is_simulated": true,
@@ -179,23 +179,23 @@
       "breadth_status": "\ud83d\udfe1 SIDEWAYS MIXED BREADTH"
     },
     "gamma_exposure_analytics": {
-      "timestamp": "25-Nov-2026 03:31 PM",
-      "net_gex_crores": 8222.1,
-      "total_call_gex_crores": 31062.6,
-      "total_put_gex_crores": 22840.5,
-      "gex_regime": "\ud83d\udfe2 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE) | FLIP \u20b926,275",
-      "zero_gamma_flip_level": 26275.0,
+      "timestamp": "25-Nov-2026 03:46 PM",
+      "net_gex_crores": 6779.3,
+      "total_call_gex_crores": 29108.8,
+      "total_put_gex_crores": 22329.5,
+      "gex_regime": "\ud83d\udfe2 POSITIVE GAMMA (VOLATILITY DAMPENED / STABLE) | FLIP \u20b926,325",
+      "zero_gamma_flip_level": 26325.0,
       "max_gex_strike": 26000.0,
       "max_gex_strike_side": "CALL",
-      "pinning_probability": "52% (heuristic: spot \u20b925,819 vs pin \u20b926,000, 6d to expiry, exp. move \u00b1\u20b9551)",
+      "pinning_probability": "53% (heuristic: spot \u20b925,819 vs pin \u20b926,000, 6d to expiry, exp. move \u00b1\u20b9546)",
       "spot": 25819.25,
       "expiry_date": "2026-12-01",
       "days_to_expiry": 6,
-      "atm_iv": 16.64,
-      "expected_move_till_expiry": 550.8,
-      "total_call_oi": 2030559,
-      "total_put_oi": 1828449,
-      "pcr": 0.9,
+      "atm_iv": 16.51,
+      "expected_move_till_expiry": 546.5,
+      "total_call_oi": 1966570,
+      "total_put_oi": 1801608,
+      "pcr": 0.92,
       "is_simulated": false,
       "simulated_components": [],
       "modeled_components": [
@@ -372,7 +372,7 @@
     ]
   },
   "backtest_analytics_ui": {
-    "timestamp": "25-Nov-2026 03:31 PM",
+    "timestamp": "25-Nov-2026 03:46 PM",
     "strategy_name": "AI Options Quant Strategy",
     "period_days": 252,
     "initial_capital": 100000.0,
@@ -390,7 +390,7 @@
     "backtest_summary": "WIN RATE: 78.38% | PROFIT: +\u20b9142,850 (+142.85%) | PROFIT FACTOR: 3.18 | MAX DD: -4.18%"
   },
   "fii_dii_flow": {
-    "timestamp": "25-Nov-2026 03:31 PM",
+    "timestamp": "25-Nov-2026 03:45 PM",
     "as_of_date": "23-Nov-2026",
     "fii_cash_net_cr": 5673.0,
     "dii_cash_net_cr": -2760.2,
@@ -470,10 +470,10 @@
     "is_valid": true,
     "data_type": "LIVE_DATA",
     "is_stale": false,
-    "stale_minutes": 16.1,
+    "stale_minutes": 31.0,
     "anomalies": [],
     "clean_rows": 125,
-    "status_summary": "PASSED (LIVE_DATA | Freshness: 16.1m)"
+    "status_summary": "PASSED (LIVE_DATA | Freshness: 31.0m)"
   },
   "backtest_metrics": {
     "cagr_pct": 3.4,
@@ -489,10 +489,10 @@
     "id": 1,
     "initial_capital": 100000.0,
     "current_balance": 100000.0,
-    "allocated_margin": 522000.0,
+    "allocated_margin": 523500.0,
     "realized_pnl": 0.0,
     "unrealized_pnl": 0.0,
-    "total_trades": 348,
+    "total_trades": 349,
     "net_portfolio_value": 100000.0,
     "formatted_balance": "\u20b9100,000.00"
   },
@@ -735,7 +735,7 @@
       "strategy_name": "Intraday Long",
       "action": "BUY",
       "entry_price": 1923.8,
-      "current_price": 1923.1,
+      "current_price": 1901.0,
       "sl_price": 1908.41,
       "target1_price": 1942.27,
       "target2_price": 1954.58,
@@ -1644,13 +1644,27 @@
     ]
   },
   "intraday_stocks": {
-    "long_setups": [],
+    "long_setups": [
+      {
+        "symbol": "SUNPHARMA",
+        "action": "BUY (LONG)",
+        "close": 1901.0,
+        "vwap": 1883.72,
+        "orb_high": 1884.7,
+        "sl": 1884.7,
+        "t1": 1920.56,
+        "t2": 1933.6,
+        "rsi": 63.8,
+        "vol_exp": 1.5,
+        "pattern": "\ud83d\udfe2 Double Bottom (W Pattern Breakout)"
+      }
+    ],
     "short_setups": [
       {
         "symbol": "INFY",
         "action": "SHORT SELL",
         "close": 1128.5,
-        "vwap": 1135.18,
+        "vwap": 1134.81,
         "orb_low": 1136.2,
         "sl": 1137.53,
         "t1": 1117.67,
@@ -1663,7 +1677,7 @@
         "symbol": "BHARTIARTL",
         "action": "SHORT SELL",
         "close": 2121.5,
-        "vwap": 2125.54,
+        "vwap": 2124.96,
         "orb_low": 2130.0,
         "sl": 2138.47,
         "t1": 2101.13,
